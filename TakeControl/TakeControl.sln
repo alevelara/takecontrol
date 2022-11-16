@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C285E3AA-AFED-4CE8-BA34-B17D554D268A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1686DAAB-AB56-4866-823D-747944C345A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{23CCC140-D513-4D9F-A84C-D928B3704AE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A46370A4-0407-4737-B4C8-36F260DEF08E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{49F108B4-BCA8-4392-8DD7-5F9E3B83DE17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{24C55D79-4B65-4D3C-A185-B9BA61CED946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "takecontrol.Identity", "takecontrol.Identity\takecontrol.Identity.csproj", "{7C9A0390-9626-44AF-9DFB-B76D7831316C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C9A0390-9626-44AF-9DFB-B76D7831316C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9A0390-9626-44AF-9DFB-B76D7831316C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9A0390-9626-44AF-9DFB-B76D7831316C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9A0390-9626-44AF-9DFB-B76D7831316C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A46370A4-0407-4737-B4C8-36F260DEF08E} = {C285E3AA-AFED-4CE8-BA34-B17D554D268A}
+		{49F108B4-BCA8-4392-8DD7-5F9E3B83DE17} = {C285E3AA-AFED-4CE8-BA34-B17D554D268A}
+		{24C55D79-4B65-4D3C-A185-B9BA61CED946} = {C285E3AA-AFED-4CE8-BA34-B17D554D268A}
+		{7C9A0390-9626-44AF-9DFB-B76D7831316C} = {A46370A4-0407-4737-B4C8-36F260DEF08E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97C30148-4293-4FAD-837B-5A66762FD1E3}
+	EndGlobalSection
+EndGlobal
