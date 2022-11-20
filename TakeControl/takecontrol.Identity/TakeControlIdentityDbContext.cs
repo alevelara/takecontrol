@@ -19,7 +19,6 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new RoleConfiguration());
         builder.ApplyConfiguration(new UserConfiguration());
         builder.ApplyConfiguration(new UserRoleConfiguration());
-
     }
 
 }

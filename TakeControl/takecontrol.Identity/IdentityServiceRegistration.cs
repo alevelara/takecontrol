@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using takecontrol.Application.Contracts.Identity;
 using takecontrol.Domain.Models;
 using takecontrol.Identity.Models;
+using takecontrol.Identity.Services;
 
 namespace takecontrol.Identity;
 
@@ -20,8 +22,9 @@ public static class IdentityServiceRegistration
             b => b.MigrationsAssembly(typeof(TakeControlIdentityDbContext).Assembly.FullName)));
 
         service.AddIdentity<ApplicationUser, IdentityRole>()
-           .AddEntityFrameworkStores<TakeControlIdentityDbContext>();      
-
+           .AddEntityFrameworkStores<TakeControlIdentityDbContext>();
+        
+        service.AddTransient<IAuthService, AuthService>();
         service.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
