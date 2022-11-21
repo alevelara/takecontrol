@@ -18,6 +18,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Email = "alevelara@gmail.com",
                 NormalizedEmail = "alevelara@gmail.com",
                 UserName = "alevelara",
+                Name ="Alejandro",
                 NormalizedUserName = "alevelara",
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
@@ -41,8 +42,8 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Email = "club@localhost.com",
                 NormalizedEmail = "club@localhost.com",
                 Name = "PadelClubTest",                
-                UserName = "antgonmar",
-                NormalizedUserName = "antogonmar",
+                UserName = "antgonmar2",
+                NormalizedUserName = "antogonmar2",
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Club
