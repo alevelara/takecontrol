@@ -20,7 +20,7 @@ public static class IdentityServiceRegistration
             => options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString")));
         service.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));                
 
-        service.AddIdentity<ApplicationUser, IdentityRole>()
+        service.AddIdentity<ApplicationUser, IdentityRole<string>>()
            .AddEntityFrameworkStores<TakeControlIdentityDbContext>();
         
         service.AddTransient<IAuthService, AuthService>();
