@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using takecontrol.Application.Contracts.Identity;
+using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Mappings.Identity;
 
 namespace takecontrol.API.Controllers;
@@ -8,16 +10,17 @@ namespace takecontrol.API.Controllers;
 [Route("api/v1/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly IAuthService _authService;
+    private IMediator _mediator;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IMediator mediator)
     {
-        _authService = authService;
+        _mediator = mediator;
     }
 
     [HttpPost("Login")]
     public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
     {
-        return Ok(await _authService.Login(request));
+        var query = new LoginQuery(request.Email, request.Password);
+        return Ok(await _mediator.Send(query));
     }
 }

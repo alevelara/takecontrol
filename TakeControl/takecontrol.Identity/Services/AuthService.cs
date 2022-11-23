@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
+using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Mappings.Identity;
 using takecontrol.Domain.Models;
 using takecontrol.Identity.Models;
@@ -25,7 +26,7 @@ public class AuthService : IAuthService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<AuthResponse> Login(AuthRequest request)
+    public async Task<AuthResponse> Login(LoginQuery request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
