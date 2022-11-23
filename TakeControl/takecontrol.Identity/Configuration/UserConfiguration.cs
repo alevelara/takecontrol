@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using takecontrol.Identity.Models;
 using takecontrol.Identity.Models.Enum;
 
@@ -7,7 +8,7 @@ namespace takecontrol.Identity.Configuration;
 
 public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
-    public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<ApplicationUser> builder)
+    public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
         var hasher = new PasswordHasher<ApplicationUser>();
 
@@ -29,7 +30,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Id = "21deff44-8079-4c23-a1a1-469735a517cc",
                 Email = "alevelara@localhost.com",
                 NormalizedEmail = "alevelara@localhost.com",
-                Name = "Antonio",                
+                Name = "Alberto",                
                 UserName = "antgonmar",
                 NormalizedUserName = "antogonmar",
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
@@ -47,6 +48,19 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Club
+            }
+            ,
+            new ApplicationUser
+            {
+                Id = "2ed8d389-80c8-4ef5-bce3-3c7881572379",
+                Email = "player2@gmail.com",
+                NormalizedEmail = "player2@gmail.com",
+                Name = "player 2",
+                UserName = "player2",
+                NormalizedUserName = "player2",
+                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                EmailConfirmed = true,
+                UserType = UserType.Player
             }
         );
     }
