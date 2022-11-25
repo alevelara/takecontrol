@@ -1,12 +1,15 @@
+using takecontrol.API.Middlewares;
 using takecontrol.Application;
 using takecontrol.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.Services.AddTransient<ExceptionHandlingMiddleware>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();    
-    builder.Services.ConfigureIdentityServices(builder.Configuration);
+    builder.Services.AddSwaggerGen();
+    builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+    builder.Services.ConfigureIdentityServices(builder.Configuration);    
     builder.Services.AddApplicationServices();
     builder.Services.AddCors(opt =>
     {
@@ -18,9 +21,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
     app.UseHttpsRedirection();
     app.UseAuthorization();
-    app.UseAuthentication();
+    app.UseAuthentication();    
     app.UseCors("CorsPolicy");
     app.MapControllers();    
     if (app.Environment.IsDevelopment())

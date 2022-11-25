@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using takecontrol.Application.Abstractions.Mediatr;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Domain.Mappings.Identity;
 
 namespace takecontrol.Application.Features.Accounts.Queries.Login;
 
-public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResponse>
+public class LoginQueryHandler : IQueryHandler<LoginQuery, AuthResponse>
 {
     private readonly IAuthService _authService;
 

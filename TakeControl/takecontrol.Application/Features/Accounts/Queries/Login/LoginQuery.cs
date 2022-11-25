@@ -1,10 +1,9 @@
-﻿
-using MediatR;
+﻿using takecontrol.Application.Abstractions.Mediatr;
 using takecontrol.Domain.Mappings.Identity;
 
 namespace takecontrol.Application.Features.Accounts.Queries.Login;
 
-public class LoginQuery : IRequest<AuthResponse>
+public class LoginQuery : IQuery<AuthResponse>
 {
     public LoginQuery(string email, string password)
     {
