@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using ValidationException = takecontrol.Application.Exceptions.ValidationException;
 
 namespace takecontrol.Application.Behaviors;
 

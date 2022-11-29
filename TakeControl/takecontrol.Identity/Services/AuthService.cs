@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
+using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Mappings.Identity;
 using takecontrol.Domain.Models;
@@ -35,7 +36,7 @@ public class AuthService : IAuthService
         var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
         if (!signInResult.Succeeded)
-            throw new Exception("Creadentials are wrong");
+            throw new UnauthorizedException("Credentials are wrong.");
 
         var token = await GenerateToken(user);
         var authResponse = new AuthResponse
@@ -87,12 +88,12 @@ public class AuthService : IAuthService
     private void ValidateUser(ApplicationUser user, string userEmail)
     {
         if (user == null)
-            throw new Exception($"User with email {userEmail} doesn't exists.");
+            throw new ConflictException($"User with email {userEmail} doesn't exists.");
         
         if (String.IsNullOrEmpty(user.Email))
-            throw new Exception($"An error occurred during the registration proccess: Email of user with email {userEmail} doesn't exists.");
+            throw new ConflictException($"An error occurred during the registration proccess: Email of user with email {userEmail} doesn't exists.");
 
         if (String.IsNullOrEmpty(user.UserName))
-            throw new Exception($"An error occurred during the registration proccess: UserName of user with email {userEmail} doesn't exists");        
+            throw new ConflictException($"An error occurred during the registration proccess: UserName of user with email {userEmail} doesn't exists");        
     }
 }

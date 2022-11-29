@@ -4,7 +4,7 @@ using takecontrol.Domain.Mappings.Identity;
 
 namespace takecontrol.Application.Features.Accounts.Queries.Login;
 
-public class LoginQueryHandler : IQueryHandler<LoginQuery, AuthResponse>
+internal class LoginQueryHandler : IQueryHandler<LoginQuery, AuthResponse>
 {
     private readonly IAuthService _authService;
 

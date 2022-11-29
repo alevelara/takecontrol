@@ -4,11 +4,13 @@ using takecontrol.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+    builder.Logging.ClearProviders();
+    builder.Logging.AddConsole();
+        
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+    builder.Services.AddTransient<ExceptionHandlingMiddleware>();
     builder.Services.ConfigureIdentityServices(builder.Configuration);    
     builder.Services.AddApplicationServices();
     builder.Services.AddCors(opt =>

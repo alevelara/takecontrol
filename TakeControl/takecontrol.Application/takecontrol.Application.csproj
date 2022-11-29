@@ -11,10 +11,17 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\takecontrol.Domain\takecontrol.Domain.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>tekecontrol.Application.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 </Project>
