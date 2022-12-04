@@ -37,6 +37,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
 
             return new TakeControlIdentityDbContext(optionsBuilder.Options);
         }
+
         IConfiguration GetAppConfiguration()
         {
             var environmentName =
