@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using takecontrol.Domain.Models.ApplicationUser.Enum;
 using takecontrol.Identity.Models;
-using takecontrol.Identity.Models.Enum;
 
 namespace takecontrol.Identity.Configuration;
 
 public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
+    public static readonly Guid AdministratorUserId = Guid.NewGuid();
+    public static readonly Guid PlayerUserId1 = Guid.NewGuid();
+    public static readonly Guid PlayerUserId2 = Guid.NewGuid();
+    public static readonly Guid ClubUserId = Guid.NewGuid();
+    
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
         var hasher = new PasswordHasher<ApplicationUser>();
@@ -15,52 +20,56 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
         builder.HasData(
             new ApplicationUser
             {
-                Id = "99475a30-d391-47bc-b38a-f63329df73b5",
+                Id = AdministratorUserId,
                 Email = "alevelara@gmail.com",
-                NormalizedEmail = "alevelara@gmail.com",
+                NormalizedEmail = "alevelara@gmail.com".ToUpper(),
                 UserName = "alevelara",
                 Name ="Alejandro",
-                NormalizedUserName = "alevelara",
+                NormalizedUserName = "alevelara".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
-                UserType = UserType.Administrator
+                UserType = UserType.Administrator,
+                SecurityStamp = Guid.NewGuid().ToString()
             },
             new ApplicationUser
             {
-                Id = "21deff44-8079-4c23-a1a1-469735a517cc",
+                Id = PlayerUserId1,
                 Email = "alevelara@localhost.com",
-                NormalizedEmail = "alevelara@localhost.com",
+                NormalizedEmail = "alevelara@localhost.com".ToUpper(),
                 Name = "Alberto",                
                 UserName = "antgonmar",
-                NormalizedUserName = "antogonmar",
+                NormalizedUserName = "antogonmar".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,                
-                UserType = UserType.Player
+                UserType = UserType.Player,
+                SecurityStamp = Guid.NewGuid().ToString()
             },
             new ApplicationUser
             {
-                Id = "754ac959-d37d-400d-8b32-9ec9bea22074",
+                Id = ClubUserId,
                 Email = "club@localhost.com",
-                NormalizedEmail = "club@localhost.com",
+                NormalizedEmail = "club@localhost.com".ToUpper(),
                 Name = "PadelClubTest",                
                 UserName = "antgonmar2",
-                NormalizedUserName = "antogonmar2",
+                NormalizedUserName = "antogonmar2".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
-                UserType = UserType.Club
+                UserType = UserType.Club,
+                SecurityStamp = Guid.NewGuid().ToString()
             }
             ,
             new ApplicationUser
             {
-                Id = "2ed8d389-80c8-4ef5-bce3-3c7881572379",
+                Id = PlayerUserId2,
                 Email = "player2@gmail.com",
-                NormalizedEmail = "player2@gmail.com",
+                NormalizedEmail = "player2@gmail.com".ToUpper(),
                 Name = "player 2",
                 UserName = "player2",
-                NormalizedUserName = "player2",
+                NormalizedUserName = "player2".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
-                UserType = UserType.Player
+                UserType = UserType.Player,
+                SecurityStamp = Guid.NewGuid().ToString()
             }
         );
     }

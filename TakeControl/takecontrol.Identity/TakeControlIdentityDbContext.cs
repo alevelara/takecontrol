@@ -8,7 +8,7 @@ using takecontrol.Identity.Models;
 
 namespace takecontrol.Identity;
 
-public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser>
+public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
 
 	public TakeControlIdentityDbContext(DbContextOptions<TakeControlIdentityDbContext> options) : base(options)
@@ -28,6 +28,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser>
 
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
     {
+        public static string API_NAME = "takecontrol.API";
         public TakeControlIdentityDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TakeControlIdentityDbContext>();
@@ -42,7 +43,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser>
                       Environment.GetEnvironmentVariable(
                           "ASPNETCORE_ENVIRONMENT");
 
-            var path = "E:\\Proyectos\\takecontrol\\TakeControl\\takecontrol.API";
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, API_NAME);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)

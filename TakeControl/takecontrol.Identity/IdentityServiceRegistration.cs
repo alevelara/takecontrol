@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Domain.Models;
+using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
 using takecontrol.Identity.Services;
 
@@ -20,7 +20,7 @@ public static class IdentityServiceRegistration
             => options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString")));
         service.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));                
 
-        service.AddIdentity<ApplicationUser, IdentityRole>()
+        service.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
            .AddEntityFrameworkStores<TakeControlIdentityDbContext>();
         
         service.AddTransient<IAuthService, AuthService>();

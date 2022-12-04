@@ -27,11 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9D367A46-5E78-4A40-8B8D-F1F0F38B2D6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tekecontrol.Application.Tests", "tekecontrol.Application.Tests\tekecontrol.Application.Tests.csproj", "{9F2990F2-C88E-462E-8275-AA231C83EB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Application.Tests", "tekecontrol.Application.Tests\takecontrol.Application.Tests.csproj", "{9F2990F2-C88E-462E-8275-AA231C83EB46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C3AF0ECE-B26A-4B21-B0B0-1EA495D549B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "takecontrol.Identity.Tests", "takecontrol.Identity.Tests\takecontrol.Identity.Tests.csproj", "{F320FBA8-D815-4377-83CB-9DDDA1EC9A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Identity.Tests", "takecontrol.Identity.Tests\takecontrol.Identity.Tests.csproj", "{F320FBA8-D815-4377-83CB-9DDDA1EC9A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,15 +1,15 @@
-﻿using Castle.Core.Logging;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Security.Claims;
+using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Models;
+using takecontrol.Domain.Models.ApplicationUser.Enum;
+using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
-using takecontrol.Identity.Models.Enum;
 using takecontrol.Identity.Services;
 
 namespace takecontrol.Identity.Tests.Services
@@ -76,7 +76,7 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);            
             
             //Assert
-            Assert.ThrowsAsync<Exception>(() => authService.Login(request));            
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));            
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);
 
             //Assert
-            Assert.ThrowsAsync<Exception>(() => authService.Login(request));
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);
 
             //Assert
-            Assert.ThrowsAsync<Exception>(() => authService.Login(request));
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
         }
 
         [Fact]
@@ -130,9 +130,8 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);            
 
             //Assert
-            Assert.ThrowsAsync<Exception>(() => authService.Login(request));
+            await Assert.ThrowsAsync<UnauthorizedException>(() => authService.Login(request));
         }
-
 
         private ApplicationUser CreateApplicationUserForTest()
         {
@@ -140,11 +139,11 @@ namespace takecontrol.Identity.Tests.Services
             {
                 Email = "user@test.com",
                 EmailConfirmed = true,
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 UserName = "Test",
                 NormalizedUserName = "TEST",
                 UserType = UserType.Administrator
             };
         }
-    }    
+    }
 }

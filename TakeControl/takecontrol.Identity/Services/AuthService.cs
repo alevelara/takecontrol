@@ -9,7 +9,7 @@ using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Mappings.Identity;
-using takecontrol.Domain.Models;
+using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
 
 namespace takecontrol.Identity.Services;
@@ -67,7 +67,7 @@ public class AuthService : IAuthService
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(CustomClaimsTypes.Uid, user.Id)
+            new Claim(CustomClaimsTypes.Uid, user.Id.ToString())
         }
         .Union(userClaims)
         .Union(roleClaims);

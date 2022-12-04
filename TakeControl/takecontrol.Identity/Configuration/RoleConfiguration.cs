@@ -4,26 +4,30 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace takecontrol.Identity.Configuration;
 
-public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
 {
-    public void Configure(EntityTypeBuilder<IdentityRole> builder)
+    public static readonly Guid AdministratorRoleId = Guid.NewGuid();
+    public static readonly Guid PlayerRoleId = Guid.NewGuid();
+    public static readonly Guid ClubRoleId = Guid.NewGuid();
+
+    public void Configure(EntityTypeBuilder<IdentityRole<Guid>> builder)
     {
         builder.HasData(
-            new IdentityRole
+            new IdentityRole<Guid>
             {
-                Id = "d810a79b-f2a8-429b-be84-5d4d6943308e",
+                Id = AdministratorRoleId,
                 Name = "Administrator",
                 NormalizedName = "Administrator"
             },
-            new IdentityRole
+            new IdentityRole<Guid>
             {
-                Id = "57ce438d-ae66-4e90-a8d1-cf5929eaf163",
+                Id = PlayerRoleId,
                 Name = "Player",
                 NormalizedName = "Player"
             },
-            new IdentityRole
+            new IdentityRole<Guid>
             {
-                Id = "6d4ce97e-9801-4881-99e1-2726d0133a35",
+                Id = ClubRoleId,
                 Name = "Club",
                 NormalizedName = "Club"
             });

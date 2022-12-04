@@ -1,9 +1,8 @@
 ﻿using Moq;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Mappings.Identity;
-using takecontrol.Identity.Models.Enum;
+using takecontrol.Domain.Models.ApplicationUser.Enum;
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 
@@ -54,7 +53,7 @@ public class LoginQueryHandlerXUnitTests
             new AuthResponse()
             {                
                 Email = "password",
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 Token = "token",
                 UserName = "username",
                 UserType = UserType.Administrator            

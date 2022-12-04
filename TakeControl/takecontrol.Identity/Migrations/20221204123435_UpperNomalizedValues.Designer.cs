@@ -12,8 +12,8 @@ using takecontrol.Identity;
 namespace takecontrol.Identity.Migrations
 {
     [DbContext(typeof(TakeControlIdentityDbContext))]
-    [Migration("20221121221929_Migration2ChangingData")]
-    partial class Migration2ChangingData
+    [Migration("20221204123435_UpperNomalizedValues")]
+    partial class UpperNomalizedValues
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,10 +25,11 @@ namespace takecontrol.Identity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -53,25 +54,25 @@ namespace takecontrol.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d810a79b-f2a8-429b-be84-5d4d6943308e",
+                            Id = new Guid("cb4f3f21-665e-4b9d-84b5-1a4368ccead5"),
                             Name = "Administrator",
                             NormalizedName = "Administrator"
                         },
                         new
                         {
-                            Id = "57ce438d-ae66-4e90-a8d1-cf5929eaf163",
+                            Id = new Guid("04af47ab-2403-44fd-b8d8-852c2c71caeb"),
                             Name = "Player",
                             NormalizedName = "Player"
                         },
                         new
                         {
-                            Id = "6d4ce97e-9801-4881-99e1-2726d0133a35",
+                            Id = new Guid("905df54f-f070-426c-83f9-0c9a0e25cbbc"),
                             Name = "Club",
                             NormalizedName = "Club"
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,9 +86,8 @@ namespace takecontrol.Identity.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -96,7 +96,7 @@ namespace takecontrol.Identity.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,9 +110,8 @@ namespace takecontrol.Identity.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -121,7 +120,7 @@ namespace takecontrol.Identity.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -132,15 +131,51 @@ namespace takecontrol.Identity.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("f4908fe8-2e73-4d64-a410-2826b382ce94"),
+                            RoleId = new Guid("cb4f3f21-665e-4b9d-84b5-1a4368ccead5")
+                        },
+                        new
+                        {
+                            UserId = new Guid("d63fe7aa-a1da-44e9-8ae5-79d4b4296e3f"),
+                            RoleId = new Guid("905df54f-f070-426c-83f9-0c9a0e25cbbc")
+                        },
+                        new
+                        {
+                            UserId = new Guid("e6d1b6f2-ebce-489d-b0a8-00777a0a1a65"),
+                            RoleId = new Guid("04af47ab-2403-44fd-b8d8-852c2c71caeb")
+                        },
+                        new
+                        {
+                            UserId = new Guid("d6a85134-d7ee-4089-8be3-ba4aec720c33"),
+                            RoleId = new Guid("04af47ab-2403-44fd-b8d8-852c2c71caeb")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -153,32 +188,13 @@ namespace takecontrol.Identity.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "99475a30-d391-47bc-b38a-f63329df73b5",
-                            RoleId = "d810a79b-f2a8-429b-be84-5d4d6943308e"
-                        },
-                        new
-                        {
-                            UserId = "21deff44-8079-4c23-a1a1-469735a517cc",
-                            RoleId = "57ce438d-ae66-4e90-a8d1-cf5929eaf163"
-                        },
-                        new
-                        {
-                            UserId = "754ac959-d37d-400d-8b32-9ec9bea22074",
-                            RoleId = "6d4ce97e-9801-4881-99e1-2726d0133a35"
-                        });
+                    b.ToTable("IdentityUserRole<string>");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -196,8 +212,9 @@ namespace takecontrol.Identity.Migrations
 
             modelBuilder.Entity("takecontrol.Identity.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
@@ -267,70 +284,84 @@ namespace takecontrol.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99475a30-d391-47bc-b38a-f63329df73b5",
+                            Id = new Guid("f4908fe8-2e73-4d64-a410-2826b382ce94"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba1e275e-ce3f-47e9-9a26-5846987b16c3",
+                            ConcurrencyStamp = "0df25e73-ad1b-44a9-acae-2fc500543b2b",
                             Email = "alevelara@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Alejandro",
-                            NormalizedEmail = "alevelara@gmail.com",
-                            NormalizedUserName = "alevelara",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMk6yfcILTTbG+YU/YCDWvL76k4ORH3lGMdKMKUORKmOXn/qFJeoWFznEAYIKNl6tQ==",
+                            NormalizedEmail = "ALEVELARA@GMAIL.COM",
+                            NormalizedUserName = "ALEVELARA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPgkEK65Xmj1Q0QJ1vLtR/IRs933WDP70g06umt0G+rCL6K/L+ZKAYj9uSJ6qTDC0g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5de9931e-a6ed-461c-ba5b-71a5b0a9f9ec",
                             TwoFactorEnabled = false,
                             UserName = "alevelara",
                             UserType = 1
                         },
                         new
                         {
-                            Id = "21deff44-8079-4c23-a1a1-469735a517cc",
+                            Id = new Guid("e6d1b6f2-ebce-489d-b0a8-00777a0a1a65"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7b32be5-b63b-4381-a807-3434a157cbe2",
+                            ConcurrencyStamp = "baa81baa-98f0-4994-ae30-3ef58cea25ab",
                             Email = "alevelara@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            Name = "Antonio",
-                            NormalizedEmail = "alevelara@localhost.com",
-                            NormalizedUserName = "antogonmar",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDNglvPVzhhS1JXXWpYLvzxGv4OB0sVUejQPG94ZVX/qhlDizA3NPLVH2z8m83nHjA==",
+                            Name = "Alberto",
+                            NormalizedEmail = "ALEVELARA@LOCALHOST.COM",
+                            NormalizedUserName = "ANTOGONMAR",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPrLH+vwKmXTFAnPL3Ifoh3etkOg4nBGsJ7YnBuM2OQGNVKo4HSrdnZF/Lo2unmkVw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44089e5a-432f-488d-9ff2-39b24b8ca5c8",
                             TwoFactorEnabled = false,
                             UserName = "antgonmar",
                             UserType = 3
                         },
                         new
                         {
-                            Id = "754ac959-d37d-400d-8b32-9ec9bea22074",
+                            Id = new Guid("d63fe7aa-a1da-44e9-8ae5-79d4b4296e3f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a392af53-5462-4321-94cd-52247e5f1dcf",
+                            ConcurrencyStamp = "9fc4bc33-e6ac-4319-a71d-9858acb082ed",
                             Email = "club@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "PadelClubTest",
-                            NormalizedEmail = "club@localhost.com",
-                            NormalizedUserName = "antogonmar2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAJZG2FGdAXUM9x/E0rCDEvt/nlkx0G38VB+n25p3P7X70WymHlZrxnSVDpKxH2z0g==",
+                            NormalizedEmail = "CLUB@LOCALHOST.COM",
+                            NormalizedUserName = "ANTOGONMAR2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF/5lm1+hQjucf1ZEaT7luAia/E+NSyiGIiCgSZ0mRcScSuKdG0yO47lmcRe3tV4xA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3ea8e49b-00e8-4c4d-a933-c83d44b13336",
                             TwoFactorEnabled = false,
                             UserName = "antgonmar2",
                             UserType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d6a85134-d7ee-4089-8be3-ba4aec720c33"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a1f154d2-d841-473a-b9da-12ac53af1937",
+                            Email = "player2@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Name = "player 2",
+                            NormalizedEmail = "PLAYER2@GMAIL.COM",
+                            NormalizedUserName = "PLAYER2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFsi+cHILnxn/ElVTclp0wNB4GTZiId2PusRk0xIL/Mb680U9s1v+J6SUQgSHgfkQg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "player2",
+                            UserType = 3
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
@@ -339,7 +370,7 @@ namespace takecontrol.Identity.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
@@ -348,9 +379,9 @@ namespace takecontrol.Identity.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,7 +394,7 @@ namespace takecontrol.Identity.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
