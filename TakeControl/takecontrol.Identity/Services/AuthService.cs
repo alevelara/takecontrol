@@ -8,7 +8,6 @@ using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Errors.Identity;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;

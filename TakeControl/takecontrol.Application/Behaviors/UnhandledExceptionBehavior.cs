@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using takecontrol.Application.Exceptions;
+using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Application.Behaviors;
 
@@ -21,8 +23,21 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
         }catch(Exception ex)
         {
             var requestName = typeof(TRequest).Name;
-            _logger.LogError($"{requestName}: Application Error: {ex.Message}");
+            LogErrorByException(ex);
             throw;
         }
+    }
+
+    private void LogErrorByException(Exception ex)
+    {
+
+        if (ex is BaseException) 
+        { 
+            _logger.LogWarning($"{ex.Source}: {ex.Message}", ex);
+        } 
+        else
+        {
+            _logger.LogError($"Application error: {ex.Message}");
+        }               
     }
 }
