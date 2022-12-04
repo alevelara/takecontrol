@@ -1,8 +1,10 @@
-﻿namespace takecontrol.Application.Exceptions;
+﻿using takecontrol.Domain.Primitives;
 
-public sealed class NotFoundException : ApplicationException
+namespace takecontrol.Application.Exceptions;
+
+public sealed class NotFoundException : BaseException
 {
-	public NotFoundException(string name, object key) : base($"Entity \"{name}\" ({key}) has not been found.")
+	public NotFoundException(DomainError error) : base(error)
 	{
 
 	}

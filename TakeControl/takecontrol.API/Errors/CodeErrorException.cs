@@ -4,7 +4,7 @@
     {
         public string? Details { get; set; }
 
-        public CodeErrorException(int statusCode, string? message = null, string? details = null) : base(statusCode, message)
+        public CodeErrorException(int statusCode, int codeId, string? message = null, string? details = null) : base(statusCode, codeId, message)
         {
             Details = details;
         }        

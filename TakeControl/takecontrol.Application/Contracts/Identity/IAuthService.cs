@@ -1,5 +1,5 @@
 ﻿using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Mappings.Identity;
+using takecontrol.Domain.Messages.Identity;
 
 namespace takecontrol.Application.Contracts.Identity;
 

@@ -1,9 +1,10 @@
-﻿namespace takecontrol.Application.Exceptions;
+﻿using takecontrol.Domain.Primitives;
 
-public class ConflictException : ApplicationException
+namespace takecontrol.Application.Exceptions;
+
+public class ConflictException : BaseException
 {
-	public ConflictException(string message) : base(message)
-	{
-
+	public ConflictException(DomainError error) : base(error)
+	{		
 	}
 }

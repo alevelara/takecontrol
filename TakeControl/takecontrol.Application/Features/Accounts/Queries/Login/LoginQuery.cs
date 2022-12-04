@@ -1,5 +1,5 @@
 ﻿using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Domain.Mappings.Identity;
+using takecontrol.Domain.Messages.Identity;
 
 namespace takecontrol.Application.Features.Accounts.Queries.Login;
 

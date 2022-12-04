@@ -1,8 +1,10 @@
-﻿namespace takecontrol.Application.Exceptions;
+﻿using takecontrol.Domain.Primitives;
 
-public class UnauthorizedException : ApplicationException   
+namespace takecontrol.Application.Exceptions;
+
+public class UnauthorizedException : BaseException   
 {
-	public UnauthorizedException(string message) : base(message)
+	public UnauthorizedException(DomainError error) : base(error)
 	{
 
 	}

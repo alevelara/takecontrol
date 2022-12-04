@@ -1,12 +1,13 @@
 ﻿using FluentValidation.Results;
+using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Application.Exceptions
 {
-    public class ValidationException : ApplicationException
+    public class ValidationException : BaseException
     {
         public IDictionary<string, string[]> Errors { get; }
 
-        public ValidationException() : base("One or more errors has been found")
+        public ValidationException() : base()
         {
             Errors = new Dictionary<string, string[]>();
         }

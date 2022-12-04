@@ -1,8 +1,10 @@
-﻿namespace takecontrol.Application.Exceptions;
+﻿using takecontrol.Domain.Primitives;
 
-public sealed class BadRequestException : ApplicationException
+namespace takecontrol.Application.Exceptions;
+
+public sealed class BadRequestException : BaseException
 {
-	public BadRequestException(string message) : base(message)
+	public BadRequestException(DomainError error) : base(error)
 	{
 	}
 }

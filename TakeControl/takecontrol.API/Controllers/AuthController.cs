@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Mappings.Identity;
+using takecontrol.Domain.Messages.Identity;
 
 namespace takecontrol.API.Controllers;
 

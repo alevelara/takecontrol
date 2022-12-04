@@ -8,9 +8,11 @@ using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Mappings.Identity;
+using takecontrol.Domain.Errors.Identity;
+using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
+using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
 
 namespace takecontrol.Identity.Services;
 
@@ -36,7 +38,7 @@ public class AuthService : IAuthService
         var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
         if (!signInResult.Succeeded)
-            throw new UnauthorizedException("Credentials are wrong.");
+            throw new UnauthorizedException(IdentityError.InvalidCredentials);
 
         var token = await GenerateToken(user);
         var authResponse = new AuthResponse
@@ -88,12 +90,15 @@ public class AuthService : IAuthService
     private void ValidateUser(ApplicationUser user, string userEmail)
     {
         if (user == null)
-            throw new ConflictException($"User with email {userEmail} doesn't exists.");
+            throw new ConflictException(IdentityError.UserDoesntExist);
         
         if (String.IsNullOrEmpty(user.Email))
-            throw new ConflictException($"An error occurred during the registration proccess: Email of user with email {userEmail} doesn't exists.");
+            throw new ConflictException(IdentityError.InvalidEmailForUser);
 
         if (String.IsNullOrEmpty(user.UserName))
-            throw new ConflictException($"An error occurred during the registration proccess: UserName of user with email {userEmail} doesn't exists");        
+            throw new ConflictException(IdentityError.InvalidUserNameForUser);
+        
+        if (String.IsNullOrEmpty(user.SecurityStamp))
+            throw new ConflictException(IdentityError.InvalidSecurtyStampNameForUser);
     }
 }

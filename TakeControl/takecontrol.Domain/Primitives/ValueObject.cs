@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Shared;
+﻿namespace takecontrol.Domain.Primitives;
 
 public abstract class ValueObject
 {
