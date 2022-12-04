@@ -112,6 +112,23 @@ namespace takecontrol.Identity.Tests.Services
         }
 
         [Fact]
+        public async Task Login_Should_ReturnException_WhenSecurityStampIsNull()
+        {
+            //Arrange
+            var request = new LoginQuery("test@test.com", "password");
+            var appUser = CreateApplicationUserForTest();
+            appUser.SecurityStamp = null;
+
+            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
+                .ReturnsAsync(appUser);
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);
+
+            //Assert
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
+        }
+
+
+        [Fact]
         public async Task Login_Should_ReturnException_WhenSignInFailed()
         {
             //Arrange
@@ -142,7 +159,8 @@ namespace takecontrol.Identity.Tests.Services
                 Id = Guid.NewGuid(),
                 UserName = "Test",
                 NormalizedUserName = "TEST",
-                UserType = UserType.Administrator
+                UserType = UserType.Administrator,
+                SecurityStamp = Guid.NewGuid().ToString(),
             };
         }
     }
