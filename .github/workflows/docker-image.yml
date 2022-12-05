@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: docker-compose -f TakeControl up -d
+        run: docker-compose -f TakeControl/docker-compose.yml up -d
       - name: Test
         run: docker run --network container:takecontrol-takecontrol-app-1 appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8000/
