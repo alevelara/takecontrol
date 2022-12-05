@@ -1,0 +1,48 @@
+version: '3.7'
+
+networks:
+  takecontrol-dev:
+    driver: bridge
+
+services:
+  takecontrol-app:
+    build: ./
+    ports:
+      - "8000:80"
+    depends_on:
+     - "postgres"
+    networks:
+     - takecontrol-dev
+  postgres:
+    container_name: postgres_container
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+     - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "padel"
+      POSTGRES_PASSWORD: paco1234
+      POSTGRES_DB: "takecontrolDB"
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    networks:
+      - takecontrol-dev
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@takecontrol.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - takecontrol-dev
+volumes:
+ db-data:
+ pgadmin-data:
+
