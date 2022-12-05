@@ -1,21 +1,24 @@
 # takecontrol
 
-# Docker for postgresql database
+## Docker for postgresql database
 
-## Create Docker compose 
+### Create Docker compose 
 
 1. Looking at github repository.
 [AspNetCorePostgreSQLDockerApp
 ](https://github.com/DanWahlin/AspNetCorePostgreSQLDockerApp)
 
-### Starting a container with https support using docker compose
+### Running docker compose
 
-1. Generate certificate and configure local machine:
+1. Type the path where `docker-compose.yml` file is located.
+2. Execute de command:
 
 ```
-dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { paco1234 }
-dotnet dev-certs https --trust
+docker compose up -d
 ```
 
-1. Create `docker-compose.yml` file. ()
-...
+3. Setting up pgadmin:
+- URL: `http:localhost:5050`
+- Hostname: `postgres_container`
+- username: `padel`
+- password: `<defined in .env file>`
