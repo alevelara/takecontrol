@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models;
+﻿namespace takecontrol.Domain.Models.ApplicationUser.Options;
 
 public class JwtSettings
 {

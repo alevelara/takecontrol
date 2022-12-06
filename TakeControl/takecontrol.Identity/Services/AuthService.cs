@@ -6,9 +6,12 @@ using System.Security.Claims;
 using System.Text;
 using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Domain.Mappings.Identity;
-using takecontrol.Domain.Models;
+using takecontrol.Application.Exceptions;
+using takecontrol.Application.Features.Accounts.Queries.Login;
+using takecontrol.Domain.Messages.Identity;
+using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
+using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
 
 namespace takecontrol.Identity.Services;
 
@@ -25,7 +28,7 @@ public class AuthService : IAuthService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<AuthResponse> Login(AuthRequest request)
+    public async Task<AuthResponse> Login(LoginQuery request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -34,7 +37,7 @@ public class AuthService : IAuthService
         var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
         if (!signInResult.Succeeded)
-            throw new Exception("Creadentials are wrong");
+            throw new UnauthorizedException(IdentityError.InvalidCredentials);
 
         var token = await GenerateToken(user);
         var authResponse = new AuthResponse
@@ -65,7 +68,7 @@ public class AuthService : IAuthService
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(CustomClaimsTypes.Uid, user.Id)
+            new Claim(CustomClaimsTypes.Uid, user.Id.ToString())
         }
         .Union(userClaims)
         .Union(roleClaims);
@@ -86,12 +89,15 @@ public class AuthService : IAuthService
     private void ValidateUser(ApplicationUser user, string userEmail)
     {
         if (user == null)
-            throw new Exception($"User with email {userEmail} doesn't exists.");
+            throw new ConflictException(IdentityError.UserDoesntExist);
         
         if (String.IsNullOrEmpty(user.Email))
-            throw new Exception($"An error occurred during the registration proccess: Email of user with email {userEmail} doesn't exists.");
+            throw new ConflictException(IdentityError.InvalidEmailForUser);
 
         if (String.IsNullOrEmpty(user.UserName))
-            throw new Exception($"An error occurred during the registration proccess: UserName of user with email {userEmail} doesn't exists");        
+            throw new ConflictException(IdentityError.InvalidUserNameForUser);
+        
+        if (String.IsNullOrEmpty(user.SecurityStamp))
+            throw new ConflictException(IdentityError.InvalidSecurtyStampNameForUser);
     }
 }
