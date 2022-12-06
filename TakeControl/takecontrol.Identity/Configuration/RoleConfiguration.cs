@@ -17,19 +17,19 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
             {
                 Id = AdministratorRoleId,
                 Name = "Administrator",
-                NormalizedName = "Administrator"
+                NormalizedName = "ADMINISTRATOR"
             },
             new IdentityRole<Guid>
             {
                 Id = PlayerRoleId,
                 Name = "Player",
-                NormalizedName = "Player"
+                NormalizedName = "PLAYER"
             },
             new IdentityRole<Guid>
             {
                 Id = ClubRoleId,
                 Name = "Club",
-                NormalizedName = "Club"
+                NormalizedName = "CLUB"
             });
     }
 }

@@ -25,7 +25,7 @@ public class TestBase : IDisposable
     /// Crea un usuario de prueba según los parámetros
     /// </summary>
     /// <returns></returns>
-    public async Task<(HttpClient Client, ApplicationUser UserId)> CreateTestForLoginUser(string userName, string password, string[] roles)
+    public async Task<HttpClient> CreateTestForLoginUser(string userName, string email, string password, string[] roles)
     {
         using var scope = Application.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -33,6 +33,7 @@ public class TestBase : IDisposable
         var newUser = new ApplicationUser
         {
             UserName = userName,
+            Email= email,
             UserType = UserType.Administrator
         };
 
@@ -45,21 +46,21 @@ public class TestBase : IDisposable
         
         var client = Application.CreateClient();        
 
-        return (client, newUser);
+        return client;
     }
 
     /// <summary>
     /// Crea un usuario de prueba según los parámetros
     /// </summary>
     /// <returns></returns>
-    public async Task<(HttpClient Client, ApplicationUser UserId)> CreateTestUser(string userName, string password, string[] roles)
+    public async Task<HttpClient> CreateTestUser(string userName, string email, string password, string[] roles)
     {
-        var (client, user) = await CreateTestForLoginUser(userName, password, roles);
+        var client = await CreateTestForLoginUser(userName, email, password, roles);
         
-        var accessToken = await GetAccessToken(userName, password);
+        var accessToken = await GetAccessToken(email, password);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-        return (client, user);
+        return client;
     }
 
 
@@ -76,40 +77,40 @@ public class TestBase : IDisposable
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetClientAsAdminAsync() =>
-        CreateTestForLoginUser("test@admin.com", "Password123!", new string[] { "Administrator" });
+    public Task<HttpClient> RegisterUserAsAdminAsync() =>
+        CreateTestForLoginUser("admintest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetSecuredClientAsAdmin() =>
-        CreateTestForLoginUser("test@admin.com", "Password123!", new string[] { "Administrator" });
+    public Task<HttpClient> RegisterSecuredUserAsAdmin() =>
+        CreateTestForLoginUser("adminsecuredtest","test@admin.com", "Password123!", new string[] { "Administrator" });
 
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetClientAsPlayerAsync() =>
-        CreateTestForLoginUser("test@player.com", "Password123!", new string[] { "Player" });
+    public Task<HttpClient> RegisterUserAsPlayerAsync() =>
+        CreateTestForLoginUser("playertest", "test@player.com", "Password123!", new string[] { "Player" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetSecuredClientAsPlayerAsync() =>
-        CreateTestForLoginUser("test@player.com", "Password123!", new string[] { "Player" });
+    public Task<HttpClient> RegisterSecuredUserAsPlayerAsync() =>
+        CreateTestForLoginUser("playersecuredtest","test@player.com", "Password123!", new string[] { "Player" });
 
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetClientAsClubAsync() =>
-        CreateTestForLoginUser("test@player.com", "Password123!", new string[] { "Club" });
+    public Task<HttpClient> RegisterUserAsClubAsync() =>
+        CreateTestForLoginUser("clubtest", "test@player.com", "Password123!", new string[] { "Club" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
-    public Task<(HttpClient Client, ApplicationUser User)> GetSecuredClientClubAsync() =>
-        CreateTestForLoginUser("test@player.com", "Password123!", new string[] { "Club" });
+    public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
+        CreateTestForLoginUser("clubsecuredtest","test@player.com", "Password123!", new string[] { "Club" });
 
 
     /// <summary>
