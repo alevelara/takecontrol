@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 
@@ -15,11 +14,6 @@ public class AuthController : ControllerBase
     public AuthController(IMediator mediator)
     {
         _mediator = mediator;
-    }
-
-    public AuthController(IAuthService authService)
-    {
-        _authService = authService;
     }
 
     [HttpPost("Login")]

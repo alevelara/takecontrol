@@ -70,20 +70,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 EmailConfirmed = true,
                 UserType = UserType.Player,
                 SecurityStamp = Guid.NewGuid().ToString()
-            }
-            ,
-            new ApplicationUser
-            {
-                Id = "2ed8d389-80c8-4ef5-bce3-3c7881572379",
-                Email = "player2@gmail.com",
-                NormalizedEmail = "player2@gmail.com",
-                Name = "player 2",
-                UserName = "player2",
-                NormalizedUserName = "player2",
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
-                EmailConfirmed = true,
-                UserType = UserType.Player
-            }
+            }            
         );
     }
 }
