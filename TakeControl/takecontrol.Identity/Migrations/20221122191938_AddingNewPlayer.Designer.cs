@@ -59,7 +59,7 @@ namespace takecontrol.Identity.Migrations
                         },
                         new
                         {
-                            Id = "57ce438d-ae66-4e90-a8d1-cf5929eaf163",
+                            Id = "05dbe4d8-ba99-4670-99bb-7a9232015ddd",
                             Name = "Player",
                             NormalizedName = "Player"
                         },
@@ -166,7 +166,7 @@ namespace takecontrol.Identity.Migrations
                         new
                         {
                             UserId = "21deff44-8079-4c23-a1a1-469735a517cc",
-                            RoleId = "57ce438d-ae66-4e90-a8d1-cf5929eaf163"
+                            RoleId = "05dbe4d8-ba99-4670-99bb-7a9232015ddd"
                         },
                         new
                         {
@@ -176,7 +176,7 @@ namespace takecontrol.Identity.Migrations
                         new
                         {
                             UserId = "2ed8d389-80c8-4ef5-bce3-3c7881572379",
-                            RoleId = "57ce438d-ae66-4e90-a8d1-cf5929eaf163"
+                            RoleId = "05dbe4d8-ba99-4670-99bb-7a9232015ddd"
                         });
                 });
 

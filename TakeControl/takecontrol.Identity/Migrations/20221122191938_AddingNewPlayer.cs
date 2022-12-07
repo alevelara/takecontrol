@@ -34,12 +34,12 @@ namespace takecontrol.Identity.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserType" },
-                values: new object[] { "2ed8d389-80c8-4ef5-bce3-3c7881572379", 0, "7eccd9bb-2cc6-493e-9ca0-1e7c42735b19", "player2@gmail.com", true, false, null, "player 2", "player2@gmail.com", "player2", "AQAAAAIAAYagAAAAEM8VYothP/UOyhQt+OWZ0z18dQvjVNFgr9CGm61M2kiy+C15Hg/C9FhdTUi+rtCpUA==", null, false, "4616d921-c880-40f3-92cf-d49070b0868f", false, "player2", 3 });
+                values: new object[] { "2ed8d389-80c8-4ef5-bce3-3c7881572379", 0, "7eccd9bb-2cc6-493e-9ca0-1e7c42735b19", "player3@gmail.com", true, false, null, "player 3", "player3@gmail.com", "player3", "AQAAAAIAAYagAAAAEM8VYothP/UOyhQt+OWZ0z18dQvjVNFgr9CGm61M2kiy+C15Hg/C9FhdTUi+rtCpUA==", null, false, "4616d921-c880-40f3-92cf-d49070b0868f", false, "player3", 3 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "57ce438d-ae66-4e90-a8d1-cf5929eaf163", "2ed8d389-80c8-4ef5-bce3-3c7881572379" });
+                values: new object[] { "05dbe4d8-ba99-4670-99bb-7a9232015ddd", "2ed8d389-80c8-4ef5-bce3-3c7881572379" });
         }
 
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace takecontrol.Identity.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "57ce438d-ae66-4e90-a8d1-cf5929eaf163", "2ed8d389-80c8-4ef5-bce3-3c7881572379" });
+                keyValues: new object[] { "05dbe4d8-ba99-4670-99bb-7a9232015ddd", "2ed8d389-80c8-4ef5-bce3-3c7881572379" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
