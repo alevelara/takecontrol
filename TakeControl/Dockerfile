@@ -22,10 +22,10 @@ RUN dotnet restore "${DockerHOME}${DockerAPIPath}"
 COPY . $DockerHOME
 
 WORKDIR "${DockerHOME}${DockerAPIPath}"
-RUN dotnet build $DockerAPIProj -c Release -o /app/build
+RUN dotnet build $DockerAPIProj -c Debug -o /app/build
 
 FROM build AS publish
-RUN dotnet publish $DockerAPIProj -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish $DockerAPIProj -c Debug -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 COPY --from=publish /app/publish .
