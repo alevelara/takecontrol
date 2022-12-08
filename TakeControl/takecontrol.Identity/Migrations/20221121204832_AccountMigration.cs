@@ -18,7 +18,7 @@ namespace takecontrol.Identity.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
@@ -32,7 +32,7 @@ namespace takecontrol.Identity.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     UserType = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -56,12 +56,24 @@ namespace takecontrol.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IdentityUserRole<string>",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserRole<string>", x => new { x.UserId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -82,7 +94,7 @@ namespace takecontrol.Identity.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -104,7 +116,7 @@ namespace takecontrol.Identity.Migrations
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     ProviderKey = table.Column<string>(type: "text", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,8 +133,8 @@ namespace takecontrol.Identity.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,7 +157,7 @@ namespace takecontrol.Identity.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Value = table.Column<string>(type: "text", nullable: true)
@@ -166,9 +178,9 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "57ce438d-ae66-4e90-a8d1-cf5929eaf163", null, "Player", "Player" },
-                    { "6d4ce97e-9801-4881-99e1-2726d0133a35", null, "Club", "Club" },
-                    { "d810a79b-f2a8-429b-be84-5d4d6943308e", null, "Administrator", "Administrator" }
+                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), null, "Player", "Player" },
+                    { new Guid("c3865b49-514c-4f2d-be74-c7b85966a9a4"), null, "Administrator", "Administrator" },
+                    { new Guid("e9af08f7-31e3-44ff-9c92-604693bc8299"), null, "Club", "Club" }
                 });
 
             migrationBuilder.InsertData(
@@ -176,9 +188,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserType" },
                 values: new object[,]
                 {
-                    { "21deff44-8079-4c23-a1a1-469735a517cc", 0, "57a4aa86-4eac-4050-a59e-4327b4790e07", "alevelara@localhost.com", true, false, null, "Antonio", "alevelara@localhost.com", "antogonmar", "AQAAAAIAAYagAAAAEBfvRU/Nbv13TJwRUE6CMlXbjXX0auKE9SvCp1HVHdzYXDuGllqOyc8Va0+eqyMmhQ==", null, false, "9d64257c-d9b3-43f1-9b64-df90ee8dc8f5", false, "antgonmar", 3 },
-                    { "754ac959-d37d-400d-8b32-9ec9bea22074", 0, "ee4f9993-fa1c-4c11-855d-7e64f392f9b4", "club@localhost.com", true, false, null, "PadelClubTest", "club@localhost.com", "antogonmar2", "AQAAAAIAAYagAAAAEEdmWxNJI48heE4sX4csHKzO1+vrGfKGT/Ti0kkzRgvKYaIzoRlgTCaXRL/vQBYWBQ==", null, false, "a5fa44f6-3d0b-41ad-b399-f8193dbb4f9f", false, "antgonmar2", 2 },
-                    { "99475a30-d391-47bc-b38a-f63329df73b5", 0, "5b397368-b1ca-4474-b21e-c67d5dc3b35f", "alevelara@gmail.com", true, false, null, "", "alevelara@gmail.com", "alevelara", "AQAAAAIAAYagAAAAEFt9hwYKeNoUE9JfdgXsLPpXLdJoyLJYEVRWS6A/hLvF0deacMue2V3zXibWp6YTfA==", null, false, "8601f555-ab79-46a8-ba99-61509eafe97f", false, "alevelara", 1 }
+                    { new Guid("4e6e5429-231f-4e64-9f66-7777dfddba64"), 0, "ab81da97-40e6-4f88-9c3f-76a497fb981d", "player2@gmail.com", true, false, null, "player 2", "player2@gmail.com", "player2", "AQAAAAIAAYagAAAAEHnzLftb5SooY2zSLSl2xTUexFrh7l+1jMg9Sqln+/EkuaARMTlm08WS/QRLRqdWtg==", null, false, null, false, "player2", 3 },
+                    { new Guid("dd83c45b-4785-4f0f-b261-a8946d2d1e30"), 0, "71cb887c-3e0b-44b9-b7b7-d82447231b9e", "club@localhost.com", true, false, null, "PadelClubTest", "club@localhost.com", "antogonmar2", "AQAAAAIAAYagAAAAEFsCMHfRO02u6M5W5AnsNs947yxLzYhQEGlLtEM57NWPLklVYw9l7V4T4vVZdYKuiA==", null, false, null, false, "antgonmar2", 2 },
+                    { new Guid("df48c93b-a92a-4af7-870a-832f8c8c5f4e"), 0, "b49b825b-e65a-44d3-8185-13eadce356ca", "alevelara@localhost.com", true, false, null, "Alberto", "alevelara@localhost.com", "antogonmar", "AQAAAAIAAYagAAAAEJzNPXxDcefPYA//q2Wr8X+16kU0+H4xNvFNRvhZZ/fG1KbPTW+sL2LJICrpkpv5ww==", null, false, null, false, "antgonmar", 3 },
+                    { new Guid("f921d4ac-d8c2-4c64-aa6a-6ee3939d9163"), 0, "a3670d1a-c866-43d4-89a1-678aefd8fd68", "alevelara@gmail.com", true, false, null, "Alejandro", "alevelara@gmail.com", "alevelara", "AQAAAAIAAYagAAAAENzTtxbQEom+YrH27TjkznpVS5dwm9MxAB+lt7okvaEZr5KbTvnQD3VfyFcuXBwBHw==", null, false, null, false, "alevelara", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -186,9 +199,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "57ce438d-ae66-4e90-a8d1-cf5929eaf163", "21deff44-8079-4c23-a1a1-469735a517cc" },
-                    { "6d4ce97e-9801-4881-99e1-2726d0133a35", "754ac959-d37d-400d-8b32-9ec9bea22074" },
-                    { "d810a79b-f2a8-429b-be84-5d4d6943308e", "99475a30-d391-47bc-b38a-f63329df73b5" }
+                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), new Guid("4e6e5429-231f-4e64-9f66-7777dfddba64") },
+                    { new Guid("e9af08f7-31e3-44ff-9c92-604693bc8299"), new Guid("dd83c45b-4785-4f0f-b261-a8946d2d1e30") },
+                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), new Guid("df48c93b-a92a-4af7-870a-832f8c8c5f4e") },
+                    { new Guid("c3865b49-514c-4f2d-be74-c7b85966a9a4"), new Guid("f921d4ac-d8c2-4c64-aa6a-6ee3939d9163") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -246,6 +260,9 @@ namespace takecontrol.Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUserRole<string>");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
