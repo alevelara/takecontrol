@@ -22,3 +22,15 @@ docker compose up -d
 - Hostname: `postgres_container`
 - username: `padel`
 - password: `<defined in .env file>`
+
+4. The swagger is not enabled and api is listening in port `80`.
+
+### Running docker compose in development mode
+
+In this mode, the dotnet command will be executed to keep watching the changes in folder and it is not necessary to build the docker image. The command is:
+
+```
+docker compose -f docker-compose.dev.yml up -d
+```
+
+The API will be listening in the url `http://localhost:5167/` and swagger is enabled by accessing to `http://localhost:5167/swagger`.

@@ -5,12 +5,14 @@ networks:
     driver: bridge
 
 services:
-  takecontrol-app-prod:
-    build: ./
+  takecontrol-app-dev:
+    build: ./docker.Dev/
     ports:
-      - "8000:80"
+      - "5167:5167"
     depends_on:
      - "postgres"
+    volumes:
+      - ./:/app
     environment:
       DB_CONNECTION_STRING: "host=postgres;port=5432;database=${DATABASE_NAME};username=${USERNAME};password=${PASSWORD}"
     networks:
