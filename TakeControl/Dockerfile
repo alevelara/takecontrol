@@ -12,8 +12,6 @@ ENV DockerAPIPath=/takecontrol.API
 ENV DockerAPIProj=takecontrol.API.csproj
 ENV DockerAPP=/app
 ENV DockerAPPDLL=takecontrol.API.dll
-ENV ASPNETCORE_URLS=http://*:5000
-ENV ASPNETCORE_ENVIRONMENT=Development
 
 # Set work directory
 WORKDIR $DockerHOME
@@ -24,10 +22,10 @@ RUN dotnet restore "${DockerHOME}${DockerAPIPath}"
 COPY . $DockerHOME
 
 WORKDIR "${DockerHOME}${DockerAPIPath}"
-RUN dotnet build $DockerAPIProj -c Debug -o /app/build
+RUN dotnet build $DockerAPIProj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish $DockerAPIProj -c Debug -o /app/publish /p:UseAppHost=false
+RUN dotnet publish $DockerAPIProj -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 COPY --from=publish /app/publish .

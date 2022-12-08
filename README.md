@@ -23,7 +23,7 @@ docker compose up -d
 - username: `padel`
 - password: `<defined in .env file>`
 
-4. The swagger is not enabled and api is listening in port `80`.
+4. The swagger is not enabled and API is listening in port `80`.
 
 ### Running docker compose in development mode
 
