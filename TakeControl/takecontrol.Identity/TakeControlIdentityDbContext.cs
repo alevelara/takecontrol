@@ -22,8 +22,6 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
         builder.ApplyConfiguration(new RoleConfiguration());
         builder.ApplyConfiguration(new UserConfiguration());
         builder.ApplyConfiguration(new UserRoleConfiguration());
-
-        builder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
     }
 
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
