@@ -3,29 +3,46 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Primitives;
+using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
+using takecontrol.Infrastructure.Persistence.Postgresql.Initializers;
 
 namespace takecontrol.Identity;
 
 public class TakeControlDbContext : DbContext
-{
-    public DbSet<Club> Clubs { get; set; }
-    public DbSet<Address> Address { get; set; }
+{   
 
     public TakeControlDbContext(DbContextOptions<TakeControlDbContext> options) : base(options)
+	{        
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var entry in ChangeTracker.Entries<BaseDomainModel>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedDate = DateTime.UtcNow;
+                    entry.Entity.CreatedBy = "system";
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.LastModifiedDate = DateTime.UtcNow;
+                    entry.Entity.LastModifiedBy = "system";
+                    break;
+            }
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    protected override void OnModelCreating(ModelBuilder builder)
 	{
+        builder.ApplyConfiguration(new ClubConfiguration());        
+    }   
 
-	}
-
-	protected override void OnModelCreating(ModelBuilder builder)
-	{
-		base.OnModelCreating(builder);
-        
-        builder.Entity<Club>()
-            .HasOne(c => c.Address)
-            .WithOne(a => a.Club)
-            .HasForeignKey<Club>(c => c.AddresId);
-
-    }    
+    public DbSet<Club> Clubs { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 }
 
 

@@ -4,7 +4,7 @@ namespace takecontrol.Domain.Models.Addresses.ValueObjects;
 
 public class AddresId : ValueObject
 {
-    public Guid Value { get; }
+    public Guid Value { get; private set; }
 
     public AddresId()
     {

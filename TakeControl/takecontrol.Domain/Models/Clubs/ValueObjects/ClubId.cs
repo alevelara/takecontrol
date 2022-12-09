@@ -4,7 +4,7 @@ namespace takecontrol.Domain.Models.Clubs.ValueObjects;
 
 public class ClubId : ValueObject
 {
-    public Guid Value { get; }
+    public Guid Value { get; private set; }
 
     public ClubId()
     {

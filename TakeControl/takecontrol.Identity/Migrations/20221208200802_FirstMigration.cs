@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace takecontrol.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class AccountMigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,18 +53,6 @@ namespace takecontrol.Identity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IdentityUserRole<string>",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityUserRole<string>", x => new { x.UserId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
@@ -178,9 +166,9 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), null, "Player", "Player" },
-                    { new Guid("c3865b49-514c-4f2d-be74-c7b85966a9a4"), null, "Administrator", "Administrator" },
-                    { new Guid("e9af08f7-31e3-44ff-9c92-604693bc8299"), null, "Club", "Club" }
+                    { new Guid("11d5e188-78c3-4231-a283-ace535c72f68"), null, "Player", "PLAYER" },
+                    { new Guid("c0093646-16d0-4b63-8ce1-389ec38d21ad"), null, "Administrator", "ADMINISTRATOR" },
+                    { new Guid("d6db5a4f-9ccc-4095-a348-c117135ad788"), null, "Club", "CLUB" }
                 });
 
             migrationBuilder.InsertData(
@@ -188,10 +176,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserType" },
                 values: new object[,]
                 {
-                    { new Guid("4e6e5429-231f-4e64-9f66-7777dfddba64"), 0, "ab81da97-40e6-4f88-9c3f-76a497fb981d", "player2@gmail.com", true, false, null, "player 2", "player2@gmail.com", "player2", "AQAAAAIAAYagAAAAEHnzLftb5SooY2zSLSl2xTUexFrh7l+1jMg9Sqln+/EkuaARMTlm08WS/QRLRqdWtg==", null, false, null, false, "player2", 3 },
-                    { new Guid("dd83c45b-4785-4f0f-b261-a8946d2d1e30"), 0, "71cb887c-3e0b-44b9-b7b7-d82447231b9e", "club@localhost.com", true, false, null, "PadelClubTest", "club@localhost.com", "antogonmar2", "AQAAAAIAAYagAAAAEFsCMHfRO02u6M5W5AnsNs947yxLzYhQEGlLtEM57NWPLklVYw9l7V4T4vVZdYKuiA==", null, false, null, false, "antgonmar2", 2 },
-                    { new Guid("df48c93b-a92a-4af7-870a-832f8c8c5f4e"), 0, "b49b825b-e65a-44d3-8185-13eadce356ca", "alevelara@localhost.com", true, false, null, "Alberto", "alevelara@localhost.com", "antogonmar", "AQAAAAIAAYagAAAAEJzNPXxDcefPYA//q2Wr8X+16kU0+H4xNvFNRvhZZ/fG1KbPTW+sL2LJICrpkpv5ww==", null, false, null, false, "antgonmar", 3 },
-                    { new Guid("f921d4ac-d8c2-4c64-aa6a-6ee3939d9163"), 0, "a3670d1a-c866-43d4-89a1-678aefd8fd68", "alevelara@gmail.com", true, false, null, "Alejandro", "alevelara@gmail.com", "alevelara", "AQAAAAIAAYagAAAAENzTtxbQEom+YrH27TjkznpVS5dwm9MxAB+lt7okvaEZr5KbTvnQD3VfyFcuXBwBHw==", null, false, null, false, "alevelara", 1 }
+                    { new Guid("1826f84a-0b71-4e65-a8ed-e638023b20da"), 0, "2d9d76c6-8a15-44e9-9ffa-66fe53a0fe1c", "club@localhost.com", true, false, null, "PadelClubTest", "CLUB@LOCALHOST.COM", "ANTOGONMAR2", "AQAAAAIAAYagAAAAEI8QfUKx7FRQAWRNpKkihY881/sK8L/GvkPHCHPPdnUECNLk9CaGTWTh9eaJrHfgvw==", null, false, "838a7d09-368f-4492-8a44-f46734f69630", false, "antgonmar2", 2 },
+                    { new Guid("25e4f5c1-3c68-4f9e-8b37-071d3c9b166f"), 0, "2a3ab53a-95f9-4032-b946-8d8fb8210d28", "alevelara@localhost.com", true, false, null, "Alberto", "ALEVELARA@LOCALHOST.COM", "ANTOGONMAR", "AQAAAAIAAYagAAAAEOzZWjdqEiGeZM9fTY9FG6MXmrt2atexaUfvxaXSo0LvWVFM+aomy1+xzz0jA/UYvA==", null, false, "5e9e9212-6512-44ae-bb79-73553b03336a", false, "antgonmar", 3 },
+                    { new Guid("5110c289-7fbc-42bd-a77a-bf6428b3288d"), 0, "a6cdaee8-5c95-4f5d-af08-9961f15f7f0d", "alevelara@gmail.com", true, false, null, "Alejandro", "ALEVELARA@GMAIL.COM", "ALEVELARA", "AQAAAAIAAYagAAAAEOtAtsrLATJJJ8fOU/onYEcVJ28HtPx4DIjOcFx/KFZaKd9vZJj6pfLGygTHTCXcBQ==", null, false, "f2aa1dac-5b52-4373-8cbb-eae0a0fd2966", false, "alevelara", 1 },
+                    { new Guid("d2e78011-6cb3-45a8-b330-36e963581333"), 0, "42136db1-b757-4569-8293-439e755534ea", "player2@gmail.com", true, false, null, "player 2", "PLAYER2@GMAIL.COM", "PLAYER2", "AQAAAAIAAYagAAAAEGBuR6D7Sbh7KhHojlq/FqjkaPVrKI3+1Znl5ISN0t8sOy8Dlo5L2FdJdq9kV810pQ==", null, false, "6bbe81c2-30f8-4110-8bf3-cef8e9a7c171", false, "player2", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -199,10 +187,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), new Guid("4e6e5429-231f-4e64-9f66-7777dfddba64") },
-                    { new Guid("e9af08f7-31e3-44ff-9c92-604693bc8299"), new Guid("dd83c45b-4785-4f0f-b261-a8946d2d1e30") },
-                    { new Guid("05dbe4d8-ba99-4670-99bb-7a9232015ddd"), new Guid("df48c93b-a92a-4af7-870a-832f8c8c5f4e") },
-                    { new Guid("c3865b49-514c-4f2d-be74-c7b85966a9a4"), new Guid("f921d4ac-d8c2-4c64-aa6a-6ee3939d9163") }
+                    { new Guid("d6db5a4f-9ccc-4095-a348-c117135ad788"), new Guid("1826f84a-0b71-4e65-a8ed-e638023b20da") },
+                    { new Guid("11d5e188-78c3-4231-a283-ace535c72f68"), new Guid("25e4f5c1-3c68-4f9e-8b37-071d3c9b166f") },
+                    { new Guid("c0093646-16d0-4b63-8ce1-389ec38d21ad"), new Guid("5110c289-7fbc-42bd-a77a-bf6428b3288d") },
+                    { new Guid("11d5e188-78c3-4231-a283-ace535c72f68"), new Guid("d2e78011-6cb3-45a8-b330-36e963581333") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -260,9 +248,6 @@ namespace takecontrol.Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "IdentityUserRole<string>");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

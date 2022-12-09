@@ -9,23 +9,22 @@ namespace takecontrol.Domain.Models.Clubs;
 public class Club : BaseDomainModel
 {
     [Key]
-    public ClubId Id { get;}
-    public AddresId AddresId { get;}
-    public string Name { get;} = string.Empty;
-    public string Code { get; }
-
-    [Required]
+    public Guid Id { get; private set; }
+    public Guid AddresId { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public string Code { get; private set; }
+    
     public virtual Address Address { get; set; }
 
-    private Club(AddresId addresId, string name, string code)
+    private Club(Guid addresId, string name, string code)
     {
-        Id = new ClubId();
+        Id = new ClubId().Value;
         AddresId = addresId;
         Name = name;
         Code = code;
     }
 
-    public static Club Create(AddresId addresId, string name, string code)
+    public static Club Create(Guid addresId, string name, string code)
     {
         return new Club(addresId, name, code);
     }
