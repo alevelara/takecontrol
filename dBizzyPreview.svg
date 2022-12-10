@@ -1,0 +1,159 @@
+<svg width="699" height="843" viewBox="0 0 524.25 632.25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="translate(4,328) scale(1)">
+<title>G</title>
+<polygon fill="transparent" stroke="transparent" points="-4,4 -4,-328 492,-328 492,4 -4,4"></polygon>
+<!-- padel_club -->
+<g id="node1" class="node" style="opacity: 1;">
+<title>padel_club</title>
+<polygon fill="#232d95" stroke="transparent" points="158,-306 158,-324 310,-324 310,-306 158,-306"></polygon>
+<polygon fill="none" stroke="white" points="158,-306 158,-324 310,-324 310,-306 158,-306"></polygon>
+<text text-anchor="start" x="161" y="-313" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">padel_club</text>
+<polygon fill="#404040" stroke="transparent" points="158,-288 158,-306 310,-306 310,-288 158,-288"></polygon>
+<polygon fill="none" stroke="white" points="158,-288 158,-306 310,-306 310,-288 158,-288"></polygon>
+<text text-anchor="start" x="161" y="-295" font-family="opensans" font-size="10.00" fill="#e2c044">PK </text>
+<text text-anchor="start" x="176.28" y="-295" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="183.28" y="-295" font-family="opensans" font-size="10.00" fill="white"> padel_club_id int</text>
+<polygon fill="#404040" stroke="transparent" points="158,-270 158,-288 310,-288 310,-270 158,-270"></polygon>
+<polygon fill="none" stroke="white" points="158,-270 158,-288 310,-288 310,-270 158,-270"></polygon>
+<text text-anchor="start" x="160.56" y="-276" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;padel_club_code varchar(100)</text>
+<polygon fill="#404040" stroke="transparent" points="158,-252 158,-270 310,-270 310,-252 158,-252"></polygon>
+<polygon fill="none" stroke="white" points="158,-252 158,-270 310,-270 310,-252 158,-252"></polygon>
+<text text-anchor="start" x="161" y="-258" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name varchar(255)</text>
+<polygon fill="#404040" stroke="transparent" points="158,-234 158,-252 310,-252 310,-234 158,-234"></polygon>
+<polygon fill="none" stroke="white" points="158,-234 158,-252 310,-252 310,-234 158,-234"></polygon>
+<text text-anchor="start" x="161" y="-240" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;created_at datetime</text>
+</g>
+<!-- Address -->
+<g id="node4" class="node" style="opacity: 1;">
+<title>Address</title>
+<polygon fill="#232d95" stroke="transparent" points="368,-238 368,-256 488,-256 488,-238 368,-238"></polygon>
+<polygon fill="none" stroke="white" points="368,-238 368,-256 488,-256 488,-238 368,-238"></polygon>
+<text text-anchor="start" x="371" y="-245" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">Address</text>
+<polygon fill="#404040" stroke="transparent" points="368,-220 368,-238 488,-238 488,-220 368,-220"></polygon>
+<polygon fill="none" stroke="white" points="368,-220 368,-238 488,-238 488,-220 368,-220"></polygon>
+<text text-anchor="start" x="371" y="-226" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;address_id int</text>
+<polygon fill="#404040" stroke="transparent" points="368,-202 368,-220 488,-220 488,-202 368,-202"></polygon>
+<polygon fill="none" stroke="white" points="368,-202 368,-220 488,-220 488,-202 368,-202"></polygon>
+<text text-anchor="start" x="371" y="-208" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;city varchar(255)</text>
+<polygon fill="#404040" stroke="transparent" points="368,-184 368,-202 488,-202 488,-184 368,-184"></polygon>
+<polygon fill="none" stroke="white" points="368,-184 368,-202 488,-202 488,-184 368,-184"></polygon>
+<text text-anchor="start" x="370.94" y="-190" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;province varchar(255)</text>
+<polygon fill="#404040" stroke="transparent" points="368,-166 368,-184 488,-184 488,-166 368,-166"></polygon>
+<polygon fill="none" stroke="white" points="368,-166 368,-184 488,-184 488,-166 368,-166"></polygon>
+<text text-anchor="start" x="371" y="-172" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;address varchar(255)</text>
+</g>
+<!-- padel_club&#45;&gt;Address -->
+<g id="edge1" class="edge" style="opacity: 1;">
+<title>padel_club:address_id-&gt;Address:address_id</title>
+<path fill="none" stroke="#5ea54a" d="M310.22,-240.22C325.48,-234.82 341.81,-230.67 357.97,-229.4"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="358.15,-232.9 368,-229 357.87,-225.9 358.15,-232.9"></polygon>
+</g>
+<!-- padel_club_user -->
+<g id="node2" class="node" style="opacity: 1;">
+<title>padel_club_user</title>
+<polygon fill="#232d95" stroke="transparent" points="0,-261 0,-279 100,-279 100,-261 0,-261"></polygon>
+<polygon fill="none" stroke="white" points="0,-261 0,-279 100,-279 100,-261 0,-261"></polygon>
+<text text-anchor="start" x="3" y="-268" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">padel_club_user</text>
+<polygon fill="#404040" stroke="transparent" points="0,-243 0,-261 100,-261 100,-243 0,-243"></polygon>
+<polygon fill="none" stroke="white" points="0,-243 0,-261 100,-261 100,-243 0,-243"></polygon>
+<text text-anchor="start" x="2.76" y="-250" font-family="opensans" font-size="10.00" fill="#e2c044">FK </text>
+<text text-anchor="start" x="18.03" y="-250" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="25.03" y="-250" font-family="opensans" font-size="10.00" fill="white"> padel_club_id int</text>
+<polygon fill="#404040" stroke="transparent" points="0,-225 0,-243 100,-243 100,-225 0,-225"></polygon>
+<polygon fill="none" stroke="white" points="0,-225 0,-243 100,-243 100,-225 0,-225"></polygon>
+<text text-anchor="start" x="3" y="-232" font-family="opensans" font-size="10.00" fill="#e2c044">FK </text>
+<text text-anchor="start" x="18.28" y="-232" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="25.28" y="-232" font-family="opensans" font-size="10.00" fill="white"> user_id int</text>
+</g>
+<!-- padel_club_user&#45;&gt;padel_club -->
+<g id="edge3" class="edge" style="opacity: 1;">
+<title>padel_club_user:padel_club_id-&gt;padel_club:padel_club_id</title>
+<path fill="none" stroke="#5ea54a" d="M100,-252C128.37,-252 125.97,-286.76 146.89,-295.18"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="146.54,-298.67 157,-297 147.78,-291.78 146.54,-298.67"></polygon>
+</g>
+<!-- User -->
+<g id="node3" class="node" style="opacity: 1;">
+<title>User</title>
+<polygon fill="#232d95" stroke="transparent" points="172,-198 172,-216 297,-216 297,-198 172,-198"></polygon>
+<polygon fill="none" stroke="white" points="172,-198 172,-216 297,-216 297,-198 172,-198"></polygon>
+<text text-anchor="start" x="175" y="-205" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">User</text>
+<polygon fill="#404040" stroke="transparent" points="172,-180 172,-198 297,-198 297,-180 172,-180"></polygon>
+<polygon fill="none" stroke="white" points="172,-180 172,-198 297,-198 297,-180 172,-180"></polygon>
+<text text-anchor="start" x="175" y="-187" font-family="opensans" font-size="10.00" fill="#e2c044">PK </text>
+<text text-anchor="start" x="190.28" y="-187" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="197.28" y="-187" font-family="opensans" font-size="10.00" fill="white"> user_id int</text>
+<polygon fill="#404040" stroke="transparent" points="172,-162 172,-180 297,-180 297,-162 172,-162"></polygon>
+<polygon fill="none" stroke="white" points="172,-162 172,-180 297,-180 297,-162 172,-162"></polygon>
+<text text-anchor="start" x="174.66" y="-168" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;full_name varchar(255)</text>
+<polygon fill="#404040" stroke="transparent" points="172,-144 172,-162 297,-162 297,-144 172,-144"></polygon>
+<polygon fill="none" stroke="white" points="172,-144 172,-162 297,-162 297,-144 172,-144"></polygon>
+<text text-anchor="start" x="175" y="-150" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;created_at datetime</text>
+</g>
+<!-- padel_club_user&#45;&gt;User -->
+<g id="edge2" class="edge" style="opacity: 1;">
+<title>padel_club_user:user_id-&gt;User:user_id</title>
+<path fill="none" stroke="#5ea54a" d="M100,-234C133.57,-234 133.97,-197.68 160.8,-190.3"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="161.52,-193.73 171,-189 160.64,-186.79 161.52,-193.73"></polygon>
+</g>
+<!-- User&#45;&gt;Address -->
+<g id="edge4" class="edge" style="opacity: 1;">
+<title>User:address_id-&gt;Address:address_id</title>
+<path fill="none" stroke="#5ea54a" d="M296.56,-212.82C315.4,-220.49 336.72,-226.93 357.73,-228.59"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="357.87,-232.09 368,-229 358.15,-225.1 357.87,-232.09"></polygon>
+</g>
+<!-- Match -->
+<g id="node5" class="node" style="opacity: 1;">
+<title>Match</title>
+<polygon fill="#232d95" stroke="transparent" points="136,-108 136,-126 332,-126 332,-108 136,-108"></polygon>
+<polygon fill="none" stroke="white" points="136,-108 136,-126 332,-126 332,-108 136,-108"></polygon>
+<text text-anchor="start" x="139" y="-115" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">Match</text>
+<polygon fill="#404040" stroke="transparent" points="136,-90 136,-108 332,-108 332,-90 136,-90"></polygon>
+<polygon fill="none" stroke="white" points="136,-90 136,-108 332,-108 332,-90 136,-90"></polygon>
+<text text-anchor="start" x="139" y="-96" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;match_id int</text>
+<polygon fill="#404040" stroke="transparent" points="136,-72 136,-90 332,-90 332,-72 136,-72"></polygon>
+<polygon fill="none" stroke="white" points="136,-72 136,-90 332,-90 332,-72 136,-72"></polygon>
+<text text-anchor="start" x="139" y="-78" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;num_players int DEFAULT 1</text>
+<polygon fill="#404040" stroke="transparent" points="136,-54 136,-72 332,-72 332,-54 136,-54"></polygon>
+<polygon fill="none" stroke="white" points="136,-54 136,-72 332,-72 332,-54 136,-54"></polygon>
+<text text-anchor="start" x="139" y="-60" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;padel_club_id int</text>
+<polygon fill="#404040" stroke="transparent" points="136,-36 136,-54 332,-54 332,-36 136,-36"></polygon>
+<polygon fill="none" stroke="white" points="136,-36 136,-54 332,-54 332,-36 136,-36"></polygon>
+<text text-anchor="start" x="139" y="-42" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;match_type enum('tennis', 'padel')</text>
+<polygon fill="#404040" stroke="transparent" points="136,-18 136,-36 332,-36 332,-18 136,-18"></polygon>
+<polygon fill="none" stroke="white" points="136,-18 136,-36 332,-36 332,-18 136,-18"></polygon>
+<text text-anchor="start" x="138.63" y="-24" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;status enum('reserved', 'free', 'pending')</text>
+<polygon fill="#404040" stroke="transparent" points="136,0 136,-18 332,-18 332,0 136,0"></polygon>
+<polygon fill="none" stroke="white" points="136,0 136,-18 332,-18 332,0 136,0"></polygon>
+<text text-anchor="start" x="139" y="-6" font-family="opensans" font-size="10.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;date_match datetime</text>
+</g>
+<!-- match_user -->
+<g id="node6" class="node" style="opacity: 1;">
+<title>match_user</title>
+<polygon fill="#232d95" stroke="transparent" points="10,-171 10,-189 91,-189 91,-171 10,-171"></polygon>
+<polygon fill="none" stroke="white" points="10,-171 10,-189 91,-189 91,-171 10,-171"></polygon>
+<text text-anchor="start" x="13" y="-178" font-family="opensans" font-weight="bold" font-size="10.00" fill="white">match_user</text>
+<polygon fill="#404040" stroke="transparent" points="10,-153 10,-171 91,-171 91,-153 10,-153"></polygon>
+<polygon fill="none" stroke="white" points="10,-153 10,-171 91,-171 91,-153 10,-153"></polygon>
+<text text-anchor="start" x="12.98" y="-160" font-family="opensans" font-size="10.00" fill="#e2c044">FK </text>
+<text text-anchor="start" x="28.25" y="-160" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="35.25" y="-160" font-family="opensans" font-size="10.00" fill="white"> match_id int</text>
+<polygon fill="#404040" stroke="transparent" points="10,-135 10,-153 91,-153 91,-135 10,-135"></polygon>
+<polygon fill="none" stroke="white" points="10,-135 10,-153 91,-153 91,-135 10,-135"></polygon>
+<text text-anchor="start" x="13" y="-142" font-family="opensans" font-size="10.00" fill="#e2c044">FK </text>
+<text text-anchor="start" x="28.28" y="-142" font-family="opensans" font-size="10.00"> | </text>
+<text text-anchor="start" x="35.28" y="-142" font-family="opensans" font-size="10.00" fill="white"> user_id int</text>
+</g>
+<!-- match_user&#45;&gt;User -->
+<g id="edge6" class="edge" style="opacity: 1;">
+<title>match_user:user_id-&gt;User:user_id</title>
+<path fill="none" stroke="#5ea54a" d="M92,-144C128.62,-144 130.56,-180.96 160.68,-187.89"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="160.68,-191.41 171,-189 161.43,-184.45 160.68,-191.41"></polygon>
+</g>
+<!-- match_user&#45;&gt;Match -->
+<g id="edge5" class="edge" style="opacity: 1;">
+<title>match_user:match_id-&gt;Match:match_id</title>
+<path fill="none" stroke="#5ea54a" d="M92,-162C122.15,-162 106.74,-112.9 126.21,-101.39"></path>
+<polygon fill="#5ea54a" stroke="#5ea54a" points="127.12,-104.77 136,-99 125.45,-97.98 127.12,-104.77"></polygon>
+</g>
+</g>
+</svg>
