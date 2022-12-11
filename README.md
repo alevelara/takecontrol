@@ -34,3 +34,16 @@ docker compose -f docker-compose.dev.yml up -d
 ```
 
 The API will be listening in the url `http://localhost:5167/` and swagger is enabled by accessing to `http://localhost:5167/swagger`.
+
+## Apply format style
+
+1. Install dotnet format command.
+
+```
+dotnet tool install --global dotnet-format
+```
+
+2. Apply format to project into project path `./*.sln`.
+```
+dotnet-format
+```
