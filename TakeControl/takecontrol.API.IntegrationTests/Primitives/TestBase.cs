@@ -33,7 +33,7 @@ public class TestBase : IDisposable
         var newUser = new ApplicationUser
         {
             UserName = userName,
-            Email= email,
+            Email = email,
             UserType = UserType.Administrator
         };
 
@@ -43,8 +43,8 @@ public class TestBase : IDisposable
         {
             await userManager.AddToRoleAsync(newUser, role);
         }
-        
-        var client = Application.CreateClient();        
+
+        var client = Application.CreateClient();
 
         return client;
     }
@@ -56,7 +56,7 @@ public class TestBase : IDisposable
     public async Task<HttpClient> CreateTestUser(string userName, string email, string password, string[] roles)
     {
         var client = await CreateTestForLoginUser(userName, email, password, roles);
-        
+
         var accessToken = await GetAccessToken(email, password);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -84,7 +84,7 @@ public class TestBase : IDisposable
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsAdmin() =>
-        CreateTestForLoginUser("adminsecuredtest","test@admin.com", "Password123!", new string[] { "Administrator" });
+        CreateTestForLoginUser("adminsecuredtest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
 
     /// <summary>
@@ -97,7 +97,7 @@ public class TestBase : IDisposable
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsPlayerAsync() =>
-        CreateTestForLoginUser("playersecuredtest","test@player.com", "Password123!", new string[] { "Player" });
+        CreateTestForLoginUser("playersecuredtest", "test@player.com", "Password123!", new string[] { "Player" });
 
 
     /// <summary>
@@ -110,7 +110,7 @@ public class TestBase : IDisposable
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
-        CreateTestForLoginUser("clubsecuredtest","test@player.com", "Password123!", new string[] { "Club" });
+        CreateTestForLoginUser("clubsecuredtest", "test@player.com", "Password123!", new string[] { "Club" });
 
 
     /// <summary>
@@ -183,7 +183,7 @@ public class TestBase : IDisposable
     {
         using var scope = Application.Services.CreateScope();
 
-        var result = await SendAsync(new LoginQuery(email, password));        
+        var result = await SendAsync(new LoginQuery(email, password));
 
         return result.Token;
     }
@@ -198,7 +198,7 @@ public class TestBase : IDisposable
 
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
-        
+
 
     }
 }

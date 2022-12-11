@@ -2,10 +2,10 @@
 
 namespace takecontrol.Application.Exceptions;
 
-public class UnauthorizedException : BaseException   
+public class UnauthorizedException : BaseException
 {
-	public UnauthorizedException(DomainError error) : base(error)
-	{
+    public UnauthorizedException(DomainError error) : base(error)
+    {
 
-	}
+    }
 }

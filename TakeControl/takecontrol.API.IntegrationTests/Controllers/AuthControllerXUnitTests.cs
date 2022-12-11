@@ -18,7 +18,7 @@ public class AuthControllerXUnitTests : TestBase
 
     [Fact]
     public async Task Login_Should_ReturnOK_WhenLoginQueryIsValid()
-    {       
+    {
         var request = new AuthRequest
         {
             Email = "test@admin.com",
@@ -28,12 +28,12 @@ public class AuthControllerXUnitTests : TestBase
         var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);        
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task Login_Should_ReturnConflict_WhenEmailIsIncorrect()
-    {        
+    {
         var request = new AuthRequest
         {
             Email = "invalid@email.com",

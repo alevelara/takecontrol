@@ -4,7 +4,7 @@ namespace takecontrol.Application.Exceptions;
 
 public class ConflictException : BaseException
 {
-	public ConflictException(DomainError error) : base(error)
-	{		
-	}
+    public ConflictException(DomainError error) : base(error)
+    {
+    }
 }

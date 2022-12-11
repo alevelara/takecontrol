@@ -32,7 +32,7 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<G
                 UserId = UserConfiguration.PlayerUserId2
             }
 
-            
+
         );
     }
 }

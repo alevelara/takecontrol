@@ -20,7 +20,8 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
         try
         {
             return await next();
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             var requestName = typeof(TRequest).Name;
             LogErrorByException(ex);
@@ -31,13 +32,13 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
     private void LogErrorByException(Exception ex)
     {
 
-        if (ex is BaseException) 
-        { 
+        if (ex is BaseException)
+        {
             _logger.LogWarning($"{ex.Source}: {ex.Message}", ex);
-        } 
+        }
         else
         {
             _logger.LogError($"Application error: {ex.Message}");
-        }               
+        }
     }
 }
