@@ -19,7 +19,7 @@ public class ClubController : ControllerBase
     [HttpPost("Register")]
     public async Task<ActionResult> RegisterClub([FromBody] RegisterClubRequest request)
     {
-        var command = new RegisterClubCommand(request.Name, request.City, request.Province, request.MainAddress);
+        var command = new RegisterClubCommand(request.Name, request.City, request.Province, request.MainAddress, request.Email, request.Password);
         await _mediator.Send(command);
         return StatusCode(201); 
     }

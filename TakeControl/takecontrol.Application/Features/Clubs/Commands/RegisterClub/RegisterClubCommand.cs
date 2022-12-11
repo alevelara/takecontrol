@@ -10,12 +10,17 @@ public class RegisterClubCommand : ICommand<Unit>
     public string City { get; private set; } = string.Empty;
     public string Province { get; private set; } = string.Empty;
     public string MainAddress { get; private set; } = string.Empty;
+    public string Email { get; private set; }
+    public string Password { get; private set; }
 
-    public RegisterClubCommand(string? name, string? city, string? province, string? mainAddress)
+    public RegisterClubCommand(string? name, string? city, string? province, string? mainAddress, string email, string password)
     {
         Name = name;
         City = city;
         Province = province;
         MainAddress = mainAddress;
+        Email = email;
+        Password = password;
     }
 }
+
