@@ -22,5 +22,16 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
             .NotEmpty()
             .WithMessage("Club province can not be empty");
 
+        RuleFor(c => c.Email)
+            .NotEmpty()
+            .WithMessage("User Email can not be empty");
+
+        RuleFor(c => c.Password)
+            .NotEmpty()
+            .WithMessage("Password can not be empty")
+            .MaximumLength(14)
+            .WithMessage("Password size can not be higher than 14 characters")
+            .MinimumLength(8)
+            .WithMessage("Password size can not be smaller than 8 characters");            
     }   
 }
