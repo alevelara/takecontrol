@@ -32,6 +32,7 @@ namespace takecontrol.Identity.Tests.Services
                 Key = Guid.NewGuid().ToString(),
                 DurationInMinutes = 60
             });
+            _logger = new();
         }
 
         [Fact]
