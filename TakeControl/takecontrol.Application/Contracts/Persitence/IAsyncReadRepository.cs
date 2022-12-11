@@ -11,7 +11,5 @@ public interface IAsyncReadRepository<T> where T : BaseDomainModel
                                     Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                     List<Expression<Func<T, object>>> includes = null,
                                     string includeString = null,
-                                    bool disableTracking = true);
-
-    Task<T> GetByIdAsync(Guid id);
+                                    bool disableTracking = true);    
 }

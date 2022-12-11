@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Infrastructure.Repositories.Primitives;
 
 namespace takecontrol.Identity;
 
@@ -10,6 +12,10 @@ public static class InfrastructureServiceRegistration
     {
         service.AddDbContext<TakeControlDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("ConnectionString")));
+
+        service.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteRepositoryBase<>));
+        service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadRepositoryBase<>));
+        service.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return service;
     }

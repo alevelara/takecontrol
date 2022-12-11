@@ -3,7 +3,7 @@ using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Domain.Primitives;
 using takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories;
+namespace takecontrol.Infrastructure.Repositories.Primitives;
 
 public class WriteRepositoryBase<T> : IAsyncWriteRepository<T> where T : BaseDomainModel
 {
@@ -17,21 +17,18 @@ public class WriteRepositoryBase<T> : IAsyncWriteRepository<T> where T : BaseDom
     public async Task<T> AddAsync(T entity)
     {
         _context.Set<T>().Add(entity);
-        await _context.SaveChangesAsync();
         return entity;
     }
 
     public async Task DeleteAsync(T entity)
     {
-        _context.Remove<T>(entity);
-        await _context.SaveChangesAsync();
+        _context.Remove(entity);
     }
 
     public async Task<T> UpdateAsync(T entity)
     {
         _context.Set<T>().Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
         return entity;
     }
 }
