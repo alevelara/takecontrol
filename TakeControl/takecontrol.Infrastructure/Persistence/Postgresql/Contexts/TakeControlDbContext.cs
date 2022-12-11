@@ -5,7 +5,6 @@ using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Domain.Primitives;
 using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
-using takecontrol.Infrastructure.Persistence.Postgresql.Initializers;
 
 namespace takecontrol.Identity;
 

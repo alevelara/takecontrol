@@ -55,29 +55,6 @@ namespace takecontrol.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("78ee0ec4-5f70-4526-b3fc-3fc1d920e346"),
-                            City = "Sevilla",
-                            MainAddress = "address1",
-                            Province = "Sevilla"
-                        },
-                        new
-                        {
-                            Id = new Guid("0f1f4ac9-8738-4dfb-b161-28ba88a639ba"),
-                            City = "Sevilla",
-                            MainAddress = "address2",
-                            Province = "Sevilla"
-                        },
-                        new
-                        {
-                            Id = new Guid("a50105fe-6748-4d2e-a1ed-07fc1c50ceb3"),
-                            City = "Sevilla",
-                            MainAddress = "address3",
-                            Province = "Sevilla"
-                        });
                 });
 
             modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
@@ -115,29 +92,6 @@ namespace takecontrol.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Clubs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0eb264be-68f3-4561-8da2-5ec6a4cbdf0e"),
-                            AddresId = new Guid("0511ee27-22b7-4f76-b5df-e82bddb79ed9"),
-                            Code = "0001",
-                            Name = "Test1"
-                        },
-                        new
-                        {
-                            Id = new Guid("0dfc5abe-4a72-43ef-b3c7-bbe1321724b4"),
-                            AddresId = new Guid("1119c834-4a1c-4c5c-8fcd-60b1ac24e418"),
-                            Code = "0002",
-                            Name = "Test2"
-                        },
-                        new
-                        {
-                            Id = new Guid("f8be32e0-1539-4ba9-98c9-b3a47c81bdce"),
-                            AddresId = new Guid("b528d2da-8edc-4573-be05-0852fbfd133c"),
-                            Code = "0003",
-                            Name = "Test3"
-                        });
                 });
 
             modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>

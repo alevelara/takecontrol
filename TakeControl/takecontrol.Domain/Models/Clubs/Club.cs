@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Addresses.ValueObjects;
 using takecontrol.Domain.Models.Clubs.ValueObjects;
 using takecontrol.Domain.Primitives;
 
