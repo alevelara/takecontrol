@@ -10,22 +10,25 @@ public class Club : BaseDomainModel
     [Key]
     public Guid Id { get; private set; }
     public Guid AddresId { get; private set; }
+    public Guid UserId { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string Code { get; private set; }
     
     public virtual Address Address { get; set; }
 
-    private Club(Guid addresId, string name, string code)
+    private Club(Guid id, Guid addresId, Guid userId,  string name, string code)
     {
-        Id = new ClubId().Value;
+        Id = id;
         AddresId = addresId;
+        UserId = userId;
         Name = name;
         Code = code;
     }
 
-    public static Club Create(Guid addresId, string name, string code)
+    public static Club Create(Guid addresId, Guid userId, string name)
     {
-        return new Club(addresId, name, code);
+        ClubValueObject clubValueObject = new();
+        return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code);
     }
 }
 

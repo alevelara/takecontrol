@@ -56,7 +56,7 @@ public class AuthService : IAuthService
         return authResponse;
     }
 
-    public async Task RegisterClub(RegistrationRequest request)
+    public async Task<Guid> Register(RegistrationRequest request)
     {
         var existingUser = await _userManager.FindByNameAsync(request.Email);
         if (existingUser != null)
@@ -72,7 +72,7 @@ public class AuthService : IAuthService
             Name = request.Name,
             UserName = request.Email,
             EmailConfirmed = true,
-            UserType = UserType.Club
+            UserType = request.UserType
         };
 
         var registerResult = await _userManager.CreateAsync(user, request.Password);
@@ -84,6 +84,8 @@ public class AuthService : IAuthService
             
         await _userManager.AddToRoleAsync(user, "Club");
         _logger.LogInformation($"User {request.Email} was succesfully registered");
+
+        return user.Id;
     }
 
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
