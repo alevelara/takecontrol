@@ -45,7 +45,7 @@ public class AuthService : IAuthService
             Id = user.Id,
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             Email = user.Email,
-            UserName = user.UserName, 
+            UserName = user.UserName,
             UserType = user.UserType
         };
 
@@ -90,13 +90,13 @@ public class AuthService : IAuthService
     {
         if (user == null)
             throw new ConflictException(IdentityError.UserDoesntExist);
-        
+
         if (String.IsNullOrEmpty(user.Email))
             throw new ConflictException(IdentityError.InvalidEmailForUser);
 
         if (String.IsNullOrEmpty(user.UserName))
             throw new ConflictException(IdentityError.InvalidUserNameForUser);
-        
+
         if (String.IsNullOrEmpty(user.SecurityStamp))
             throw new ConflictException(IdentityError.InvalidSecurtyStampNameForUser);
     }

@@ -1,0 +1,19 @@
+name: Format check on push
+on: push
+jobs:
+  dotnet-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Add dotnet-format problem matcher
+        uses: xt0rted/dotnet-format-problem-matcher@v1
+
+      - name: Restore dotnet tools
+        uses: xt0rted/dotnet-tool-restore@v1
+
+      - uses: actions/checkout@v3
+      - name: Run dotnet format
+        run: dotnet format ./TakeControl/TakeControl.sln --diagnostics ./TakeControl/TakeControl.sln --verify-no-changes
+      

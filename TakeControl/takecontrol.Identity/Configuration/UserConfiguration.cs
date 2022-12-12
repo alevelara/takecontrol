@@ -12,7 +12,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     public static readonly Guid PlayerUserId1 = Guid.NewGuid();
     public static readonly Guid PlayerUserId2 = Guid.NewGuid();
     public static readonly Guid ClubUserId = Guid.NewGuid();
-    
+
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
         var hasher = new PasswordHasher<ApplicationUser>();
@@ -24,7 +24,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Email = "alevelara@gmail.com",
                 NormalizedEmail = "alevelara@gmail.com".ToUpper(),
                 UserName = "alevelara",
-                Name ="Alejandro",
+                Name = "Alejandro",
                 NormalizedUserName = "alevelara".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
                 EmailConfirmed = true,
@@ -36,11 +36,11 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Id = PlayerUserId1,
                 Email = "alevelara@localhost.com",
                 NormalizedEmail = "alevelara@localhost.com".ToUpper(),
-                Name = "Alberto",                
+                Name = "Alberto",
                 UserName = "antgonmar",
                 NormalizedUserName = "antogonmar".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
-                EmailConfirmed = true,                
+                EmailConfirmed = true,
                 UserType = UserType.Player,
                 SecurityStamp = Guid.NewGuid().ToString()
             },
@@ -49,7 +49,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Id = ClubUserId,
                 Email = "club@localhost.com",
                 NormalizedEmail = "club@localhost.com".ToUpper(),
-                Name = "PadelClubTest",                
+                Name = "PadelClubTest",
                 UserName = "antgonmar2",
                 NormalizedUserName = "antogonmar2".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Password123!"),
@@ -70,7 +70,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 EmailConfirmed = true,
                 UserType = UserType.Player,
                 SecurityStamp = Guid.NewGuid().ToString()
-            }            
+            }
         );
     }
 }

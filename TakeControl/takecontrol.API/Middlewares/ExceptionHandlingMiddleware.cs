@@ -6,13 +6,13 @@ using takecontrol.Application.Exceptions;
 namespace takecontrol.API.Middlewares;
 
 public class ExceptionHandlingMiddleware : IMiddleware
-{    
+{
     private readonly IHostEnvironment _environment;
     private static int NOT_FOUND_CODE_ID = 1404;
     private static int BAD_REQUEST_CODE_ID = 1400;
 
     public ExceptionHandlingMiddleware(IHostEnvironment environment)
-    {        
+    {
         _environment = environment;
     }
 
@@ -22,14 +22,14 @@ public class ExceptionHandlingMiddleware : IMiddleware
         {
             await next(context);
         }
-        catch(Exception ex)
-        {            
+        catch (Exception ex)
+        {
             context.Response.ContentType = "application/json";
             var statusCode = (int)HttpStatusCode.InternalServerError;
             var codeId = 0;
             var resultMessage = string.Empty;
 
-            switch (ex) 
+            switch (ex)
             {
                 case NotFoundException:
                     statusCode = (int)HttpStatusCode.NotFound;
@@ -60,9 +60,9 @@ public class ExceptionHandlingMiddleware : IMiddleware
             context.Response.StatusCode = statusCode;
 
             if (string.IsNullOrEmpty(resultMessage))
-                resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, codeId, ex.Message, ex.StackTrace)) ;
+                resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, codeId, ex.Message, ex.StackTrace));
 
             await context.Response.WriteAsync(resultMessage);
         }
-    }    
+    }
 }

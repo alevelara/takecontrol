@@ -4,7 +4,7 @@ namespace takecontrol.Application.Exceptions;
 
 public sealed class BadRequestException : BaseException
 {
-	public BadRequestException(DomainError error) : base(error)
-	{
-	}
+    public BadRequestException(DomainError error) : base(error)
+    {
+    }
 }

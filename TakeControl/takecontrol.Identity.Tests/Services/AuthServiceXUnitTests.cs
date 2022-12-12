@@ -73,10 +73,10 @@ namespace takecontrol.Identity.Tests.Services
             var request = new LoginQuery("test@test.com", "password");
             var appUser = CreateApplicationUserForTest();
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()));
-            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);            
-            
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);
+
             //Assert
-            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));            
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
         }
 
         [Fact]
@@ -137,14 +137,14 @@ namespace takecontrol.Identity.Tests.Services
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
                 appUser
                 );
-            
+
             var signInResult = _signInManager.Setup(c => c.PasswordSignInAsync(It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<bool>(),
                 It.IsAny<bool>()))
                 .ReturnsAsync(SignInResult.Failed);
 
-            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);            
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings);
 
             //Assert
             await Assert.ThrowsAsync<UnauthorizedException>(() => authService.Login(request));

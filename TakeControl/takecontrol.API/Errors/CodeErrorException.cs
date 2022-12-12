@@ -7,6 +7,6 @@
         public CodeErrorException(int statusCode, int codeId, string? message = null, string? details = null) : base(statusCode, codeId, message)
         {
             Details = details;
-        }        
+        }
     }
 }

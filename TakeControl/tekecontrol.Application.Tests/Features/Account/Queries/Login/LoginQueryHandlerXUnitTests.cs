@@ -9,12 +9,12 @@ namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 
 public class LoginQueryHandlerXUnitTests
 {
-    private readonly Mock<IAuthService> _authService;    
+    private readonly Mock<IAuthService> _authService;
     public LoginQueryHandlerXUnitTests()
     {
         _authService = new();
     }
-    
+
     [Fact]
     public async Task Handle_Should_ReturnNullResult_WhenEmailIsEmptyAsync()
     {
@@ -23,7 +23,7 @@ public class LoginQueryHandlerXUnitTests
         LoginQueryHandler handler = new(_authService.Object);
         //Act
         var result = handler.Handle(query, CancellationToken.None);
-        
+
         //Assert
         Assert.Null(result.Result);
     }
@@ -51,12 +51,12 @@ public class LoginQueryHandlerXUnitTests
 
         var authResponse = _authService.Setup(c => c.Login(It.IsAny<LoginQuery>())).ReturnsAsync(
             new AuthResponse()
-            {                
+            {
                 Email = "password",
                 Id = Guid.NewGuid(),
                 Token = "token",
                 UserName = "username",
-                UserType = UserType.Administrator            
+                UserType = UserType.Administrator
             });
 
         //Act
@@ -64,6 +64,6 @@ public class LoginQueryHandlerXUnitTests
 
         //Assert
         Assert.NotNull(result.Result);
-        Assert.True(result.Result is AuthResponse);        
+        Assert.True(result.Result is AuthResponse);
     }
 }

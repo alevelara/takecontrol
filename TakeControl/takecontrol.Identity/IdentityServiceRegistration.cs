@@ -16,13 +16,13 @@ public static class IdentityServiceRegistration
 {
     public static IServiceCollection ConfigureIdentityServices(this IServiceCollection service, IConfiguration configuration)
     {
-        service.AddDbContext<TakeControlIdentityDbContext>(options 
+        service.AddDbContext<TakeControlIdentityDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString")));
-        service.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));                
+        service.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         service.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
            .AddEntityFrameworkStores<TakeControlIdentityDbContext>();
-        
+
         service.AddTransient<IAuthService, AuthService>();
         service.AddAuthentication(opt =>
         {
