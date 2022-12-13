@@ -15,6 +15,8 @@ public class TestBase : IDisposable
 {
     protected ApiWebApplicationFactory Application;
 
+    public HttpClient HttpClient { get => Application.CreateClient();}
+
     public TestBase()
     {
         Application = new ApiWebApplicationFactory();
@@ -42,11 +44,9 @@ public class TestBase : IDisposable
         foreach (var role in roles)
         {
             await userManager.AddToRoleAsync(newUser, role);
-        }
+        }                  
 
-        var client = Application.CreateClient();
-
-        return client;
+        return HttpClient;
     }
 
     /// <summary>
@@ -74,6 +74,11 @@ public class TestBase : IDisposable
         ResetState().ConfigureAwait(false);
     }
 
+    public void DisposeIdentity()
+    {
+        ResetIdentityState().ConfigureAwait(false);
+    }
+
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin
     /// </summary>
@@ -86,7 +91,6 @@ public class TestBase : IDisposable
     public Task<HttpClient> RegisterSecuredUserAsAdmin() =>
         CreateTestForLoginUser("adminsecuredtest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
-
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
@@ -98,7 +102,6 @@ public class TestBase : IDisposable
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsPlayerAsync() =>
         CreateTestForLoginUser("playersecuredtest", "test@player.com", "Password123!", new string[] { "Player" });
-
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
@@ -168,7 +171,20 @@ public class TestBase : IDisposable
     /// <summary>
     /// Se asegura de crear la BD
     /// </summary>
-    private void EnsureDatabase()
+    private async void EnsureDatabase()
+    {
+        using var scope = Application.Services.CreateScope();
+        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
+
+        context.Database.EnsureCreated();
+
+        EnsureIdentityDatabase();
+    }
+
+    /// <summary>
+    /// Se asegura de crear la BD
+    /// </summary>
+    private void EnsureIdentityDatabase()
     {
         using var scope = Application.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
@@ -191,15 +207,24 @@ public class TestBase : IDisposable
     /// Se asegura de limpiar la BD
     /// </summary>
     /// <returns></returns>
-    private async Task ResetState()
+    private async Task ResetIdentityState()
     {
         using var scope = Application.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
         context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();        
+    }
+
+    private async Task ResetState()
+    {
+        using var scope = Application.Services.CreateScope();
+        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
+
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
-
+        await ResetIdentityState();
     }
 }
 

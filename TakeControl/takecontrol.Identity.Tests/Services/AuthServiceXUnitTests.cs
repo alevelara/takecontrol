@@ -7,10 +7,12 @@ using Moq;
 using System.Security.Claims;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
+using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
 using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
 using takecontrol.Identity.Services;
+using takecontrol.Identity.Tests.TestsData;
 
 namespace takecontrol.Identity.Tests.Services
 {
@@ -40,7 +42,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
                 appUser
                 );
@@ -73,7 +75,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()));
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);            
             
@@ -86,7 +88,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.Email = null;
 
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
@@ -102,7 +104,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.UserName = null;
 
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
@@ -118,7 +120,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.SecurityStamp = null;
 
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
@@ -135,7 +137,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = CreateApplicationUserForTest();
+            var appUser = IdentityTestData.CreateApplicationUserForTest();
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
                 appUser
                 );
@@ -152,18 +154,71 @@ namespace takecontrol.Identity.Tests.Services
             await Assert.ThrowsAsync<UnauthorizedException>(() => authService.Login(request));
         }
 
-        private ApplicationUser CreateApplicationUserForTest()
+        [Fact]
+        public async Task Register_Should_ReturnConflictException_WhenUserAlreadyExistsWithSameName()
         {
-            return new ApplicationUser
-            {
-                Email = "user@test.com",
-                EmailConfirmed = true,
-                Id = Guid.NewGuid(),
-                UserName = "Test",
-                NormalizedUserName = "TEST",
-                UserType = UserType.Administrator,
-                SecurityStamp = Guid.NewGuid().ToString(),
-            };
+            //Arrange
+            var request = new RegistrationRequest("existingName", "email", "password", UserType.Club);
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+            //Act
+            _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+
+            //Assert
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));
+
+        }
+
+        [Fact]
+        public async Task Register_Should_ReturnConflictException_WhenUserAlreadyExistsWithSameEmail()
+        {
+            //Arrange
+            var request = new RegistrationRequest("name", "existingEmail", "password", UserType.Club);
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+
+            //Act
+            _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>()));
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+
+            //Assert
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));
+        }
+
+        [Fact]
+        public async Task Register_Should_ReturnConflictException_WhenPasswordIsWrong()
+        {
+            //Arrange
+            var request = new RegistrationRequest("name", "existingEmail", "", UserType.Club);
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+            var failedIdentityResult = IdentityTestData.CreateFailedIdentityResult();
+
+            //Act
+            _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>()));
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>()));
+            _userManager.Setup(u => u.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(failedIdentityResult);
+
+            //Assert
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));
+        }
+
+        [Fact]
+        public async Task Register_Should_ReturnValidUserId_WhenRegisterIsSuccesful()
+        {
+            //Arrange
+            var request = new RegistrationRequest("name", "existingEmail", "", UserType.Club);
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+            var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
+
+            //Act
+            _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+            _userManager.Setup(u => u.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(successIdentityResult);            
+
+            //Assert
+            await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));
         }
     }
 }

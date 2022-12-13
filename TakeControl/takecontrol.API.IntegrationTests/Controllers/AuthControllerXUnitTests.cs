@@ -13,6 +13,7 @@ public class AuthControllerXUnitTests : TestBase
 
     public AuthControllerXUnitTests() : base()
     {
+        base.DisposeIdentity();
         _contextHttpClient = RegisterUserAsAdminAsync().Result;
     }
 
