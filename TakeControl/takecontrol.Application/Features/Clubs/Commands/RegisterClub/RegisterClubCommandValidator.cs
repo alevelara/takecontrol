@@ -36,7 +36,7 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
             .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible).WithMessage("Invalid email.")
             .NotEmpty().WithMessage("User email can not be empty")
             .NotNull().WithMessage("User email can not be null");
-            
+
         RuleFor(c => c.Password)
             .NotEmpty()
             .WithMessage("Password can not be empty")
@@ -99,6 +99,6 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
             result = symbol.IsMatch(pw);
         }
         return result;
-    }
+    }   
   
 }
