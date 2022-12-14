@@ -6,7 +6,7 @@ using takecontrol.Domain.Primitives;
 namespace takecontrol.Domain.Models.Addresses;
 
 public class Address : BaseDomainModel
-{    
+{
     public Guid Id { get; private set; }
     public string City { get; private set; } = string.Empty;
     public string Province { get; private set; } = string.Empty;

@@ -14,7 +14,7 @@ public class RegisterClubCommandHandlerXUnitTests
 {
     private Mock<IUnitOfWork> _uoW;
     private Mock<IAuthService> _authService;
-    private Mock<ILogger<RegisterClubCommandHandler>> _logger;    
+    private Mock<ILogger<RegisterClubCommandHandler>> _logger;
 
     public RegisterClubCommandHandlerXUnitTests()
     {
@@ -31,7 +31,7 @@ public class RegisterClubCommandHandlerXUnitTests
         var userId = Guid.NewGuid();
         var address = ApplicationTestData.CreateAddresForTest();
         var club = ApplicationTestData.CreateClubForTest(userId, address);
-        
+
         var handler = new RegisterClubCommandHandler(_uoW.Object, _authService.Object, _logger.Object);
         var addressRepo = new Mock<IAsyncWriteRepository<Address>>();
         _uoW.Setup(c => c.Repository<Address>()).Returns(addressRepo.Object);
@@ -39,8 +39,8 @@ public class RegisterClubCommandHandlerXUnitTests
         _uoW.Setup(c => c.Repository<Club>()).Returns(clubRepo.Object);
 
         //Act
-        await handler.Handle(command, default);        
-        _authService.Setup(x => x.Register(It.IsAny<RegistrationRequest>())).ReturnsAsync(userId);        
+        await handler.Handle(command, default);
+        _authService.Setup(x => x.Register(It.IsAny<RegistrationRequest>())).ReturnsAsync(userId);
         addressRepo.Setup(a => a.AddAsync(It.IsAny<Address>())).ReturnsAsync(address);
         clubRepo.Setup(c => c.AddAsync(It.IsAny<Club>())).ReturnsAsync(club);
         _uoW.Setup(u => u.CompleteAsync()).ReturnsAsync(1);

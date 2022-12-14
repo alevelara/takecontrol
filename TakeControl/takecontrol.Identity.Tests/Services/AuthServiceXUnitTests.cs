@@ -77,8 +77,8 @@ namespace takecontrol.Identity.Tests.Services
             var request = new LoginQuery("test@test.com", "password");
             var appUser = IdentityTestData.CreateApplicationUserForTest();
             var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()));
-            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);            
-            
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+
             //Assert
             await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
         }
@@ -148,7 +148,7 @@ namespace takecontrol.Identity.Tests.Services
                 It.IsAny<bool>()))
                 .ReturnsAsync(SignInResult.Failed);
 
-            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);            
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
             //Assert
             await Assert.ThrowsAsync<UnauthorizedException>(() => authService.Login(request));
@@ -215,7 +215,7 @@ namespace takecontrol.Identity.Tests.Services
             //Act
             _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
-            _userManager.Setup(u => u.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(successIdentityResult);            
+            _userManager.Setup(u => u.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(successIdentityResult);
 
             //Assert
             await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));

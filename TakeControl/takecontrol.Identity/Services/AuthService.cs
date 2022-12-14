@@ -81,7 +81,7 @@ public class AuthService : IAuthService
             _logger.LogError($"{IdentityError.ErrorDuringUserRegistration.Message}: {registerResult.Errors.FirstOrDefault().Description}");
             throw new ConflictException(IdentityError.ErrorDuringUserRegistration);
         }
-            
+
         await _userManager.AddToRoleAsync(user, "Club");
         _logger.LogInformation($"User {request.Email} was succesfully registered");
 

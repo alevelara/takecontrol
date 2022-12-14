@@ -9,10 +9,10 @@ using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 namespace takecontrol.Identity;
 
 public class TakeControlDbContext : DbContext
-{   
+{
 
     public TakeControlDbContext(DbContextOptions<TakeControlDbContext> options) : base(options)
-	{        
+    {
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -36,9 +36,9 @@ public class TakeControlDbContext : DbContext
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
-	{
-        builder.ApplyConfiguration(new ClubConfiguration());        
-    }   
+    {
+        builder.ApplyConfiguration(new ClubConfiguration());
+    }
 
     public DbSet<Club> Clubs { get; set; }
     public DbSet<Address> Addresses { get; set; }

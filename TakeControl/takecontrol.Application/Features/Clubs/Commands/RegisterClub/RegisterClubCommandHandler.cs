@@ -42,5 +42,5 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
         _logger.LogInformation($"New club {request.Name} has been registered succesfully.");
 
         return Unit.Value;
-    }    
+    }
 }

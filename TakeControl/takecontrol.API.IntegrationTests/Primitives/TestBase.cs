@@ -15,7 +15,7 @@ public class TestBase : IDisposable
 {
     protected ApiWebApplicationFactory Application;
 
-    public HttpClient HttpClient { get => Application.CreateClient();}
+    public HttpClient HttpClient { get => Application.CreateClient(); }
 
     public TestBase()
     {
@@ -44,7 +44,7 @@ public class TestBase : IDisposable
         foreach (var role in roles)
         {
             await userManager.AddToRoleAsync(newUser, role);
-        }                  
+        }
 
         return HttpClient;
     }
@@ -213,7 +213,7 @@ public class TestBase : IDisposable
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
         context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();        
+        context.Database.EnsureCreated();
     }
 
     private async Task ResetState()

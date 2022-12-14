@@ -13,10 +13,10 @@ public class Club : BaseDomainModel
     public Guid UserId { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string Code { get; private set; }
-    
+
     public virtual Address Address { get; set; }
 
-    private Club(Guid id, Guid addresId, Guid userId,  string name, string code)
+    private Club(Guid id, Guid addresId, Guid userId, string name, string code)
     {
         Id = id;
         AddresId = addresId;

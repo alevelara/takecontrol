@@ -7,24 +7,24 @@ public class RegisterClubCommandValidatorXUnitTests
 {
     private RegisterClubCommandValidator validator;
 
-	public RegisterClubCommandValidatorXUnitTests()
-	{
-		validator = new();
-	}
+    public RegisterClubCommandValidatorXUnitTests()
+    {
+        validator = new();
+    }
 
-	[Fact]
-	public void Validator_Should_ReturnValidationException_WhenNameIsNull()
-	{
-		//Arrange
-		var request = new RegisterClubCommand(null, "city", "province", "mainAddress", "email@test.com", "Password123!");
+    [Fact]
+    public void Validator_Should_ReturnValidationException_WhenNameIsNull()
+    {
+        //Arrange
+        var request = new RegisterClubCommand(null, "city", "province", "mainAddress", "email@test.com", "Password123!");
 
-		//Act
-		var result = validator.Validate(request);
+        //Act
+        var result = validator.Validate(request);
 
-		//Assert
-		Assert.Equal(result.Errors.Count, 2);
-		Assert.False(result.IsValid);
-	}
+        //Assert
+        Assert.Equal(result.Errors.Count, 2);
+        Assert.False(result.IsValid);
+    }
 
     [Fact]
     public void Validator_Should_ReturnValidationException_WhenNameIsEmpty()
@@ -72,7 +72,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenProvinceIsNull()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "city", null , "mainaddress", "email@test.com", "Password123!");
+        var request = new RegisterClubCommand("name", "city", null, "mainaddress", "email@test.com", "Password123!");
 
         //Act
         var result = validator.Validate(request);

@@ -6,17 +6,17 @@ namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 
 public class RegisterClubCommandValidator : AbstractValidator<RegisterClubCommand>
 {
-	public RegisterClubCommandValidator()
-	{
-		RuleFor(c => c.Name)
-			.NotEmpty()
-			.WithMessage("Club Name can not be empty")
+    public RegisterClubCommandValidator()
+    {
+        RuleFor(c => c.Name)
+            .NotEmpty()
+            .WithMessage("Club Name can not be empty")
             .NotNull()
             .WithMessage("Club Name can not be null");
 
-		RuleFor(c => c.City)
-			.NotEmpty()
-			.WithMessage("Club city can not be empty")
+        RuleFor(c => c.City)
+            .NotEmpty()
+            .WithMessage("Club city can not be empty")
             .NotNull()
             .WithMessage("Club city can not be null");
 
@@ -99,6 +99,6 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
             result = symbol.IsMatch(pw);
         }
         return result;
-    }   
-  
+    }
+
 }
