@@ -41,23 +41,24 @@ public class TakeControlDbContext : DbContext
     }
 
     public DbSet<Club> Clubs { get; set; }
+
     public DbSet<Address> Addresses { get; set; }
 }
-
 
 public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
     public static string API_NAME = "takecontrol.API";
+
     public TakeControlDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>();
         var config = GetAppConfiguration();
-        optionsBuilder.UseNpgsql(config.GetConnectionString("ConnectionString"));
+        var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>()
+            .UseNpgsql(config.GetConnectionString("ConnectionString"));
 
-        return new TakeControlDbContext(optionsBuilder.Options);
+        return new TakeControlDbContext(optionsBuilder.Options); ;
     }
 
-    IConfiguration GetAppConfiguration()
+    private static IConfiguration GetAppConfiguration()
     {
         var environmentName =
                   Environment.GetEnvironmentVariable(

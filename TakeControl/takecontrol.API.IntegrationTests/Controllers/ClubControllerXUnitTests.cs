@@ -5,15 +5,18 @@ using takecontrol.Domain.Messages.Clubs;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
-public class ClubControllerXUnitTests : TestBase
+public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     public static string REGISTER_ENDPOINT = "api/v1/club/Register";
-    private HttpClient _contextHttpClient;
+    private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly TestBase _testBase;
+    private readonly HttpClient _httpClient;
 
-    public ClubControllerXUnitTests() : base()
+    public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _contextHttpClient = base.HttpClient;
-        base.Dispose();
+        _factory = factory;
+        _httpClient = factory.CreateClient();
+        _testBase = new TestBase(factory, _httpClient);
     }
 
     [Fact]
@@ -29,7 +32,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -48,7 +51,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -67,7 +70,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -86,7 +89,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -105,7 +108,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = ""
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -124,7 +127,7 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -143,10 +146,14 @@ public class ClubControllerXUnitTests : TestBase
             Province = "provinceTest"
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
+    public void Dispose()
+    {
+        _testBase.Dispose();
+    }
 }

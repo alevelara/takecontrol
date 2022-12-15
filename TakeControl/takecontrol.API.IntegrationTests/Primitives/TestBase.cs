@@ -11,17 +11,17 @@ using takecontrol.Identity.Models;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
-public class TestBase : IDisposable
+public class TestBase
 {
-    protected ApiWebApplicationFactory Application;
+    private readonly CustomWebApplicationFactory<Program> _apiWebApplicationFactory;
+    private readonly HttpClient _httpClient;
 
-    public HttpClient HttpClient { get => Application.CreateClient(); }
-
-    public TestBase()
+    public TestBase(CustomWebApplicationFactory<Program> apiWebApplicationFactory, HttpClient httpClient)
     {
-        Application = new ApiWebApplicationFactory();
-        EnsureDatabase();
+        _apiWebApplicationFactory = apiWebApplicationFactory;
+        _httpClient = httpClient;
     }
+
 
     /// <summary>
     /// Crea un usuario de prueba según los parámetros
@@ -29,7 +29,7 @@ public class TestBase : IDisposable
     /// <returns></returns>
     public async Task<HttpClient> CreateTestForLoginUser(string userName, string email, string password, string[] roles)
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
         var newUser = new ApplicationUser
@@ -46,7 +46,7 @@ public class TestBase : IDisposable
             await userManager.AddToRoleAsync(newUser, role);
         }
 
-        return HttpClient;
+        return _httpClient;
     }
 
     /// <summary>
@@ -72,11 +72,6 @@ public class TestBase : IDisposable
     public void Dispose()
     {
         ResetState().ConfigureAwait(false);
-    }
-
-    public void DisposeIdentity()
-    {
-        ResetIdentityState().ConfigureAwait(false);
     }
 
     /// <summary>
@@ -121,7 +116,7 @@ public class TestBase : IDisposable
     /// </summary>
     public async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
 
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
@@ -133,7 +128,7 @@ public class TestBase : IDisposable
     /// </summary>
     protected async Task<TEntity> AddAsync<TEntity>(TEntity entity) where TEntity : class
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
 
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
@@ -149,7 +144,7 @@ public class TestBase : IDisposable
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
 
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
@@ -161,7 +156,7 @@ public class TestBase : IDisposable
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
 
         var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
@@ -171,9 +166,9 @@ public class TestBase : IDisposable
     /// <summary>
     /// Se asegura de crear la BD
     /// </summary>
-    private async void EnsureDatabase()
+    private void EnsureDatabase()
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
 
         context.Database.EnsureCreated();
@@ -181,15 +176,12 @@ public class TestBase : IDisposable
         EnsureIdentityDatabase();
     }
 
-    /// <summary>
-    /// Se asegura de crear la BD
-    /// </summary>
     private void EnsureIdentityDatabase()
     {
-        using var scope = Application.Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
+        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
 
-        context.Database.EnsureCreated();
+        identityContext.Database.EnsureCreated();
     }
 
     /// <summary>
@@ -197,34 +189,22 @@ public class TestBase : IDisposable
     /// </summary>
     private async Task<string> GetAccessToken(string email, string password)
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
 
         var result = await SendAsync(new LoginQuery(email, password));
 
         return result.Token;
     }
-    /// <summary>
-    /// Se asegura de limpiar la BD
-    /// </summary>
-    /// <returns></returns>
-    private async Task ResetIdentityState()
-    {
-        using var scope = Application.Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
-    }
 
     private async Task ResetState()
     {
-        using var scope = Application.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
-        await ResetIdentityState();
+        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        identityContext.Database.EnsureDeleted();
+        identityContext.Database.EnsureCreated();
     }
 }
-

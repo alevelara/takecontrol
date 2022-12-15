@@ -20,4 +20,8 @@
     <ProjectReference Include="..\takecontrol.Infrastructure\takecontrol.Infrastructure.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="takecontrol.API.IntegrationTests" />
+	</ItemGroup>
+
 </Project>

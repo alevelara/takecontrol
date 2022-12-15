@@ -27,11 +27,12 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
     {
         public static string API_NAME = "takecontrol.API";
+
         public TakeControlIdentityDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<TakeControlIdentityDbContext>();
             var config = GetAppConfiguration();
-            optionsBuilder.UseNpgsql(config.GetConnectionString("IdentityConnectionString"));
+            var optionsBuilder = new DbContextOptionsBuilder<TakeControlIdentityDbContext>()
+                .UseNpgsql(config.GetConnectionString("IdentityConnectionString"));
 
             return new TakeControlIdentityDbContext(optionsBuilder.Options);
         }

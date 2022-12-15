@@ -20,7 +20,7 @@
 
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-			<_Parameter1>tekecontrol.Application.Tests</_Parameter1>
+			<_Parameter1>takecontrol.Application.Tests</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 
