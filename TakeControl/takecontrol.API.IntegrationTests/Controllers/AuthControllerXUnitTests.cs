@@ -118,6 +118,7 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
 
     public void Dispose()
     {
-        _testBase.Dispose();
+        this._httpClient.Dispose();
+        this._testBase.Dispose();
     }
 }

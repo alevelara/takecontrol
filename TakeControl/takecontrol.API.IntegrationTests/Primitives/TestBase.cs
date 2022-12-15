@@ -20,6 +20,7 @@ public class TestBase
     {
         _apiWebApplicationFactory = apiWebApplicationFactory;
         _httpClient = httpClient;
+        EnsureDatabase();
     }
 
 
@@ -71,7 +72,7 @@ public class TestBase
     /// 
     public void Dispose()
     {
-        ResetState().ConfigureAwait(false);
+        ResetState();
     }
 
     /// <summary>
@@ -196,15 +197,14 @@ public class TestBase
         return result.Token;
     }
 
-    private async Task ResetState()
+    private void ResetState()
     {
         using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
+        context.Clubs.ExecuteDelete();
+        context.Addresses.ExecuteDelete();
 
         var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Database.EnsureDeleted();
-        identityContext.Database.EnsureCreated();
+        identityContext.Users.ExecuteDelete();
     }
 }
