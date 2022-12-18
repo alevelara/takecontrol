@@ -73,6 +73,12 @@ public class TestBase
     public void Dispose()
     {
         ResetState();
+        ResetIdentityState();
+    }
+
+    public void DisposeIdentity()
+    {
+        ResetIdentityState();
     }
 
     /// <summary>
@@ -197,14 +203,19 @@ public class TestBase
         return result.Token;
     }
 
-    private void ResetState()
+    public void ResetIdentityState()
+    {
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
+        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        identityContext.Users.RemoveRange(identityContext.Users);
+        identityContext.SaveChanges();
+    }
+
+    public void ResetState()
     {
         using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-        context.Clubs.ExecuteDelete();
-        context.Addresses.ExecuteDelete();
-
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Users.ExecuteDelete();
+        context.Clubs.RemoveRange(context.Clubs);
+        context.Addresses.RemoveRange(context.Addresses);
     }
 }

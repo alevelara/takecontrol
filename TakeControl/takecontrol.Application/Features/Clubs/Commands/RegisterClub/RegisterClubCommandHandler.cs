@@ -25,8 +25,7 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
 
     public async Task<Unit> Handle(RegisterClubCommand request, CancellationToken cancellationToken)
     {
-        var registerRequest = new RegistrationRequest(request.Name, request.Email, request.Password, UserType.Club);
-        var userId = await _authService.Register(registerRequest);
+        var userId = await this.RegisterClub(request.Name, request.Email, request.Password);
 
         var address = Address.Create(request.City, request.Province, request.MainAddress);
         var addressWriteRepository = _unitOfWork.Repository<Address>();
@@ -42,5 +41,11 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
         _logger.LogInformation($"New club {request.Name} has been registered succesfully.");
 
         return Unit.Value;
+    }
+
+    private async Task<Guid> RegisterClub(string name, string email, string password)
+    {
+        var registerRequest = new RegistrationRequest(name, email, password, UserType.Club);
+        return await _authService.Register(registerRequest);
     }
 }

@@ -9,9 +9,17 @@ public class Club : BaseDomainModel
 {
     [Key]
     public Guid Id { get; private set; }
+
+    [Required]
     public Guid AddresId { get; private set; }
+
+    [Required]
     public Guid UserId { get; private set; }
-    public string Name { get; private set; } = string.Empty;
+
+    [Required]
+    public string Name { get; private set; }
+
+    [Required]
     public string Code { get; private set; }
 
     public virtual Address Address { get; set; }

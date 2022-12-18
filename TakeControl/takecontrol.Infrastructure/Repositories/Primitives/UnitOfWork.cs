@@ -5,7 +5,7 @@ using takecontrol.Identity;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives;
 
-public sealed class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
     private Hashtable _repostories;
     private readonly TakeControlDbContext _context;

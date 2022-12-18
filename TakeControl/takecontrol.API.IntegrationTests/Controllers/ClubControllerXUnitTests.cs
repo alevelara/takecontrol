@@ -39,6 +39,27 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
+    public async Task RegisterClub_Should_ReturnConflict_WhenUserWithSameEmailAlreadyExist()
+    {
+        await this.RegisterClubForTest();
+
+        var request = new RegisterClubRequest
+        {
+            City = "CityTest",
+            Email = "email@test.com",
+            MainAddress = "mainAddressTest",
+            Name = "nameTest2",
+            Password = "Password123!",
+            Province = "provinceTest"
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenEmailIsIncorrect()
     {
         var request = new RegisterClubRequest
@@ -156,5 +177,20 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     {
         this._httpClient.Dispose();
         this._testBase.Dispose();
+    }
+
+    private async Task RegisterClubForTest()
+    {
+        var request = new RegisterClubRequest
+        {
+            City = "CityTest",
+            Email = "email@test.com",
+            MainAddress = "mainAddressTest",
+            Name = "nameTest",
+            Password = "Password123!",
+            Province = "provinceTest"
+        };
+
+        await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
     }
 }

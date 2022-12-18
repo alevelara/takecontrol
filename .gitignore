@@ -424,6 +424,9 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+#Migration folders
+Migrations/
+
 # JetBrains Rider
 *.sln.iml
 Footer
@@ -440,4 +443,4 @@ API
 Training
 Blog
 About
-mycinema/.gitignore at main · alevelara/mycinema
+takecontrol/.gitignore at main · alevelara/takecontrol
