@@ -208,6 +208,7 @@ public class TestBase
         using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
         identityContext.Users.RemoveRange(identityContext.Users);
+        identityContext.UserRoles.RemoveRange(identityContext.UserRoles);
         identityContext.SaveChanges();
     }
 
@@ -217,5 +218,11 @@ public class TestBase
         var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
         context.Clubs.RemoveRange(context.Clubs);
         context.Addresses.RemoveRange(context.Addresses);
+        context.SaveChanges();
+
+        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        identityContext.Users.RemoveRange(identityContext.Users);
+        identityContext.SaveChanges();
+        // context.SaveChanges();
     }
 }

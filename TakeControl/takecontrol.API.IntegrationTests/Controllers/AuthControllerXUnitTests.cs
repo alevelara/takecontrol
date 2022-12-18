@@ -67,8 +67,6 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-
-        this.Dispose();
     }
 
     [Fact]

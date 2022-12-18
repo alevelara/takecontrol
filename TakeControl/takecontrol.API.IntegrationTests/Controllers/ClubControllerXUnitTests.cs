@@ -29,7 +29,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -50,7 +50,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
             MainAddress = "mainAddressTest",
             Name = "nameTest2",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -69,7 +69,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -88,7 +88,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "pass",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -102,12 +102,12 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     {
         var request = new RegisterClubRequest
         {
-            City = "",
+            City = string.Empty,
             Email = "email",
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -121,12 +121,12 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     {
         var request = new RegisterClubRequest
         {
-            City = "",
+            City = "city",
             Email = "email",
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "Password123!",
-            Province = ""
+            Province = string.Empty,
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -140,12 +140,12 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     {
         var request = new RegisterClubRequest
         {
-            City = "",
+            City = "city",
             Email = "email",
-            MainAddress = "",
+            MainAddress = string.Empty,
             Name = "nameTest",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -159,12 +159,12 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     {
         var request = new RegisterClubRequest
         {
-            City = "",
+            City = "city",
             Email = "email",
             MainAddress = "mainAddressTest",
-            Name = "",
+            Name = string.Empty,
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
@@ -188,7 +188,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
             MainAddress = "mainAddressTest",
             Name = "nameTest",
             Password = "Password123!",
-            Province = "provinceTest"
+            Province = "provinceTest",
         };
 
         await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
