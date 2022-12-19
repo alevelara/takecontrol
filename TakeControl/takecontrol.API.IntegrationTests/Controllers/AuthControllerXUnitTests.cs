@@ -7,7 +7,7 @@ using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", "IntegrationIdentityTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(10)]
 public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable

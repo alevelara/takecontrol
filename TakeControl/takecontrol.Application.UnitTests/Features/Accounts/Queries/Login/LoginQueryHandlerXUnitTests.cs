@@ -10,7 +10,7 @@ namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 public class LoginQueryHandlerXUnitTests
 {
     private readonly Mock<IAuthService> _authService;
-    
+
     public LoginQueryHandlerXUnitTests()
     {
         _authService = new();
