@@ -16,6 +16,7 @@ using takecontrol.Identity.Tests.TestsData;
 
 namespace takecontrol.Identity.Tests.Services
 {
+    [Trait("Category", "UnitTests")]
     public class AuthServiceXUnitTests
     {
         private readonly Mock<UserManager<ApplicationUser>> _userManager;

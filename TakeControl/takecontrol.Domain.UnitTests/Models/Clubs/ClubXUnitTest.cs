@@ -2,6 +2,7 @@
 
 namespace takecontrol.Domain.UnitTests.Models.Clubs;
 
+[Trait("Category", "UnitTests")]
 public class ClubXUnitTest
 {
     [Fact]

@@ -2,6 +2,7 @@
 
 namespace takecontrol.Domain.UnitTests.Models.Addresses;
 
+[Trait("Category", "UnitTests")]
 public class AddressXUnitTest
 {
 

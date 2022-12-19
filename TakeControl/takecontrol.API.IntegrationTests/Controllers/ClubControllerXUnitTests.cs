@@ -2,9 +2,13 @@
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Clubs;
+using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
+[Trait("Category", "IntegrationTests")]
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+[DefaultPriority(10)]
 public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     public static string REGISTER_ENDPOINT = "api/v1/club/Register";
@@ -20,6 +24,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
+    [Priority(2)]
     public async Task RegisterClub_Should_Return201StatusCode_WhenRegisterRequestIsValid()
     {
         var request = new RegisterClubRequest
@@ -39,6 +44,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
+    [Priority(20)]
     public async Task RegisterClub_Should_ReturnConflict_WhenUserWithSameEmailAlreadyExist()
     {
         await this.RegisterClubForTest();

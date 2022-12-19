@@ -2,6 +2,7 @@
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 
+[Trait("Category", "UnitTests")]
 public class LoginQueryValidatorXUnitTests
 {
     private LoginQueryValidator validator;

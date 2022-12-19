@@ -10,6 +10,7 @@ using takecontrol.Domain.Models.Clubs;
 
 namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
+[Trait("Category", "UnitTests")]
 public class RegisterClubCommandHandlerXUnitTests
 {
     private Mock<IUnitOfWork> _uoW;

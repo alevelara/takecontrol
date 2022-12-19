@@ -3,9 +3,13 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Identity;
+using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
+[Trait("Category", "IntegrationTests")]
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+[DefaultPriority(10)]
 public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
@@ -21,6 +25,7 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
+    [Priority(0)]
     public async Task Login_Should_ReturnOK_WhenLoginQueryIsValid()
     {
         await _testBase.RegisterUserAsAdminAsync();
@@ -53,6 +58,7 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
+    [Priority(15)]
     public async Task Login_Should_ReturnUnhathorized_WhenPasswordIsIncorrect()
     {
         await _testBase.RegisterUserAsAdminAsync();

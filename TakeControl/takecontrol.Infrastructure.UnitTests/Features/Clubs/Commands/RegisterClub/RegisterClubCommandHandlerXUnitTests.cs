@@ -2,15 +2,16 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Domain.Messages.Clubs;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
 using takecontrol.Infrastructure.Repositories.Primitives;
+using Xunit.Priority;
 
 namespace takecontrol.Infrastructure.IntegrationTests.Features.Clubs.Commands.RegisterClub;
 
+[Trait("Category", "IntegrationTests")]
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {
 
@@ -26,6 +27,7 @@ public class RegisterClubCommandHandlerXUnitTests
     }
 
     [Fact]
+    [Priority(-10)]
     public async Task RegisterClub_Should_ReturnUnitValue_WhenRequestIsOK()
     {
         var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password");

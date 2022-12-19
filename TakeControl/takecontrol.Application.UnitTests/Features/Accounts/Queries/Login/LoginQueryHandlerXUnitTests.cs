@@ -6,10 +6,11 @@ using takecontrol.Domain.Models.ApplicationUser.Enum;
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 
-
+[Trait("Category", "UnitTests")]
 public class LoginQueryHandlerXUnitTests
 {
     private readonly Mock<IAuthService> _authService;
+    
     public LoginQueryHandlerXUnitTests()
     {
         _authService = new();
