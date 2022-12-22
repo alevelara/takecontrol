@@ -7,12 +7,12 @@ public class LoginQueryValidator : AbstractValidator<LoginQuery>
     public LoginQueryValidator()
     {
         RuleFor(r => r.Email)
-            .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible).WithMessage("Esto no es un email válido")
-            .NotEmpty().WithMessage("El email debe estar relleno")
-            .NotNull().WithMessage("El email debe estar relleno");
+            .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible).WithMessage("Invalid email.")
+            .NotEmpty().WithMessage("User email can not be empty")
+            .NotNull().WithMessage("User email can not be null");
 
         RuleFor(r => r.Password)
-            .NotEmpty().WithMessage("La contraseña no puede ser vacía")
-            .NotNull().WithMessage("La contraseña no puede ser vacía");
+            .NotEmpty().WithMessage("Password can not be empty")
+            .NotNull().WithMessage("Password can no be null");
     }
 }

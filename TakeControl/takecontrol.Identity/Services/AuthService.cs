@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,6 +10,7 @@ using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
+using takecontrol.Domain.Models.ApplicationUser.Enum;
 using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
 using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
@@ -20,12 +22,14 @@ public class AuthService : IAuthService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly JwtSettings _jwtSettings;
+    private readonly ILogger<AuthService> _logger;
 
-    public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<JwtSettings> jwtSettings)
+    public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<JwtSettings> jwtSettings, ILogger<AuthService> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _jwtSettings = jwtSettings.Value;
+        _logger = logger;
     }
 
     public async Task<AuthResponse> Login(LoginQuery request)
@@ -50,6 +54,38 @@ public class AuthService : IAuthService
         };
 
         return authResponse;
+    }
+
+    public async Task<Guid> Register(RegistrationRequest request)
+    {
+        var existingUser = await _userManager.FindByNameAsync(request.Email);
+        if (existingUser != null)
+            throw new ConflictException(IdentityError.UserAlreadyExistsWithThisUserName);
+
+        var existingEmail = await _userManager.FindByEmailAsync(request.Email);
+        if (existingEmail != null)
+            throw new ConflictException(IdentityError.UserAlreadyExistsWithThisEmail);
+
+        var user = new ApplicationUser
+        {
+            Email = request.Email,
+            Name = request.Name,
+            UserName = request.Email,
+            EmailConfirmed = true,
+            UserType = request.UserType
+        };
+
+        var registerResult = await _userManager.CreateAsync(user, request.Password);
+        if (!registerResult.Succeeded)
+        {
+            _logger.LogError($"{IdentityError.ErrorDuringUserRegistration.Message}: {registerResult.Errors.FirstOrDefault().Description}");
+            throw new ConflictException(IdentityError.ErrorDuringUserRegistration);
+        }
+
+        await _userManager.AddToRoleAsync(user, "Club");
+        _logger.LogInformation($"User {request.Email} was succesfully registered");
+
+        return user.Id;
     }
 
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)

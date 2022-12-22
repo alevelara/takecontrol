@@ -1,31 +1,42 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Identity;
+using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
-public class AuthControllerXUnitTests : TestBase
+[Trait("Category", "IntegrationIdentityTests")]
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+[DefaultPriority(10)]
+public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
-
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
-    private HttpClient _contextHttpClient;
+    private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly TestBase _testBase;
+    private readonly HttpClient _httpClient;
 
-    public AuthControllerXUnitTests() : base()
+    public AuthControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _contextHttpClient = RegisterUserAsAdminAsync().Result;
+        _factory = factory;
+        _httpClient = factory.CreateClient();
+        _testBase = new TestBase(factory, _httpClient);
     }
 
     [Fact]
+    [Priority(0)]
     public async Task Login_Should_ReturnOK_WhenLoginQueryIsValid()
     {
+        await _testBase.RegisterUserAsAdminAsync();
+
         var request = new AuthRequest
         {
             Email = "test@admin.com",
-            Password = "Password123!"
+            Password = "Password123!",
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -37,25 +48,28 @@ public class AuthControllerXUnitTests : TestBase
         var request = new AuthRequest
         {
             Email = "invalid@email.com",
-            Password = "Password123!"
+            Password = "Password123!",
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
 
     [Fact]
+    [Priority(15)]
     public async Task Login_Should_ReturnUnhathorized_WhenPasswordIsIncorrect()
     {
+        await _testBase.RegisterUserAsAdminAsync();
+
         var request = new AuthRequest
         {
             Email = "test@admin.com",
-            Password = "incorrectPassword"
+            Password = "incorrectPassword",
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -66,11 +80,11 @@ public class AuthControllerXUnitTests : TestBase
     {
         var request = new AuthRequest
         {
-            Email = "",
-            Password = "incorrectPassword"
+            Email = string.Empty,
+            Password = "incorrectPassword",
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -82,10 +96,10 @@ public class AuthControllerXUnitTests : TestBase
         var request = new AuthRequest
         {
             Email = "test@admin.com",
-            Password = ""
+            Password = string.Empty,
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -97,12 +111,18 @@ public class AuthControllerXUnitTests : TestBase
         var request = new AuthRequest
         {
             Email = "wrongemail",
-            Password = "incorrectPassword"
+            Password = "incorrectPassword",
         };
 
-        var response = await _contextHttpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    public void Dispose()
+    {
+        this._httpClient.Dispose();
+        this._testBase.ResetIdentityState();
     }
 }

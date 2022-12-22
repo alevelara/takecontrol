@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddTransient<ExceptionHandlingMiddleware>();
     builder.Services.ConfigureIdentityServices(builder.Configuration);
     builder.Services.AddApplicationServices();
+    builder.Services.ConfigureInfrastructureServices(builder.Configuration);
     builder.Services.AddCors(opt =>
     {
         opt.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
@@ -37,3 +38,5 @@ var app = builder.Build();
 
     app.Run();
 }
+
+public partial class Program { }

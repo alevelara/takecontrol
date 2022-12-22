@@ -6,4 +6,5 @@ namespace takecontrol.Application.Contracts.Identity;
 public interface IAuthService
 {
     Task<AuthResponse> Login(LoginQuery request);
+    Task<Guid> Register(RegistrationRequest request);
 }
