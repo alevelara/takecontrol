@@ -39,4 +39,3 @@ public class Club : BaseDomainModel
         return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code);
     }
 }
-

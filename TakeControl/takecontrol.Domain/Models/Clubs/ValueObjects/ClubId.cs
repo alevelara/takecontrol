@@ -5,6 +5,7 @@ namespace takecontrol.Domain.Models.Clubs.ValueObjects;
 public class ClubValueObject : ValueObject
 {
     public Guid Value { get; private set; }
+
     public string Code { get; private set; }
 
     public ClubValueObject()

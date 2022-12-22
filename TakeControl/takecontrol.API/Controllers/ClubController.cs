@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Domain.Messages.Clubs;
 
@@ -21,6 +22,6 @@ public class ClubController : ControllerBase
     {
         var command = new RegisterClubCommand(request.Name, request.City, request.Province, request.MainAddress, request.Email, request.Password);
         await _mediator.Send(command);
-        return StatusCode(201);
+        return StatusCode((int)HttpStatusCode.Created);
     }
 }

@@ -223,6 +223,5 @@ public class TestBase
         var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
         identityContext.Users.RemoveRange(identityContext.Users);
         identityContext.SaveChanges();
-        // context.SaveChanges();
     }
 }
