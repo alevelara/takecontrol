@@ -97,6 +97,48 @@ namespace takecontrol.Infrastructure.Migrations
                     b.ToTable("Clubs");
                 });
 
+            modelBuilder.Entity("takecontrol.Domain.Models.Players.Player", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("AvgNumberOfMatchesInAWeek")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfClassesInAWeek")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberOfYearsPlayed")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PlayerLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Players");
+                });
+
             modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
                 {
                     b.HasOne("takecontrol.Domain.Models.Addresses.Address", "Address")

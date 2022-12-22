@@ -1,37 +1,41 @@
 ﻿using FluentValidation;
-using System.Text.RegularExpressions;
 using takecontrol.Domain.Utils;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
-public class RegisterClubCommandValidator : AbstractValidator<RegisterClubCommand>
+public class RegisterPlayerCommandValidator : AbstractValidator<RegisterPlayerCommand>
 {
-    public RegisterClubCommandValidator()
-    {
+	public RegisterPlayerCommandValidator()
+	{
         RuleFor(c => c.Name)
             .NotEmpty()
             .WithMessage("Club Name can not be empty")
             .NotNull()
             .WithMessage("Club Name can not be null");
 
-        RuleFor(c => c.City)
+        RuleFor(c => c.NumberOfClassesInAWeek)
             .NotEmpty()
-            .WithMessage("Club city can not be empty")
+            .WithMessage("Number of class in a week can not be empty")
             .NotNull()
-            .WithMessage("Club city can not be null");
+            .WithMessage("Number of class in a week can not be null")
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("Number of class in a week can not be negative");
 
-        RuleFor(c => c.MainAddress)
+        RuleFor(c => c.AvgNumberOfMatchesInAWeek)
             .NotEmpty()
-            .WithMessage("Club address can not be empty")
+            .WithMessage("Average of number of matches in a week  can not be empty")
             .NotNull()
-            .WithMessage("Club address can not be null");
+            .WithMessage("Average of number of matches in a week  can not be null")
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("Average of number of matches in a week can not be negative"); 
 
-        RuleFor(c => c.Province)
+        RuleFor(c => c.NumberOfYearsPlayed)
             .NotEmpty()
-            .WithMessage("Club province can not be empty")
+            .WithMessage("Number of years played can not be empty")
             .NotNull()
-            .WithMessage("Club province can not be null");
+            .WithMessage("Number of years played can not be null")
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("Number of years played can not be negative");
 
         RuleFor(c => c.Email)
             .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible).WithMessage("Invalid email.")
