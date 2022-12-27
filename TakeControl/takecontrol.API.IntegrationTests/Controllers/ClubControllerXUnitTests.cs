@@ -6,25 +6,26 @@ using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
+[Collection("IntegrationTests")]
 [Trait("Category", "IntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
-[DefaultPriority(10)]
-public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
+[DefaultPriority(20)]
+public class ClubControllerXUnitTests : IAsyncLifetime
 {
     public static string REGISTER_ENDPOINT = "api/v1/club/Register";
-    private readonly CustomWebApplicationFactory<Program> _factory;
-    private readonly TestBase _testBase;
+    private readonly Func<Task> _resetDatabase;
+    private readonly Func<Task> _initDatabase;
     private readonly HttpClient _httpClient;
 
     public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _factory = factory;
-        _httpClient = factory.CreateClient();
-        _testBase = new TestBase(factory, _httpClient);
+        _resetDatabase = factory.ResetState;
+        _initDatabase = factory.EnsureDatabase;
+        _httpClient = factory.HttpClient;
     }
 
     [Fact]
-    [Priority(2)]
+    [Priority(19)]
     public async Task RegisterClub_Should_Return201StatusCode_WhenRegisterRequestIsValid()
     {
         var request = new RegisterClubRequest
@@ -44,7 +45,7 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
-    [Priority(20)]
+    [Priority(21)]
     public async Task RegisterClub_Should_ReturnConflict_WhenUserWithSameEmailAlreadyExist()
     {
         await this.RegisterClubForTest();
@@ -179,12 +180,6 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    public void Dispose()
-    {
-        this._httpClient.Dispose();
-        this._testBase.Dispose();
-    }
-
     private async Task RegisterClubForTest()
     {
         var request = new RegisterClubRequest
@@ -199,4 +194,8 @@ public class ClubControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
 
         await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
     }
+
+    public async Task InitializeAsync() => await _initDatabase();
+
+    public async Task DisposeAsync() => await _resetDatabase();
 }

@@ -48,7 +48,7 @@ public class TakeControlDbContext : DbContext
     public DbSet<Player> Players { get; set; }
 }
 
-public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
+public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
     public static string API_NAME = "takecontrol.API";
 
@@ -58,7 +58,7 @@ public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlD
         var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>()
             .UseNpgsql(config.GetConnectionString("ConnectionString"));
 
-        return new TakeControlDbContext(optionsBuilder.Options); ;
+        return new TakeControlDbContext(optionsBuilder.Options);
     }
 
     private static IConfiguration GetAppConfiguration()

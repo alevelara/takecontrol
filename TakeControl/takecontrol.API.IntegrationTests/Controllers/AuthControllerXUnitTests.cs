@@ -10,18 +10,21 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [Trait("Category", "IntegrationIdentityTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(10)]
-public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
+[Collection("IntegrationTests")]
+public class AuthControllerXUnitTests : IAsyncLifetime
 {
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
-    private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly Func<Task> _resetDatabase;
+    private readonly Func<Task> _initDatabase;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
 
     public AuthControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _factory = factory;
-        _httpClient = factory.CreateClient();
-        _testBase = new TestBase(factory, _httpClient);
+        _resetDatabase = factory.ResetIdentityState;
+        _initDatabase = factory.EnsureIdentityDatabase;
+        _httpClient = factory.HttpClient;
+        _testBase = new TestBase(factory);
     }
 
     [Fact]
@@ -58,7 +61,7 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
     }
 
     [Fact]
-    [Priority(15)]
+    [Priority(11)]
     public async Task Login_Should_ReturnUnhathorized_WhenPasswordIsIncorrect()
     {
         await _testBase.RegisterUserAsAdminAsync();
@@ -120,9 +123,7 @@ public class AuthControllerXUnitTests : IClassFixture<CustomWebApplicationFactor
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    public void Dispose()
-    {
-        this._httpClient.Dispose();
-        this._testBase.ResetIdentityState();
-    }
+    public async Task InitializeAsync() => await _initDatabase();
+
+    public async Task DisposeAsync() => await _resetDatabase();
 }
