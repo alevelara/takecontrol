@@ -20,9 +20,8 @@ public class TakeControlDb : IDbConfiguration
 
     public async Task ResetState()
     {
-        this.Context.Clubs.RemoveRange(Context.Clubs);
-        this.Context.Addresses.RemoveRange(Context.Addresses);
-        this.Context.Players.RemoveRange(Context.Players);
-        await this.Context.SaveChangesAsync();
+        await this.Context.Clubs.ExecuteDeleteAsync();
+        await this.Context.Addresses.ExecuteDeleteAsync();
+        await this.Context.Players.ExecuteDeleteAsync();
     }
 }

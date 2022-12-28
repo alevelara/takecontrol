@@ -40,6 +40,7 @@ namespace takecontrol.Infrastructure.IntegrationTests.Mocks
         {
             takeControlContextFake.Clubs.ExecuteDelete();
             takeControlContextFake.Addresses.ExecuteDelete();
+            takeControlContextFake.Players.ExecuteDelete();
         }
     }
 }

@@ -20,8 +20,7 @@ public class TakeControlIdentityDb : IDbConfiguration
 
     public async Task ResetState()
     {
-        this.Context.Users.RemoveRange(Context.Users);
-        this.Context.UserRoles.RemoveRange(Context.UserRoles);
-        await Context.SaveChangesAsync();
+        await this.Context.Users.ExecuteDeleteAsync();
+        await this.Context.UserRoles.ExecuteDeleteAsync();
     }
 }
