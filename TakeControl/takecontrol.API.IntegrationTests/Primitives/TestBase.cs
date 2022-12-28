@@ -27,7 +27,7 @@ public class TestBase
     /// <returns></returns>
     public async Task<HttpClient> CreateTestForLoginUser(string userName, string email, string password, string[] roles)
     {
-        var scope = _apiWebApplicationFactory.Services.CreateScope();
+        using var scope = _apiWebApplicationFactory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
         var newUser = new ApplicationUser

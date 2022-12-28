@@ -51,7 +51,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     private TakeControlDbContext GetTakeControlDbContext()
     {
-        var scope = Services.CreateScope();
+        using var scope = Services.CreateScope();
         return scope.ServiceProvider.GetService<TakeControlDbContext>();
     }
 
