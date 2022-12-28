@@ -13,15 +13,15 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 public class PlayerControllerXUnitTests : IAsyncLifetime
 {
     public static string REGISTER_ENDPOINT = "api/v1/player/Register";
-    private readonly Func<Task> _resetDatabase;
-    private readonly Func<Task> _initDatabase;
+    private readonly TakeControlDb _takeControlDb;
+    private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly HttpClient _httpClient;
 
     public PlayerControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _resetDatabase = factory.ResetState;
+        _takeControlDb = factory.TakecontrolDb;
+        _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
-        _initDatabase = factory.EnsureDatabase;
     }
 
     [Fact]
@@ -195,7 +195,11 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(REGISTER_ENDPOINT, request, default);
     }
 
-    public async Task InitializeAsync() => await _initDatabase();
+    public Task InitializeAsync() => Task.CompletedTask;
 
-    public async Task DisposeAsync() => await _resetDatabase();
+    public async Task DisposeAsync()
+    {
+        _takeControlIdentityDb.ResetState();
+        _takeControlDb.ResetState();
+    }
 }

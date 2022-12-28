@@ -5,8 +5,8 @@ namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommandValidator : AbstractValidator<RegisterPlayerCommand>
 {
-	public RegisterPlayerCommandValidator()
-	{
+    public RegisterPlayerCommandValidator()
+    {
         RuleFor(c => c.Name)
             .NotEmpty()
             .WithMessage("Club Name can not be empty")
@@ -27,7 +27,7 @@ public class RegisterPlayerCommandValidator : AbstractValidator<RegisterPlayerCo
             .NotNull()
             .WithMessage("Average of number of matches in a week  can not be null")
             .GreaterThanOrEqualTo(0)
-            .WithMessage("Average of number of matches in a week can not be negative"); 
+            .WithMessage("Average of number of matches in a week can not be negative");
 
         RuleFor(c => c.NumberOfYearsPlayed)
             .NotEmpty()

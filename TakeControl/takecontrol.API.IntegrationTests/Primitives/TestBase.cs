@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Identity;
 using takecontrol.Identity.Models;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
@@ -19,7 +18,7 @@ public class TestBase
     public TestBase(CustomWebApplicationFactory<Program> apiWebApplicationFactory)
     {
         _apiWebApplicationFactory = apiWebApplicationFactory;
-        _httpClient = apiWebApplicationFactory.HttpClient;        
+        _httpClient = apiWebApplicationFactory.HttpClient;
     }
 
     /// <summary>
@@ -116,9 +115,7 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> AddAsync<TEntity>(TEntity entity) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         context.Add(entity);
 
@@ -132,9 +129,7 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         return await context.FindAsync<TEntity>(keyValues);
     }
@@ -144,9 +139,7 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         return await context.Set<TEntity>().FirstOrDefaultAsync(predicate);
     }

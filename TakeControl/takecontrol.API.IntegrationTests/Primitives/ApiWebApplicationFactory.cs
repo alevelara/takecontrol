@@ -1,14 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
-using Respawn;
-using Respawn.Graph;
-using System.Data.Common;
 using takecontrol.Identity;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
@@ -19,31 +14,15 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public HttpClient HttpClient { get; private set; } = default!;
 
+    public TakeControlDb TakecontrolDb = default!;
+
+    public TakeControlIdentityDb TakeControlIdentityDb = default!;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var connectionString = GetAppConfiguration().GetConnectionString("ConnectionString");
-        var connectionIdentityString = GetAppConfiguration().GetConnectionString("IdentityConnectionString");
-
         builder.ConfigureTestServices(services =>
         {
-            var dbIdentityContext = services.SingleOrDefault(
-              d => d.ServiceType == typeof(DbContextOptions<TakeControlIdentityDbContext>));
-
-            services.Remove(dbIdentityContext);
-
-            var dbMainContext = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<TakeControlDbContext>));
-
-            services.Remove(dbMainContext);
-            services.AddDbContext<TakeControlIdentityDbContext>((container, options) =>
-            {
-                options.UseNpgsql(connectionIdentityString);
-            });
-
-            services.AddDbContext<TakeControlDbContext>((container, options) =>
-            {
-                options.UseNpgsql(connectionString);
-            });
+            services.AddAPIIntegrationTestsServices(GetAppConfiguration());
         });
     }
 
@@ -61,51 +40,24 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public async Task InitializeAsync()
     {
-        await EnsureDatabase();
+        TakecontrolDb = new TakeControlDb(GetTakeControlDbContext());
+        TakeControlIdentityDb = new TakeControlIdentityDb(GetTakeControlIdentityDbContext());
         HttpClient = CreateClient();
+        TakecontrolDb.EnsureDatabase();
+        TakeControlIdentityDb.EnsureDatabase();
     }
 
     public new Task DisposeAsync() => Task.CompletedTask;
 
-    public async Task EnsureDatabase()
+    private TakeControlDbContext GetTakeControlDbContext()
     {
-        using var scope = Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-
-        await context.Database.MigrateAsync();
-
-        await EnsureIdentityDatabase();
+        var scope = Services.CreateScope();
+        return scope.ServiceProvider.GetService<TakeControlDbContext>();
     }
 
-    public async Task EnsureIdentityDatabase()
+    private TakeControlIdentityDbContext GetTakeControlIdentityDbContext()
     {
-        using var scope = Services.CreateScope();
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-
-        await identityContext.Database.MigrateAsync();
-    }
-
-    public async Task ResetIdentityState()
-    {
-        using var scope = Services.CreateScope();
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Users.RemoveRange(identityContext.Users);
-        identityContext.UserRoles.RemoveRange(identityContext.UserRoles);
-        await identityContext.SaveChangesAsync();
-    }
-
-    public async Task ResetState()
-    {
-        using var scope = Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-        context.Clubs.RemoveRange(context.Clubs);
-        context.Addresses.RemoveRange(context.Addresses);
-        context.Players.RemoveRange(context.Players);
-        await context.SaveChangesAsync();
-
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Users.RemoveRange(identityContext.Users);
-        identityContext.UserRoles.RemoveRange(identityContext.UserRoles);
-        await identityContext.SaveChangesAsync();
+        var scope = Services.CreateScope();
+        return scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
     }
 }

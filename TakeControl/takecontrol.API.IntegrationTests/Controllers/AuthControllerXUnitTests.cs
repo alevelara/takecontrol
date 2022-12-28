@@ -14,15 +14,13 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 public class AuthControllerXUnitTests : IAsyncLifetime
 {
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
-    private readonly Func<Task> _resetDatabase;
-    private readonly Func<Task> _initDatabase;
+    private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
 
     public AuthControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
-        _resetDatabase = factory.ResetIdentityState;
-        _initDatabase = factory.EnsureIdentityDatabase;
+        _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
         _testBase = new TestBase(factory);
     }
@@ -123,7 +121,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    public async Task InitializeAsync() => await _initDatabase();
+    public Task InitializeAsync() => Task.CompletedTask;
 
-    public async Task DisposeAsync() => await _resetDatabase();
+    public async Task DisposeAsync() => await _takeControlIdentityDb.ResetState();
 }
