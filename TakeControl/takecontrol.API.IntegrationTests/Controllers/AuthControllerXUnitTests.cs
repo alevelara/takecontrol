@@ -10,7 +10,7 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [Trait("Category", "IntegrationIdentityTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(10)]
-[Collection("IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 public class AuthControllerXUnitTests : IAsyncLifetime
 {
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";

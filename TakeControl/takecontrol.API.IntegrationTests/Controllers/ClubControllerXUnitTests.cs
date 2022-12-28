@@ -6,7 +6,7 @@ using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
-[Collection("IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 [Trait("Category", "IntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(20)]

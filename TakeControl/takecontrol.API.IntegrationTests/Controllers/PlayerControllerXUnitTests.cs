@@ -9,7 +9,7 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [Trait("Category", "IntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(30)]
-[Collection("IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 public class PlayerControllerXUnitTests : IAsyncLifetime
 {
     public static string REGISTER_ENDPOINT = "api/v1/player/Register";
