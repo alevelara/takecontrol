@@ -23,7 +23,7 @@ public static class ApplicationTestData
 
     public static Player CreateMidPlayerForTest(Guid userId)
     {
-        return Player.Create(userId, "name",1, 3, 2);
+        return Player.Create(userId, "name", 1, 3, 2);
     }
 
     public static Player CreateExpertPlayerForTest(Guid userId)
