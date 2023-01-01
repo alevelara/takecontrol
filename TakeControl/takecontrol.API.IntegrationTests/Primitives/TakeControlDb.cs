@@ -8,20 +8,24 @@ public class TakeControlDb : IDbConfiguration
 {
     public TakeControlDbContext Context { get; private set; }
 
-    public TakeControlDb(TakeControlDbContext context)
+    public TakeControlDb(string connectionString)
     {
-        Context = context;
+        var factory = new TakeControlDBContextFactory();
+        Context = factory.CreateDbContext(connectionString);
     }
 
-    public async Task EnsureDatabase()
+    public void EnsureDatabase()
     {
-        await this.Context.Database.MigrateAsync();
+        this.Context.Database.Migrate();
     }
 
     public async Task ResetState()
     {
-        await this.Context.Clubs.ExecuteDeleteAsync();
-        await this.Context.Addresses.ExecuteDeleteAsync();
-        await this.Context.Players.ExecuteDeleteAsync();
+        if (await this.Context.Database.CanConnectAsync())
+        {
+            await this.Context.Clubs.ExecuteDeleteAsync();
+            await this.Context.Addresses.ExecuteDeleteAsync();
+            await this.Context.Players.ExecuteDeleteAsync();
+        }
     }
 }

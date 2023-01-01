@@ -61,6 +61,14 @@ public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeContr
         return new TakeControlDbContext(optionsBuilder.Options);
     }
 
+    public TakeControlDbContext CreateDbContext(string connectionString)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>()
+            .UseNpgsql(connectionString);
+
+        return new TakeControlDbContext(optionsBuilder.Options);
+    }
+
     private static IConfiguration GetAppConfiguration()
     {
         var environmentName =

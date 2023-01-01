@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using takecontrol.API.IntegrationTests.Contracts;
+using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Identity;
 
 namespace takecontrol.API.IntegrationTests;
@@ -16,8 +18,8 @@ public static class APITestIntegrationServiceRegistration
 
         var dbMainContext = services.SingleOrDefault(
             d => d.ServiceType == typeof(DbContextOptions<TakeControlDbContext>));
-
         services.Remove(dbMainContext);
+
         services.AddDbContext<TakeControlIdentityDbContext>((container, options) =>
         {
             options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString"));
@@ -27,6 +29,7 @@ public static class APITestIntegrationServiceRegistration
         {
             options.UseNpgsql(configuration.GetConnectionString("ConnectionString"));
         });
+
         return services;
     }
 }

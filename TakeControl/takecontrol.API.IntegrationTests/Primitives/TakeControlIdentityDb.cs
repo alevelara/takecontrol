@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using takecontrol.API.IntegrationTests.Contracts;
 using takecontrol.Identity;
+using static takecontrol.Identity.TakeControlIdentityDbContext;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
@@ -8,19 +9,23 @@ public class TakeControlIdentityDb : IDbConfiguration
 {
     public TakeControlIdentityDbContext Context { get; private set; }
 
-    public TakeControlIdentityDb(TakeControlIdentityDbContext context)
+    public TakeControlIdentityDb(string connectionString)
     {
-        Context = context;
+        var factory = new IdentityDBContextFactory();
+        Context = factory.CreateDbContext(connectionString);
     }
 
-    public async Task EnsureDatabase()
+    public void EnsureDatabase()
     {
-        await this.Context.Database.MigrateAsync();
+        this.Context.Database.Migrate();
     }
 
     public async Task ResetState()
     {
-        await this.Context.Users.ExecuteDeleteAsync();
-        await this.Context.UserRoles.ExecuteDeleteAsync();
+        if (await this.Context.Database.CanConnectAsync())
+        {
+            await this.Context.Users.ExecuteDeleteAsync();
+            await this.Context.UserRoles.ExecuteDeleteAsync();
+        }
     }
 }

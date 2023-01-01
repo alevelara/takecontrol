@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using takecontrol.Identity;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
@@ -20,6 +17,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.UseEnvironment("Testing");
         builder.ConfigureTestServices(services =>
         {
             services.AddAPIIntegrationTestsServices(GetAppConfiguration());
@@ -40,24 +38,12 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public async Task InitializeAsync()
     {
-        TakecontrolDb = new TakeControlDb(GetTakeControlDbContext());
-        TakeControlIdentityDb = new TakeControlIdentityDb(GetTakeControlIdentityDbContext());
+        TakecontrolDb = new TakeControlDb(GetAppConfiguration().GetConnectionString("ConnectionString"));
+        TakeControlIdentityDb = new TakeControlIdentityDb(GetAppConfiguration().GetConnectionString("IdentityConnectionString"));
         HttpClient = CreateClient();
         TakecontrolDb.EnsureDatabase();
         TakeControlIdentityDb.EnsureDatabase();
     }
 
     public new Task DisposeAsync() => Task.CompletedTask;
-
-    private TakeControlDbContext GetTakeControlDbContext()
-    {
-        using var scope = Services.CreateScope();
-        return scope.ServiceProvider.GetService<TakeControlDbContext>();
-    }
-
-    private TakeControlIdentityDbContext GetTakeControlIdentityDbContext()
-    {
-        var scope = Services.CreateScope();
-        return scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-    }
 }

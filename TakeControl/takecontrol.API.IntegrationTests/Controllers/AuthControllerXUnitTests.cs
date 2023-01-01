@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Net.Http;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Identity;
@@ -7,10 +6,10 @@ using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
+[Collection(SharedTestCollection.Name)]
 [Trait("Category", "IntegrationIdentityTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(10)]
-[Collection(SharedTestCollection.Name)]
 public class AuthControllerXUnitTests : IAsyncLifetime
 {
     public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
