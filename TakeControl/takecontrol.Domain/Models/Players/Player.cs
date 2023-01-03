@@ -50,19 +50,23 @@ public class Player : BaseDomainModel
     //Si suma > 3 -> Expert
     private PlayerLevel CalculatePlayerLevel(int numberOfClassesInAWeek, int avgNumberOfMatchesInAWeek, int numberOfYearsPlayed)
     {
-        var levelPlayer = (numberOfClassesInAWeek * 0.4) + (avgNumberOfMatchesInAWeek * 0.2) + (numberOfYearsPlayed * 0.4);
+        const double minimumBegginerLevel = 0;
+        const double minimunMidLevel = 1.5;
+        const double minimumExpertLevel = 3;
 
-        if (levelPlayer is > 0 and < 1.5)
+        var levelPlayer = (numberOfClassesInAWeek * 0.4) + (avgNumberOfMatchesInAWeek * 0.2) + (numberOfYearsPlayed * 0.4);        
+
+        if (levelPlayer is > minimumBegginerLevel and < minimunMidLevel)
         {
             return PlayerLevel.Begginer;
         }
 
-        if (levelPlayer is >= 1.5 and < 3)
+        if (levelPlayer is >= minimunMidLevel and < minimumExpertLevel)
         {
             return PlayerLevel.Mid;
         }
 
-        if (levelPlayer is >= 3)
+        if (levelPlayer is >= minimumExpertLevel)
         {
             return PlayerLevel.Expert;
         }
