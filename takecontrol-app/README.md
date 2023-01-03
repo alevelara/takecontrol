@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Docker
+
+### Single docker container
+Commands to run docker react app inside the `takecontrol-app` folder:
+
+1. `docker build . -t dockerized-react`
+2. `docker run -p 3000:3000 -d dockerized-react`
+
+### Docker compose
+Look at the readme file from C# project.
