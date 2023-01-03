@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+﻿using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 
 namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 

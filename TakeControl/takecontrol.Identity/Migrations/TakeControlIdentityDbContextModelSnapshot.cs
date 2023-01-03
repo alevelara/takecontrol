@@ -51,19 +51,19 @@ namespace takecontrol.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c35472be-9e6e-41d6-a2a5-14b46df8a4aa"),
+                            Id = new Guid("e07a73fa-ba65-402c-9a41-b88af1131edb"),
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = new Guid("bb37520a-638c-443f-8988-cd656a9e92ff"),
+                            Id = new Guid("bd858f4f-139c-4824-9db3-eb71988bef73"),
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         },
                         new
                         {
-                            Id = new Guid("9afe48f3-6e13-4fd6-be43-cdaecf4f2674"),
+                            Id = new Guid("15063acc-fcff-4b65-b6e1-25fec68e9afb"),
                             Name = "Club",
                             NormalizedName = "CLUB"
                         });
@@ -155,23 +155,23 @@ namespace takecontrol.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("3e3acdb3-bcee-4d52-bbe0-4cc8e73142ca"),
-                            RoleId = new Guid("c35472be-9e6e-41d6-a2a5-14b46df8a4aa")
+                            UserId = new Guid("a69f006a-78b1-42e0-b78d-b4fa0d0e042b"),
+                            RoleId = new Guid("e07a73fa-ba65-402c-9a41-b88af1131edb")
                         },
                         new
                         {
-                            UserId = new Guid("6d5dc714-11a4-4d1c-8bb3-b668cbea0f5e"),
-                            RoleId = new Guid("9afe48f3-6e13-4fd6-be43-cdaecf4f2674")
+                            UserId = new Guid("00d0e55a-0076-490a-a6e1-331b67d93543"),
+                            RoleId = new Guid("15063acc-fcff-4b65-b6e1-25fec68e9afb")
                         },
                         new
                         {
-                            UserId = new Guid("53615aac-95ec-4354-8350-ff75f1351107"),
-                            RoleId = new Guid("bb37520a-638c-443f-8988-cd656a9e92ff")
+                            UserId = new Guid("56b6b6d7-c9bf-45d3-947f-21be0d705728"),
+                            RoleId = new Guid("bd858f4f-139c-4824-9db3-eb71988bef73")
                         },
                         new
                         {
-                            UserId = new Guid("f9eefd29-b6b3-4517-9613-95b238540240"),
-                            RoleId = new Guid("bb37520a-638c-443f-8988-cd656a9e92ff")
+                            UserId = new Guid("2bb860f9-2f53-4a0c-a819-41639fec474d"),
+                            RoleId = new Guid("bd858f4f-139c-4824-9db3-eb71988bef73")
                         });
                 });
 
@@ -268,72 +268,72 @@ namespace takecontrol.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3e3acdb3-bcee-4d52-bbe0-4cc8e73142ca"),
+                            Id = new Guid("a69f006a-78b1-42e0-b78d-b4fa0d0e042b"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "981da0bb-2412-4b8e-92b2-b10f4521a5f2",
+                            ConcurrencyStamp = "99ab5333-adff-475d-9e3d-230490bbd4c5",
                             Email = "alevelara@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Alejandro",
                             NormalizedEmail = "ALEVELARA@GMAIL.COM",
                             NormalizedUserName = "ALEVELARA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFVwpY1lksvCkrcuZ7ERy0VuIKWhB6V2z/PrwSx/GQBH3ugkbSnEDnIX30T3ZU7ODA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN05EpWZ9ARzHAXTwxsaZxyoecayNjEKdkJ1qcjCKGt05QAdPS9rtoqICTelDosIMw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7ef157ff-51fe-48fb-8eb5-5f807dda6823",
+                            SecurityStamp = "ccc18f64-88b0-473a-b51e-f725c74e21d0",
                             TwoFactorEnabled = false,
                             UserName = "alevelara",
                             UserType = 1
                         },
                         new
                         {
-                            Id = new Guid("53615aac-95ec-4354-8350-ff75f1351107"),
+                            Id = new Guid("56b6b6d7-c9bf-45d3-947f-21be0d705728"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ffe0d79-27f0-408b-b3b2-9159c9b4de5b",
+                            ConcurrencyStamp = "f9970210-ea17-4d76-9686-5bfdd1cf5a8b",
                             Email = "alevelara@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Alberto",
                             NormalizedEmail = "ALEVELARA@LOCALHOST.COM",
                             NormalizedUserName = "ANTOGONMAR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKccyLPoQJUM/4RwKR1YPdKDtjMQ4xzirDnzrQCxaSwR27mODdiFO0e7QV1uZKGHIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHKaOHeTOqycq3UiFPioBb+fJ+fG4jDrfK5F/i8G8Ad7t6V2f2sj4zhvAsf4HkZoWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "612b4a89-c7c2-4f9e-8f40-49d93b38eb2e",
+                            SecurityStamp = "0f6e1b97-832b-4ea3-b00e-880469a3683b",
                             TwoFactorEnabled = false,
                             UserName = "antgonmar",
                             UserType = 3
                         },
                         new
                         {
-                            Id = new Guid("6d5dc714-11a4-4d1c-8bb3-b668cbea0f5e"),
+                            Id = new Guid("00d0e55a-0076-490a-a6e1-331b67d93543"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a7e1bd8-0666-4c13-96b8-d2a56c189639",
+                            ConcurrencyStamp = "71041de0-771d-49a5-86e4-dc50beb782d4",
                             Email = "club@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "PadelClubTest",
                             NormalizedEmail = "CLUB@LOCALHOST.COM",
                             NormalizedUserName = "ANTOGONMAR2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN8/aI5B+SCsqmyODNgVVdaMTdwzLBMyM4WPvH4J8ScRSfDdVFa6PmUXRtLDC8MLPQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELuWuaOkMEM0iaZDrYJRT5VqFMpy5poRwyOjkrVuBQlVNrUo2gEfD5PJqwggY/Q6yw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b4021e8-e202-4006-b2ac-f9f52274ed6b",
+                            SecurityStamp = "80967b11-cdcc-4f7c-91f4-4d13e1705737",
                             TwoFactorEnabled = false,
                             UserName = "antgonmar2",
                             UserType = 2
                         },
                         new
                         {
-                            Id = new Guid("f9eefd29-b6b3-4517-9613-95b238540240"),
+                            Id = new Guid("2bb860f9-2f53-4a0c-a819-41639fec474d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bdb10e0a-a8ce-425d-a699-92b09266257a",
+                            ConcurrencyStamp = "e2668296-a95d-4305-a619-ae3d272b91b1",
                             Email = "player2@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "player 2",
                             NormalizedEmail = "PLAYER2@GMAIL.COM",
                             NormalizedUserName = "PLAYER2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJU/5a4rrmxvU5D5MwcQ1I1aNTWSvmk01Y8jC4suDsz8op/iRVSAFVY6QyjMNJ8k6Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPAmeTU6bDU13+8SUTM16cpxak56OaVGqaRzvEuFWnMph+mK/cz2TizYK/3hx8KPUA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8419ef35-8ef0-4c2e-b888-1811f8b6d289",
+                            SecurityStamp = "1963da13-e057-4663-84d0-a6e68e3f10c2",
                             TwoFactorEnabled = false,
                             UserName = "player2",
                             UserType = 3

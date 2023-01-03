@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Identity;
 using takecontrol.Identity.Models;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
@@ -16,13 +15,11 @@ public class TestBase
     private readonly CustomWebApplicationFactory<Program> _apiWebApplicationFactory;
     private readonly HttpClient _httpClient;
 
-    public TestBase(CustomWebApplicationFactory<Program> apiWebApplicationFactory, HttpClient httpClient)
+    public TestBase(CustomWebApplicationFactory<Program> apiWebApplicationFactory)
     {
         _apiWebApplicationFactory = apiWebApplicationFactory;
-        _httpClient = httpClient;
-        EnsureDatabase();
+        _httpClient = apiWebApplicationFactory.HttpClient;
     }
-
 
     /// <summary>
     /// Crea un usuario de prueba según los parámetros
@@ -62,23 +59,6 @@ public class TestBase
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         return client;
-    }
-
-
-    /// <summary>
-    /// Al terminar cada prueba, se resetea la base de datos
-    /// </summary>
-    /// <returns></returns>
-    /// 
-    public void Dispose()
-    {
-        ResetState();
-        ResetIdentityState();
-    }
-
-    public void DisposeIdentity()
-    {
-        ResetIdentityState();
     }
 
     /// <summary>
@@ -135,9 +115,7 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> AddAsync<TEntity>(TEntity entity) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         context.Add(entity);
 
@@ -151,9 +129,7 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         return await context.FindAsync<TEntity>(keyValues);
     }
@@ -163,32 +139,9 @@ public class TestBase
     /// </summary>
     protected async Task<TEntity> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var context = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
+        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
 
         return await context.Set<TEntity>().FirstOrDefaultAsync(predicate);
-    }
-
-    /// <summary>
-    /// Se asegura de crear la BD
-    /// </summary>
-    private void EnsureDatabase()
-    {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-
-        context.Database.EnsureCreated();
-
-        EnsureIdentityDatabase();
-    }
-
-    private void EnsureIdentityDatabase()
-    {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-
-        identityContext.Database.EnsureCreated();
     }
 
     /// <summary>
@@ -201,27 +154,5 @@ public class TestBase
         var result = await SendAsync(new LoginQuery(email, password));
 
         return result.Token;
-    }
-
-    public void ResetIdentityState()
-    {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Users.RemoveRange(identityContext.Users);
-        identityContext.UserRoles.RemoveRange(identityContext.UserRoles);
-        identityContext.SaveChanges();
-    }
-
-    public void ResetState()
-    {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<TakeControlDbContext>();
-        context.Clubs.RemoveRange(context.Clubs);
-        context.Addresses.RemoveRange(context.Addresses);
-        context.SaveChanges();
-
-        var identityContext = scope.ServiceProvider.GetService<TakeControlIdentityDbContext>();
-        identityContext.Users.RemoveRange(identityContext.Users);
-        identityContext.SaveChanges();
     }
 }

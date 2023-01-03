@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Primitives;
 using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 
@@ -43,9 +44,11 @@ public class TakeControlDbContext : DbContext
     public DbSet<Club> Clubs { get; set; }
 
     public DbSet<Address> Addresses { get; set; }
+
+    public DbSet<Player> Players { get; set; }
 }
 
-public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
+public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
     public static string API_NAME = "takecontrol.API";
 
@@ -55,7 +58,15 @@ public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlD
         var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>()
             .UseNpgsql(config.GetConnectionString("ConnectionString"));
 
-        return new TakeControlDbContext(optionsBuilder.Options); ;
+        return new TakeControlDbContext(optionsBuilder.Options);
+    }
+
+    public TakeControlDbContext CreateDbContext(string connectionString)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<TakeControlDbContext>()
+            .UseNpgsql(connectionString);
+
+        return new TakeControlDbContext(optionsBuilder.Options);
     }
 
     private static IConfiguration GetAppConfiguration()

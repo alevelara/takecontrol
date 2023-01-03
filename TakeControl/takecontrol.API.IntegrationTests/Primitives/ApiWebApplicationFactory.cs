@@ -1,43 +1,26 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Npgsql;
-using System.Data.Common;
-using takecontrol.Identity;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
-public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
+public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime where TProgram : class
 {
     public static string API_NAME = "takecontrol.API";
+
+    public HttpClient HttpClient { get; private set; } = default!;
+
+    public TakeControlDb TakecontrolDb = default!;
+
+    public TakeControlIdentityDb TakeControlIdentityDb = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
-        builder.ConfigureServices(services =>
+        builder.ConfigureTestServices(services =>
         {
-            var dbIdentityContext = services.SingleOrDefault(
-               d => d.ServiceType == typeof(DbContextOptions<TakeControlIdentityDbContext>));
-
-            services.Remove(dbIdentityContext);
-
-            var dbMainContext = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<TakeControlDbContext>));
-
-            services.Remove(dbMainContext);
-
-            services.AddDbContext<TakeControlIdentityDbContext>((container, options) =>
-            {
-                options.UseNpgsql(GetAppConfiguration().GetConnectionString("IdentityConnectionString"));
-            });
-
-            services.AddDbContext<TakeControlDbContext>((container, options) =>
-            {
-                options.UseNpgsql(GetAppConfiguration().GetConnectionString("ConnectionString"));
-            });
+            services.AddAPIIntegrationTestsServices(GetAppConfiguration());
         });
     }
 
@@ -52,4 +35,15 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
         return builder.Build();
     }
+
+    public async Task InitializeAsync()
+    {
+        TakecontrolDb = new TakeControlDb(GetAppConfiguration().GetConnectionString("ConnectionString"));
+        TakeControlIdentityDb = new TakeControlIdentityDb(GetAppConfiguration().GetConnectionString("IdentityConnectionString"));
+        HttpClient = CreateClient();
+        TakecontrolDb.EnsureDatabase();
+        TakeControlIdentityDb.EnsureDatabase();
+    }
+
+    public new Task DisposeAsync() => Task.CompletedTask;
 }
