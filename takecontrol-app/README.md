@@ -71,11 +71,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Docker
 
-### Single docker container
-Commands to run docker react app inside the `takecontrol-app` folder:
+### Development
 
-1. `docker build . -t dockerized-react`
-2. `docker run -p 3000:3000 -d dockerized-react`
+Run the following commands:
+
+1. `npm start`
+
+It will start the project and it will be accessible from `http://localhost:3000/`. Besides, if there is a change in the code, it will reload automatically.
 
 ### Docker compose
 Look at the readme file from C# project.
+
+### Docker compose live reload fail in Windows and Debian
+
+After a little research, we have realized that the environment variable `CHOKIDAR_USEPOLLING` doesn't work. Therefore, it is better to use the command `npm start` for development instead of running a docker container to develop.
