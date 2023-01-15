@@ -16,4 +16,5 @@ public sealed class IdentityError : DomainError
     public static IdentityError UserAlreadyExistsWithThisEmail = new IdentityError(1506, "This email is already used.");
     public static IdentityError UserAlreadyExistsWithThisUserName = new IdentityError(1507, "This username is already used.");
     public static IdentityError ErrorDuringUserRegistration = new IdentityError(1508, "Something happened during user registration.");
+    public static IdentityError ErrorChangingPassword = new IdentityError(1508, "Something happened during password update.");
 }
