@@ -5,6 +5,7 @@ using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
 namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPassword;
 
+[Trait("Category", "UnitTests")]
 public class ResetPasswordCommandHandlerXUnitTests
 {
     private Mock<IAuthService> _authService;
