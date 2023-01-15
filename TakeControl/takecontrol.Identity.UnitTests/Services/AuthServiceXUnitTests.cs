@@ -229,7 +229,7 @@ namespace takecontrol.Identity.Tests.Services
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
             var request = new ResetPasswordCommand(applicationUser.Email, "Password123!", "Password124!");
-            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);            
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
 
             //Act            

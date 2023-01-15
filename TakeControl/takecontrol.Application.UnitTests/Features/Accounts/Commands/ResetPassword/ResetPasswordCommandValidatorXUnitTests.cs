@@ -6,24 +6,24 @@ public class ResetPasswordCommandValidatorXUnitTests : IClassFixture<ResetPasswo
 {
     private ResetPasswordCommandValidator _validator;
 
-	public ResetPasswordCommandValidatorXUnitTests()
-	{
-		_validator = new();
-	}
+    public ResetPasswordCommandValidatorXUnitTests()
+    {
+        _validator = new();
+    }
 
-	[Theory]
-	[InlineData("", false, 2)]
+    [Theory]
+    [InlineData("", false, 2)]
     [InlineData(null, false, 2)]
     [InlineData("email", false, 1)]
     [InlineData("email@test.com", true, 0)]
     public void Validate_Should_ValidateEmailParam(string email, bool isValid, int countErrors)
-	{
-		var command = new ResetPasswordCommand(email, "Password123!", "Password124!");
-		var result = _validator.Validate(command);
+    {
+        var command = new ResetPasswordCommand(email, "Password123!", "Password124!");
+        var result = _validator.Validate(command);
 
-		Assert.Equal(isValid, result.IsValid);
-		Assert.Equal(countErrors, result.Errors.Count);
-	}
+        Assert.Equal(isValid, result.IsValid);
+        Assert.Equal(countErrors, result.Errors.Count);
+    }
 
     [Theory]
     [InlineData("", false, 6)]

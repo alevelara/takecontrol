@@ -5,8 +5,8 @@ namespace takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
 public class ResetPasswordCommandValidator : AbstractValidator<ResetPasswordCommand>
 {
-	public ResetPasswordCommandValidator()
-	{
+    public ResetPasswordCommandValidator()
+    {
         RuleFor(c => c.Email)
            .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible).WithMessage("Invalid email.")
            .NotEmpty().WithMessage("User email can not be empty")
