@@ -39,6 +39,8 @@ public class TakeControlDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new ClubConfiguration());
+        builder.ApplyConfiguration(new PlayerConfiguration());
+        builder.ApplyConfiguration(new AddressConfiguration());
     }
 
     public DbSet<Club> Clubs { get; set; }
