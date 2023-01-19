@@ -13,8 +13,8 @@ public static class InfrastructureServiceRegistration
         service.AddDbContext<TakeControlDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("ConnectionString")));
 
-        service.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteRepositoryBase<>));
-        service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadRepositoryBase<>));
+        service.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteBaseRepository<>));
+        service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadBaseRepository<>));
         service.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return service;

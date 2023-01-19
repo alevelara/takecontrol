@@ -2,15 +2,15 @@
 using System.Linq.Expressions;
 using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Domain.Primitives;
-using takecontrol.Identity;
+using takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives;
+namespace takecontrol.EmailEngine.Repositories.Primitives;
 
-public class ReadRepositoryBase<T> : IAsyncReadRepository<T> where T : BaseDomainModel
+public class ReadBaseRepository<T> : IAsyncReadRepository<T> where T : BaseDomainModel
 {
-    protected readonly TakeControlDbContext _context;
+    protected readonly EmailDbContext _context;
 
-    public ReadRepositoryBase(TakeControlDbContext context)
+    public ReadBaseRepository(EmailDbContext context)
     {
         _context = context;
     }

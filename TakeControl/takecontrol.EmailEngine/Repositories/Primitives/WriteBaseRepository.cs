@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Domain.Primitives;
-using takecontrol.Identity;
+using takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives;
+namespace takecontrol.EmailEngine.Repositories.Primitives;
 
-public class WriteRepositoryBase<T> : IAsyncWriteRepository<T> where T : BaseDomainModel
+public class WriteBaseRepository<T> : IAsyncWriteRepository<T> where T : BaseDomainModel
 {
-    protected readonly TakeControlDbContext _context;
+    private readonly EmailDbContext _context;
 
-    public WriteRepositoryBase(TakeControlDbContext context)
+    public WriteBaseRepository(EmailDbContext context)
     {
         _context = context;
     }
 
     public async Task<T> AddAsync(T entity)
     {
-        _context.Set<T>().Add(entity);
+        _context.Set<T>().AddAsync(entity);
         return entity;
     }
 
@@ -27,7 +27,7 @@ public class WriteRepositoryBase<T> : IAsyncWriteRepository<T> where T : BaseDom
 
     public async Task<T> UpdateAsync(T entity)
     {
-        _context.Set<T>().Attach(entity);
+        _context.Set<T>().Update(entity);
         _context.Entry(entity).State = EntityState.Modified;
         return entity;
     }

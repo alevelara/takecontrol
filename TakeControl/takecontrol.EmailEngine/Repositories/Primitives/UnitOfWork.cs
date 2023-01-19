@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Domain.Primitives;
-using takecontrol.Identity;
+using takecontrol.EmailEngine.Persistence.Contexts;
+using takecontrol.EmailEngine.Repositories.Primitives;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives;
 
 public class UnitOfWork : IUnitOfWork
 {
     private Hashtable _repostories;
-    private readonly TakeControlDbContext _context;
+    private readonly EmailDbContext _context;
 
-    public UnitOfWork(TakeControlDbContext context)
+    public UnitOfWork(EmailDbContext context)
     {
         _context = context;
     }
