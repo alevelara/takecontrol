@@ -8,6 +8,7 @@ using System.Text;
 using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
+using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
@@ -86,6 +87,22 @@ public class AuthService : IAuthService
         _logger.LogInformation($"User {request.Email} was succesfully registered");
 
         return user.Id;
+    }
+
+    public async Task<bool> ResetPassword(ResetPasswordCommand request)
+    {
+        var existingUser = await _userManager.FindByEmailAsync(request.Email);
+        if (existingUser == null)
+            throw new NotFoundException(IdentityError.UserDoesntExist);
+
+        var result = await _userManager.ChangePasswordAsync(existingUser, request.CurrentPassword, request.NewPassword);
+        if (!result.Succeeded)
+        {
+            _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            throw new ConflictException(IdentityError.ErrorChangingPassword);
+        }
+
+        return result.Succeeded;
     }
 
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)

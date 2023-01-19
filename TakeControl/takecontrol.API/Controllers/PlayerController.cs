@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using takecontrol.API.Routes;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
-using takecontrol.Domain.Messages.Clubs;
 using takecontrol.Domain.Messages.Players;
 
 namespace takecontrol.API.Controllers;
@@ -19,7 +18,7 @@ public class PlayerController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("Register")]
+    [HttpPost(nameof(PlayerRouteName.Register))]
     public async Task<ActionResult> RegisterClub([FromBody] RegisterPlayerRequest request)
     {
         var command = new RegisterPlayerCommand(request.Name, request.Email, request.Password, request.NumberOfClassesInAWeek, request.AvgNumberOfMatchesInAWeek, request.NumberOfYearsPlayed);

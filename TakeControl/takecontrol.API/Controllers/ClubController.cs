@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using takecontrol.API.Routes;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Domain.Messages.Clubs;
 
@@ -17,7 +18,7 @@ public class ClubController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("Register")]
+    [HttpPost(nameof(ClubRouteName.Register))]
     public async Task<ActionResult> RegisterClub([FromBody] RegisterClubRequest request)
     {
         var command = new RegisterClubCommand(request.Name, request.City, request.Province, request.MainAddress, request.Email, request.Password);

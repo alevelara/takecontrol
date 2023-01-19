@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.Routes;
 using takecontrol.Domain.Messages.Identity;
 using Xunit.Priority;
 
@@ -12,7 +13,9 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [DefaultPriority(10)]
 public class AuthControllerXUnitTests : IAsyncLifetime
 {
-    public static string LOGIN_ENDPOINT = "api/v1/auth/Login";
+    public static string MAIN_ENDPOINT = "api/v1/auth/";
+    public static string LOGIN_ENDPOINT = MAIN_ENDPOINT + AuthRouteName.Login;
+    public static string RESET_PASSWORD_ENDPOINT = MAIN_ENDPOINT + AuthRouteName.ResetPassword;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
@@ -118,6 +121,61 @@ public class AuthControllerXUnitTests : IAsyncLifetime
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task ResetPassword_Should_ReturnCreated_WhenRequestParamsAreValid()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new ResetPasswordRequest
+        {
+            Email = "test@admin.com",
+            CurrentPassword = "Password123!",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task ResetPassword_Should_ReturnNotFoundException_WhenUserDoesntExist()
+    {
+        var request = new ResetPasswordRequest
+        {
+            Email = "test@admin.com",
+            CurrentPassword = "Password123!",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task ResetPassword_Should_ReturnConflictException_WhenCurrentPasswordIsIncorrect()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new ResetPasswordRequest
+        {
+            Email = "test@admin.com",
+            CurrentPassword = "Incorrect12!",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
