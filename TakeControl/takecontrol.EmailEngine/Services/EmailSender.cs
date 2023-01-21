@@ -20,13 +20,13 @@ public sealed class EmailSender : IEmailSender
         _emailSettings = emailSettings.Value;
     }
 
-    public async Task<bool> SendEmailAsync(Email email, Template template, CancellationToken ct = default)
+    public async Task<bool> SendEmailAsync(Email email, string payload, CancellationToken ct = default)
     {
         try
         {
             var mailGenerator = new EmailGenerator();
             mailGenerator.AddSender(_emailSettings.DisplayName, _emailSettings.From, email.EmailTo);
-            mailGenerator.AddBody(email.Subject, template.Payload);
+            mailGenerator.AddBody(email.Subject, payload);
 
             await SendEmailAsync(mailGenerator.Mail, ct);
 

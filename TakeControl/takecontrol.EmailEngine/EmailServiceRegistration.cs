@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using takecontrol.Application.Contracts.Emails;
 using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Domain.Models.Emails.Options;
 using takecontrol.EmailEngine.Persistence.Contexts;
 using takecontrol.EmailEngine.Repositories.Primitives;
+using takecontrol.EmailEngine.Services;
 using takecontrol.Infrastructure.Repositories.Primitives;
 
 namespace takecontrol.EmailEngine;
@@ -21,6 +23,7 @@ public static class EmailServiceRegistration
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
 
+        services.AddTransient<IEmailSender, EmailSender>();
         return services;
     }
 }

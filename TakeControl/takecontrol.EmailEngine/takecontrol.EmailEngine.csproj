@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Persistence\Data\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

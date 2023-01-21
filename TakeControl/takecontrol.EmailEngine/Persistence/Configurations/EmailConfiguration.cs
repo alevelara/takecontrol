@@ -18,7 +18,7 @@ public class EmailConfiguration : IEntityTypeConfiguration<Email>
         builder.Property(d => d.UserId)
             .IsRequired();
 
-        builder.Property(d => d.Name)
+        builder.Property(d => d.TemplateType)
             .HasConversion(x => nameof(x),
             x => (TemplateType)Enum.Parse(typeof(TemplateType), x))
             .IsRequired();

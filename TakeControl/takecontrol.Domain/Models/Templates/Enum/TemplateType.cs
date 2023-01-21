@@ -2,5 +2,5 @@
 
 public enum TemplateType
 {
-    WELCOME_EMAIL,
+    WELCOME,
 }
