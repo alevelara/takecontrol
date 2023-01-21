@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using takecontrol.Application.Abstractions.Mediatr;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Addresses;
@@ -14,11 +15,11 @@ namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommandHandler : ICommandHandler<RegisterPlayerCommand, Unit>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IEmailUnitOfWork _unitOfWork;
     private readonly IAuthService _authService;
     private readonly ILogger<RegisterPlayerCommandHandler> _logger;
 
-    public RegisterPlayerCommandHandler(IUnitOfWork unitOfWork, IAuthService authService, ILogger<RegisterPlayerCommandHandler> logger)
+    public RegisterPlayerCommandHandler(IEmailUnitOfWork unitOfWork, IAuthService authService, ILogger<RegisterPlayerCommandHandler> logger)
     {
         _unitOfWork = unitOfWork;
         _authService = authService;

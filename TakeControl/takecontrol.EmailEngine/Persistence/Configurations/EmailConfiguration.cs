@@ -15,17 +15,12 @@ public class EmailConfiguration : IEntityTypeConfiguration<Email>
 
         builder.HasKey(d => d.Id);
 
-        builder.Property(d => d.UserId)
-            .IsRequired();
-
         builder.Property(d => d.TemplateType)
-            .HasConversion(x => nameof(x),
-            x => (TemplateType)Enum.Parse(typeof(TemplateType), x))
+            .HasConversion<string>()
             .IsRequired();
 
         builder.Property(d => d.Status)
-            .HasConversion(x => nameof(x),
-            x => (EmailStatus)Enum.Parse(typeof(EmailStatus), x))
+            .HasConversion<string>()
             .IsRequired();
 
         builder.Property(d => d.EmailTo)

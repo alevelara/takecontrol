@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.4.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,14 +19,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageReference Include="MimeKit" Version="3.4.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Persistence\Data\" />
-    <Folder Include="Services\" />
+    <PackageReference Include="RazorEngineCore" Version="2022.8.1" />
   </ItemGroup>
 
   <ItemGroup>

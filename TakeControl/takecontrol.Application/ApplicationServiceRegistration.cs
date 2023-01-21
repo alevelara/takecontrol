@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using takecontrol.Application.Behaviors;
+using takecontrol.Application.Services.Emails;
 
 namespace takecontrol.Application;
 
@@ -15,6 +16,8 @@ public static class ApplicationServiceRegistration
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddTransient<ISendEmailService, SendEmailService>();
+
         return services;
     }
 

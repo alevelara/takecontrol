@@ -15,8 +15,7 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.TemplateType)
-            .HasConversion(x => nameof(x),
-            x => (TemplateType)Enum.Parse(typeof(TemplateType), x));
+            .HasConversion<string>();
 
         builder.Property(x => x.Payload)
             .HasMaxLength(int.MaxValue)
@@ -25,6 +24,6 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
         builder.Property(x => x.Language)
             .HasMaxLength(10);
 
-        builder.HasData(new WelcomeTemplate());
+        builder.HasData(new Template[] { Template.Create(TemplateType.WELCOME, TemplateData.WelcomeTemplate(), "ES") });
     }
 }

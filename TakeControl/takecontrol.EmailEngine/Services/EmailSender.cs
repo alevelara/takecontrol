@@ -1,5 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using takecontrol.Application.Contracts.Emails;
@@ -14,10 +15,12 @@ namespace takecontrol.EmailEngine.Services;
 public sealed class EmailSender : IEmailSender
 {
     private readonly EmailSettings _emailSettings;
+    private readonly ILogger<EmailSender> _logger;
 
-    public EmailSender(IOptions<EmailSettings> emailSettings)
+    public EmailSender(IOptions<EmailSettings> emailSettings, ILogger<EmailSender> logger)
     {
         _emailSettings = emailSettings.Value;
+        _logger = logger;
     }
 
     public async Task<bool> SendEmailAsync(Email email, string payload, CancellationToken ct = default)
@@ -33,8 +36,9 @@ public sealed class EmailSender : IEmailSender
             return true;
 
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            _logger.LogWarning($"Some error occurred during email sending: {e.Message}");
             return false;
         }
     }

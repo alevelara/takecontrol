@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\takecontrol.Application\takecontrol.Application.csproj" />
+    <ProjectReference Include="..\takecontrol.EmailEngine\takecontrol.EmailEngine.csproj" />
     <ProjectReference Include="..\takecontrol.Identity\takecontrol.Identity.csproj" />
     <ProjectReference Include="..\takecontrol.Infrastructure\takecontrol.Infrastructure.csproj" />
   </ItemGroup>

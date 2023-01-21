@@ -2,6 +2,7 @@
 using Moq;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 using takecontrol.Application.Tests.TestsData;
 using takecontrol.Domain.Messages.Identity;
@@ -13,7 +14,7 @@ namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer
 [Trait("Category", "UnitTests")]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
-    private Mock<IUnitOfWork> _uoW;
+    private Mock<IEmailUnitOfWork> _uoW;
     private Mock<IAuthService> _authService;
     private Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
 

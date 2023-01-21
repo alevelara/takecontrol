@@ -40,7 +40,6 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
         var addressWriteRepository = _unitOfWork.Repository<Address>();
         await addressWriteRepository.AddAsync(address);
 
-        //Add validation by name before adding the club?
         var club = Club.Create(address.Id, userId, request.Name);
         var clubWriteRepository = _unitOfWork.Repository<Club>();
         await clubWriteRepository.AddAsync(club);
@@ -63,7 +62,7 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
     private async Task SendWelcomeEmail(string toEmail, CancellationToken cancellationToken)
     {
         var email = Email.Create(toEmail, "Welcome to takecontrol", TemplateType.WELCOME);
-        _emailSender.SendEmailAsync(email, cancellationToken);
+        await _emailSender.SendEmailAsync(email, cancellationToken);
     }
 
 }

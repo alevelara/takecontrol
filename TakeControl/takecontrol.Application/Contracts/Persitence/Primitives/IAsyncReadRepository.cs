@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using takecontrol.Domain.Primitives;
 
-namespace takecontrol.Application.Contracts.Persitence;
+namespace takecontrol.Application.Contracts.Persitence.Primitives;
 
 public interface IAsyncReadRepository<T> where T : BaseDomainModel
 {

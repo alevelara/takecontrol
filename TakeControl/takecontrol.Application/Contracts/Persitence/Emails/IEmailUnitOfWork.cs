@@ -2,7 +2,7 @@
 
 namespace takecontrol.Application.Contracts.Persitence;
 
-public interface IUnitOfWork : IDisposable
+public interface IEmailUnitOfWork : IDisposable
 {
     IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
 
