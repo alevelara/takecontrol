@@ -32,7 +32,7 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
 
         builder.Property(x => x.PlayerLevel)
             .HasConversion(x => nameof(x),
-            x => (PlayerLevel) Enum.Parse(typeof(PlayerLevel), x))
+            x => (PlayerLevel)Enum.Parse(typeof(PlayerLevel), x))
             .IsRequired();
     }
 }

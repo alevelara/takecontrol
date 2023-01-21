@@ -10,9 +10,9 @@ namespace takecontrol.EmailEngine.Persistence.Contexts;
 
 public class EmailDbContext : DbContext
 {
-	public EmailDbContext(DbContextOptions<EmailDbContext> options) : base(options)
-	{
-	}
+    public EmailDbContext(DbContextOptions<EmailDbContext> options) : base(options)
+    {
+    }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

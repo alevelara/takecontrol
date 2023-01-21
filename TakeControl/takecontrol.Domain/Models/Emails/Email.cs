@@ -7,7 +7,7 @@ namespace takecontrol.Domain.Models.Emails;
 
 public sealed class Email : BaseDomainModel
 {
-    public Guid Id { get; private set; }    
+    public Guid Id { get; private set; }
 
     public string EmailTo { get; private set; }
 
@@ -17,7 +17,7 @@ public sealed class Email : BaseDomainModel
 
     public EmailStatus Status { get; private set; }
 
-    public Email( string emailTo, string subject, TemplateType templateType, EmailStatus status)
+    public Email(string emailTo, string subject, TemplateType templateType, EmailStatus status)
     {
         Id = new EmailId().Value;
         Subject = subject;
