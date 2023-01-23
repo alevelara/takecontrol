@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Identity.UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Application.UnitTests", "takecontrol.Application.UnitTests\takecontrol.Application.UnitTests.csproj", "{C060B4F0-6E58-45CF-BD70-69E59516649A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "takecontrol.EmailEngine", "takecontrol.EmailEngine\takecontrol.EmailEngine.csproj", "{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.EmailEngine", "takecontrol.EmailEngine\takecontrol.EmailEngine.csproj", "{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

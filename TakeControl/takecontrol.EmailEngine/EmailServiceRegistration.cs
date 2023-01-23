@@ -2,11 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using takecontrol.Application.Contracts.Emails;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Emails;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Contracts.Persitence.Templates;
 using takecontrol.Application.Contracts.Templates;
 using takecontrol.Domain.Models.Emails.Options;
 using takecontrol.EmailEngine.Persistence.Contexts;
+using takecontrol.EmailEngine.Repositories.Emails;
 using takecontrol.EmailEngine.Repositories.Primitives;
 using takecontrol.EmailEngine.Repositories.Templates;
 using takecontrol.EmailEngine.Services;
@@ -23,7 +25,8 @@ public static class EmailServiceRegistration
 
         services.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteBaseRepository<>));
         services.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadBaseRepository<>));
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IEmailUnitOfWork, EmailUnitOfWork>();
+        services.AddScoped<IEmailWriteRepository, EmailWriteRepository>();
 
         services.AddScoped<ITemplateAsyncReadRepository, TemplateReadRepository>();
         services.AddScoped<ITemplateLoader, TemplateLoader>();

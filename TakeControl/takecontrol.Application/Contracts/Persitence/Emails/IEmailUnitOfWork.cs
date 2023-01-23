@@ -1,8 +1,9 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using takecontrol.Application.Contracts.Persitence.Primitives;
+using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Application.Contracts.Persitence;
 
-public interface IEmailUnitOfWork : IDisposable
+public interface IUnitOfWork : IDisposable
 {
     IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
 

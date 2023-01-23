@@ -3,9 +3,9 @@ using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Application.Contracts.Persitence.Primitives;
 
-public interface IUnitOfWork : IDisposable
+public interface IEmailUnitOfWork : IDisposable
 {
-    IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;    
+    IEmailWriteRepository EmailWriteRepository();
 
     Task<int> CompleteAsync();
 }

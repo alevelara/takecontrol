@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Application.Services.Emails;
 using takecontrol.Application.Tests.TestsData;

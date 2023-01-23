@@ -2,8 +2,11 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+using takecontrol.Application.Services.Emails;
 using takecontrol.Domain.Messages.Identity;
+using takecontrol.Domain.Models.Emails;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
 using takecontrol.Infrastructure.Repositories.Primitives;
 using Xunit.Priority;
@@ -18,12 +21,15 @@ public class RegisterPlayerCommandHandlerXUnitTests
     private readonly Mock<UnitOfWork> _uow;
     private readonly Mock<IAuthService> _authService;
     private readonly Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
+    private Mock<ISendEmailService> _emailSender;
+
 
     public RegisterPlayerCommandHandlerXUnitTests()
     {
         _uow = MockUnitOfWork.GetUnitOfWork();
         _authService = new();
         _logger = new();
+        _emailSender = new();
     }
 
     [Fact]
@@ -31,10 +37,12 @@ public class RegisterPlayerCommandHandlerXUnitTests
     public async Task RegisterPlayer_Should_ReturnUnitValue_WhenRequestIsOK()
     {
         var command = new RegisterPlayerCommand("name", "email@test.com", "Password123!", 1, 1, 1);
-        var handler = new RegisterPlayerCommandHandler(_uow.Object, _authService.Object, _logger.Object);
+        var handler = new RegisterPlayerCommandHandler(_uow.Object, _authService.Object, _logger.Object, _emailSender.Object);
 
         _authService.Setup(s => s.Register(It.IsAny<RegistrationRequest>()))
             .ReturnsAsync(Guid.NewGuid());
+
+        _emailSender.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default(CancellationToken)));
 
         var result = await handler.Handle(command, default);
 

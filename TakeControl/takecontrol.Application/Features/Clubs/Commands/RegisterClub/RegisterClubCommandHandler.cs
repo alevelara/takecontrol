@@ -1,12 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Threading;
 using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Emails;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence;
-using takecontrol.Application.Contracts.Persitence.Templates;
-using takecontrol.Application.Contracts.Templates;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Services.Emails;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Addresses;

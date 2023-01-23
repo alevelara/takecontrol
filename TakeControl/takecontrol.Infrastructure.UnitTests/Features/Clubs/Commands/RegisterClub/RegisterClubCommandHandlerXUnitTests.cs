@@ -2,9 +2,11 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Application.Services.Emails;
 using takecontrol.Domain.Messages.Identity;
+using takecontrol.Domain.Models.Emails;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
 using takecontrol.Infrastructure.Repositories.Primitives;
 using Xunit.Priority;
@@ -38,6 +40,8 @@ public class RegisterClubCommandHandlerXUnitTests
 
         _authService.Setup(s => s.Register(It.IsAny<RegistrationRequest>()))
             .ReturnsAsync(Guid.NewGuid());
+
+        _emailSender.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default(CancellationToken)));
 
         var result = await handler.Handle(command, default);
 

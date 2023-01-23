@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Infrastructure.Repositories.Primitives;
 
 namespace takecontrol.Identity;
@@ -20,4 +20,3 @@ public static class InfrastructureServiceRegistration
         return service;
     }
 }
-
