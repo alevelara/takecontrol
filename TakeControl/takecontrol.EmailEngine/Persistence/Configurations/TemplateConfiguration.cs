@@ -24,6 +24,6 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
         builder.Property(x => x.Language)
             .HasMaxLength(10);
 
-        builder.HasData(new Template[] { Template.Create(TemplateType.WELCOME, TemplateData.WelcomeTemplate(), "ES") });
+        builder.HasData(new Template[] { TemplateFactory.WelcomeTemplate });
     }
 }

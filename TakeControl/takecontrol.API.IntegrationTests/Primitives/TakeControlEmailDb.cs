@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using takecontrol.API.IntegrationTests.Contracts;
 using takecontrol.EmailEngine.Persistence.Contexts;
+using takecontrol.EmailEngine.Persistence.Data;
 using static takecontrol.EmailEngine.Persistence.Contexts.EmailDbContext;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
@@ -15,9 +16,10 @@ public class TakeControlEmailDb : IDbConfiguration
         Context = factory.CreateDbContext(connectionString);
     }
 
-    public void EnsureDatabase()
+    public async Task EnsureDatabase()
     {
         this.Context.Database.Migrate();
+        await this.SeedData();
     }
 
     public async Task ResetState()
@@ -27,5 +29,11 @@ public class TakeControlEmailDb : IDbConfiguration
             await this.Context.Emails.ExecuteDeleteAsync();
             await this.Context.Templates.ExecuteDeleteAsync();
         }
+    }
+
+    public async Task SeedData()
+    {
+        await this.Context.Templates.AddAsync(TemplateFactory.WelcomeTemplate);
+        await this.Context.SaveChangesAsync();
     }
 }

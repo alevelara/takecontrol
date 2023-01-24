@@ -2,7 +2,9 @@
 
 public interface IDbConfiguration
 {
-    void EnsureDatabase();
+    Task EnsureDatabase();
 
     Task ResetState();
+
+    Task SeedData();
 }

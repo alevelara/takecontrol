@@ -32,12 +32,12 @@ public static class APITestIntegrationServiceRegistration
 
         services.AddDbContext<TakeControlDbContext>((container, options) =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString"));
+            options.UseNpgsql(configuration.GetConnectionString("ConnectionString"));
         });
 
         services.AddDbContext<EmailDbContext>((container, options) =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString"));
+            options.UseNpgsql(configuration.GetConnectionString("EmailConnectionString"));
         });
 
         return services;
