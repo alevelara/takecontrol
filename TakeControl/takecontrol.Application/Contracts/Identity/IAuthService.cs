@@ -1,4 +1,5 @@
 ﻿using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 
@@ -11,4 +12,6 @@ public interface IAuthService
     Task<Guid> Register(RegistrationRequest request);
 
     Task<bool> ResetPassword(ResetPasswordCommand request);
+
+    Task<bool> UpdatePassword(UpdatePasswordCommand request);
 }

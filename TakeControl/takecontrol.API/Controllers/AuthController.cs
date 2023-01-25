@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using takecontrol.API.Routes;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 
@@ -31,6 +32,16 @@ public class AuthController : ControllerBase
     {
         var query = new ResetPasswordCommand(request.Email, request.CurrentPassword, request.NewPassword);
         await _mediator.Send(query);
+        return StatusCode((int)HttpStatusCode.Created);
+
+    }
+
+    [HttpPost(nameof(AuthRouteName.UpdatePassword))]
+    public async Task<ActionResult<AuthResponse>> UpdatePasword([FromBody] UpdatePasswordRequest request)
+    {
+        var query = new UpdatePasswordCommand(request.Email, request.NewPassword, request.Token);
+        await _mediator.Send(query);
+
         return StatusCode((int)HttpStatusCode.Created);
     }
 }
