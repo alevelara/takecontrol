@@ -21,7 +21,7 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     }
 
     [Fact]
-    private async Task GetTemplateByTemplateType_Should_ReturnWelcomeTemplate_WhenTemplateAlreadyExists()
+    public async Task GetTemplateByTemplateType_Should_ReturnWelcomeTemplate_WhenTemplateAlreadyExists()
     {
         //Arrange
         await SeedData();
@@ -39,7 +39,7 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     }
 
     [Fact]
-    private async Task GetTemplateByTemplateType_Should_ReturnNullValue_WhenTemplateDoesntExist()
+    public async Task GetTemplateByTemplateType_Should_ReturnNullValue_WhenTemplateDoesntExist()
     {
         //Arrange
         var templateRepository = new TemplateReadRepository(_dbContext);
