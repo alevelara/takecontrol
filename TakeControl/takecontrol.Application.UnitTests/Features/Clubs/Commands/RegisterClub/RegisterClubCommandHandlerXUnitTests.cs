@@ -8,6 +8,7 @@ using takecontrol.Application.Tests.TestsData;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Models.Emails;
 
 namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
@@ -41,6 +42,7 @@ public class RegisterClubCommandHandlerXUnitTests
         _uoW.Setup(c => c.Repository<Address>()).Returns(addressRepo.Object);
         var clubRepo = new Mock<IAsyncWriteRepository<Club>>();
         _uoW.Setup(c => c.Repository<Club>()).Returns(clubRepo.Object);
+        _emailService.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default));
 
         //Act
         await handler.Handle(command, default);

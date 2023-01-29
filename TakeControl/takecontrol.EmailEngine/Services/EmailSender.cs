@@ -31,7 +31,7 @@ public sealed class EmailSender : IEmailSender
             mailGenerator.AddSender(_emailSettings.DisplayName, _emailSettings.From, email.EmailTo);
             mailGenerator.AddBody(email.Subject, payload);
 
-            await SendEmailAsync(mailGenerator.Mail, ct);
+            await SendMimeMessageAsync(mailGenerator.Mail, ct);
 
             return true;
 
@@ -43,7 +43,7 @@ public sealed class EmailSender : IEmailSender
         }
     }
 
-    private async Task SendEmailAsync(MimeMessage mail, CancellationToken ct = default)
+    private async Task SendMimeMessageAsync(MimeMessage mail, CancellationToken ct = default)
     {
         using var smtp = new SmtpClient();
 

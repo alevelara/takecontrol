@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.API.IntegrationTests.Contracts;
-using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.EmailEngine.Persistence.Contexts;
 using takecontrol.Identity;
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Identity;
 using takecontrol.Infrastructure.Repositories.Primitives;
 
