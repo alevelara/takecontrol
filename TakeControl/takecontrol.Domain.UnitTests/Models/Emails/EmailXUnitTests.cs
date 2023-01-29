@@ -31,7 +31,7 @@ public class EmailXUnitTests
         Assert.NotNull(email);
         Assert.NotNull(email.Id);
         Assert.Null(email.Subject);
-        Assert.Equal(EmailStatus.PENDING, email.Status);        
+        Assert.Equal(EmailStatus.PENDING, email.Status);
         Assert.Equal(email.EmailTo, emailTo);
         Assert.Equal(TemplateType.WELCOME, email.TemplateType);
     }

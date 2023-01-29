@@ -95,7 +95,7 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(template);
 
         _templateLoader.Setup(t => t.LoadTemplate(It.IsAny<string>())).Returns("serializedPayload");
-        
+
         _emailSender.Setup(s => s.SendEmailAsync(It.IsAny<Email>(), It.IsAny<string>(), default)).ReturnsAsync(true);
 
         _uow.Setup(u => u.EmailWriteRepository().AddEmail(It.IsAny<Email>()))

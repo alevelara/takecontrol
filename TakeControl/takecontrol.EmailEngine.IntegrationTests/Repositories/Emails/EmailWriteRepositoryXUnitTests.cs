@@ -19,18 +19,18 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
         _dbContext = fixture.EmailDbContext;
     }
 
-	[Fact]
-	public async Task AddEmail_Should_ReturnEmail_WhenEntityIsInsertedInDB()
-	{
-		var repository = new EmailWriteRepository(_dbContext);
-		var email = EmailTestData.CreateEmailForTest();
+    [Fact]
+    public async Task AddEmail_Should_ReturnEmail_WhenEntityIsInsertedInDB()
+    {
+        var repository = new EmailWriteRepository(_dbContext);
+        var email = EmailTestData.CreateEmailForTest();
 
-		var result = await repository.AddEmail(email);
+        var result = await repository.AddEmail(email);
 
-		Assert.NotNull(result);
-		Assert.NotNull(result.Id);
-		Assert.Equal(email, result);
-	}
+        Assert.NotNull(result);
+        Assert.NotNull(result.Id);
+        Assert.Equal(email, result);
+    }
 
     public async Task DisposeAsync()
     {
@@ -39,6 +39,6 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-       await _fixture.InitializeAsync();
+        await _fixture.InitializeAsync();
     }
 }

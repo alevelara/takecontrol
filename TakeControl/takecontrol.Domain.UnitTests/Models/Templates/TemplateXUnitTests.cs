@@ -38,13 +38,13 @@ public class TemplateXUnitTests
     [Fact]
     public void Create_Should_ReturnNewTemplate_WhenLanguageIsNUll()
     {
-        var payload = "payloadTest";        
+        var payload = "payloadTest";
         var template = Template.Create(TemplateType.WELCOME, payload, null);
 
         Assert.NotNull(template);
         Assert.NotNull(template.Id);
         Assert.Null(template.Language);
-        Assert.Equal(template.Payload, payload);        
+        Assert.Equal(template.Payload, payload);
         Assert.Equal(TemplateType.WELCOME, template.TemplateType);
     }
 }

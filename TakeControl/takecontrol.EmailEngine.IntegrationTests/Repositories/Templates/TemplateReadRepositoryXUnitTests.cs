@@ -15,10 +15,10 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     private EmailDbContext _dbContext;
 
     public TemplateReadRepositoryXUnitTests(EmailDbContextFixture fixture)
-	{
+    {
         _fixture = fixture;
         _dbContext = _fixture.EmailDbContext;
-	}
+    }
 
     [Fact]
     private async Task GetTemplateByTemplateType_Should_ReturnWelcomeTemplate_WhenTemplateAlreadyExists()
@@ -66,6 +66,6 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-       await _fixture.DisposeAsync();
+        await _fixture.DisposeAsync();
     }
 }
