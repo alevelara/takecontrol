@@ -3,7 +3,7 @@ on: push
 
 jobs:
   tests:
-    name: Integration Testing
+    name: Identity Integration Testing
     runs-on: ubuntu-latest    
     services:
       postgres:
