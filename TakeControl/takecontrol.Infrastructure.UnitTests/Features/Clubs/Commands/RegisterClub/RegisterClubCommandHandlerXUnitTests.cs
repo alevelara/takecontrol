@@ -12,7 +12,7 @@ using Xunit.Priority;
 
 namespace takecontrol.Infrastructure.IntegrationTests.Features.Clubs.Commands.RegisterClub;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", "InfrastructureIntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {
