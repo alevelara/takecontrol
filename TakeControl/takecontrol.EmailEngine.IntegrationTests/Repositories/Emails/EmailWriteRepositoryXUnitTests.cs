@@ -7,7 +7,6 @@ namespace takecontrol.EmailEngine.UnitTests.Repositories.Emails;
 
 [Collection(SharedTestCollection.Name)]
 [Trait("Category", "EmailIntegrationTests")]
-
 public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
 {
     private EmailDbContextFixture _fixture;
