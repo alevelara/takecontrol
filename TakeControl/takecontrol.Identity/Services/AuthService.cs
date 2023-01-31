@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
 using takecontrol.Domain.Models.ApplicationUser.Options;
 using takecontrol.Identity.Models;
 using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
@@ -144,13 +143,13 @@ public class AuthService : IAuthService
         if (user == null)
             throw new ConflictException(IdentityError.UserDoesntExist);
 
-        if (String.IsNullOrEmpty(user.Email))
+        if (string.IsNullOrEmpty(user.Email))
             throw new ConflictException(IdentityError.InvalidEmailForUser);
 
-        if (String.IsNullOrEmpty(user.UserName))
+        if (string.IsNullOrEmpty(user.UserName))
             throw new ConflictException(IdentityError.InvalidUserNameForUser);
 
-        if (String.IsNullOrEmpty(user.SecurityStamp))
+        if (string.IsNullOrEmpty(user.SecurityStamp))
             throw new ConflictException(IdentityError.InvalidSecurtyStampNameForUser);
     }
 }

@@ -5,7 +5,6 @@ namespace takecontrol.Domain.UnitTests.Models.Addresses;
 [Trait("Category", "UnitTests")]
 public class AddressXUnitTest
 {
-
     [Fact]
     public void Create_Should_ReturnNewAddress_WhenAllFieldsArePopulated()
     {
@@ -16,7 +15,6 @@ public class AddressXUnitTest
         Address address = Address.Create(city, province, mainAddress);
 
         Assert.NotNull(address);
-        Assert.NotNull(address.Id);
         Assert.Equal(address.City, city);
         Assert.Equal(address.Province, province);
         Assert.Equal(address.MainAddress, mainAddress);
@@ -32,7 +30,6 @@ public class AddressXUnitTest
         Address address = Address.Create(city, province, mainAddress);
 
         Assert.NotNull(address);
-        Assert.NotNull(address.Id);
         Assert.Equal(address.City, city);
         Assert.Equal(address.Province, province);
         Assert.Empty(address.MainAddress);
@@ -48,7 +45,6 @@ public class AddressXUnitTest
         Address address = Address.Create(city, province, mainAddress);
 
         Assert.NotNull(address);
-        Assert.NotNull(address.Id);
         Assert.Empty(address.City);
         Assert.Equal(address.Province, province);
         Assert.Equal(address.MainAddress, mainAddress);
@@ -64,7 +60,6 @@ public class AddressXUnitTest
         Address address = Address.Create(city, province, mainAddress);
 
         Assert.NotNull(address);
-        Assert.NotNull(address.Id);
         Assert.Equal(address.City, city);
         Assert.Empty(address.Province);
         Assert.Equal(address.MainAddress, mainAddress);
