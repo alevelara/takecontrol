@@ -108,11 +108,15 @@ public class AuthService : IAuthService
     public async Task<bool> UpdatePassword(UpdatePasswordCommand request)
     {
         var existingUser = await _userManager.FindByEmailAsync(request.Email);
+
         if (existingUser == null)
             throw new NotFoundException(IdentityError.UserDoesntExist);
             
         
-        var result = await _userManager.ResetPasswordAsync(existingUser, request.Token, request.NewPassword);
+        // var result = await _userManager.ResetPasswordAsync(existingUser, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqY3IyQGdtYWlsLmNvbSIsImVtYWlsIjoiamNyMkBnbWFpbC5jb20iLCJ1aWQiOiJjOTFjZGFiZi0xZWQ1LTRhN2EtYTgxNS01MTFjY2E2MGM4MmIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDbHViIiwiZXhwIjoxNjc1MTk0NTEzLCJpc3MiOiJUYWtlQ29udHJvbEFsZXZlbGFyYSIsImF1ZCI6IlRha2VDb250cm9sVXNlcnMifQ.A7fsVPs-0dYLY8QwGTmsa05NYvLAcUXgc5emjd_pFK4", request.NewPassword);
+        string resetToken = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
+        var result = await _userManager.ResetPasswordAsync(existingUser, resetToken, request.NewPassword);
+        // var result = await _userManager.ResetPasswordAsync(existingUser, request.Token, request.NewPassword);
         if (!result.Succeeded)
         {
             _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
