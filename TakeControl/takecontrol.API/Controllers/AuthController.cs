@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
     [HttpPost(nameof(AuthRouteName.UpdatePassword))]
     public async Task<ActionResult<AuthResponse>> UpdatePasword([FromBody] UpdatePasswordRequest request)
     {
-        var query = new UpdatePasswordCommand(request.Email, request.NewPassword, request.Token);
+        var query = new UpdatePasswordCommand(request.Email, request.NewPassword);
         await _mediator.Send(query);
 
         return StatusCode((int)HttpStatusCode.Created);
