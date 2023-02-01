@@ -110,14 +110,17 @@ public class AuthService : IAuthService
         var existingUser = await _userManager.FindByEmailAsync(request.Email);
 
         if (existingUser == null)
+        {
             _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {IdentityError.UserDoesntExist.Message}");
             throw new NotFoundException(IdentityError.UserDoesntExist);
-        
+        }
         string resetToken = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
 
         if (string.IsNullOrEmpty(resetToken))
+        {
             _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {IdentityError.ErrorGeneratingUpdatePassword.Message}");
             throw new ConflictException(IdentityError.ErrorGeneratingUpdatePassword);
+        }
 
         var result = await _userManager.ResetPasswordAsync(existingUser, resetToken, request.NewPassword);
         if (!result.Succeeded)
