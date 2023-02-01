@@ -178,6 +178,58 @@ public class AuthControllerXUnitTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
 
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnCreated_WhenRequestParamsAreValid()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnNotFoundException_WhenUserDoesntExist()
+    {
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnConflictException_WhenCurrentPasswordIsIncorrect()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
     public Task InitializeAsync() => Task.CompletedTask;
 
     public async Task DisposeAsync() => await _takeControlIdentityDb.ResetState();
