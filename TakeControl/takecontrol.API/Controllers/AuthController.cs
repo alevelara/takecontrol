@@ -1,4 +1,4 @@
-using System.Net;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using takecontrol.API.Routes;
@@ -13,24 +13,26 @@ namespace takecontrol.API.Controllers;
 [Route("api/v1/[controller]")]
 public class AuthController : ControllerBase
 {
-    private IMediator _mediator;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public AuthController(IMediator mediator)
+    public AuthController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost(nameof(AuthRouteName.Login))]
     public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
     {
-        var query = new LoginQuery(request.Email, request.Password);
+        var query = _mapper.Map<LoginQuery>(request);
         return Ok(await _mediator.Send(query));
     }
 
     [HttpPost(nameof(AuthRouteName.ResetPassword))]
     public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
     {
-        var query = new ResetPasswordCommand(request.Email, request.CurrentPassword, request.NewPassword);
+        var query = _mapper.Map<ResetPasswordCommand>(request);
         await _mediator.Send(query);
         return StatusCode((int)HttpStatusCode.Created);
 
