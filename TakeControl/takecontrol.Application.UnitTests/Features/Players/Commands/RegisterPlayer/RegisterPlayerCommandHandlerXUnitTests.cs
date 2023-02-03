@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+using takecontrol.Application.Services.Emails;
 using takecontrol.Application.Tests.TestsData;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Addresses;
+using takecontrol.Domain.Models.Emails;
 using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer;
@@ -16,12 +18,14 @@ public class RegisterPlayerCommandHandlerXUnitTests
     private Mock<IUnitOfWork> _uoW;
     private Mock<IAuthService> _authService;
     private Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
+    private Mock<ISendEmailService> _emailService;
 
     public RegisterPlayerCommandHandlerXUnitTests()
     {
         _uoW = new();
         _authService = new();
         _logger = new();
+        _emailService = new();
     }
 
     [Fact]
@@ -32,9 +36,10 @@ public class RegisterPlayerCommandHandlerXUnitTests
         var userId = Guid.NewGuid();
         var player = ApplicationTestData.CreateBegginerPlayerForTest(userId);
 
-        var handler = new RegisterPlayerCommandHandler(_uoW.Object, _authService.Object, _logger.Object);
+        var handler = new RegisterPlayerCommandHandler(_uoW.Object, _authService.Object, _logger.Object, _emailService.Object);
         var playerRepo = new Mock<IAsyncWriteRepository<Player>>();
         _uoW.Setup(c => c.Repository<Player>()).Returns(playerRepo.Object);
+        _emailService.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default));
 
         //Act
         await handler.Handle(command, default);

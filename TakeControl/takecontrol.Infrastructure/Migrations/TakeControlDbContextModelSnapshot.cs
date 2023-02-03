@@ -30,7 +30,9 @@ namespace takecontrol.Infrastructure.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -46,15 +48,19 @@ namespace takecontrol.Infrastructure.Migrations
 
                     b.Property<string>("MainAddress")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Province")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses", (string)null);
                 });
 
             modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
@@ -68,7 +74,9 @@ namespace takecontrol.Infrastructure.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(5)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(5)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -84,7 +92,9 @@ namespace takecontrol.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -94,7 +104,9 @@ namespace takecontrol.Infrastructure.Migrations
                     b.HasIndex("AddresId")
                         .IsUnique();
 
-                    b.ToTable("Clubs");
+                    b.HasIndex("Id");
+
+                    b.ToTable("clubs", (string)null);
                 });
 
             modelBuilder.Entity("takecontrol.Domain.Models.Players.Player", b =>
@@ -120,7 +132,9 @@ namespace takecontrol.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("NumberOfClassesInAWeek")
                         .HasColumnType("integer");
@@ -128,15 +142,16 @@ namespace takecontrol.Infrastructure.Migrations
                     b.Property<int>("NumberOfYearsPlayed")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PlayerLevel")
-                        .HasColumnType("integer");
+                    b.Property<string>("PlayerLevel")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Players");
+                    b.ToTable("players", (string)null);
                 });
 
             modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>

@@ -15,6 +15,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public TakeControlIdentityDb TakeControlIdentityDb = default!;
 
+    public TakeControlEmailDb TakeControlEmailDb = default!;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
@@ -40,9 +42,11 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
     {
         TakecontrolDb = new TakeControlDb(GetAppConfiguration().GetConnectionString("ConnectionString"));
         TakeControlIdentityDb = new TakeControlIdentityDb(GetAppConfiguration().GetConnectionString("IdentityConnectionString"));
+        TakeControlEmailDb = new TakeControlEmailDb(GetAppConfiguration().GetConnectionString("EmailConnectionString"));
         HttpClient = CreateClient();
         TakecontrolDb.EnsureDatabase();
         TakeControlIdentityDb.EnsureDatabase();
+        TakeControlEmailDb.EnsureDatabase();
     }
 
     public new Task DisposeAsync() => Task.CompletedTask;

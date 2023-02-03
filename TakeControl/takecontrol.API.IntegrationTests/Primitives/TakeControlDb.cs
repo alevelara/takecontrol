@@ -14,9 +14,10 @@ public class TakeControlDb : IDbConfiguration
         Context = factory.CreateDbContext(connectionString);
     }
 
-    public void EnsureDatabase()
+    public Task EnsureDatabase()
     {
         this.Context.Database.Migrate();
+        return Task.CompletedTask;
     }
 
     public async Task ResetState()
@@ -27,5 +28,10 @@ public class TakeControlDb : IDbConfiguration
             await this.Context.Addresses.ExecuteDeleteAsync();
             await this.Context.Players.ExecuteDeleteAsync();
         }
+    }
+
+    public Task SeedData()
+    {
+        return Task.CompletedTask;
     }
 }

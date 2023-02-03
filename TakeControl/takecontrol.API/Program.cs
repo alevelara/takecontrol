@@ -1,5 +1,6 @@
 using takecontrol.API.Middlewares;
 using takecontrol.Application;
+using takecontrol.EmailEngine;
 using takecontrol.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSwaggerGen();
     builder.Services.AddTransient<ExceptionHandlingMiddleware>();
     builder.Services.ConfigureIdentityServices(builder.Configuration);
+    builder.Services.RegisterEmailServices(builder.Configuration);
     builder.Services.AddApplicationServices();
     builder.Services.ConfigureInfrastructureServices(builder.Configuration);
     builder.Services.AddCors(opt =>

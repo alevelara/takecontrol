@@ -33,13 +33,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D44E381D-4E5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.API.IntegrationTests", "takecontrol.API.IntegrationTests\takecontrol.API.IntegrationTests.csproj", "{6A49EB4D-C38A-4E99-9B0F-B418A91BC5CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "takecontrol.Infrastructure.IntegrationTests", "takecontrol.Infrastructure.UnitTests\takecontrol.Infrastructure.IntegrationTests.csproj", "{CDFCBE44-37B1-41A2-82DA-7CEC47898785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Infrastructure.IntegrationTests", "takecontrol.Infrastructure.UnitTests\takecontrol.Infrastructure.IntegrationTests.csproj", "{CDFCBE44-37B1-41A2-82DA-7CEC47898785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "takecontrol.Domain.UnitTests", "takecontrol.Domain.UnitTests\takecontrol.Domain.UnitTests.csproj", "{96E3CAEF-01EB-4C83-A69E-A697F994AE3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Domain.UnitTests", "takecontrol.Domain.UnitTests\takecontrol.Domain.UnitTests.csproj", "{96E3CAEF-01EB-4C83-A69E-A697F994AE3B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Identity.UnitTests", "takecontrol.Identity.UnitTests\takecontrol.Identity.UnitTests.csproj", "{E5BAB26A-946C-440B-99A5-A65F77CF5538}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Application.UnitTests", "takecontrol.Application.UnitTests\takecontrol.Application.UnitTests.csproj", "{C060B4F0-6E58-45CF-BD70-69E59516649A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.EmailEngine", "takecontrol.EmailEngine\takecontrol.EmailEngine.csproj", "{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.EmailEngine.IntegrationTests", "takecontrol.EmailEngine.IntegrationTests\takecontrol.EmailEngine.IntegrationTests.csproj", "{10299A04-9BE3-474C-92A1-06BE6B52FF08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,14 @@ Global
 		{C060B4F0-6E58-45CF-BD70-69E59516649A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C060B4F0-6E58-45CF-BD70-69E59516649A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C060B4F0-6E58-45CF-BD70-69E59516649A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10299A04-9BE3-474C-92A1-06BE6B52FF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10299A04-9BE3-474C-92A1-06BE6B52FF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10299A04-9BE3-474C-92A1-06BE6B52FF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10299A04-9BE3-474C-92A1-06BE6B52FF08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +120,8 @@ Global
 		{96E3CAEF-01EB-4C83-A69E-A697F994AE3B} = {9D367A46-5E78-4A40-8B8D-F1F0F38B2D6D}
 		{E5BAB26A-946C-440B-99A5-A65F77CF5538} = {C3AF0ECE-B26A-4B21-B0B0-1EA495D549B0}
 		{C060B4F0-6E58-45CF-BD70-69E59516649A} = {9D367A46-5E78-4A40-8B8D-F1F0F38B2D6D}
+		{6C31B3A6-1A81-48B5-8954-38FE7EFB6B27} = {A46370A4-0407-4737-B4C8-36F260DEF08E}
+		{10299A04-9BE3-474C-92A1-06BE6B52FF08} = {C3AF0ECE-B26A-4B21-B0B0-1EA495D549B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97C30148-4293-4FAD-837B-5A66762FD1E3}
