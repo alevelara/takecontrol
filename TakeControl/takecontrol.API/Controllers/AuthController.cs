@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using takecontrol.API.Routes;
