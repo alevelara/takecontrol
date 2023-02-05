@@ -1,8 +1,7 @@
-﻿namespace takecontrol.API.Routes
+﻿namespace takecontrol.API.Routes;
+
+public static class AuthRouteName
 {
-    public static class AuthRouteName
-    {
-        public static string Login = "Login";
-        public static string ResetPassword = "ResetPassword";
-    }
+    public static readonly string Login = "Login";
+    public static readonly string ResetPassword = "ResetPassword";
 }

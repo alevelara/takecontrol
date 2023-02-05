@@ -1,7 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using takecontrol.API.Routes;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;

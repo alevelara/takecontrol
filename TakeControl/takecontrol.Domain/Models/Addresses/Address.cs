@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using takecontrol.Domain.Models.Addresses.ValueObjects;
+﻿using takecontrol.Domain.Models.Addresses.ValueObjects;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Domain.Primitives;
 
@@ -14,7 +13,6 @@ public class Address : BaseDomainModel
 
     public virtual Club Club { get; set; }
 
-
     private Address(string city, string province, string mainAddress)
     {
         Id = new AddresId().Value;
@@ -27,5 +25,4 @@ public class Address : BaseDomainModel
     {
         return new Address(city, province, mainAddress);
     }
-
 }

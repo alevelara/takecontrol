@@ -5,15 +5,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
-public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime where TProgram : class
+public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime
+    where TProgram : class
 {
-    public static string API_NAME = "takecontrol.API";
+    private static string apiName = "takecontrol.API";
 
     public HttpClient HttpClient { get; private set; } = default!;
 
-    public TakeControlDb TakecontrolDb = default!;
+    public TakeControlDb TakecontrolDb { get; private set; } = default!;
 
-    public TakeControlIdentityDb TakeControlIdentityDb = default!;
+    public TakeControlIdentityDb TakeControlIdentityDb { get; private set; } = default!;
 
     public TakeControlEmailDb TakeControlEmailDb = default!;
 
@@ -26,9 +27,9 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
         });
     }
 
-    IConfiguration GetAppConfiguration()
+    private IConfiguration GetAppConfiguration()
     {
-        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, API_NAME);
+        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, apiName);
 
         var builder = new ConfigurationBuilder()
                 .SetBasePath(path)

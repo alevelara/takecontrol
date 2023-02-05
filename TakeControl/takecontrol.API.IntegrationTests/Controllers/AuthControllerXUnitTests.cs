@@ -13,9 +13,9 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [DefaultPriority(10)]
 public class AuthControllerXUnitTests : IAsyncLifetime
 {
-    public static string MAIN_ENDPOINT = "api/v1/auth/";
-    public static string LOGIN_ENDPOINT = MAIN_ENDPOINT + AuthRouteName.Login;
-    public static string RESET_PASSWORD_ENDPOINT = MAIN_ENDPOINT + AuthRouteName.ResetPassword;
+    private static string mainEndpoint = "api/v1/auth/";
+    private static string loginEndpoint = mainEndpoint + AuthRouteName.Login;
+    private static string resetPaswordEndpoint = mainEndpoint + AuthRouteName.ResetPassword;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
@@ -39,7 +39,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = "Password123!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -54,7 +54,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = "Password123!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -72,7 +72,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = "incorrectPassword",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -87,7 +87,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = "incorrectPassword",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -102,7 +102,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = string.Empty,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -117,7 +117,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             Password = "incorrectPassword",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(LOGIN_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -136,7 +136,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(resetPaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -153,7 +153,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(resetPaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -172,7 +172,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<ResetPasswordRequest>(resetPaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
