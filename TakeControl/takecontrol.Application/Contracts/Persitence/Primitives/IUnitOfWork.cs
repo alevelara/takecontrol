@@ -1,5 +1,4 @@
-﻿using takecontrol.Application.Contracts.Persitence.Emails;
-using takecontrol.Domain.Primitives;
+﻿using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Application.Contracts.Persitence.Primitives;
 

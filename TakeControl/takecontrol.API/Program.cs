@@ -1,3 +1,4 @@
+using takecontrol.API.Mappings;
 using takecontrol.API.Middlewares;
 using takecontrol.Application;
 using takecontrol.EmailEngine;
@@ -15,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.ConfigureIdentityServices(builder.Configuration);
     builder.Services.RegisterEmailServices(builder.Configuration);
     builder.Services.AddApplicationServices();
+    builder.Services.AddMappings();
     builder.Services.ConfigureInfrastructureServices(builder.Configuration);
     builder.Services.AddCors(opt =>
     {

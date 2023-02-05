@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using takecontrol.Application.Features.Clubs.Queries.GetById;
 
-namespace takecontrol.Application.Features.Clubs.Queries.GetClubById
+namespace takecontrol.Application.Features.Clubs.Queries.GetClubById;
+
+public class GetClubByIdQueryValidator : AbstractValidator<GetClubByIdQuery>
 {
-    internal class GetClubByIdQueryValidator
-    {
-    }
+	public GetClubByIdQueryValidator()
+	{
+		RuleFor(c => c.Id)
+			.NotNull()
+			.NotEmpty()
+			.NotEqual(Guid.Empty)
+			.WithMessage("Id can not be empty");
+	}
 }

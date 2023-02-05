@@ -1,4 +1,4 @@
-﻿using takecontrol.Domain.Models.Addresses;
+﻿using takecontrol.Domain.Dtos.Addresses;
 
 namespace takecontrol.Domain.Dtos.Clubs;
 
@@ -14,5 +14,5 @@ public sealed class ClubDto
 
     public string Code { get; set; }
 
-    public Address Address { get; set; }
+    public AddressDto Address { get; set; }
 }
