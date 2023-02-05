@@ -1,4 +1,5 @@
-﻿using takecontrol.EmailEngine.IntegrationTests;
+﻿using Microsoft.EntityFrameworkCore;
+using takecontrol.EmailEngine.IntegrationTests;
 using takecontrol.EmailEngine.Persistence.Contexts;
 using takecontrol.EmailEngine.Repositories.Emails;
 using takecontrol.EmailEngine.UnitTests.TestsData;
@@ -33,11 +34,11 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        await _fixture.DisposeAsync();
+        if (await _dbContext.Database.CanConnectAsync())
+        {
+            await _dbContext.Emails.ExecuteDeleteAsync();
+        }
     }
 
-    public async Task InitializeAsync()
-    {
-        await _fixture.InitializeAsync();
-    }
+    public Task InitializeAsync() => Task.CompletedTask;
 }

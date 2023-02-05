@@ -14,15 +14,12 @@ namespace takecontrol.EmailEngine.IntegrationTests
             EmailDbContext = MockDbContext.GetEmailDbContext();
         }
 
-        public async Task DisposeAsync()
-        {
-            await EmailDbContext.Emails.ExecuteDeleteAsync();
-            await EmailDbContext.Templates.ExecuteDeleteAsync();
-        }
+        public Task DisposeAsync() => Task.CompletedTask;
 
-        public async Task InitializeAsync()
+        public Task InitializeAsync()
         {
-            await EmailDbContext.Database.MigrateAsync();
+            EmailDbContext.Database.Migrate();
+            return Task.CompletedTask;
         }
     }
 }

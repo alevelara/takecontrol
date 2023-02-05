@@ -97,7 +97,6 @@ public class TestBase
     public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
         CreateTestForLoginUser("clubsecuredtest", "test@player.com", "Password123!", new string[] { "Club" });
 
-
     /// <summary>
     /// Shortcut para ejecutar IRequests con el Mediador
     /// </summary>

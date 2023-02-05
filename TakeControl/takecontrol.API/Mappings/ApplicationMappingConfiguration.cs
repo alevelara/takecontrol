@@ -17,13 +17,23 @@ namespace takecontrol.API.Mappings
     {
         public void Register(TypeAdapterConfig config)
         {
-            config.NewConfig<Address, AddressDto>();
-            config.NewConfig<Club, ClubDto>()
-                .Map(dest => dest.Address, src => src.Address);
+            this.AddNewConfigForClubs(config);
+            this.AddNewConfigForAuthentication(config);
+        }
+
+        private void AddNewConfigForAuthentication(TypeAdapterConfig config)
+        {
             config.NewConfig<AuthRequest, LoginQuery>();
             config.NewConfig<ResetPasswordRequest, ResetPasswordCommand>();
             config.NewConfig<RegisterClubRequest, RegisterClubCommand>();
             config.NewConfig<RegisterPlayerRequest, RegisterPlayerCommand>();
+        }
+
+        private void AddNewConfigForClubs(TypeAdapterConfig config)
+        {
+            config.NewConfig<Address, AddressDto>();
+            config.NewConfig<Club, ClubDto>()
+                .Map(dest => dest.Address, src => src.Address);
         }
     }
 }
