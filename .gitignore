@@ -425,7 +425,7 @@ FodyWeavers.xsd
 *.msp
 
 #Migration folders
-Migrations/
+#Migrations/
 
 # JetBrains Rider
 *.sln.iml
