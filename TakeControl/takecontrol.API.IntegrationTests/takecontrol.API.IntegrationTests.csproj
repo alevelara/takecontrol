@@ -34,4 +34,8 @@
     <PackageReference Update="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\ClubController\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Moq;
 using takecontrol.Application.Contracts.Emails;
-using takecontrol.Application.Contracts.Persitence.Primitives;
+using takecontrol.Application.Contracts.Persitence.Emails;
 using takecontrol.Application.Contracts.Persitence.Templates;
 using takecontrol.Application.Contracts.Templates;
 using takecontrol.Application.Services.Emails;

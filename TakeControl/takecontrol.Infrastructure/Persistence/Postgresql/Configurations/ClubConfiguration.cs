@@ -10,7 +10,9 @@ public class ClubConfiguration : IEntityTypeConfiguration<Club>
     {
         builder.ToTable("clubs");
 
-        builder.HasIndex(c => c.Id);
+        builder.HasKey(c => c.Id);
+
+        builder.HasIndex(c => c.UserId);
 
         builder.Property(c => c.AddresId)
             .IsRequired();
@@ -33,6 +35,7 @@ public class ClubConfiguration : IEntityTypeConfiguration<Club>
             .HasForeignKey<Club>(c => c.AddresId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
+
     }
 
 }

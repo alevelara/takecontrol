@@ -4,5 +4,5 @@ namespace takecontrol.Application.Contracts.Persitence;
 
 public interface IClubReadRepository
 {
-    Task<Club> GetClubById(Guid id);
+    Task<Club> GetClubByUserId(Guid userId);
 }

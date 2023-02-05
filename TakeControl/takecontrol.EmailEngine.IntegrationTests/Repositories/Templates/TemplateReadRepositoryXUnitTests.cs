@@ -1,4 +1,5 @@
-﻿using takecontrol.Domain.Models.Templates;
+﻿using Microsoft.EntityFrameworkCore;
+using takecontrol.Domain.Models.Templates;
 using takecontrol.Domain.Models.Templates.Enum;
 using takecontrol.EmailEngine.Persistence.Contexts;
 using takecontrol.EmailEngine.Persistence.Data;
@@ -59,13 +60,15 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task InitializeAsync()
-    {
-        await _fixture.InitializeAsync();
-    }
+    public Task InitializeAsync() => Task.CompletedTask;
+
 
     public async Task DisposeAsync()
     {
-        await _fixture.DisposeAsync();
+        if (await _dbContext.Database.CanConnectAsync())
+        {
+            await _dbContext.Emails.ExecuteDeleteAsync();
+            await _dbContext.Templates.ExecuteDeleteAsync();
+        }
     }
 }

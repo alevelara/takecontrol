@@ -1,10 +1,10 @@
-﻿using System.Net;
-using MapsterMapper;
+﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using takecontrol.API.Routes;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Application.Features.Clubs.Queries.GetById;
+using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
 using takecontrol.Domain.Dtos.Clubs;
 using takecontrol.Domain.Messages.Clubs;
 
@@ -32,11 +32,11 @@ public class ClubController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ClubDto>> GetByClubId([FromQuery] Guid id)
+    public async Task<ActionResult<ClubDto>> GetByUserId([FromQuery] Guid userId)
     {
-        var query = new GetClubByIdQuery(id);
+        var query = new GetClubByUserIdQuery(userId);
         var club = await _mediator.Send(query);
-        var dto = _mapper.From(club).AdaptToType<ClubDto>();
-        return Ok(dto);
+        return Ok(_mapper.From(club)
+            .AdaptToType<ClubDto>());
     }
 }

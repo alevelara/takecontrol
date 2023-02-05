@@ -14,11 +14,11 @@ public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
         _dbContext = dbContext;
     }
 
-    public async Task<Club> GetClubById(Guid id)
+    public async Task<Club> GetClubByUserId(Guid userId)
     {
         return await _dbContext.Clubs
             .Include(c => c.Address)
             .IgnoreAutoIncludes<Club>()
-            .FirstOrDefaultAsync(c => c.Id == id);
+            .FirstOrDefaultAsync(c => c.UserId == userId);
     }
 }

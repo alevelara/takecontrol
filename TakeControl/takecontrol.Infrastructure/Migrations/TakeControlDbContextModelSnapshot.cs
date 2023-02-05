@@ -104,7 +104,7 @@ namespace takecontrol.Infrastructure.Migrations
                     b.HasIndex("AddresId")
                         .IsUnique();
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("clubs", (string)null);
                 });
