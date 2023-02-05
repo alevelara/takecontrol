@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using takecontrol.API.Routes;
@@ -31,6 +32,7 @@ public class ClubController : ControllerBase
         return StatusCode((int)HttpStatusCode.Created);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<ClubDto>> GetByUserId([FromQuery] Guid userId)
     {
