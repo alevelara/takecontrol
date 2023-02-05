@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using takecontrol.Application.Contracts.Persitence;
 using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Infrastructure.Repositories.Primitives;
+using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
 
 namespace takecontrol.Identity;
 
@@ -15,6 +17,7 @@ public static class InfrastructureServiceRegistration
 
         service.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteBaseRepository<>));
         service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadBaseRepository<>));
+        service.AddScoped<IClubReadRepository, ClubReadRepository>();
         service.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return service;

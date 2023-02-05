@@ -13,6 +13,10 @@ public static class MappingServiceRegistration
 
         services.AddSingleton(config);
         services.AddScoped<IMapper, ServiceMapper>();
+
+        TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = true;
+        TypeAdapterConfig.GlobalSettings.RequireDestinationMemberSource = true;
+        TypeAdapterConfig.GlobalSettings.Compile();
         return services;
     }
 }

@@ -5,7 +5,7 @@ using takecontrol.Identity;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives.Clubs;
 
-public class ClubReadRepository : ReadRepositoryBase<Club>, IClubReadRepository
+public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
 {
     private readonly TakeControlDbContext _dbContext;
 
@@ -16,6 +16,9 @@ public class ClubReadRepository : ReadRepositoryBase<Club>, IClubReadRepository
 
     public async Task<Club> GetClubById(Guid id)
     {
-        return await _dbContext.Clubs.Include(c => c.Address).FirstOrDefaultAsync(c => c.Id == id);
+        return await _dbContext.Clubs
+            .Include(c => c.Address)
+            .IgnoreAutoIncludes<Club>()
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 }
