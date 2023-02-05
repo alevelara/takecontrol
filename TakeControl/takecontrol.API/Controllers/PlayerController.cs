@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using takecontrol.API.Routes;
@@ -11,17 +12,19 @@ namespace takecontrol.API.Controllers;
 [Route("api/v1/[controller]")]
 public class PlayerController : ControllerBase
 {
-    private IMediator _mediator;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public PlayerController(IMediator mediator)
+    public PlayerController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost(nameof(PlayerRouteName.Register))]
     public async Task<ActionResult> RegisterClub([FromBody] RegisterPlayerRequest request)
     {
-        var command = new RegisterPlayerCommand(request.Name, request.Email, request.Password, request.NumberOfClassesInAWeek, request.AvgNumberOfMatchesInAWeek, request.NumberOfYearsPlayed);
+        var command = _mapper.Map<RegisterPlayerCommand>(request);
         await _mediator.Send(command);
         return StatusCode((int)HttpStatusCode.Created);
     }
