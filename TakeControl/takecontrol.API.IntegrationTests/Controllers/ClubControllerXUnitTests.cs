@@ -15,6 +15,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     public static string REGISTER_ENDPOINT = "api/v1/club/Register";
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
+    private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
 
     public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
@@ -22,6 +23,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
+        _takeControlEmailDb = factory.TakeControlEmailDb;
     }
 
     [Fact]
@@ -201,5 +203,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         _takeControlDb.ResetState();
         _takeControlIdentityDb.ResetState();
+        _takeControlEmailDb.ResetState();
     }
 }

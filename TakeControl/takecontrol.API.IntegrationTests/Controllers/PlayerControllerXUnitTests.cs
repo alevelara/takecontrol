@@ -15,6 +15,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     public static string REGISTER_ENDPOINT = "api/v1/player/Register";
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
+    private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
 
     public PlayerControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
@@ -22,6 +23,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
+        _takeControlEmailDb = factory.TakeControlEmailDb;
     }
 
     [Fact]
@@ -201,5 +203,6 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         _takeControlIdentityDb.ResetState();
         _takeControlDb.ResetState();
+        _takeControlEmailDb.ResetState();
     }
 }

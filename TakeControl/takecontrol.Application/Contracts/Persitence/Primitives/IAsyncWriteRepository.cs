@@ -1,6 +1,6 @@
 ﻿using takecontrol.Domain.Primitives;
 
-namespace takecontrol.Application.Contracts.Persitence;
+namespace takecontrol.Application.Contracts.Persitence.Primitives;
 
 public interface IAsyncWriteRepository<T> where T : BaseDomainModel
 {

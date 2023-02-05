@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using takecontrol.Application.Services.Emails;
 using takecontrol.Application.Tests.TestsData;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Models.Emails;
 
 namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
@@ -16,12 +18,14 @@ public class RegisterClubCommandHandlerXUnitTests
     private Mock<IUnitOfWork> _uoW;
     private Mock<IAuthService> _authService;
     private Mock<ILogger<RegisterClubCommandHandler>> _logger;
+    private Mock<ISendEmailService> _emailService;
 
     public RegisterClubCommandHandlerXUnitTests()
     {
         _uoW = new();
         _authService = new();
         _logger = new();
+        _emailService = new();
     }
 
     [Fact]
@@ -33,11 +37,12 @@ public class RegisterClubCommandHandlerXUnitTests
         var address = ApplicationTestData.CreateAddresForTest();
         var club = ApplicationTestData.CreateClubForTest(userId, address);
 
-        var handler = new RegisterClubCommandHandler(_uoW.Object, _authService.Object, _logger.Object);
+        var handler = new RegisterClubCommandHandler(_uoW.Object, _authService.Object, _logger.Object, _emailService.Object);
         var addressRepo = new Mock<IAsyncWriteRepository<Address>>();
         _uoW.Setup(c => c.Repository<Address>()).Returns(addressRepo.Object);
         var clubRepo = new Mock<IAsyncWriteRepository<Club>>();
         _uoW.Setup(c => c.Repository<Club>()).Returns(clubRepo.Object);
+        _emailService.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default));
 
         //Act
         await handler.Handle(command, default);
@@ -51,7 +56,4 @@ public class RegisterClubCommandHandlerXUnitTests
         Assert.Equal(club.AddresId, address.Id);
         Assert.Equal(club.UserId, userId);
     }
-
-
-
 }

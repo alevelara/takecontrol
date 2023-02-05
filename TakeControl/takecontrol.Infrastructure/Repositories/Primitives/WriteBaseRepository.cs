@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Domain.Primitives;
 using takecontrol.Identity;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives;
 
-public class WriteRepositoryBase<T> : IAsyncWriteRepository<T> where T : BaseDomainModel
+public class WriteBaseRepository<T> : IAsyncWriteRepository<T> where T : BaseDomainModel
 {
     protected readonly TakeControlDbContext _context;
 
-    public WriteRepositoryBase(TakeControlDbContext context)
+    public WriteBaseRepository(TakeControlDbContext context)
     {
         _context = context;
     }

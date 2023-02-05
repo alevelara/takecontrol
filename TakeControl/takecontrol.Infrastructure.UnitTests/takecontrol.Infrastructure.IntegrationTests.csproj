@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\takecontrol.Domain\takecontrol.Domain.csproj" />
     <ProjectReference Include="..\takecontrol.Infrastructure\takecontrol.Infrastructure.csproj" />
   </ItemGroup>
 

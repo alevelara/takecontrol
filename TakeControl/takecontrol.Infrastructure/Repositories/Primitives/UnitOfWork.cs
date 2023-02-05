@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Domain.Primitives;
 using takecontrol.Identity;
 
@@ -34,7 +34,7 @@ public class UnitOfWork : IUnitOfWork
 
         if (!_repostories.ContainsKey(nameType))
         {
-            var repositoryType = typeof(WriteRepositoryBase<>);
+            var repositoryType = typeof(WriteBaseRepository<>);
             var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
             _repostories.Add(nameType, repositoryInstance);
         }
