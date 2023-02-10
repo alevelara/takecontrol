@@ -16,6 +16,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     private static string mainEndpoint = "api/v1/auth/";
     private static string loginEndpoint = mainEndpoint + AuthRouteName.Login;
     private static string resetPaswordEndpoint = mainEndpoint + AuthRouteName.ResetPassword;
+    private static string updatePaswordEndpoint = mainEndpoint + AuthRouteName.UpdatePassword;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
@@ -190,7 +191,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -206,7 +207,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124!",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -224,7 +225,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
             NewPassword = "Password124",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(RESET_PASSWORD_ENDPOINT, request, CancellationToken.None);
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
