@@ -30,8 +30,8 @@ var app = builder.Build();
 {
     app.UseMiddleware<ExceptionHandlingMiddleware>();
     app.UseHttpsRedirection();
-    app.UseAuthorization();
     app.UseAuthentication();
+    app.UseAuthorization();
     app.UseCors("CorsPolicy");
     app.MapControllers();
     if (app.Environment.IsDevelopment())
