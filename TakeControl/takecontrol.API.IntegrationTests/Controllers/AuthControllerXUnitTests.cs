@@ -228,7 +228,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
         var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
         Assert.NotNull(response);
-        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
