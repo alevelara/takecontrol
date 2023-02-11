@@ -32,7 +32,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         var request = new RegisterPlayerRequest
         {
-            Email = "email@test.com",
+            Email = "email2@test.com",
             Name = "nameTest",
             Password = "Password123!",
             AvgNumberOfMatchesInAWeek = 1,
