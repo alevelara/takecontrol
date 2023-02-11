@@ -286,9 +286,12 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
-            _userManager.Setup(u => u.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(successIdentityResult);
+            _userManager.Setup(u => u.GeneratePasswordResetTokenAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync("resetToken");
+            _userManager.Setup(u => u.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
 
             var result = authService.UpdatePassword(request);
 
@@ -305,7 +308,7 @@ namespace takecontrol.Identity.Tests.Services
             var request = new UpdatePasswordCommand("user@test.com", "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
 
             //Assert
@@ -313,7 +316,7 @@ namespace takecontrol.Identity.Tests.Services
         }
 
         [Fact]
-        public async Task UpdatePassword_Should_ThrowConflictException_WhenCurrentPasswordIsInvalid()
+        public async Task UpdatePassword_Should_ThrowConflictException_WhenChangingPasswordIsNotPossible()
         {
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
@@ -321,9 +324,12 @@ namespace takecontrol.Identity.Tests.Services
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var failedResult = IdentityTestData.CreateFailedIdentityResult();
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
-            _userManager.Setup(u => u.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(failedResult);
+            _userManager.Setup(u => u.GeneratePasswordResetTokenAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync("resetToken");
+            _userManager.Setup(u => u.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Failed(null));
 
             //Assert
             Assert.ThrowsAsync<ConflictException>(() => authService.UpdatePassword(request));
