@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.API.Routes;
 using takecontrol.Domain.Messages.Clubs;
-using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.Clubs;
 using Xunit.Priority;
 
@@ -23,6 +23,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
+    private readonly TestBase _testBase;
 
     public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
@@ -30,6 +31,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
         _takeControlEmailDb = factory.TakeControlEmailDb;
+        _testBase = new TestBase(factory);
     }
 
     #region Tests for registerClub Endpoint
@@ -199,9 +201,10 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.NewGuid().ToString();
+        var httpClient = await AddJWTTokenToHeader();
 
         //Act
-        var response = await this._httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
 
         //Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -212,12 +215,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var clubName = "nameTest";
-        await this.RegisterClubForTest();
+        var httpClient = await AddJWTTokenToHeader();
 
+        await RegisterClubForTest();
         var club = await GetClubByName(clubName);
 
         //Act
-        var response = await this._httpClient.GetAsync(mainEndpoint + $"?userId={club.UserId}");
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={club.UserId}");
 
         //Assert
         Assert.NotNull(response);
@@ -229,9 +233,10 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.Empty;
+        var httpClient = await AddJWTTokenToHeader();
 
         //Act
-        var response = await this._httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
 
         //Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -252,6 +257,11 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         };
 
         await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
+    }
+
+    private async Task<HttpClient> AddJWTTokenToHeader()
+    {
+        return await _testBase.RegisterSecuredUserAsClubAsync();
     }
 
     private async Task<Club> GetClubByName(string name)

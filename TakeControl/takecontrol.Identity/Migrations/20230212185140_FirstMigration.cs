@@ -166,9 +166,9 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("223de600-5321-468d-8382-d320c1de07ee"), null, "Club", "CLUB" },
-                    { new Guid("3ca33cb3-c0a4-4309-822a-9c75abc79f7c"), null, "Player", "PLAYER" },
-                    { new Guid("48e304e1-b820-4865-8189-f6dc00877022"), null, "Administrator", "ADMINISTRATOR" }
+                    { new Guid("56155233-2501-44b2-890a-bc735493ccfb"), null, "Administrator", "ADMINISTRATOR" },
+                    { new Guid("71831d6b-ce5d-4b1c-9f94-4c8843749fdc"), null, "Club", "CLUB" },
+                    { new Guid("88fb0139-4f60-4c43-9753-905219fd755a"), null, "Player", "PLAYER" }
                 });
 
             migrationBuilder.InsertData(
@@ -176,10 +176,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserType" },
                 values: new object[,]
                 {
-                    { new Guid("41432b39-4f42-4582-bcdf-c10aa47bdc10"), 0, "8b07d38f-b860-4365-acbc-dc6288fead60", "player2@gmail.com", true, false, null, "player 2", "PLAYER2@GMAIL.COM", "PLAYER2", "AQAAAAIAAYagAAAAEBMZ3lzAR6V8bhZnWPoMEwoeJG2rxaoI4BHEXlRvX9WNovZtsVfeKub5YXIUktB+cw==", null, false, "90ce20bd-5abe-440f-b7b8-50b682d971a8", false, "player2", 3 },
-                    { new Guid("8f4c1060-89a4-478e-9a32-d0b30f6e869b"), 0, "257a7912-310b-4135-903e-710c701c6f8a", "club@localhost.com", true, false, null, "PadelClubTest", "CLUB@LOCALHOST.COM", "ANTOGONMAR2", "AQAAAAIAAYagAAAAEPvXlW6hiwRUvxbG+zRtb27T0lKmr6GJU3WlyK5y63ZgMW3MSeBjTV5dWzTP9EaPvQ==", null, false, "227ef87e-d26e-4015-993d-b416d51afb70", false, "antgonmar2", 2 },
-                    { new Guid("a2f90331-cf0f-4172-96f1-509b4e8079e5"), 0, "c4b3687f-973f-49d6-a930-35c0aa22b997", "alevelara@localhost.com", true, false, null, "Alberto", "ALEVELARA@LOCALHOST.COM", "ANTOGONMAR", "AQAAAAIAAYagAAAAEJGQiDrKbqXK79DRDlS3JDKl5rDCbpzkYDaG+85sdvvgoHsIx/GRCTidLSJp4ijFPg==", null, false, "8a87d146-9ff9-4f7c-81be-1c9ed730675e", false, "antgonmar", 3 },
-                    { new Guid("e0ebfbcc-2d94-49e3-a16b-0f31c2e86375"), 0, "3a10e558-0cf2-4d69-a65a-b5b930234319", "alevelara@gmail.com", true, false, null, "Alejandro", "ALEVELARA@GMAIL.COM", "ALEVELARA", "AQAAAAIAAYagAAAAEICm7yvaUlTeGC6VF7jOdYXIl4JDVJ42u3tGwDN3EntxwEGLDyFJ8pvwi8J1gIXALg==", null, false, "50f20fd4-70bc-4c80-98de-23eac36cd095", false, "alevelara", 1 }
+                    { new Guid("5ff41d08-c89b-4455-bb66-446dc9d7b504"), 0, "bf7a803f-7b6a-4fe8-9c7c-717a90991b26", "alevelara@localhost.com", true, false, null, "Alberto", "ALEVELARA@LOCALHOST.COM", "ANTOGONMAR", "AQAAAAIAAYagAAAAEHmCClWBAML9NlmD10w3nMY1iDgD9mHOjijae3nFD3WXEqoPw26ArojGLH3vbnxkaw==", null, false, "c00bd3f1-5bce-4f32-a694-92435ae7d708", false, "antgonmar", 3 },
+                    { new Guid("a8559602-421e-4719-a59d-768d8486fe16"), 0, "917cedec-1087-4529-9567-612063173aec", "alevelara@gmail.com", true, false, null, "Alejandro", "ALEVELARA@GMAIL.COM", "ALEVELARA", "AQAAAAIAAYagAAAAEFW78tlmBadoMkJSzIqpfjHBcag4CR90O2DmWkjIVfXQIm9qNx45YZhzYYwBoOU2Xw==", null, false, "46434c90-fe5b-404f-a20d-2f6a03675531", false, "alevelara", 1 },
+                    { new Guid("a9efc78e-f642-47ad-a986-25054281e9d1"), 0, "63a75038-b638-4e4e-84f3-2dc589db534e", "player2@gmail.com", true, false, null, "player 2", "PLAYER2@GMAIL.COM", "PLAYER2", "AQAAAAIAAYagAAAAELzc3OBJDyM1zgbX6C1rOMgBCipi169Xw1E9oQeVvAR3yxPJZ5SFXCcHiOb4kZ+mrA==", null, false, "f100d44e-31f7-4190-ade6-201fdba03ab6", false, "player2", 3 },
+                    { new Guid("ad1a33d7-b234-4ce3-ada1-f8fbc8e8b340"), 0, "3df7bed9-e6f6-48c8-a03f-148e248e31a9", "club@localhost.com", true, false, null, "PadelClubTest", "CLUB@LOCALHOST.COM", "ANTOGONMAR2", "AQAAAAIAAYagAAAAEE+v9qVuCvZCfMJFDrK8ChpRzgMQFndeqihqr369UrPbrLVag2ivY9rEFgexYwSJ2A==", null, false, "4104955c-5800-444c-95e6-2584a54d1ffe", false, "antgonmar2", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -187,10 +187,10 @@ namespace takecontrol.Identity.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("3ca33cb3-c0a4-4309-822a-9c75abc79f7c"), new Guid("41432b39-4f42-4582-bcdf-c10aa47bdc10") },
-                    { new Guid("223de600-5321-468d-8382-d320c1de07ee"), new Guid("8f4c1060-89a4-478e-9a32-d0b30f6e869b") },
-                    { new Guid("3ca33cb3-c0a4-4309-822a-9c75abc79f7c"), new Guid("a2f90331-cf0f-4172-96f1-509b4e8079e5") },
-                    { new Guid("48e304e1-b820-4865-8189-f6dc00877022"), new Guid("e0ebfbcc-2d94-49e3-a16b-0f31c2e86375") }
+                    { new Guid("88fb0139-4f60-4c43-9753-905219fd755a"), new Guid("5ff41d08-c89b-4455-bb66-446dc9d7b504") },
+                    { new Guid("56155233-2501-44b2-890a-bc735493ccfb"), new Guid("a8559602-421e-4719-a59d-768d8486fe16") },
+                    { new Guid("88fb0139-4f60-4c43-9753-905219fd755a"), new Guid("a9efc78e-f642-47ad-a986-25054281e9d1") },
+                    { new Guid("71831d6b-ce5d-4b1c-9f94-4c8843749fdc"), new Guid("ad1a33d7-b234-4ce3-ada1-f8fbc8e8b340") }
                 });
 
             migrationBuilder.CreateIndex(

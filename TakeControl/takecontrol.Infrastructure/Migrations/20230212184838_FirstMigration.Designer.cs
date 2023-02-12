@@ -12,7 +12,7 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230205191210_FirstMigration")]
+    [Migration("20230212184838_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
