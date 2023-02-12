@@ -12,7 +12,7 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230210165910_FirstMigration")]
+    [Migration("20230212184838_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -107,7 +107,7 @@ namespace takecontrol.Infrastructure.Migrations
                     b.HasIndex("AddresId")
                         .IsUnique();
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("clubs", (string)null);
                 });

@@ -82,9 +82,9 @@ namespace takecontrol.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_clubs_Id",
+                name: "IX_clubs_UserId",
                 table: "clubs",
-                column: "Id");
+                column: "UserId");
         }
 
         /// <inheritdoc />

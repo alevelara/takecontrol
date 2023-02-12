@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq.Expressions;
 using System.Net.Http.Headers;
+using takecontrol.API.IntegrationTests.Helpers;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
 using takecontrol.Identity.Models;
@@ -54,8 +55,9 @@ public class TestBase
     public async Task<HttpClient> CreateTestUser(string userName, string email, string password, string[] roles)
     {
         var client = await CreateTestForLoginUser(userName, email, password, roles);
+        var user = await this.FindAsync<ApplicationUser>(c => c.UserName == userName);
 
-        var accessToken = await GetAccessToken(email, password);
+        var accessToken = await GetAccessToken(userName, email, user.Id.ToString(), roles[0]);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         return client;
@@ -71,7 +73,7 @@ public class TestBase
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsAdmin() =>
-        CreateTestForLoginUser("adminsecuredtest", "test@admin.com", "Password123!", new string[] { "Administrator" });
+        CreateTestUser("adminsecuredtest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
@@ -83,20 +85,19 @@ public class TestBase
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsPlayerAsync() =>
-        CreateTestForLoginUser("playersecuredtest", "test@player.com", "Password123!", new string[] { "Player" });
+        CreateTestUser("playersecuredtest", "test@player.com", "Password123!", new string[] { "Player" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
     public Task<HttpClient> RegisterUserAsClubAsync() =>
-        CreateTestForLoginUser("clubtest", "test@player.com", "Password123!", new string[] { "Club" });
+        CreateTestForLoginUser("clubtest", "test@club.com", "Password123!", new string[] { "Club" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
-        CreateTestForLoginUser("clubsecuredtest", "test@player.com", "Password123!", new string[] { "Club" });
-
+        CreateTestUser("clubsecuredtest", "test@club.com", "Password123!", new string[] { "Club" });
 
     /// <summary>
     /// Shortcut para ejecutar IRequests con el Mediador
@@ -147,12 +148,8 @@ public class TestBase
     /// <summary>
     /// Shortcut para autenticar un usuario para pruebas
     /// </summary>
-    private async Task<string> GetAccessToken(string email, string password)
+    private async Task<string> GetAccessToken(string userName, string email, string id, string role)
     {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var result = await SendAsync(new LoginQuery(email, password));
-
-        return result.Token;
+        return AuthTestHelper.GenerateToken(userName, email, id, role);
     }
 }

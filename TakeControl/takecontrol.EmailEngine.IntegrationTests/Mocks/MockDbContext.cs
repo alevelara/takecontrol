@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Moq;
-using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.Infrastructure.Repositories.Primitives;
 
 namespace takecontrol.EmailEngine.IntegrationTests.Mocks;
 

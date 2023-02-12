@@ -1,7 +1,11 @@
-﻿using System.Net;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.Routes;
 using takecontrol.Domain.Messages.Clubs;
+using takecontrol.Domain.Models.Clubs;
 using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
@@ -12,11 +16,14 @@ namespace takecontrol.API.IntegrationTests.Controllers;
 [DefaultPriority(20)]
 public class ClubControllerXUnitTests : IAsyncLifetime
 {
-    public static string REGISTER_ENDPOINT = "api/v1/club/Register";
+    private static string mainEndpoint = "api/v1/club/";
+    private static string registerEndpoint = mainEndpoint + ClubRouteName.Register;
+
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
+    private readonly TestBase _testBase;
 
     public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
     {
@@ -24,7 +31,10 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
         _takeControlEmailDb = factory.TakeControlEmailDb;
+        _testBase = new TestBase(factory);
     }
+
+    #region Tests for registerClub Endpoint
 
     [Fact]
     [Priority(19)]
@@ -40,7 +50,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -62,7 +72,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -81,7 +91,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -100,7 +110,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -119,7 +129,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -138,7 +148,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = string.Empty,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -157,7 +167,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -176,11 +186,63 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
+
+    #endregion
+
+    #region Tests for GetByUserId Endpoint
+
+    [Fact]
+    public async Task GetByUserId_Should_ThrownClubNotFoundException_WhenUserIdDoesntExist()
+    {
+        //Arrange
+        var userId = Guid.NewGuid().ToString();
+        var httpClient = await AddJWTTokenToHeader();
+
+        //Act
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+
+        //Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task GetByUserId_Should_ReturnClub_WhenUserIdExistInDatabase()
+    {
+        //Arrange
+        var clubName = "nameTest";
+        var httpClient = await AddJWTTokenToHeader();
+
+        await RegisterClubForTest();
+        var club = await GetClubByName(clubName);
+
+        //Act
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={club.UserId}");
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.True(response.IsSuccessStatusCode);
+    }
+
+    [Fact]
+    public async Task GetByUserId_Should_ThrownValidationError_WhenUserIdIsEmpty()
+    {
+        //Arrange
+        var userId = Guid.Empty;
+        var httpClient = await AddJWTTokenToHeader();
+
+        //Act
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+
+        //Assert
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    #endregion
 
     private async Task RegisterClubForTest()
     {
@@ -194,7 +256,17 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Province = "provinceTest",
         };
 
-        await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(REGISTER_ENDPOINT, request, default);
+        await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
+    }
+
+    private async Task<HttpClient> AddJWTTokenToHeader()
+    {
+        return await _testBase.RegisterSecuredUserAsClubAsync();
+    }
+
+    private async Task<Club> GetClubByName(string name)
+    {
+        return await _takeControlDb.Context.Clubs?.FirstOrDefaultAsync(c => c.Name == name);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
