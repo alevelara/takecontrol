@@ -21,7 +21,8 @@ public static class IdentityServiceRegistration
         service.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         service.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-           .AddEntityFrameworkStores<TakeControlIdentityDbContext>();
+           .AddEntityFrameworkStores<TakeControlIdentityDbContext>()
+           .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
         service.AddTransient<IAuthService, AuthService>();
         service.AddAuthentication(opt =>

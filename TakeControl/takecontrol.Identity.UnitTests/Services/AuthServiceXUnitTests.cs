@@ -7,6 +7,7 @@ using Moq;
 using System.Security.Claims;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Enum;
@@ -274,6 +275,64 @@ namespace takecontrol.Identity.Tests.Services
 
             //Assert
             Assert.ThrowsAsync<ConflictException>(() => authService.ResetPassword(request));
+        }
+
+        [Fact]
+        public async Task UpdatePassword_Should_ReturnTrue_WhenCommandIsValid()
+        {
+            //Arrange
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+            var request = new UpdatePasswordCommand(applicationUser.Email, "Password124!");
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
+
+            //Act
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+            _userManager.Setup(u => u.GeneratePasswordResetTokenAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync("resetToken");
+            _userManager.Setup(u => u.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
+
+            var result = authService.UpdatePassword(request);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.True(result.IsCompletedSuccessfully);
+        }
+
+        [Fact]
+        public async Task UpdatePassword_Should_ThrowNotFoundException_WhenUserDoesntExist()
+        {
+            //Arrange
+            ApplicationUser applicationUser = null;
+            var request = new UpdatePasswordCommand("user@test.com", "Password124!");
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+
+            //Act
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+
+            //Assert
+            Assert.ThrowsAsync<NotFoundException>(() => authService.UpdatePassword(request));
+        }
+
+        [Fact]
+        public async Task UpdatePassword_Should_ThrowConflictException_WhenChangingPasswordIsNotPossible()
+        {
+            //Arrange
+            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+            var request = new UpdatePasswordCommand(applicationUser.Email, "invalidPassword");
+            var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
+            var failedResult = IdentityTestData.CreateFailedIdentityResult();
+
+            //Act
+            _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
+            _userManager.Setup(u => u.GeneratePasswordResetTokenAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync("resetToken");
+            _userManager.Setup(u => u.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Failed(null));
+
+            //Assert
+            Assert.ThrowsAsync<ConflictException>(() => authService.UpdatePassword(request));
         }
     }
 }

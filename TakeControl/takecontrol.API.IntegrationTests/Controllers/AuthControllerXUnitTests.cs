@@ -16,6 +16,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     private static string mainEndpoint = "api/v1/auth/";
     private static string loginEndpoint = mainEndpoint + AuthRouteName.Login;
     private static string resetPaswordEndpoint = mainEndpoint + AuthRouteName.ResetPassword;
+    private static string updatePaswordEndpoint = mainEndpoint + AuthRouteName.UpdatePassword;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
@@ -176,6 +177,58 @@ public class AuthControllerXUnitTests : IAsyncLifetime
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnCreated_WhenRequestParamsAreValid()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnNotFoundException_WhenUserDoesntExist()
+    {
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124!",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    [Priority(0)]
+    public async Task UpdatePassword_Should_ReturnConflictException_WhenCurrentPasswordIsIncorrect()
+    {
+        await _testBase.RegisterUserAsAdminAsync();
+
+        var request = new UpdatePasswordRequest
+        {
+            Email = "test@admin.com",
+            NewPassword = "Password124",
+        };
+
+        var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

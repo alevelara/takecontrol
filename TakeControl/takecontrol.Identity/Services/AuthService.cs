@@ -9,6 +9,7 @@ using takecontrol.Application.Constants;
 using takecontrol.Application.Contracts.Identity;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Options;
@@ -95,6 +96,33 @@ public class AuthService : IAuthService
             throw new NotFoundException(IdentityError.UserDoesntExist);
 
         var result = await _userManager.ChangePasswordAsync(existingUser, request.CurrentPassword, request.NewPassword);
+        if (!result.Succeeded)
+        {
+            _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            throw new ConflictException(IdentityError.ErrorChangingPassword);
+        }
+
+        return result.Succeeded;
+    }
+
+    public async Task<bool> UpdatePassword(UpdatePasswordCommand request)
+    {
+        var existingUser = await _userManager.FindByEmailAsync(request.Email);
+
+        if (existingUser == null)
+        {
+            _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {IdentityError.UserDoesntExist.Message}");
+            throw new NotFoundException(IdentityError.UserDoesntExist);
+        }
+        string resetToken = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
+
+        if (string.IsNullOrEmpty(resetToken))
+        {
+            _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {IdentityError.ErrorGeneratingUpdatePassword.Message}");
+            throw new ConflictException(IdentityError.ErrorGeneratingUpdatePassword);
+        }
+
+        var result = await _userManager.ResetPasswordAsync(existingUser, resetToken, request.NewPassword);
         if (!result.Succeeded)
         {
             _logger.LogError($"{IdentityError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
