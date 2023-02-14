@@ -25,6 +25,7 @@ public static class IdentityServiceRegistration
            .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
         service.AddTransient<IAuthService, AuthService>();
+        service.AddAuthorization();
         service.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using takecontrol.Identity.Constants;
 
 namespace takecontrol.Identity.Configuration;
 
@@ -16,20 +17,20 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
             new IdentityRole<Guid>
             {
                 Id = AdministratorRoleId,
-                Name = "Administrator",
-                NormalizedName = "ADMINISTRATOR"
+                Name = nameof(Role.Administrator),
+                NormalizedName = nameof(Role.Administrator).ToUpper()
             },
             new IdentityRole<Guid>
             {
                 Id = PlayerRoleId,
-                Name = "Player",
-                NormalizedName = "PLAYER"
+                Name = nameof(Role.Player),
+                NormalizedName = nameof(Role.Player).ToUpper()
             },
             new IdentityRole<Guid>
             {
                 Id = ClubRoleId,
-                Name = "Club",
-                NormalizedName = "CLUB"
+                Name = nameof(Role.Club),
+                NormalizedName = nameof(Role.Club).ToUpper()
             });
     }
 }

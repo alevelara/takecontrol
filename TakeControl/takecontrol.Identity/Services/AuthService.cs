@@ -13,6 +13,7 @@ using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Models.ApplicationUser.Options;
+using takecontrol.Identity.Constants;
 using takecontrol.Identity.Models;
 using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
 
@@ -83,7 +84,7 @@ public class AuthService : IAuthService
             throw new ConflictException(IdentityError.ErrorDuringUserRegistration);
         }
 
-        await _userManager.AddToRoleAsync(user, "Club");
+        await _userManager.AddToRoleAsync(user, request.UserType.ToString());
         _logger.LogInformation($"User {request.Email} was succesfully registered");
 
         return user.Id;
