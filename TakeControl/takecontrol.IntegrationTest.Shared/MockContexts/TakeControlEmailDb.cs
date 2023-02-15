@@ -2,6 +2,7 @@
 using takecontrol.API.IntegrationTests.Contracts;
 using takecontrol.EmailEngine.Persistence.Contexts;
 using takecontrol.EmailEngine.Persistence.Data;
+using takecontrol.IntegrationTest.Shared.Utils;
 using static takecontrol.EmailEngine.Persistence.Contexts.EmailDbContext;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
@@ -10,10 +11,10 @@ public class TakeControlEmailDb : IDbConfiguration
 {
     public EmailDbContext Context { get; private set; }
 
-    public TakeControlEmailDb(string connectionString)
+    public TakeControlEmailDb()
     {
         var factory = new EmailDBContextFactory();
-        Context = factory.CreateDbContext(connectionString);
+        Context = factory.CreateDbContext(TestConfigurations.GetConnectionString("EmailConnectionString"));
     }
 
     public async Task EnsureDatabase()

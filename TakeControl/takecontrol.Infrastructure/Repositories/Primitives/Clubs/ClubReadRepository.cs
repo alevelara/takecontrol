@@ -19,6 +19,7 @@ public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
     {
         return await _dbContext.Clubs
             .Include(c => c.Address)
+            .IgnoreAutoIncludes<Club>()
             .ToListAsync();
     }
 

@@ -8,7 +8,7 @@ namespace takecontrol.API.IntegrationTests;
 
 public static class APITestIntegrationServiceRegistration
 {
-    public static IServiceCollection AddAPIIntegrationTestsServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddIntegrationTestsServices(this IServiceCollection services, IConfiguration configuration)
     {
         var dbIdentityContext = services.SingleOrDefault(
               d => d.ServiceType == typeof(DbContextOptions<TakeControlIdentityDbContext>));

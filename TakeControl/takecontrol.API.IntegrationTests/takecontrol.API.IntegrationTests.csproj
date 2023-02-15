@@ -9,11 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
-    <PackageReference Include="Respawn" Version="6.0.0" />
-    <PackageReference Include="Testcontainers" Version="2.3.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="Xunit.Priority" Version="1.1.6" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -28,14 +26,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\takecontrol.API\takecontrol.API.csproj" />
+    <ProjectReference Include="..\takecontrol.IntegrationTest.Shared\takecontrol.IntegrationTest.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\ClubController\" />
   </ItemGroup>
 
 </Project>

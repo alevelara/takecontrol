@@ -18,6 +18,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
 {
     private static string mainEndpoint = "api/v1/club/";
     private static string registerEndpoint = mainEndpoint + ClubRouteName.Register;
+    private static string allClubsEndpoint = mainEndpoint + ClubRouteName.All;
 
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
@@ -201,7 +202,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.NewGuid().ToString();
-        var httpClient = await AddJWTTokenToHeader();
+        var httpClient = await AddJWTTokenToHeaderForClubs();
 
         //Act
         var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
@@ -215,7 +216,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var clubName = "nameTest";
-        var httpClient = await AddJWTTokenToHeader();
+        var httpClient = await AddJWTTokenToHeaderForClubs();
 
         await RegisterClubForTest();
         var club = await GetClubByName(clubName);
@@ -233,7 +234,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.Empty;
-        var httpClient = await AddJWTTokenToHeader();
+        var httpClient = await AddJWTTokenToHeaderForClubs();
 
         //Act
         var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
@@ -243,6 +244,24 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     }
 
     #endregion
+
+    #region Tests for GetAllClubs Endpoint
+    [Fact]
+    public async Task GetAllClubs_Should_ReturnSuccesfulHttpStatus_WhenClubsAreInDatabase()
+    {
+        //Arrange
+        var httpClient = await AddJWTTokenToHeaderForPlayers();
+
+        //Act
+        var response = await httpClient.GetAsync(allClubsEndpoint);
+
+        //Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    #endregion
+
+    #region Private methods
 
     private async Task RegisterClubForTest()
     {
@@ -259,15 +278,22 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(registerEndpoint, request, default);
     }
 
-    private async Task<HttpClient> AddJWTTokenToHeader()
+    private async Task<HttpClient> AddJWTTokenToHeaderForClubs()
     {
         return await _testBase.RegisterSecuredUserAsClubAsync();
+    }
+
+    private async Task<HttpClient> AddJWTTokenToHeaderForPlayers()
+    {
+        return await _testBase.RegisterSecuredUserAsPlayerAsync();
     }
 
     private async Task<Club> GetClubByName(string name)
     {
         return await _takeControlDb.Context.Clubs?.FirstOrDefaultAsync(c => c.Name == name);
     }
+
+    #endregion
 
     public Task InitializeAsync() => Task.CompletedTask;
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using takecontrol.API.IntegrationTests.Contracts;
 using takecontrol.Identity;
+using takecontrol.IntegrationTest.Shared.Utils;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
@@ -8,10 +9,10 @@ public class TakeControlDb : IDbConfiguration
 {
     public TakeControlDbContext Context { get; private set; }
 
-    public TakeControlDb(string connectionString)
+    public TakeControlDb()
     {
         var factory = new TakeControlDBContextFactory();
-        Context = factory.CreateDbContext(connectionString);
+        Context = factory.CreateDbContext(TestConfigurations.GetConnectionString("ConnectionString"));
     }
 
     public Task EnsureDatabase()
