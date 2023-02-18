@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Primitives;
 using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
@@ -41,6 +42,7 @@ public class TakeControlDbContext : DbContext
         builder.ApplyConfiguration(new ClubConfiguration());
         builder.ApplyConfiguration(new PlayerConfiguration());
         builder.ApplyConfiguration(new AddressConfiguration());
+        builder.ApplyConfiguration(new PlayerClubConfiguration());
     }
 
     public DbSet<Club> Clubs { get; set; }
@@ -48,6 +50,8 @@ public class TakeControlDbContext : DbContext
     public DbSet<Address> Addresses { get; set; }
 
     public DbSet<Player> Players { get; set; }
+
+    public DbSet<PlayerClub> PlayerClubs { get; set; }
 }
 
 public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
