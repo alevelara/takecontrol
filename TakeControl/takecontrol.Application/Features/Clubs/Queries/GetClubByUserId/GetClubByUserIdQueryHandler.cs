@@ -1,5 +1,5 @@
 ﻿using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Clubs;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
 using takecontrol.Domain.Errors.Clubs;

@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using takecontrol.Application.Constants;
-using takecontrol.Domain.Models.ApplicationUser.Options;
 
 namespace takecontrol.API.IntegrationTests.Helpers;
 
@@ -13,10 +10,11 @@ public static class AuthTestHelper
 {
     public static string GenerateToken(string userName, string email, string id, string role)
     {
-        var roleClaims = new List<Claim>();
+
+        var roleClaims = new List<Claim>()
         {
-            new Claim(ClaimTypes.Role, role);
-        }
+            new Claim(ClaimTypes.Role, role)
+        };
 
         var claims = new[]
         {

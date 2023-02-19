@@ -2,6 +2,7 @@
 {
     public static class ClubRouteName
     {
-        public static string Register = "Register";
+        public const string Register = "register";
+        public const string All = "all";
     }
 }

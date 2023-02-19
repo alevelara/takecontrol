@@ -1,4 +1,5 @@
 ﻿using takecontrol.API.IntegrationTests.Primitives;
+using Xunit;
 
 namespace takecontrol.API.IntegrationTests;
 

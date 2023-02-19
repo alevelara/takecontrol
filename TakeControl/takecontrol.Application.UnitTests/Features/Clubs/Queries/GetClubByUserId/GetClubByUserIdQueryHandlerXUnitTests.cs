@@ -1,5 +1,5 @@
 ﻿using Moq;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Clubs;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
 using takecontrol.Application.Features.Clubs.Queries.GetClubById;

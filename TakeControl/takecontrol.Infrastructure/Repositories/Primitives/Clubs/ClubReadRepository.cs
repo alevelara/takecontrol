@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence;
+using takecontrol.Application.Contracts.Persitence.Clubs;
+using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Identity;
 
@@ -12,6 +13,14 @@ public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
     public ClubReadRepository(TakeControlDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
+    }
+
+    public async Task<List<Club>> GetAllClubsAsync()
+    {
+        return await _dbContext.Clubs
+            .Include(c => c.Address)
+            .IgnoreAutoIncludes<Club>()
+            .ToListAsync();
     }
 
     public async Task<Club> GetClubByUserId(Guid userId)

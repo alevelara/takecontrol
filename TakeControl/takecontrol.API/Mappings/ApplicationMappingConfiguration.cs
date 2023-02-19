@@ -36,6 +36,8 @@ namespace takecontrol.API.Mappings
             config.NewConfig<Address, AddressDto>();
             config.NewConfig<Club, ClubDto>()
                 .Map(dest => dest.Address, src => src.Address);
+            config.NewConfig<Club, RestrictedClubDto>()
+                .Map(dest => dest.Address, src => src.Address);
         }
     }
 }
