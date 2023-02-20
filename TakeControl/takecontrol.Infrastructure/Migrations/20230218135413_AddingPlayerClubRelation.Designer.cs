@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using takecontrol.Identity;
@@ -11,9 +12,11 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    partial class TakeControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230218135413_AddingPlayerClubRelation")]
+    partial class AddingPlayerClubRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using takecontrol.Domain.Models.Clubs.ValueObjects;
+using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.Domain.Models.Players.Enums;
 using takecontrol.Domain.Primitives;
 
@@ -23,6 +24,8 @@ public class Player : BaseDomainModel
     public int NumberOfYearsPlayed { get; private set; }
 
     public PlayerLevel PlayerLevel { get; private set; }
+
+    public virtual ICollection<PlayerClub> PlayerClubs { get; set; }
 
     private Player(Guid id, Guid userId, string name, int numberOfClassesInAWeek, int avgNumberOfMatchesInAWeek, int numberOfYearsPlayed)
     {
