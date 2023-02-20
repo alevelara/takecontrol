@@ -6,11 +6,13 @@ using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 using takecontrol.Domain.Dtos.Addresses;
 using takecontrol.Domain.Dtos.Clubs;
+using takecontrol.Domain.Dtos.Players;
 using takecontrol.Domain.Messages.Clubs;
 using takecontrol.Domain.Messages.Identity;
 using takecontrol.Domain.Messages.Players;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
+using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.API.Mappings
 {
@@ -20,6 +22,7 @@ namespace takecontrol.API.Mappings
         {
             this.AddNewConfigForClubs(config);
             this.AddNewConfigForAuthentication(config);
+            this.AddNewConfigForPlayers(config);
         }
 
         private void AddNewConfigForAuthentication(TypeAdapterConfig config)
@@ -38,6 +41,12 @@ namespace takecontrol.API.Mappings
                 .Map(dest => dest.Address, src => src.Address);
             config.NewConfig<Club, RestrictedClubDto>()
                 .Map(dest => dest.Address, src => src.Address);
+        }
+
+        private void AddNewConfigForPlayers(TypeAdapterConfig config)
+        {
+            config.NewConfig<Player, PlayerDto>()
+                .Map(dest => dest.PlayerLevel, src => src.PlayerLevel);
         }
     }
 }

@@ -12,8 +12,8 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230212184838_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230220155940_migrations_1")]
+    partial class migrations1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
