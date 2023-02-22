@@ -14,7 +14,7 @@ public sealed class PlayerDto
     public int NumberOfClassesInAWeek { get; set; }
 
     public int AvgNumberOfMatchesInAWeek { get; set; }
-    
+
     public int NumberOfYearsPlayed { get; set; }
 
     public PlayerLevel PlayerLevel { get; set; }

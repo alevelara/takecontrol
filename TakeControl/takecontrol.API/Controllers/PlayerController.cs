@@ -33,9 +33,9 @@ public class PlayerController : ControllerBase
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    [Authorize(Roles=Role.Player)]
+    [Authorize(Roles = Role.Player)]
     [HttpGet]
-    public async Task<ActionResult<PlayerDto>> GetPlayer([FromQuery] Guid playerId) 
+    public async Task<ActionResult<PlayerDto>> GetPlayer([FromQuery] Guid playerId)
     {
         var player = await _mediator.Send(new GetPlayerByIdQuery(playerId));
         return Ok(_mapper.From(player)
