@@ -12,8 +12,8 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230218135413_AddingPlayerClubRelation")]
-    partial class AddingPlayerClubRelation
+    [Migration("20230222190324_migrations_1")]
+    partial class migrations1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
