@@ -12,7 +12,7 @@ using takecontrol.Identity;
 namespace takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230222190324_migrations_1")]
+    [Migration("20230226105049_migrations_1")]
     partial class migrations1
     {
         /// <inheritdoc />
@@ -175,9 +175,8 @@ namespace takecontrol.Infrastructure.Migrations
                     b.Property<int>("NumberOfYearsPlayed")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PlayerLevel")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("PlayerLevel")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

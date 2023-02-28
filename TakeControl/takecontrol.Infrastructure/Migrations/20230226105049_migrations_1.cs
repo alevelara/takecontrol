@@ -39,7 +39,7 @@ namespace takecontrol.Infrastructure.Migrations
                     NumberOfClassesInAWeek = table.Column<int>(type: "integer", nullable: false),
                     AvgNumberOfMatchesInAWeek = table.Column<int>(type: "integer", nullable: false),
                     NumberOfYearsPlayed = table.Column<int>(type: "integer", nullable: false),
-                    PlayerLevel = table.Column<string>(type: "text", nullable: false),
+                    PlayerLevel = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),

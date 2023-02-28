@@ -17,5 +17,5 @@ public sealed class PlayerDto
 
     public int NumberOfYearsPlayed { get; set; }
 
-    public PlayerLevel PlayerLevel { get; set; }
+    public int PlayerLevel { get; set; }
 }

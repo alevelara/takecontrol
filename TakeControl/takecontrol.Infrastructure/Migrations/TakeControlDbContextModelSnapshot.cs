@@ -172,9 +172,8 @@ namespace takecontrol.Infrastructure.Migrations
                     b.Property<int>("NumberOfYearsPlayed")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PlayerLevel")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("PlayerLevel")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

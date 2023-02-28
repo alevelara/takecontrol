@@ -17,7 +17,7 @@ public class PlayerXUnitTest
 
         Assert.NotNull(player);
         Assert.NotNull(player.Id);
-        Assert.Equal(player.PlayerLevel, PlayerLevel.Begginer);
+        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Begginer);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -32,7 +32,7 @@ public class PlayerXUnitTest
 
         Assert.NotNull(player);
         Assert.NotNull(player.Id);
-        Assert.Equal(player.PlayerLevel, PlayerLevel.Mid);
+        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Mid);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -47,7 +47,7 @@ public class PlayerXUnitTest
 
         Assert.NotNull(player);
         Assert.NotNull(player.Id);
-        Assert.Equal(player.PlayerLevel, PlayerLevel.Expert);
+        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -62,7 +62,7 @@ public class PlayerXUnitTest
 
         Assert.NotNull(player);
         Assert.NotNull(player.Id);
-        Assert.Equal(player.PlayerLevel, PlayerLevel.Expert);
+        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -76,7 +76,7 @@ public class PlayerXUnitTest
 
         Assert.NotNull(player);
         Assert.NotNull(player.Id);
-        Assert.Equal(player.PlayerLevel, PlayerLevel.Expert);
+        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
         Assert.Null(player.Name);
         Assert.Equal(player.UserId, userId);
     }
