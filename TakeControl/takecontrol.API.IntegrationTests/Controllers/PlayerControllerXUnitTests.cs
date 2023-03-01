@@ -70,16 +70,16 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             names.Add(request.Name);
         }
 
-        List<Player> elements = _takeControlDb.Context.Players.ToList();
+        List<Player> players = _takeControlDb.Context.Players.ToList();
 
-        Assert.Equal(names.Count, elements.Count);
+        Assert.Equal(names.Count, players.Count);
 
         foreach (string name in names)
         {
             Int32 level = Int32.Parse(name.Split('-')[1]);
 
-            Player element = elements.FirstOrDefault(c => c.Name == name);
-            Assert.Equal((int)element.PlayerLevel, level);
+            Player player = players!.FirstOrDefault(c => c.Name == name);
+            Assert.Equal((int)player.PlayerLevel, level);
         }
     }
 

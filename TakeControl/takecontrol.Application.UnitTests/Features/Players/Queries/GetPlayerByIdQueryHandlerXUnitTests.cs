@@ -46,7 +46,6 @@ public class GetPlayerByIdQueryHandlerXUnitTests
         var queryMid = new GetPlayerByIdQuery(userIdMid);
         var queryExpert = new GetPlayerByIdQuery(userIdExpert);
 
-
         var handler = new GetPlayerByIdQueryHandler(_mockReadRepository.Object);
         var playerBeginner = ApplicationTestData.CreateBegginerPlayerForTest(userIdBegginer);
         var playerMid = ApplicationTestData.CreateMidPlayerForTest(userIdMid);
