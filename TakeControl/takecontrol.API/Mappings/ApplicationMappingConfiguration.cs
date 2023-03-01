@@ -3,6 +3,7 @@ using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 using takecontrol.Application.Features.Accounts.Queries.Login;
 using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using takecontrol.Application.Features.Players.Commands.JoinToClub;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 using takecontrol.Domain.Dtos.Addresses;
 using takecontrol.Domain.Dtos.Clubs;
@@ -20,6 +21,7 @@ namespace takecontrol.API.Mappings
         {
             this.AddNewConfigForClubs(config);
             this.AddNewConfigForAuthentication(config);
+            this.AddNewConfigForPlayers(config);
         }
 
         private void AddNewConfigForAuthentication(TypeAdapterConfig config)
@@ -28,7 +30,7 @@ namespace takecontrol.API.Mappings
             config.NewConfig<ResetPasswordRequest, ResetPasswordCommand>();
             config.NewConfig<RegisterClubRequest, RegisterClubCommand>();
             config.NewConfig<RegisterPlayerRequest, RegisterPlayerCommand>();
-            config.NewConfig<UpdatePasswordRequest, UpdatePasswordCommand>();
+            config.NewConfig<UpdatePasswordRequest, UpdatePasswordCommand>();            
         }
 
         private void AddNewConfigForClubs(TypeAdapterConfig config)
@@ -38,6 +40,11 @@ namespace takecontrol.API.Mappings
                 .Map(dest => dest.Address, src => src.Address);
             config.NewConfig<Club, RestrictedClubDto>()
                 .Map(dest => dest.Address, src => src.Address);
+        }
+
+        private void AddNewConfigForPlayers(TypeAdapterConfig config)
+        {
+            config.NewConfig<JoinToClubRequest, JoinToClubCommand>();
         }
     }
 }
