@@ -2,6 +2,7 @@
 {
     public static class PlayerRouteName
     {
-        public static string Register = "Register";
+        public const string Register = "Register";
+        public const string Join = "Join";
     }
 }

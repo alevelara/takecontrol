@@ -12,7 +12,6 @@ namespace takecontrol.Identity;
 
 public class TakeControlDbContext : DbContext
 {
-
     public TakeControlDbContext(DbContextOptions<TakeControlDbContext> options) : base(options)
     {
     }
