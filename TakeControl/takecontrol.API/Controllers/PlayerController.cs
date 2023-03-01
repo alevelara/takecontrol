@@ -35,6 +35,7 @@ public class PlayerController : ControllerBase
     }
 
     [Authorize(Roles = Role.Player)]
+<<<<<<< HEAD
     [HttpGet]
     public async Task<ActionResult<PlayerDto>> GetPlayer([FromQuery] Guid playerId)
     {
@@ -44,6 +45,8 @@ public class PlayerController : ControllerBase
     }
 
     [Authorize(Roles = Role.Player)]
+=======
+>>>>>>> e4c019e8054464869312e69f9d9156c4d6aeb5c5
     [HttpPost(nameof(PlayerRouteName.Join))]
     public async Task<ActionResult> JoinToClub(JoinToClubRequest request)
     {

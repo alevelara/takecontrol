@@ -46,10 +46,15 @@ namespace takecontrol.API.Mappings
 
         private void AddNewConfigForPlayers(TypeAdapterConfig config)
         {
+<<<<<<< HEAD
             config.NewConfig<Player, PlayerDto>()
                 .Map(dest => dest.PlayerLevel, src => src.PlayerLevel);
             config.NewConfig<JoinToClubRequest, JoinToClubCommand>();
         }
         
+=======
+            config.NewConfig<JoinToClubRequest, JoinToClubCommand>();
+        }
+>>>>>>> e4c019e8054464869312e69f9d9156c4d6aeb5c5
     }
 }
