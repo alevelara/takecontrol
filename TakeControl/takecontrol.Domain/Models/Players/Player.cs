@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using takecontrol.Domain.Models.Clubs.ValueObjects;
 using takecontrol.Domain.Models.PlayerClubs;
-using takecontrol.Domain.Models.Players.Enums;
 using takecontrol.Domain.Primitives;
 
 namespace takecontrol.Domain.Models.Players;
@@ -23,7 +22,7 @@ public class Player : BaseDomainModel
 
     public int NumberOfYearsPlayed { get; private set; }
 
-    public PlayerLevel PlayerLevel { get; private set; }
+    public int PlayerLevel { get; private set; }
 
     public virtual ICollection<PlayerClub> PlayerClubs { get; set; }
 
@@ -51,7 +50,7 @@ public class Player : BaseDomainModel
     //Si suma < 1.5 -> Begginer
     //Si suma > 1.5 y < 3 -> Mid
     //Si suma > 3 -> Expert
-    private PlayerLevel CalculatePlayerLevel(int numberOfClassesInAWeek, int avgNumberOfMatchesInAWeek, int numberOfYearsPlayed)
+    private int CalculatePlayerLevel(int numberOfClassesInAWeek, int avgNumberOfMatchesInAWeek, int numberOfYearsPlayed)
     {
         const double minimumBegginerLevel = 0;
         const double minimunMidLevel = 1.5;
@@ -61,19 +60,19 @@ public class Player : BaseDomainModel
 
         if (levelPlayer is > minimumBegginerLevel and < minimunMidLevel)
         {
-            return PlayerLevel.Begginer;
+            return (int)Players.Enums.PlayerLevel.Begginer;
         }
 
         if (levelPlayer is >= minimunMidLevel and < minimumExpertLevel)
         {
-            return PlayerLevel.Mid;
+            return (int)Players.Enums.PlayerLevel.Mid;
         }
 
         if (levelPlayer is >= minimumExpertLevel)
         {
-            return PlayerLevel.Expert;
+            return (int)Players.Enums.PlayerLevel.Expert;
         }
 
-        return PlayerLevel.Begginer;
+        return (int)Players.Enums.PlayerLevel.Begginer;
     }
 }

@@ -299,8 +299,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        _takeControlDb.ResetState();
-        _takeControlIdentityDb.ResetState();
-        _takeControlEmailDb.ResetState();
+        await _takeControlDb.ResetState();
+        await _takeControlIdentityDb.ResetState();
+        await _takeControlEmailDb.ResetState();
     }
 }

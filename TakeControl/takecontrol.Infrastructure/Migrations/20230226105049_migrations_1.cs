@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace takecontrol.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class migrations1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,7 +39,7 @@ namespace takecontrol.Infrastructure.Migrations
                     NumberOfClassesInAWeek = table.Column<int>(type: "integer", nullable: false),
                     AvgNumberOfMatchesInAWeek = table.Column<int>(type: "integer", nullable: false),
                     NumberOfYearsPlayed = table.Column<int>(type: "integer", nullable: false),
-                    PlayerLevel = table.Column<string>(type: "text", nullable: false),
+                    PlayerLevel = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -75,6 +75,35 @@ namespace takecontrol.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PlayerClubs",
+                columns: table => new
+                {
+                    PlayerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClubId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlayerClubs", x => new { x.ClubId, x.PlayerId });
+                    table.ForeignKey(
+                        name: "FK_PlayerClubs_clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "clubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PlayerClubs_players_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_clubs_AddresId",
                 table: "clubs",
@@ -85,11 +114,19 @@ namespace takecontrol.Infrastructure.Migrations
                 name: "IX_clubs_UserId",
                 table: "clubs",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlayerClubs_PlayerId",
+                table: "PlayerClubs",
+                column: "PlayerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PlayerClubs");
+
             migrationBuilder.DropTable(
                 name: "clubs");
 

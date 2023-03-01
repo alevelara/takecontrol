@@ -2,7 +2,10 @@
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Players;
+using takecontrol.Domain.Models.Players.Enums;
 using Xunit.Priority;
+using System.Linq;
+using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
@@ -44,6 +47,40 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task RegisterPlayer_ShouldReturnCorrectLevel_WhenRegisterRequestIsValid()
+    {
+        List<string> names = new List<string>();
+
+        foreach (PlayerLevel level in Enum.GetValues(typeof(PlayerLevel)))
+        {
+            var request = new RegisterPlayerRequest
+            {
+                Email = $"email2{(int)level}@test.com",
+                Name = $"nameTest2-{(int)level}",
+                Password = "Password123!",
+                AvgNumberOfMatchesInAWeek = 2,
+                NumberOfClassesInAWeek = 1,
+                NumberOfYearsPlayed = (int)level * (int)level,
+            };
+
+            var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(REGISTER_ENDPOINT, request, default);
+            names.Add(request.Name);
+        }
+
+        List<Player> players = _takeControlDb.Context.Players.ToList();
+
+        Assert.Equal(names.Count, players.Count);
+
+        foreach (string name in names)
+        {
+            Int32 level = Int32.Parse(name.Split('-')[1]);
+
+            Player player = players!.FirstOrDefault(c => c.Name == name);
+            Assert.Equal((int)player.PlayerLevel, level);
+        }
     }
 
     [Fact]
@@ -201,8 +238,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        _takeControlIdentityDb.ResetState();
-        _takeControlDb.ResetState();
-        _takeControlEmailDb.ResetState();
+        await _takeControlIdentityDb.ResetState();
+        await _takeControlDb.ResetState();
+        await _takeControlEmailDb.ResetState();
     }
 }
