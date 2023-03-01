@@ -53,8 +53,9 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     public async Task RegisterPlayer_ShouldReturnCorrectLevel_WhenRegisterRequestIsValid()
     {
         List<string> names = new List<string>();
-        
-        foreach(PlayerLevel level in Enum.GetValues(typeof(PlayerLevel))) {
+
+        foreach (PlayerLevel level in Enum.GetValues(typeof(PlayerLevel)))
+        {
             var request = new RegisterPlayerRequest
             {
                 Email = $"email2{(int)level}@test.com",
@@ -62,7 +63,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 Password = "Password123!",
                 AvgNumberOfMatchesInAWeek = 2,
                 NumberOfClassesInAWeek = 1,
-                NumberOfYearsPlayed = (int) level * (int) level,
+                NumberOfYearsPlayed = (int)level * (int)level,
             };
 
             var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(REGISTER_ENDPOINT, request, default);
@@ -73,7 +74,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         Assert.Equal(names.Count, elements.Count);
 
-        foreach(string name in names) {
+        foreach (string name in names)
+        {
             Int32 level = Int32.Parse(name.Split('-')[1]);
 
             Player element = elements.FirstOrDefault(c => c.Name == name);

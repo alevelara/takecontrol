@@ -60,19 +60,19 @@ public class Player : BaseDomainModel
 
         if (levelPlayer is > minimumBegginerLevel and < minimunMidLevel)
         {
-            return (int) Players.Enums.PlayerLevel.Begginer;
+            return (int)Players.Enums.PlayerLevel.Begginer;
         }
 
         if (levelPlayer is >= minimunMidLevel and < minimumExpertLevel)
         {
-            return (int) Players.Enums.PlayerLevel.Mid;
+            return (int)Players.Enums.PlayerLevel.Mid;
         }
 
         if (levelPlayer is >= minimumExpertLevel)
         {
-            return (int) Players.Enums.PlayerLevel.Expert;
+            return (int)Players.Enums.PlayerLevel.Expert;
         }
 
-        return (int) Players.Enums.PlayerLevel.Begginer;
+        return (int)Players.Enums.PlayerLevel.Begginer;
     }
 }

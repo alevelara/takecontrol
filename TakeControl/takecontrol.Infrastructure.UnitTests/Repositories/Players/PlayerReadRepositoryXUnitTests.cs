@@ -1,0 +1,109 @@
+using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.Domain.Models.Players;
+using takecontrol.Domain.Models.Players.Enums;
+using takecontrol.Infrastructure.IntegrationTests.Mocks;
+using takecontrol.Infrastructure.Repositories.Primitives.Players;
+
+namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
+
+[Trait("Category", "IntegrationTests")]
+public class ClubReadRepositoryXUnitTests : IAsyncLifetime
+{
+    private readonly TakeControlDb _dbContext;
+
+    public ClubReadRepositoryXUnitTests()
+    {
+        _dbContext = new TakeControlDb();
+    }
+
+    [Fact]
+    public async Task GetPlayerById_Should_ReturnNull_WhenIdDoesntExist()
+    {
+        //Arrange
+        var userId = Guid.NewGuid();
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetPlayerByUserId(userId);
+
+        //Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task GetPlayerById_Should_ReturnAPlayer_WhenAPlayerIsRelatedToAnId()
+    {
+        //Arrange
+        var userId = Guid.NewGuid();
+        await MockPlayerRepository.AddPlayerWithUserId(_dbContext.Context, userId);
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetPlayerByUserId(userId);
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.IsType<Player>(result);
+    }
+
+    [Fact]
+    public async Task GetPlayerById_Should_ReturnABeginnerPlayer()
+    {
+        //Arrange
+        var userId = Guid.NewGuid();
+        await MockPlayerRepository.AddPlayerBeginner(_dbContext.Context, userId);
+
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetPlayerByUserId(userId);
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.IsType<Player>(result);
+        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Begginer);
+    }
+
+    [Fact]
+    public async Task GetPlayerById_Should_ReturnAMidPlayer()
+    {
+        //Arrange
+        var userId = Guid.NewGuid();
+        await MockPlayerRepository.AddPlayerMid(_dbContext.Context, userId);
+
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetPlayerByUserId(userId);
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.IsType<Player>(result);
+        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Mid);
+    }
+
+    [Fact]
+    public async Task GetPlayerById_Should_ReturnAnExpertPlayer()
+    {
+        //Arrange
+        var userId = Guid.NewGuid();
+        await MockPlayerRepository.AddPlayerExpert(_dbContext.Context, userId);
+
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetPlayerByUserId(userId);
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.IsType<Player>(result);
+        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Expert);
+    }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+
+    public async Task DisposeAsync()
+    {
+        await _dbContext.ResetState();
+    }
+}

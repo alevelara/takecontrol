@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using takecontrol.API.Routes;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
-using takecontrol.Application.Features.Players.Queries.GetPlayerById;
+using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 using takecontrol.Domain.Dtos.Players;
 using takecontrol.Domain.Messages.Players;
 using takecontrol.Identity.Constants;

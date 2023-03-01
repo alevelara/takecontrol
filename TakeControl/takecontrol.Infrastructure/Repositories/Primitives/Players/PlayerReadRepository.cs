@@ -15,10 +15,10 @@ public class PlayerReadRepository : ReadBaseRepository<Player>, IPlayerReadRepos
         _dbContext = dbContext;
     }
 
-    public async Task<Player> GetPlayerById(Guid Id)
+    public async Task<Player> GetPlayerByUserId(Guid UserId)
     {
         return await _dbContext.Players
             .IgnoreAutoIncludes<Player>()
-            .FirstOrDefaultAsync(c => c.Id == Id);
+            .FirstOrDefaultAsync(c => c.UserId == UserId);
     }
 }

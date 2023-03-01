@@ -1,11 +1,11 @@
 using Moq;
 using takecontrol.Application.Contracts.Persitence.Players;
 using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Players.Queries.GetPlayerById;
+using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 using takecontrol.Application.Tests.TestsData;
 using takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetPlayerById;
+namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetPlayerByUserId;
 
 public class GetPlayerByIdQueryHandlerXUnitTests
 {
@@ -26,7 +26,7 @@ public class GetPlayerByIdQueryHandlerXUnitTests
 
         //Act
 
-        _mockReadRepository.Setup(c => c.GetPlayerById(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(player);
 
         //Assert
@@ -48,17 +48,16 @@ public class GetPlayerByIdQueryHandlerXUnitTests
 
 
         var handler = new GetPlayerByIdQueryHandler(_mockReadRepository.Object);
-        
         var playerBeginner = ApplicationTestData.CreateBegginerPlayerForTest(userIdBegginer);
         var playerMid = ApplicationTestData.CreateMidPlayerForTest(userIdMid);
         var playerExpert = ApplicationTestData.CreateExpertPlayerForTest(userIdExpert);
 
         //Acts
-        _mockReadRepository.Setup(c => c.GetPlayerById(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(playerBeginner);
-        _mockReadRepository.Setup(c => c.GetPlayerById(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(playerMid);
-        _mockReadRepository.Setup(c => c.GetPlayerById(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(playerExpert);
 
         var resultBeginner = await handler.Handle(queryBegginer, default);

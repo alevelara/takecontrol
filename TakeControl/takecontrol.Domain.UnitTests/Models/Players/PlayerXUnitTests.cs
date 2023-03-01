@@ -5,7 +5,7 @@ using takecontrol.Domain.Models.Players.Enums;
 namespace takecontrol.Domain.UnitTests.Models.Players;
 
 [Trait("Category", "UnitTests")]
-public class PlayerXUnitTest
+public class PlayerXUnitTests
 {
     [Fact]
     public void Create_Should_ReturnNewBegginerPlayer_WhenAllFieldsArePopulated()
