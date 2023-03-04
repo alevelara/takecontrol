@@ -15,7 +15,6 @@ public class TemplateXUnitTests
         var template = Template.Create(TemplateType.WELCOME, payload, language);
 
         Assert.NotNull(template);
-        Assert.NotNull(template.Id);
         Assert.Equal(template.Payload, payload);
         Assert.Equal(template.Language, language);
         Assert.Equal(TemplateType.WELCOME, template.TemplateType);
@@ -29,7 +28,6 @@ public class TemplateXUnitTests
         var template = Template.Create(TemplateType.WELCOME, null, language);
 
         Assert.NotNull(template);
-        Assert.NotNull(template.Id);
         Assert.Null(template.Payload);
         Assert.Equal(template.Language, language);
         Assert.Equal(TemplateType.WELCOME, template.TemplateType);
@@ -42,7 +40,6 @@ public class TemplateXUnitTests
         var template = Template.Create(TemplateType.WELCOME, payload, null);
 
         Assert.NotNull(template);
-        Assert.NotNull(template.Id);
         Assert.Null(template.Language);
         Assert.Equal(template.Payload, payload);
         Assert.Equal(TemplateType.WELCOME, template.TemplateType);

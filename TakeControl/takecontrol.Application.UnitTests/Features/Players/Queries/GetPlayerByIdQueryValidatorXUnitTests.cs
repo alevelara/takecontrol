@@ -29,7 +29,7 @@ public class GetPlayerByIdQueryValidatorXUnitTests : IClassFixture<GetPlayerById
 
     [Theory]
     [InlineData(null, false)]
-    public void Validator_Should_ReturnInvalidValue_WhenGuidIsNull(Guid guid, bool isValid)
+    public void Validator_Should_ReturnInvalidValue_WhenGuidIsNull(Guid? guid, bool isValid)
     {
         //Arrange
         var query = new GetPlayerByIdQuery(guid);
@@ -40,5 +40,4 @@ public class GetPlayerByIdQueryValidatorXUnitTests : IClassFixture<GetPlayerById
         //Assert
         Assert.Equal(isValid, result.IsValid);
     }
-
 }

@@ -8,5 +8,4 @@ public sealed class PlayerError : DomainError
     }
 
     public static PlayerError PlayerNotFound = new PlayerError(1801, "Player doesn't exists for this id.");
-
 }

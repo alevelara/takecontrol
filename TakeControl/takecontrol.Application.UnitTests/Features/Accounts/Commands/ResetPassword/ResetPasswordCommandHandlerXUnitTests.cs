@@ -24,9 +24,6 @@ public class ResetPasswordCommandHandlerXUnitTests
             .ReturnsAsync(true);
 
         var result = await handler.Handle(command, default);
-
-        Assert.NotNull(result);
         Assert.IsType<Unit>(result);
     }
-
 }

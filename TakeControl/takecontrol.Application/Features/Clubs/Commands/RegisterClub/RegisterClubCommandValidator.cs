@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using FluentValidation;
 using takecontrol.Domain.Utils;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 

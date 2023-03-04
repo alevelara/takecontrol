@@ -28,7 +28,6 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
         var result = await repository.AddEmail(email);
 
         Assert.NotNull(result);
-        Assert.NotNull(result.Id);
         Assert.Equal(email, result);
     }
 

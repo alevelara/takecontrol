@@ -43,7 +43,7 @@ public class Player : BaseDomainModel
         return new Player(playerId.Value, userId, name, numberOfClassesInAWeek, avgNumberOfMatchesInAWeek, numberOfYearsPlayed);
     }
 
-    //importante: 
+    //importante:
     //numero de clases * 0.4
     //media de partidos * 0.2
     //numero de años jugando * 0.4

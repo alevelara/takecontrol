@@ -17,12 +17,10 @@ namespace takecontrol.Infrastructure.IntegrationTests.Features.Players.Commands.
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
-
     private readonly Mock<UnitOfWork> _uow;
     private readonly Mock<IAuthService> _authService;
     private readonly Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
-    private Mock<ISendEmailService> _emailSender;
-
+    private readonly Mock<ISendEmailService> _emailSender;
 
     public RegisterPlayerCommandHandlerXUnitTests()
     {
@@ -45,8 +43,6 @@ public class RegisterPlayerCommandHandlerXUnitTests
         _emailSender.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default(CancellationToken)));
 
         var result = await handler.Handle(command, default);
-
-        Assert.NotNull(result);
         Assert.IsType<Unit>(result);
     }
 }

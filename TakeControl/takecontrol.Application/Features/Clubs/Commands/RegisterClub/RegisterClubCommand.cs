@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using MediatR;
 using takecontrol.Application.Abstractions.Mediatr;
 
 namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
@@ -23,4 +23,3 @@ public class RegisterClubCommand : ICommand<Unit>
         Password = password;
     }
 }
-

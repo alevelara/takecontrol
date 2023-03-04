@@ -6,6 +6,5 @@ public sealed class NotFoundException : BaseException
 {
     public NotFoundException(DomainError error) : base(error)
     {
-
     }
 }

@@ -26,7 +26,6 @@ public class GetPlayerByIdQueryHandlerXUnitTests
         Player player = null;
 
         //Act
-
         _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(player);
 

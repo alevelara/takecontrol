@@ -15,7 +15,6 @@ public class EmailXUnitTests
         var email = Email.Create(emailTo, subject, TemplateType.WELCOME);
 
         Assert.NotNull(email);
-        Assert.NotNull(email.Id);
         Assert.Equal(EmailStatus.PENDING, email.Status);
         Assert.Equal(email.Subject, subject);
         Assert.Equal(email.EmailTo, emailTo);
@@ -29,7 +28,6 @@ public class EmailXUnitTests
         var email = Email.Create(emailTo, null, TemplateType.WELCOME);
 
         Assert.NotNull(email);
-        Assert.NotNull(email.Id);
         Assert.Null(email.Subject);
         Assert.Equal(EmailStatus.PENDING, email.Status);
         Assert.Equal(email.EmailTo, emailTo);
@@ -43,7 +41,6 @@ public class EmailXUnitTests
         var email = Email.Create(null, subject, TemplateType.WELCOME);
 
         Assert.NotNull(email);
-        Assert.NotNull(email.Id);
         Assert.Null(email.EmailTo);
         Assert.Equal(email.Subject, subject);
         Assert.Equal(EmailStatus.PENDING, email.Status);

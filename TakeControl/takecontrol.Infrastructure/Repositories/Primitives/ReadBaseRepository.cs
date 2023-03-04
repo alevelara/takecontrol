@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Domain.Primitives;
 using takecontrol.Identity;

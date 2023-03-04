@@ -62,7 +62,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Begginer);
+        Assert.Equal((int)PlayerLevel.Begginer, result.PlayerLevel);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Mid);
+        Assert.Equal((int)PlayerLevel.Mid, result.PlayerLevel);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Expert);
+        Assert.Equal((int)PlayerLevel.Expert, result.PlayerLevel);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

@@ -31,7 +31,7 @@ public class RegisterClubCommandHandlerXUnitTests
     [Fact]
     public async Task Handle_Should_RegisterTheClub_WhenRegisterClubCommandIsValid()
     {
-        //Arrange   
+        //Arrange
         var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password");
         var userId = Guid.NewGuid();
         var address = ApplicationTestData.CreateAddresForTest();

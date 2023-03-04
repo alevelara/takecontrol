@@ -23,6 +23,5 @@ public sealed class GetClubByUserIdQueryHandler : IQueryHandler<GetClubByUserIdQ
             throw new NotFoundException(ClubError.ClubNotFound);
 
         return club;
-
     }
 }

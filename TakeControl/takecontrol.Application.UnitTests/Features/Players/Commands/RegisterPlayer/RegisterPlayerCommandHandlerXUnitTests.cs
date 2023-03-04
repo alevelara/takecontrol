@@ -31,7 +31,7 @@ public class RegisterPlayerCommandHandlerXUnitTests
     [Fact]
     public async Task Handle_Should_RegisterThePlayer_WhenRegisterPlayerCommandIsValid()
     {
-        //Arrange   
+        //Arrange
         var command = new RegisterPlayerCommand("name", "email@test.com", "Password123!", 1, 1, 1);
         var userId = Guid.NewGuid();
         var player = ApplicationTestData.CreateBegginerPlayerForTest(userId);
@@ -51,7 +51,4 @@ public class RegisterPlayerCommandHandlerXUnitTests
         Assert.NotNull(player);
         Assert.Equal(player.UserId, userId);
     }
-
-
-
 }

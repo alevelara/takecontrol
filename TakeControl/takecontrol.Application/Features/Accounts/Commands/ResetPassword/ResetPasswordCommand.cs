@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using MediatR;
 using takecontrol.Application.Abstractions.Mediatr;
 
 namespace takecontrol.Application.Features.Accounts.Commands.ResetPassword;

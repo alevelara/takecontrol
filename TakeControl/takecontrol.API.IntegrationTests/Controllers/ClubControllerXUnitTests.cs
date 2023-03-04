@@ -36,8 +36,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         _clubReadRepository = new TestClubReadRepository(_takeControlDb);
     }
 
-    #region Tests for registerClub Endpoint
-
     [Fact]
     [Priority(19)]
     public async Task RegisterClub_Should_Return201StatusCode_WhenRegisterRequestIsValid()
@@ -194,10 +192,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    #endregion
-
-    #region Tests for GetByUserId Endpoint
-
     [Fact]
     public async Task GetByUserId_Should_ThrownClubNotFoundException_WhenUserIdDoesntExist()
     {
@@ -244,9 +238,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    #endregion
-
-    #region Tests for GetAllClubs Endpoint
     [Fact]
     public async Task GetAllClubs_Should_ReturnSuccesfulHttpStatus_WhenClubsAreInDatabase()
     {
@@ -259,10 +250,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         //Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
-
-    #endregion
-
-    #region Private methods
 
     private async Task RegisterClubForTest()
     {
@@ -288,8 +275,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         return await _testBase.RegisterSecuredUserAsPlayerAsync();
     }
-
-    #endregion
 
     public Task InitializeAsync() => Task.CompletedTask;
 

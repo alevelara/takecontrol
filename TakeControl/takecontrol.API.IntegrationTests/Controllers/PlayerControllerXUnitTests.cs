@@ -40,7 +40,6 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         _playerReadRepository = new TestPlayerReadRepository(_takeControlDb);
     }
 
-    #region RegisterPlayer Tests
     [Fact]
     [Priority(29)]
     public async Task RegisterPlayer_Should_Return201StatusCode_WhenRegisterRequestIsValid()
@@ -88,7 +87,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         foreach (string name in names)
         {
-            Int32 level = Int32.Parse(name.Split('-')[1]);
+            int level = int.Parse(name.Split('-')[1]);
 
             Player player = players!.FirstOrDefault(c => c.Name == name);
             Assert.Equal((int)player.PlayerLevel, level);
@@ -230,9 +229,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
-    #endregion
 
-    #region JoinToClub Tests
     [Fact]
     public async Task JoinToClub_Should_ReturnCreatedStatusCode_WhenAPlayerJoinToANewClub()
     {
@@ -290,9 +287,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
-    #endregion
 
-    #region Private methods
     private async Task RegisterPlayerForTest()
     {
         var request = new RegisterPlayerRequest
@@ -328,7 +323,6 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         return await _testBase.RegisterSecuredUserAsPlayerAsync();
     }
 
-    #endregion
     public Task InitializeAsync() => Task.CompletedTask;
 
     public async Task DisposeAsync()
