@@ -1,4 +1,5 @@
 ﻿using takecontrol.Domain.Primitives;
+using takecontrol.Domain.Utils;
 
 namespace takecontrol.Domain.Models.Clubs.ValueObjects;
 
