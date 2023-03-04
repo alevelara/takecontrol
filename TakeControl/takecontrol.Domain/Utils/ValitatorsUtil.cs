@@ -4,7 +4,6 @@ namespace takecontrol.Domain.Utils;
 
 public static class ValitatorsUtil
 {
-
     public static bool HasAnyLowerCase(string pw)
     {
         var lowercase = new Regex("[a-z]+");
@@ -25,6 +24,7 @@ public static class ValitatorsUtil
         {
             result = uppercase.IsMatch(pw);
         }
+
         return result;
     }
 
@@ -36,6 +36,7 @@ public static class ValitatorsUtil
         {
             result = digit.IsMatch(pw);
         }
+
         return result;
     }
 
@@ -47,6 +48,7 @@ public static class ValitatorsUtil
         {
             result = symbol.IsMatch(pw);
         }
+
         return result;
     }
 }

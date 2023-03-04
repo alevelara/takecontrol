@@ -6,9 +6,10 @@ using takecontrol.Identity;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives;
 
-public class ReadBaseRepository<T> : IAsyncReadRepository<T> where T : BaseDomainModel
+public class ReadBaseRepository<T> : IAsyncReadRepository<T>
+    where T : BaseDomainModel
 {
-    protected readonly TakeControlDbContext _context;
+    private readonly TakeControlDbContext _context;
 
     public ReadBaseRepository(TakeControlDbContext context)
     {
@@ -37,8 +38,8 @@ public class ReadBaseRepository<T> : IAsyncReadRepository<T> where T : BaseDomai
         return await query.ToListAsync();
     }
 
-    public async Task<T> GetByIdAsync(Guid id)
+    public async Task<T?> GetByIdAsync(Guid id)
     {
-        return await _context.Set<T>().FindAsync(id);
+        return await _context.Set<T>()!.FindAsync(id);
     }
 }

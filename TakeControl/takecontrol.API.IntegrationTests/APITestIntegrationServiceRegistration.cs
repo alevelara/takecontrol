@@ -13,15 +13,15 @@ public static class APITestIntegrationServiceRegistration
         var dbIdentityContext = services.SingleOrDefault(
               d => d.ServiceType == typeof(DbContextOptions<TakeControlIdentityDbContext>));
 
-        services.Remove(dbIdentityContext);
+        services.Remove(dbIdentityContext!);
 
         var dbMainContext = services.SingleOrDefault(
             d => d.ServiceType == typeof(DbContextOptions<TakeControlDbContext>));
-        services.Remove(dbMainContext);
+        services.Remove(dbMainContext!);
 
         var dbEmailContext = services.SingleOrDefault(
            d => d.ServiceType == typeof(DbContextOptions<EmailDbContext>));
-        services.Remove(dbEmailContext);
+        services.Remove(dbEmailContext!);
 
         services.AddDbContext<TakeControlIdentityDbContext>((container, options) =>
         {

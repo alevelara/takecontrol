@@ -1,4 +1,4 @@
-using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Models.Players.Enums;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
@@ -7,6 +7,7 @@ using takecontrol.Infrastructure.Repositories.Primitives.Players;
 namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
 
 [Trait("Category", "IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 {
     private readonly TakeControlDb _dbContext;

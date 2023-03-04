@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.API.Routes;
 using takecontrol.Domain.Messages.Identity;
 using Xunit.Priority;
@@ -21,7 +22,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     private readonly TestBase _testBase;
     private readonly HttpClient _httpClient;
 
-    public AuthControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
+    public AuthControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
     {
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
@@ -185,11 +186,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     {
         await _testBase.RegisterUserAsAdminAsync();
 
-        var request = new UpdatePasswordRequest
-        {
-            Email = "test@admin.com",
-            NewPassword = "Password124!",
-        };
+        var request = new UpdatePasswordRequest("test@admin.com", "Password124!");
 
         var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
@@ -201,11 +198,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     [Priority(0)]
     public async Task UpdatePassword_Should_ReturnNotFoundException_WhenUserDoesntExist()
     {
-        var request = new UpdatePasswordRequest
-        {
-            Email = "test@admin.com",
-            NewPassword = "Password124!",
-        };
+        var request = new UpdatePasswordRequest("test@admin.com", "Password124!");
 
         var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 
@@ -219,11 +212,7 @@ public class AuthControllerXUnitTests : IAsyncLifetime
     {
         await _testBase.RegisterUserAsAdminAsync();
 
-        var request = new UpdatePasswordRequest
-        {
-            Email = "test@admin.com",
-            NewPassword = "Password124",
-        };
+        var request = new UpdatePasswordRequest("test@admin.com", "Password124");
 
         var response = await this._httpClient.PostAsJsonAsync<UpdatePasswordRequest>(updatePaswordEndpoint, request, CancellationToken.None);
 

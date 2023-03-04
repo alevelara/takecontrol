@@ -2,9 +2,10 @@
 
 namespace takecontrol.Application.Contracts.Persitence.Primitives;
 
-public interface IUnitOfWork : IDisposable
+public interface IUnitOfWork
 {
-    IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
+    IAsyncWriteRepository<TEntity> Repository<TEntity>()
+        where TEntity : BaseDomainModel;
 
     Task<int> CompleteAsync();
 }

@@ -6,7 +6,6 @@ namespace takecontrol.Identity.Configuration;
 
 public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<Guid>>
 {
-
     public void Configure(EntityTypeBuilder<IdentityUserRole<Guid>> builder)
     {
         builder.HasData(
@@ -14,7 +13,6 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<G
             {
                 RoleId = RoleConfiguration.AdministratorRoleId,
                 UserId = UserConfiguration.AdministratorUserId
-
             },
             new IdentityUserRole<Guid>
             {
@@ -31,8 +29,6 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<G
                 RoleId = RoleConfiguration.PlayerRoleId,
                 UserId = UserConfiguration.PlayerUserId2
             }
-
-
         );
     }
 }

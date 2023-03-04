@@ -8,7 +8,7 @@ namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.UpdatePas
 [Trait("Category", "UnitTests")]
 public class UpdatePasswordCommandHandlerXUnitTests
 {
-    private Mock<IAuthService> _authService;
+    private readonly Mock<IAuthService> _authService;
 
     public UpdatePasswordCommandHandlerXUnitTests()
     {
@@ -25,8 +25,6 @@ public class UpdatePasswordCommandHandlerXUnitTests
 
         var result = await handler.Handle(command, default);
 
-        Assert.NotNull(result);
         Assert.IsType<Unit>(result);
     }
-
 }

@@ -2,9 +2,10 @@
 
 namespace takecontrol.Application.Contracts.Persitence.Primitives;
 
-public interface IAsyncWriteRepository<T> where T : BaseDomainModel
+public interface IAsyncWriteRepository<T>
+    where T : BaseDomainModel
 {
     Task<T> AddAsync(T entity);
-    Task<T> UpdateAsync(T entity);
-    Task DeleteAsync(T entity);
+    T UpdateAsync(T entity);
+    void DeleteAsync(T entity);
 }

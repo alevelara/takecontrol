@@ -25,7 +25,7 @@ public sealed class JoinToClubCommandHandler : ICommandHandler<JoinToClubCommand
         var club = await _clubReadRepository.GetClubByCodeAndClubId(request.ClubId, request.Code);
 
         if (club == null)
-            throw new NotFoundException(ClubError.ClubDoesnotMatchByCode);
+            throw new ConflictException(ClubError.ClubDoesnotMatchByCode);
 
         var association = PlayerClub.Create(request.PlayerId, request.ClubId);
 

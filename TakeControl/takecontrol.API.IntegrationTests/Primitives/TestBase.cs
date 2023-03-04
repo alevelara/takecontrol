@@ -13,10 +13,10 @@ namespace takecontrol.API.IntegrationTests.Primitives;
 
 public class TestBase
 {
-    private readonly CustomWebApplicationFactory<Program> _apiWebApplicationFactory;
+    private readonly ApiWebApplicationFactory<Program> _apiWebApplicationFactory;
     private readonly HttpClient _httpClient;
 
-    public TestBase(CustomWebApplicationFactory<Program> apiWebApplicationFactory)
+    public TestBase(ApiWebApplicationFactory<Program> apiWebApplicationFactory)
     {
         _apiWebApplicationFactory = apiWebApplicationFactory;
         _httpClient = apiWebApplicationFactory.HttpClient;
@@ -49,7 +49,6 @@ public class TestBase
     }
 
     /// <summary>
-    /// Crea un usuario de prueba según los parámetros
     /// </summary>
     /// <returns></returns>
     public async Task<HttpClient> CreateTestUser(string userName, string email, string password, string[] roles)
@@ -98,42 +97,6 @@ public class TestBase
     /// </summary>
     public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
         CreateTestUser("clubsecuredtest", "test@club.com", "Password123!", new string[] { "Club" });
-
-    /// <summary>
-    /// Shortcut para ejecutar IRequests con el Mediador
-    /// </summary>
-    public async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
-    {
-        using var scope = _apiWebApplicationFactory.Services.CreateScope();
-
-        var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
-
-        return await mediator.Send(request);
-    }
-
-    /// <summary>
-    /// Shortcut para agregar Entities a la BD
-    /// </summary>
-    protected async Task<TEntity> AddAsync<TEntity>(TEntity entity) where TEntity : class
-    {
-        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
-
-        context.Add(entity);
-
-        await context.SaveChangesAsync();
-
-        return entity;
-    }
-
-    /// <summary>
-    /// Shortcut para buscar entities por primary key
-    /// </summary>
-    protected async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
-    {
-        var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
-
-        return await context.FindAsync<TEntity>(keyValues);
-    }
 
     /// <summary>
     /// Shortcut para buscar entities según un criterio

@@ -5,10 +5,10 @@ using takecontrol.Identity;
 
 namespace takecontrol.Infrastructure.Repositories.Primitives;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork, IDisposable
 {
-    private Hashtable _repostories;
     private readonly TakeControlDbContext _context;
+    private Hashtable _repostories;
 
     public UnitOfWork(TakeControlDbContext context)
     {
@@ -25,7 +25,8 @@ public class UnitOfWork : IUnitOfWork
         _context.Dispose();
     }
 
-    public IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel
+    public IAsyncWriteRepository<TEntity> Repository<TEntity>()
+        where TEntity : BaseDomainModel
     {
         if (_repostories == null)
             _repostories = new Hashtable();
@@ -39,6 +40,6 @@ public class UnitOfWork : IUnitOfWork
             _repostories.Add(nameType, repositoryInstance);
         }
 
-        return (IAsyncWriteRepository<TEntity>)_repostories[nameType];
+        return (IAsyncWriteRepository<TEntity>)_repostories[nameType]!;
     }
 }

@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System.Net.Http.Headers;
+﻿using System.Net;
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.API.Routes;
 using takecontrol.Domain.Messages.Clubs;
-using takecontrol.Domain.Models.Clubs;
+using takecontrol.IntegrationTest.Shared.Repositories.Clubs;
 using Xunit.Priority;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
@@ -25,14 +24,16 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
     private readonly TestBase _testBase;
+    private readonly TestClubReadRepository _clubReadRepository;
 
-    public ClubControllerXUnitTests(CustomWebApplicationFactory<Program> factory)
+    public ClubControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
     {
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
         _httpClient = factory.HttpClient;
         _takeControlEmailDb = factory.TakeControlEmailDb;
         _testBase = new TestBase(factory);
+        _clubReadRepository = new TestClubReadRepository(_takeControlDb);
     }
 
     #region Tests for registerClub Endpoint
@@ -219,10 +220,10 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         var httpClient = await AddJWTTokenToHeaderForClubs();
 
         await RegisterClubForTest();
-        var club = await GetClubByName(clubName);
+        var club = await _clubReadRepository.GetClubByName(clubName);
 
         //Act
-        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={club.UserId}");
+        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={club!.UserId}");
 
         //Assert
         Assert.NotNull(response);
@@ -286,11 +287,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     private async Task<HttpClient> AddJWTTokenToHeaderForPlayers()
     {
         return await _testBase.RegisterSecuredUserAsPlayerAsync();
-    }
-
-    private async Task<Club> GetClubByName(string name)
-    {
-        return await _takeControlDb.Context.Clubs?.FirstOrDefaultAsync(c => c.Name == name);
     }
 
     #endregion

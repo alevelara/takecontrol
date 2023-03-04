@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using takecontrol.Application.Contracts.Persitence.Players;
-using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Identity;
 
@@ -15,10 +14,9 @@ public class PlayerReadRepository : ReadBaseRepository<Player>, IPlayerReadRepos
         _dbContext = dbContext;
     }
 
-    public async Task<Player> GetPlayerByUserId(Guid UserId)
+    public async Task<Player?> GetPlayerByUserId(Guid userId)
     {
-        return await _dbContext.Players
-            .IgnoreAutoIncludes<Player>()
-            .FirstOrDefaultAsync(c => c.UserId == UserId);
+        return await _dbContext.Players!
+            .FirstOrDefaultAsync(c => c.UserId == userId);
     }
 }
