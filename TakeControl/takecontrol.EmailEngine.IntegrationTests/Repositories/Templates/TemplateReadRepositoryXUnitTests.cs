@@ -11,8 +11,8 @@ namespace takecontrol.EmailEngine.IntegrationTests.Repositories.Templates;
 [Trait("Category", "EmailIntegrationTests")]
 public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 {
-    private EmailDbContextFixture _fixture;
-    private EmailDbContext _dbContext;
+    private readonly EmailDbContextFixture _fixture;
+    private readonly EmailDbContext _dbContext;
 
     public TemplateReadRepositoryXUnitTests(EmailDbContextFixture fixture)
     {

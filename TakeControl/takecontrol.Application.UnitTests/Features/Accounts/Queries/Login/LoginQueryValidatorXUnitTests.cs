@@ -79,6 +79,6 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.True(result.IsValid);
-        Assert.Equal(0, result.Errors.Count);
+        Assert.Empty(result.Errors);
     }
 }

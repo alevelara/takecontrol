@@ -34,7 +34,7 @@ public class JoinToClubCommandValidatorXUnitTests : IClassFixture<JoinToClubComm
 
     [Theory]
     [InlineData("3a0a3ad1-acc8-45eb-8ae8-364b6e805274", true)]
-    [InlineData("00000000-0000-0000-0000-000000000000", false)]    
+    [InlineData("00000000-0000-0000-0000-000000000000", false)]
     public void Validator_Should_ValidateThePlayerId(string id, bool isValid)
     {
         //Arrange
@@ -52,7 +52,7 @@ public class JoinToClubCommandValidatorXUnitTests : IClassFixture<JoinToClubComm
 
     [Theory]
     [InlineData("3a0a3ad1-acc8-45eb-8ae8-364b6e805274", true)]
-    [InlineData("00000000-0000-0000-0000-000000000000", false)]    
+    [InlineData("00000000-0000-0000-0000-000000000000", false)]
     public void Validator_Should_ValidateTheClubId(string id, bool isValid)
     {
         //Arrange
