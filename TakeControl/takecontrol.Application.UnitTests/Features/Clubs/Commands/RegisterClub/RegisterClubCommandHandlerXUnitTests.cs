@@ -15,10 +15,10 @@ namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 [Trait("Category", "UnitTests")]
 public class RegisterClubCommandHandlerXUnitTests
 {
-    private Mock<IUnitOfWork> _uoW;
-    private Mock<IAuthService> _authService;
-    private Mock<ILogger<RegisterClubCommandHandler>> _logger;
-    private Mock<ISendEmailService> _emailService;
+    private readonly Mock<IUnitOfWork> _uoW;
+    private readonly Mock<IAuthService> _authService;
+    private readonly Mock<ILogger<RegisterClubCommandHandler>> _logger;
+    private readonly Mock<ISendEmailService> _emailService;
 
     public RegisterClubCommandHandlerXUnitTests()
     {

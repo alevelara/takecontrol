@@ -5,11 +5,11 @@ namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommand : ICommand<Unit>
 {
-    public string Name { get; private set; } = string.Empty;
+    public string Name { get; private set; }
 
-    public string Email { get; private set; } = string.Empty;
+    public string Email { get; private set; }
 
-    public string Password { get; private set; } = string.Empty;
+    public string Password { get; private set; }
 
     public int NumberOfClassesInAWeek { get; private set; }
 

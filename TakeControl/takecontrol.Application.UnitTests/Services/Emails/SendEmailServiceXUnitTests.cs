@@ -15,10 +15,10 @@ namespace takecontrol.Application.UnitTests.Services.Emails;
 [Trait("Category", "UnitTests")]
 public class SendEmailServiceXUnitTests
 {
-    private Mock<ITemplateAsyncReadRepository> _templateRepository;
-    private Mock<IEmailSender> _emailSender;
-    private Mock<ITemplateLoader> _templateLoader;
-    private Mock<IEmailUnitOfWork> _uow;
+    private readonly Mock<ITemplateAsyncReadRepository> _templateRepository;
+    private readonly Mock<IEmailSender> _emailSender;
+    private readonly Mock<ITemplateLoader> _templateLoader;
+    private readonly Mock<IEmailUnitOfWork> _uow;
 
     public SendEmailServiceXUnitTests()
     {

@@ -1,64 +1,70 @@
-﻿using MediatR;
-using Moq;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Players.Commands.JoinToClub;
-using takecontrol.Application.Tests.TestsData;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.PlayerClubs;
+﻿using takecontrol.Application.Features.Players.Commands.JoinToClub;
+using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
 namespace takecontrol.Application.UnitTests.Features.Players.Commands.JoinToClub;
 
 [Trait("Category", "UnitTests")]
-public class JoinToClubCommandValidatorXUnitTests
+public class JoinToClubCommandValidatorXUnitTests : IClassFixture<JoinToClubCommandValidator>
 {
-    private readonly Mock<IClubReadRepository> _clubReadRepository;
-    private readonly Mock<IUnitOfWork> _unitOfWork;
+    private readonly JoinToClubCommandValidator _validator;
 
     public JoinToClubCommandValidatorXUnitTests()
     {
-        _clubReadRepository = new();
-        _unitOfWork = new();
+        _validator = new();
     }
 
-    [Fact]
-    public async Task Handle_Should_CreateNewAssociation_WhenClubCodeIsCorrect()
+    [Theory]
+    [InlineData("12345", true)]
+    [InlineData("123", false)]
+    [InlineData("123456", false)]
+    [InlineData("", false)]
+    public void Validator_Should_ValidateTheCode(string code, bool isValid)
     {
         //Arrange
-        var code = "12345";
-        var command = new JoinToClubCommand(Guid.NewGuid(), Guid.NewGuid(), code);
-        var handler = new JoinToClubCommandHandler(_clubReadRepository.Object, _unitOfWork.Object);
-        var club = ApplicationTestData.CreateClubForTest(Guid.NewGuid(), ApplicationTestData.CreateAddresForTest());
-        var playerClubWriteRepository = new Mock<IAsyncWriteRepository<PlayerClub>>();
-
-        _clubReadRepository.Setup(c => c.GetClubByCodeAndClubId(It.IsAny<Guid>(), It.IsAny<string>()))
-            .ReturnsAsync(club);
-        _unitOfWork.Setup(c => c.Repository<PlayerClub>())
-            .Returns(playerClubWriteRepository.Object);
+        var playerId = Guid.NewGuid();
+        var clubId = Guid.NewGuid();
+        var command = new JoinToClubCommand(playerId, clubId, code);
 
         //Act
-        var result = await handler.Handle(command, default);
+        var result = _validator.Validate(command);
 
         //Assert
-        _unitOfWork.Verify(c => c.Repository<PlayerClub>(), Times.Once);
-        _unitOfWork.Verify(c => c.CompleteAsync(), Times.Once);
-        Assert.IsType<Unit>(result);
+        Assert.Equal(isValid, result.IsValid);
     }
 
-    [Fact]
-    public async Task Handle_Should_ThrownConflictException_WhenClubCodeIsInCorrect()
+    [Theory]
+    [InlineData("3a0a3ad1-acc8-45eb-8ae8-364b6e805274", true)]
+    [InlineData("00000000-0000-0000-0000-000000000000", false)]    
+    public void Validator_Should_ValidateThePlayerId(string id, bool isValid)
     {
         //Arrange
+        var playerId = new Guid(id);
+        var clubId = Guid.NewGuid();
         var code = "12345";
-        var command = new JoinToClubCommand(Guid.NewGuid(), Guid.NewGuid(), code);
-        var handler = new JoinToClubCommandHandler(_clubReadRepository.Object, _unitOfWork.Object);
-        Club club = null;
+        var command = new JoinToClubCommand(playerId, clubId, code);
 
-        _clubReadRepository.Setup(c => c.GetClubByCodeAndClubId(It.IsAny<Guid>(), It.IsAny<string>()))
-            .ReturnsAsync(club);
+        //Act
+        var result = _validator.Validate(command);
 
         //Assert
-        await Assert.ThrowsAsync<ConflictException>(() => handler.Handle(command, default));
+        Assert.Equal(isValid, result.IsValid);
+    }
+
+    [Theory]
+    [InlineData("3a0a3ad1-acc8-45eb-8ae8-364b6e805274", true)]
+    [InlineData("00000000-0000-0000-0000-000000000000", false)]    
+    public void Validator_Should_ValidateTheClubId(string id, bool isValid)
+    {
+        //Arrange
+        var clubId = new Guid(id);
+        var playerId = Guid.NewGuid();
+        var code = "12345";
+        var command = new JoinToClubCommand(playerId, clubId, code);
+
+        //Act
+        var result = _validator.Validate(command);
+
+        //Assert
+        Assert.Equal(isValid, result.IsValid);
     }
 }

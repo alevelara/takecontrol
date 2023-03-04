@@ -25,7 +25,7 @@ public class TestBase
     /// <summary>
     /// Crea un usuario de prueba según los parámetros.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task<HttpClient> CreateTestForLoginUser(string userName, string email, string password, string[] roles)
     {
         using var scope = _apiWebApplicationFactory.Services.CreateScope();
@@ -50,7 +50,7 @@ public class TestBase
 
     /// <summary>
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task<HttpClient> CreateTestUser(string userName, string email, string password, string[] roles)
     {
         var client = await CreateTestForLoginUser(userName, email, password, roles);
@@ -65,49 +65,49 @@ public class TestBase
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterUserAsAdminAsync() =>
         CreateTestForLoginUser("admintest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario Admin.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterSecuredUserAsAdmin() =>
         CreateTestUser("adminsecuredtest", "test@admin.com", "Password123!", new string[] { "Administrator" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterUserAsPlayerAsync() =>
         CreateTestForLoginUser("playertest", "test@player.com", "Password123!", new string[] { "Player" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterSecuredUserAsPlayerAsync() =>
         CreateTestUser("playersecuredtest", "test@player.com", "Password123!", new string[] { "Player" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterUserAsClubAsync() =>
         CreateTestForLoginUser("clubtest", "test@club.com", "Password123!", new string[] { "Club" });
 
     /// <summary>
     /// Crea un HttpClient incluyendo un JWT válido con usuario default.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<HttpClient> RegisterSecuredUserAsClubAsync() =>
         CreateTestUser("clubsecuredtest", "test@club.com", "Password123!", new string[] { "Club" });
 
     /// <summary>
     /// Shortcut para buscar entities según un criterio.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     protected async Task<TEntity> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate)
         where TEntity : class
     {

@@ -15,10 +15,10 @@ namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer
 [Trait("Category", "UnitTests")]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
-    private Mock<IUnitOfWork> _uoW;
-    private Mock<IAuthService> _authService;
-    private Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
-    private Mock<ISendEmailService> _emailService;
+    private readonly Mock<IUnitOfWork> _uoW;
+    private readonly Mock<IAuthService> _authService;
+    private readonly Mock<ILogger<RegisterPlayerCommandHandler>> _logger;
+    private readonly Mock<ISendEmailService> _emailService;
 
     public RegisterPlayerCommandHandlerXUnitTests()
     {

@@ -5,7 +5,7 @@ namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 [Trait("Category", "UnitTests")]
 public class LoginQueryValidatorXUnitTests
 {
-    private LoginQueryValidator validator;
+    private readonly LoginQueryValidator validator;
 
     public LoginQueryValidatorXUnitTests()
     {
@@ -37,7 +37,7 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
     }
 
     [Fact]

@@ -8,8 +8,8 @@ namespace takecontrol.API.Middlewares;
 public class ExceptionHandlingMiddleware : IMiddleware
 {
     private readonly IHostEnvironment _environment;
-    private static int nOTFOUNDCODEID = 1404;
-    private static int bADREQUESTCODEID = 1400;
+    private static int notFoundException = 1404;
+    private static int badRequestException = 1400;
 
     public ExceptionHandlingMiddleware(IHostEnvironment environment)
     {
@@ -33,11 +33,11 @@ public class ExceptionHandlingMiddleware : IMiddleware
             {
                 case NotFoundException:
                     statusCode = (int)HttpStatusCode.NotFound;
-                    codeId = nOTFOUNDCODEID;
+                    codeId = notFoundException;
                     break;
                 case BadRequestException:
                     statusCode = (int)HttpStatusCode.BadRequest;
-                    codeId = bADREQUESTCODEID;
+                    codeId = badRequestException;
                     break;
                 case ValidationException:
                     var validationException = ex as ValidationException;

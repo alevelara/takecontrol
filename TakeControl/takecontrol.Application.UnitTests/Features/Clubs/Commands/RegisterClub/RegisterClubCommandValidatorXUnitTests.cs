@@ -5,7 +5,7 @@ namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 [Trait("Category", "UnitTests")]
 public class RegisterClubCommandValidatorXUnitTests
 {
-    private RegisterClubCommandValidator validator;
+    private readonly RegisterClubCommandValidator validator;
 
     public RegisterClubCommandValidatorXUnitTests()
     {
@@ -36,7 +36,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -64,7 +64,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -92,7 +92,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -120,7 +120,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -134,7 +134,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -204,7 +204,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -218,7 +218,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -232,7 +232,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -246,7 +246,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -260,7 +260,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -274,7 +274,7 @@ public class RegisterClubCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(1, result.Errors.Count);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 

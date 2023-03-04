@@ -203,6 +203,7 @@ csharp_style_prefer_top_level_statements = true:silent
 csharp_space_around_binary_operators = before_and_after
 csharp_indent_labels = no_change
 dotnet_diagnostic.SA1300.severity = silent
+dotnet_diagnostic.SA1124.severity = silent
 
 [*.vb]
 #### Estilos de nomenclatura ####

@@ -8,7 +8,7 @@ namespace takecontrol.Infrastructure.IntegrationTests.Mocks
 {
     public static class MockUnitOfWork
     {
-        private static string aPINAME = "takecontrol.API";
+        private static string apiName = "takecontrol.API";
 
         public static Mock<UnitOfWork> GetUnitOfWork()
         {
@@ -26,7 +26,7 @@ namespace takecontrol.Infrastructure.IntegrationTests.Mocks
 
         private static IConfiguration GetAppConfiguration()
         {
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, aPINAME);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, apiName);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)

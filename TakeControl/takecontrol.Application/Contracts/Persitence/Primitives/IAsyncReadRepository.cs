@@ -10,8 +10,8 @@ public interface IAsyncReadRepository<T>
     Task<IReadOnlyList<T?>> GetAsync(Expression<Func<T, bool>> predicate);
     Task<IReadOnlyList<T>> GetAsync(
         Expression<Func<T, bool>> predicate = null,
-                                    Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-                                    List<Expression<Func<T, object>>> includes = null,
-                                    string includeString = null,
-                                    bool disableTracking = true);
+        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+        List<Expression<Func<T, object>>> includes = null,
+        string includeString = null,
+        bool disableTracking = true);
 }

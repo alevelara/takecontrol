@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using takecontrol.Domain.Utils;
 
 namespace takecontrol.Application.Features.Players.Commands.JoinToClub;
 
@@ -8,7 +9,9 @@ public class JoinToClubCommandValidator : AbstractValidator<JoinToClubCommand>
     {
         RuleFor(c => c.Code)
             .NotEmpty()
-            .WithMessage("Code can not be empty");
+            .WithMessage("Code can not be empty")
+            .Must(x => ValitatorsUtil.HasTheCorrectSize(x, 5))
+            .WithMessage("Code must have 5 digits");
 
         RuleFor(c => c.ClubId)
             .NotNull()

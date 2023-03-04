@@ -40,6 +40,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         _playerReadRepository = new TestPlayerReadRepository(_takeControlDb);
     }
 
+    #region RegisterPlayer Tests
     [Fact]
     [Priority(29)]
     public async Task RegisterPlayer_Should_Return201StatusCode_WhenRegisterRequestIsValid()
@@ -230,6 +231,9 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
+    #endregion
+
+    #region JoinToClub Tests
     [Fact]
     public async Task JoinToClub_Should_ReturnCreatedStatusCode_WhenAPlayerJoinToANewClub()
     {
@@ -276,7 +280,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         var club = await _clubReadRepository.GetClubByName("nameTest");
         var player = await _playerReadRepository.GetPlayerByName("nameTest");
-        var incorrectCode = "12345123";
+        var incorrectCode = "12345";
         var request = new JoinToClubRequest(player.Id, club.Id, incorrectCode);
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
@@ -287,7 +291,9 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
+    #endregion
 
+    #region Private methods
     private async Task RegisterPlayerForTest()
     {
         var request = new RegisterPlayerRequest
@@ -322,6 +328,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         return await _testBase.RegisterSecuredUserAsPlayerAsync();
     }
+
+    #endregion
 
     public Task InitializeAsync() => Task.CompletedTask;
 
