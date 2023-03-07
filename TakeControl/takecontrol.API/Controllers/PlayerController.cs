@@ -6,6 +6,7 @@ using System.Net;
 using takecontrol.API.Routes;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+using takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 using takecontrol.Domain.Dtos.Players;
 using takecontrol.Domain.Messages.Players;
 using takecontrol.Identity.Constants;
@@ -40,5 +41,14 @@ public class PlayerController : ControllerBase
         var player = await _mediator.Send(new GetPlayerByIdQuery(playerId));
         return Ok(_mapper.From(player)
             .AdaptToType<PlayerDto>());
+    }
+
+    [Authorize(Roles = Role.Player)]
+    [HttpGet(PlayerRouteName.AllByClubId)]
+    public async Task<ActionResult<List<PlayerDto>>> GetPlayersByClubId([FromQuery] Guid clubId)
+    {
+        var players = await _mediator.Send(new GetAllPlayersByClubIdQuery(clubId));
+        return Ok(_mapper.From(players)
+            .AdaptToType<List<PlayerDto>>());
     }
 }

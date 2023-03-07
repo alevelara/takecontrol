@@ -3,5 +3,7 @@
     public static class PlayerRouteName
     {
         public static string Register = "Register";
+
+        public const string AllByClubId = "AllByClubId";
     }
 }

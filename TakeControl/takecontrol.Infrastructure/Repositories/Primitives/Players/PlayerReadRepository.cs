@@ -21,4 +21,11 @@ public class PlayerReadRepository : ReadBaseRepository<Player>, IPlayerReadRepos
             .IgnoreAutoIncludes<Player>()
             .FirstOrDefaultAsync(c => c.UserId == UserId);
     }
+
+    public Task<List<Player>> GetAllPlayersByClubId(Guid ClubId)
+    {
+        var players = _dbContext.Players.Where(b => b.PlayerClubs.Any(c => c.ClubId == ClubId));
+
+        return players.ToListAsync();
+    }
 }

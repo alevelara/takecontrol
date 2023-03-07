@@ -1,7 +1,6 @@
 using takecontrol.Application.Abstractions.Mediatr;
 using takecontrol.Application.Contracts.Persitence.Players;
 using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 using takecontrol.Domain.Errors.Players;
 using takecontrol.Domain.Models.Players;
 
