@@ -1,7 +1,5 @@
 ﻿namespace takecontrol.Domain.Utils;
 
-namespace takecontrol.Domain.Utils;
-
 public static class RandomGenerator
 {
     public static int RandomNumber(int min, int max)
