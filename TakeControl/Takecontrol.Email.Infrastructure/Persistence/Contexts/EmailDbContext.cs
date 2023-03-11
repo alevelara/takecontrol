@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Takecontrol.Emails.Domain.Models.Emails;
 using Takecontrol.Emails.Domain.Models.Templates;
+using Takecontrol.Emails.Infrastructure.Persistence.Configurations;
 using Takecontrol.Shared.Domain.Primitives;
 
 namespace Takecontrol.Emails.Infrastructure.Contexts;

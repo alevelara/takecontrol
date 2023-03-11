@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace takecontrol.Application.Abstractions.Mediatr;
+namespace Takecontrol.Shared.Application.Abstractions.Mediatr;
 
 public interface IQuery<out TResponse> : IRequest<TResponse>
 {
