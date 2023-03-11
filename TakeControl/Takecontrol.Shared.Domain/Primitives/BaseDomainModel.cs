@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Primitives;
+﻿namespace Takecontrol.Shared.Domain.Primitives;
 
 public abstract class BaseDomainModel
 {

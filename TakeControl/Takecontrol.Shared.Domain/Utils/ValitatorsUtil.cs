@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace takecontrol.Domain.Utils;
+namespace Takecontrol.Shared.Domain.Utils;
 
 public static class ValitatorsUtil
 {

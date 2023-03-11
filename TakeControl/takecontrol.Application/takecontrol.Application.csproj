@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MockContexts\**" />
+    <Compile Remove="Utils\**" />
+    <EmbeddedResource Remove="MockContexts\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <None Remove="MockContexts\**" />
+    <None Remove="Utils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
