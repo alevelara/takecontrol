@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace Takecontrol.Shared.Application.Abstractions.Mediatr
+namespace Takecontrol.Shared.Application.Abstractions.Mediatr;
+
+public interface IEventNotification : INotification
 {
-    public interface IEventNotification : INotification
-    {
-    }
 }
