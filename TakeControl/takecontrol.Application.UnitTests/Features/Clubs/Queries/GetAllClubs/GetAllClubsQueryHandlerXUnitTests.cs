@@ -25,14 +25,12 @@ public class GetAllClubsQueryHandlerXunitTests
             .ReturnsAsync(new List<Club>() { Club.Create(Guid.NewGuid(), Guid.NewGuid(), "name") });
 
         //Act
-
         var result = await handler.Handle(query, default);
 
         //Assert
         Assert.NotNull(result);
         Assert.NotEmpty(result);
     }
-
 
     [Fact]
     public async Task Handle_Should_ReturnEmptyList_WhenClubsDontExistInDatabase()
@@ -45,12 +43,10 @@ public class GetAllClubsQueryHandlerXunitTests
             .ReturnsAsync(new List<Club>());
 
         //Act
-
         var result = await handler.Handle(query, default);
 
         //Assert
         Assert.NotNull(result);
         Assert.Empty(result);
     }
-
 }

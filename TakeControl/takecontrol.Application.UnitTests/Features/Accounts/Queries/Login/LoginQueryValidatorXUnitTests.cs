@@ -5,7 +5,7 @@ namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 [Trait("Category", "UnitTests")]
 public class LoginQueryValidatorXUnitTests
 {
-    private LoginQueryValidator validator;
+    private readonly LoginQueryValidator validator;
 
     public LoginQueryValidatorXUnitTests()
     {
@@ -23,7 +23,7 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(result.Errors.Count, 2);
+        Assert.Equal(2, result.Errors.Count);
     }
 
     [Fact]
@@ -37,9 +37,8 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
     }
-
 
     [Fact]
     public void Validator_Should_ReturnValidationException_WhenPasswordIsEmptyAsync()
@@ -52,7 +51,7 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
     }
 
     [Fact]
@@ -66,7 +65,7 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.False(result.IsValid);
-        Assert.Equal(result.Errors.Count, 3);
+        Assert.Equal(3, result.Errors.Count);
     }
 
     [Fact]
@@ -80,6 +79,6 @@ public class LoginQueryValidatorXUnitTests
 
         //Assert
         Assert.True(result.IsValid);
-        Assert.Equal(result.Errors.Count, 0);
+        Assert.Empty(result.Errors);
     }
 }

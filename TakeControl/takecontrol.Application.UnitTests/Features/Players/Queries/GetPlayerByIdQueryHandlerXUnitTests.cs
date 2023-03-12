@@ -7,6 +7,7 @@ using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetPlayerByUserId;
 
+[Trait("Category", "UnitTests")]
 public class GetPlayerByIdQueryHandlerXUnitTests
 {
     private readonly Mock<IPlayerReadRepository> _mockReadRepository;
@@ -25,12 +26,10 @@ public class GetPlayerByIdQueryHandlerXUnitTests
         Player player = null;
 
         //Act
-
         _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(player);
 
         //Assert
-
         await Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(query, default));
     }
 
@@ -52,11 +51,11 @@ public class GetPlayerByIdQueryHandlerXUnitTests
         var playerExpert = ApplicationTestData.CreateExpertPlayerForTest(userIdExpert);
 
         //Acts
-        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(userIdBegginer))
             .ReturnsAsync(playerBeginner);
-        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(userIdMid))
             .ReturnsAsync(playerMid);
-        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
+        _mockReadRepository.Setup(c => c.GetPlayerByUserId(userIdExpert))
             .ReturnsAsync(playerExpert);
 
         var resultBeginner = await handler.Handle(queryBegginer, default);

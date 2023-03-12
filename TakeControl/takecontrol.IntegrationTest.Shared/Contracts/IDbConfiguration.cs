@@ -1,4 +1,4 @@
-﻿namespace takecontrol.API.IntegrationTests.Contracts;
+﻿namespace takecontrol.IntegrationTests.Shared.Contracts;
 
 public interface IDbConfiguration
 {

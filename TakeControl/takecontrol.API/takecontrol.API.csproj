@@ -30,4 +30,8 @@
 	  <PackageReference Update="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
 	</ItemGroup>
 
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="node ../../scripts/init.js" Condition="$(ConfigurationName) == Debug" />
+	</Target>
+
 </Project>

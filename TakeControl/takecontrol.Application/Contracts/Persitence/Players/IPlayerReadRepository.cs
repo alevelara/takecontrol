@@ -4,5 +4,5 @@ namespace takecontrol.Application.Contracts.Persitence.Players;
 
 public interface IPlayerReadRepository
 {
-    Task<Player> GetPlayerByUserId(Guid Id);
+    Task<Player?> GetPlayerByUserId(Guid Id);
 }

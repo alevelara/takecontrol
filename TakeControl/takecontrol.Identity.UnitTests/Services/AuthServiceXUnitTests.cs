@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using System.Security.Claims;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
@@ -46,23 +46,24 @@ namespace takecontrol.Identity.Tests.Services
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
             var appUser = IdentityTestData.CreateApplicationUserForTest();
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
                 appUser
                 );
-            var claim = _userManager.Setup(c => c.GetClaimsAsync(It.IsAny<ApplicationUser>()))
+            _userManager.Setup(c => c.GetClaimsAsync(It.IsAny<ApplicationUser>()))
                 .ReturnsAsync(new List<Claim>());
-            var roles = _userManager.Setup(c => c.GetRolesAsync(It.IsAny<ApplicationUser>()))
+            _userManager.Setup(c => c.GetRolesAsync(It.IsAny<ApplicationUser>()))
                 .ReturnsAsync(new List<string>());
 
-            var signInResult = _signInManager.Setup(c => c.PasswordSignInAsync(It.IsAny<string>(),
+            _signInManager.Setup(c => c.PasswordSignInAsync(
+                It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<bool>(),
                 It.IsAny<bool>()))
                 .ReturnsAsync(SignInResult.Success);
 
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
-            //Act
 
+            //Act
             var response = await authService.Login(request);
 
             //Assert
@@ -78,8 +79,7 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
-            var appUser = IdentityTestData.CreateApplicationUserForTest();
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()));
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()));
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
             //Assert
@@ -94,7 +94,7 @@ namespace takecontrol.Identity.Tests.Services
             var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.Email = null;
 
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync(appUser);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
@@ -110,7 +110,7 @@ namespace takecontrol.Identity.Tests.Services
             var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.UserName = null;
 
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync(appUser);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
@@ -126,7 +126,7 @@ namespace takecontrol.Identity.Tests.Services
             var appUser = IdentityTestData.CreateApplicationUserForTest();
             appUser.SecurityStamp = null;
 
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync(appUser);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
@@ -134,18 +134,18 @@ namespace takecontrol.Identity.Tests.Services
             await Assert.ThrowsAsync<ConflictException>(() => authService.Login(request));
         }
 
-
         [Fact]
         public async Task Login_Should_ReturnException_WhenSignInFailed()
         {
             //Arrange
             var request = new LoginQuery("test@test.com", "password");
             var appUser = IdentityTestData.CreateApplicationUserForTest();
-            var user = _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
+            _userManager.Setup(c => c.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(
                 appUser
                 );
 
-            var signInResult = _signInManager.Setup(c => c.PasswordSignInAsync(It.IsAny<string>(),
+            _signInManager.Setup(c => c.PasswordSignInAsync(
+                It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<bool>(),
                 It.IsAny<bool>()))
@@ -164,12 +164,12 @@ namespace takecontrol.Identity.Tests.Services
             var request = new RegistrationRequest("existingName", "email", "password", UserType.Club);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
+
             //Act
             _userManager.Setup(u => u.FindByNameAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
 
             //Assert
             await Assert.ThrowsAsync<ConflictException>(() => authService.Register(request));
-
         }
 
         [Fact]
@@ -194,7 +194,6 @@ namespace takecontrol.Identity.Tests.Services
             //Arrange
             var request = new RegistrationRequest("name", "existingEmail", "", UserType.Club);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
-            var applicationUser = IdentityTestData.CreateApplicationUserForTest();
             var failedIdentityResult = IdentityTestData.CreateFailedIdentityResult();
 
             //Act
@@ -229,35 +228,33 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
-            var request = new ResetPasswordCommand(applicationUser.Email, "Password123!", "Password124!");
+            var request = new ResetPasswordCommand(applicationUser.Email!, "Password123!", "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
             _userManager.Setup(u => u.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(successIdentityResult);
 
-            var result = authService.ResetPassword(request);
+            var result = await authService.ResetPassword(request);
 
             //Assert
-
-            Assert.NotNull(result);
-            Assert.True(result.IsCompletedSuccessfully);
+            Assert.True(result);
         }
 
         [Fact]
         public async Task ResetPassword_Should_ThrowNotFoundException_WhenUserDoesntExist()
         {
             //Arrange
-            ApplicationUser applicationUser = null;
+            ApplicationUser? applicationUser = null;
             var request = new ResetPasswordCommand("user@test.com", "Password123!", "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
 
             //Assert
-            Assert.ThrowsAsync<NotFoundException>(() => authService.ResetPassword(request));
+            await Assert.ThrowsAsync<NotFoundException>(() => authService.ResetPassword(request));
         }
 
         [Fact]
@@ -265,26 +262,25 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
-            var request = new ResetPasswordCommand(applicationUser.Email, "invalidPassword", "Password124!");
+            var request = new ResetPasswordCommand(applicationUser.Email!, "invalidPassword", "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var failedResult = IdentityTestData.CreateFailedIdentityResult();
 
-            //Act            
+            //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
             _userManager.Setup(u => u.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(failedResult);
 
             //Assert
-            Assert.ThrowsAsync<ConflictException>(() => authService.ResetPassword(request));
+            await Assert.ThrowsAsync<ConflictException>(() => authService.ResetPassword(request));
         }
 
         [Fact]
-        public async Task UpdatePassword_Should_ReturnTrue_WhenCommandIsValid()
+        public void UpdatePassword_Should_ReturnTrue_WhenCommandIsValid()
         {
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
-            var request = new UpdatePasswordCommand(applicationUser.Email, "Password124!");
+            var request = new UpdatePasswordCommand(applicationUser.Email!, "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
-            var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();
 
             //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
@@ -304,7 +300,7 @@ namespace takecontrol.Identity.Tests.Services
         public async Task UpdatePassword_Should_ThrowNotFoundException_WhenUserDoesntExist()
         {
             //Arrange
-            ApplicationUser applicationUser = null;
+            ApplicationUser? applicationUser = null;
             var request = new UpdatePasswordCommand("user@test.com", "Password124!");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
 
@@ -312,7 +308,7 @@ namespace takecontrol.Identity.Tests.Services
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
 
             //Assert
-            Assert.ThrowsAsync<NotFoundException>(() => authService.UpdatePassword(request));
+            await Assert.ThrowsAsync<NotFoundException>(() => authService.UpdatePassword(request));
         }
 
         [Fact]
@@ -320,19 +316,24 @@ namespace takecontrol.Identity.Tests.Services
         {
             //Arrange
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
-            var request = new UpdatePasswordCommand(applicationUser.Email, "invalidPassword");
+            var request = new UpdatePasswordCommand(applicationUser.Email!, "invalidPassword");
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
-            var failedResult = IdentityTestData.CreateFailedIdentityResult();
+            var errors = new IdentityError[1];
+            errors[0] = new IdentityError()
+            {
+                Code = "CODE",
+                Description = "description"
+            };
 
             //Act
             _userManager.Setup(u => u.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(applicationUser);
             _userManager.Setup(u => u.GeneratePasswordResetTokenAsync(It.IsAny<ApplicationUser>()))
                 .ReturnsAsync("resetToken");
             _userManager.Setup(u => u.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(IdentityResult.Failed(null));
+                .ReturnsAsync(IdentityResult.Failed(errors));
 
             //Assert
-            Assert.ThrowsAsync<ConflictException>(() => authService.UpdatePassword(request));
+            await Assert.ThrowsAsync<ConflictException>(() => authService.UpdatePassword(request));
         }
     }
 }

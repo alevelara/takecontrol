@@ -8,7 +8,7 @@ namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPass
 [Trait("Category", "UnitTests")]
 public class ResetPasswordCommandHandlerXUnitTests
 {
-    private Mock<IAuthService> _authService;
+    private readonly Mock<IAuthService> _authService;
 
     public ResetPasswordCommandHandlerXUnitTests()
     {
@@ -24,9 +24,6 @@ public class ResetPasswordCommandHandlerXUnitTests
             .ReturnsAsync(true);
 
         var result = await handler.Handle(command, default);
-
-        Assert.NotNull(result);
         Assert.IsType<Unit>(result);
     }
-
 }

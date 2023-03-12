@@ -15,10 +15,10 @@ namespace takecontrol.Application.UnitTests.Services.Emails;
 [Trait("Category", "UnitTests")]
 public class SendEmailServiceXUnitTests
 {
-    private Mock<ITemplateAsyncReadRepository> _templateRepository;
-    private Mock<IEmailSender> _emailSender;
-    private Mock<ITemplateLoader> _templateLoader;
-    private Mock<IEmailUnitOfWork> _uow;
+    private readonly Mock<ITemplateAsyncReadRepository> _templateRepository;
+    private readonly Mock<IEmailSender> _emailSender;
+    private readonly Mock<ITemplateLoader> _templateLoader;
+    private readonly Mock<IEmailUnitOfWork> _uow;
 
     public SendEmailServiceXUnitTests()
     {
@@ -32,7 +32,6 @@ public class SendEmailServiceXUnitTests
     public async Task SendEmailAsync_Should_AddFailedEmail_WhenTemplateDoesntExist()
     {
         //Arrange
-
         var sender = new SendEmailService(_templateRepository.Object, _emailSender.Object, _templateLoader.Object, _uow.Object);
         Template template = null;
         var email = ApplicationTestData.CreateEmailForTest();
@@ -44,12 +43,9 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-
         await sender.SendEmailAsync(email, default);
 
         //Assert
-
-        Assert.NotNull(email.Id);
         Assert.Equal(EmailStatus.FAILED, email.Status);
     }
 
@@ -57,7 +53,6 @@ public class SendEmailServiceXUnitTests
     public async Task SendEmailAsync_Should_AddFailedEmail_WhenEmailCanNotBeSent()
     {
         //Arrange
-
         var sender = new SendEmailService(_templateRepository.Object, _emailSender.Object, _templateLoader.Object, _uow.Object);
         Template template = ApplicationTestData.CreateTemplateForTest();
         var email = ApplicationTestData.CreateEmailForTest();
@@ -73,12 +68,9 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-
         await sender.SendEmailAsync(email, default);
 
         //Assert
-
-        Assert.NotNull(email.Id);
         Assert.Equal(EmailStatus.FAILED, email.Status);
     }
 
@@ -86,7 +78,6 @@ public class SendEmailServiceXUnitTests
     public async Task SendEmailAsync_Should_AddConfirmedEmail_WhenTemplateExists()
     {
         //Arrange
-
         var sender = new SendEmailService(_templateRepository.Object, _emailSender.Object, _templateLoader.Object, _uow.Object);
         Template template = ApplicationTestData.CreateTemplateForTest();
         var email = ApplicationTestData.CreateEmailForTest();
@@ -102,12 +93,9 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-
         await sender.SendEmailAsync(email, default);
 
         //Assert
-
-        Assert.NotNull(email.Id);
         Assert.Equal(EmailStatus.CONFIRMED, email.Status);
     }
 }

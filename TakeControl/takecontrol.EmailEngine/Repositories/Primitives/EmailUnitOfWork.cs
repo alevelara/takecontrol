@@ -11,8 +11,8 @@ namespace takecontrol.Infrastructure.Repositories.Primitives;
 
 public class EmailUnitOfWork : IEmailUnitOfWork
 {
-    private Hashtable _repostories;
     private readonly EmailDbContext _context;
+    private Hashtable _repostories;
 
     public EmailUnitOfWork(EmailDbContext context)
     {
@@ -29,7 +29,8 @@ public class EmailUnitOfWork : IEmailUnitOfWork
         _context.Dispose();
     }
 
-    public IAsyncWriteRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel
+    public IAsyncWriteRepository<TEntity> Repository<TEntity>()
+        where TEntity : BaseDomainModel
     {
         if (_repostories == null)
             _repostories = new Hashtable();

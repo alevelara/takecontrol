@@ -1,6 +1,5 @@
-using takecontrol.Domain.Primitives;
-
 namespace takecontrol.Domain.Errors.Players;
+using takecontrol.Domain.Primitives;
 
 public sealed class PlayerError : DomainError
 {

@@ -60,5 +60,4 @@ public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCom
         var email = Email.Create(toEmail, "Welcome to takecontrol", TemplateType.WELCOME);
         await _emailSender.SendEmailAsync(email, cancellationToken);
     }
-
 }

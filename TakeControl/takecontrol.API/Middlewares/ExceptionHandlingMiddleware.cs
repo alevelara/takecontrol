@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Net;
+﻿using System.Net;
+using Newtonsoft.Json;
 using takecontrol.API.Errors;
 using takecontrol.Application.Exceptions;
 
@@ -8,8 +8,8 @@ namespace takecontrol.API.Middlewares;
 public class ExceptionHandlingMiddleware : IMiddleware
 {
     private readonly IHostEnvironment _environment;
-    private static int NOT_FOUND_CODE_ID = 1404;
-    private static int BAD_REQUEST_CODE_ID = 1400;
+    private static int notFoundException = 1404;
+    private static int badRequestException = 1400;
 
     public ExceptionHandlingMiddleware(IHostEnvironment environment)
     {
@@ -33,11 +33,11 @@ public class ExceptionHandlingMiddleware : IMiddleware
             {
                 case NotFoundException:
                     statusCode = (int)HttpStatusCode.NotFound;
-                    codeId = NOT_FOUND_CODE_ID;
+                    codeId = notFoundException;
                     break;
                 case BadRequestException:
                     statusCode = (int)HttpStatusCode.BadRequest;
-                    codeId = BAD_REQUEST_CODE_ID;
+                    codeId = badRequestException;
                     break;
                 case ValidationException:
                     var validationException = ex as ValidationException;

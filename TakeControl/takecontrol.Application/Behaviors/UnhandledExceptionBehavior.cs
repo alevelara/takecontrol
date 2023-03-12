@@ -31,7 +31,6 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
 
     private void LogErrorByException(Exception ex)
     {
-
         if (ex is BaseException)
         {
             _logger.LogWarning($"{ex.Source}: {ex.Message}", ex);

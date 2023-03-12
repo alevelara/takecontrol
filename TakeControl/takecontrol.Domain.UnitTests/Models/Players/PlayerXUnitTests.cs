@@ -16,11 +16,11 @@ public class PlayerXUnitTests
         var player = Player.Create(userId, name, 1, 1, 1);
 
         Assert.NotNull(player);
-        Assert.NotNull(player.Id);
-        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Begginer);
+        Assert.Equal((int)PlayerLevel.Begginer, player.PlayerLevel);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
+
 
     [Fact]
     public void Create_Should_ReturnNewMidPlayer_WhenAllFieldsArePopulated()
@@ -31,8 +31,7 @@ public class PlayerXUnitTests
         var player = Player.Create(userId, name, 1, 3, 2);
 
         Assert.NotNull(player);
-        Assert.NotNull(player.Id);
-        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Mid);
+        Assert.Equal((int)PlayerLevel.Mid, player.PlayerLevel);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -46,8 +45,7 @@ public class PlayerXUnitTests
         var player = Player.Create(userId, name, 2, 4, 4);
 
         Assert.NotNull(player);
-        Assert.NotNull(player.Id);
-        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
+        Assert.Equal((int)PlayerLevel.Expert, player.PlayerLevel);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -61,8 +59,7 @@ public class PlayerXUnitTests
         var player = Player.Create(userId, name, 2, 4, 4);
 
         Assert.NotNull(player);
-        Assert.NotNull(player.Id);
-        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
+        Assert.Equal((int)PlayerLevel.Expert, player.PlayerLevel);
         Assert.Equal(player.Name, name);
         Assert.Equal(player.UserId, userId);
     }
@@ -75,8 +72,7 @@ public class PlayerXUnitTests
         var player = Player.Create(userId, null, 2, 4, 4);
 
         Assert.NotNull(player);
-        Assert.NotNull(player.Id);
-        Assert.Equal((int)player.PlayerLevel, (int)PlayerLevel.Expert);
+        Assert.Equal((int)PlayerLevel.Expert, player.PlayerLevel);
         Assert.Null(player.Name);
         Assert.Equal(player.UserId, userId);
     }

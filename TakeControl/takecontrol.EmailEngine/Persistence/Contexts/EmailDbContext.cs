@@ -34,10 +34,10 @@ public class EmailDbContext : DbContext
         return base.SaveChangesAsync(cancellationToken);
     }
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        builder.ApplyConfiguration(new TemplateConfiguration());
-        builder.ApplyConfiguration(new EmailConfiguration());
+        modelBuilder.ApplyConfiguration(new TemplateConfiguration());
+        modelBuilder.ApplyConfiguration(new EmailConfiguration());
     }
 
     public DbSet<Email> Emails { get; set; }
@@ -46,7 +46,7 @@ public class EmailDbContext : DbContext
 
     public class EmailDBContextFactory : IDesignTimeDbContextFactory<EmailDbContext>
     {
-        public static string API_NAME = "takecontrol.API";
+        private static string apiName = "takecontrol.API";
 
         public EmailDbContext CreateDbContext(string[] args)
         {
@@ -71,7 +71,7 @@ public class EmailDbContext : DbContext
                       Environment.GetEnvironmentVariable(
                           "ASPNETCORE_ENVIRONMENT");
 
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, API_NAME);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, apiName);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)
@@ -83,5 +83,3 @@ public class EmailDbContext : DbContext
         }
     }
 }
-
-

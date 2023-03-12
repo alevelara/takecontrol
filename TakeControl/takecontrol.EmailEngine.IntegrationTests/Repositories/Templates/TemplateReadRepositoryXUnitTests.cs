@@ -11,9 +11,8 @@ namespace takecontrol.EmailEngine.IntegrationTests.Repositories.Templates;
 [Trait("Category", "EmailIntegrationTests")]
 public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 {
-
-    private EmailDbContextFixture _fixture;
-    private EmailDbContext _dbContext;
+    private readonly EmailDbContextFixture _fixture;
+    private readonly EmailDbContext _dbContext;
 
     public TemplateReadRepositoryXUnitTests(EmailDbContextFixture fixture)
     {
@@ -29,12 +28,11 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 
         var templateRepository = new TemplateReadRepository(_dbContext);
         var welcomeTemplate = TemplateType.WELCOME;
-        //Act
 
+        //Act
         var result = await templateRepository.GetTemplateByTemplateType(welcomeTemplate);
 
         //Assert
-
         Assert.NotNull(result);
         Assert.Equal(TemplateType.WELCOME, result.TemplateType);
     }
@@ -45,12 +43,11 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
         //Arrange
         var templateRepository = new TemplateReadRepository(_dbContext);
         var welcomeTemplate = TemplateType.WELCOME;
-        //Act
 
+        //Act
         var result = await templateRepository.GetTemplateByTemplateType(welcomeTemplate);
 
         //Assert
-
         Assert.Null(result);
     }
 
@@ -61,7 +58,6 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
-
 
     public async Task DisposeAsync()
     {

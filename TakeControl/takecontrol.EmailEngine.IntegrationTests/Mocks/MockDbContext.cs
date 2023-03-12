@@ -6,7 +6,7 @@ namespace takecontrol.EmailEngine.IntegrationTests.Mocks;
 
 public class MockDbContext
 {
-    private static string API_NAME = "takecontrol.API";
+    private static string apiName = "takecontrol.API";
 
     public static EmailDbContext GetEmailDbContext()
     {
@@ -18,7 +18,7 @@ public class MockDbContext
 
     private static IConfiguration GetAppConfiguration()
     {
-        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, API_NAME);
+        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, apiName);
 
         var builder = new ConfigurationBuilder()
                 .SetBasePath(path)

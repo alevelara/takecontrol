@@ -5,7 +5,7 @@ namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.UpdatePas
 [Trait("Category", "UnitTests")]
 public class UpdatePasswordCommandValidatorXUnitTests : IClassFixture<UpdatePasswordCommandValidatorXUnitTests>
 {
-    private UpdatePasswordCommandValidator _validator;
+    private readonly UpdatePasswordCommandValidator _validator;
 
     public UpdatePasswordCommandValidatorXUnitTests()
     {

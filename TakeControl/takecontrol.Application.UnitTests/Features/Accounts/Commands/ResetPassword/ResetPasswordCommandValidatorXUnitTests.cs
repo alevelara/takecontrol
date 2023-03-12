@@ -5,7 +5,7 @@ namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPass
 [Trait("Category", "UnitTests")]
 public class ResetPasswordCommandValidatorXUnitTests : IClassFixture<ResetPasswordCommandValidatorXUnitTests>
 {
-    private ResetPasswordCommandValidator _validator;
+    private readonly ResetPasswordCommandValidator _validator;
 
     public ResetPasswordCommandValidatorXUnitTests()
     {

@@ -15,10 +15,10 @@ namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 [Trait("Category", "UnitTests")]
 public class RegisterClubCommandHandlerXUnitTests
 {
-    private Mock<IUnitOfWork> _uoW;
-    private Mock<IAuthService> _authService;
-    private Mock<ILogger<RegisterClubCommandHandler>> _logger;
-    private Mock<ISendEmailService> _emailService;
+    private readonly Mock<IUnitOfWork> _uoW;
+    private readonly Mock<IAuthService> _authService;
+    private readonly Mock<ILogger<RegisterClubCommandHandler>> _logger;
+    private readonly Mock<ISendEmailService> _emailService;
 
     public RegisterClubCommandHandlerXUnitTests()
     {
@@ -31,7 +31,7 @@ public class RegisterClubCommandHandlerXUnitTests
     [Fact]
     public async Task Handle_Should_RegisterTheClub_WhenRegisterClubCommandIsValid()
     {
-        //Arrange   
+        //Arrange
         var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password");
         var userId = Guid.NewGuid();
         var address = ApplicationTestData.CreateAddresForTest();

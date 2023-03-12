@@ -15,7 +15,6 @@ public class ClubXUnitTest
         var club = Club.Create(addressId, userId, name);
 
         Assert.NotNull(club);
-        Assert.NotNull(club.Id);
         Assert.NotEmpty(club.Code);
         Assert.Equal(club.Name, name);
         Assert.Equal(club.UserId, userId);
@@ -32,7 +31,6 @@ public class ClubXUnitTest
         var club = Club.Create(addressId, userId, name);
 
         Assert.NotNull(club);
-        Assert.NotNull(club.Id);
         Assert.NotEmpty(club.Code);
         Assert.Equal(club.Name, name);
         Assert.Equal(club.UserId, userId);
@@ -49,7 +47,6 @@ public class ClubXUnitTest
         var club = Club.Create(addressId, userId, name);
 
         Assert.NotNull(club);
-        Assert.NotNull(club.Id);
         Assert.NotEmpty(club.Code);
         Assert.Equal(club.Name, name);
         Assert.Equal(club.UserId, userId);
@@ -65,7 +62,6 @@ public class ClubXUnitTest
         var club = Club.Create(addressId, userId, null);
 
         Assert.NotNull(club);
-        Assert.NotNull(club.Id);
         Assert.NotEmpty(club.Code);
         Assert.Null(club.Name);
         Assert.Equal(club.UserId, userId);
