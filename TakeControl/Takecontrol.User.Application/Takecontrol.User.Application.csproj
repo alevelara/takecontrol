@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Takecontrol.Shared.Application\Takecontrol.Shared.Application.csproj" />
     <ProjectReference Include="..\Takecontrol.User.Domain\Takecontrol.User.Domain.csproj" />
   </ItemGroup>
 

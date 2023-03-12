@@ -4,7 +4,7 @@ using Takecontrol.Shared.Domain.Utils;
 
 namespace Takecontrol.Credential.Application.Features.Accounts.Commands.RegisterUser;
 
-public class RegisterPlayerEventNotificationValidator : AbstractValidator<RegisterPlayerEventNotification>
+public class RegisterPlayerEventNotificationValidator : AbstractValidator<RegisterPlayerMessageNotification>
 {
     public RegisterPlayerEventNotificationValidator()
     {

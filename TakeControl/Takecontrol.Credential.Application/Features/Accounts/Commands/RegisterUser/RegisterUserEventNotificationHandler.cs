@@ -7,8 +7,8 @@ using Takecontrol.Shared.Application.Events.Credentials;
 namespace Takecontrol.Credential.Application.Features.Accounts.Commands.RegisterUser;
 
 internal sealed class RegisterUserEventNotificationHandler :
-    INotificationHandler<RegisterClubEventNotification>,
-    INotificationHandler<RegisterPlayerEventNotification>
+    INotificationHandler<RegisterClubMessageNotification>,
+    INotificationHandler<RegisterPlayerMessageNotification>
 {
     private readonly IAuthService _authService;
     private readonly IMediator _mediator;
@@ -19,7 +19,7 @@ internal sealed class RegisterUserEventNotificationHandler :
         _mediator = mediator;
     }
 
-    public async Task Handle(RegisterClubEventNotification notification, CancellationToken cancellationToken)
+    public async Task Handle(RegisterClubMessageNotification notification, CancellationToken cancellationToken)
     {
         var registerRequest = new RegistrationRequest(notification.Name, notification.Email, notification.Password, UserType.Club);
         var userId = await _authService.Register(registerRequest);
@@ -27,7 +27,7 @@ internal sealed class RegisterUserEventNotificationHandler :
         await _mediator.Publish(new UserRegisteredEventNotification(userId));
     }
 
-    public async Task Handle(RegisterPlayerEventNotification notification, CancellationToken cancellationToken)
+    public async Task Handle(RegisterPlayerMessageNotification notification, CancellationToken cancellationToken)
     {
         var registerRequest = new RegistrationRequest(notification.Name, notification.Email, notification.Password, UserType.Player);
         var userId = await _authService.Register(registerRequest);
