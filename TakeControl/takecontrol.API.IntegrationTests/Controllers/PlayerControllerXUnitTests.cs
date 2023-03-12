@@ -2,10 +2,9 @@
 using System.Net.Http.Json;
 using takecontrol.API.IntegrationTests.Primitives;
 using takecontrol.Domain.Messages.Players;
+using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Models.Players.Enums;
 using Xunit.Priority;
-using System.Linq;
-using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 

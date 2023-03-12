@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using takecontrol.IntegrationTest.Shared.Utils;
-using Xunit;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
