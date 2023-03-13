@@ -14,6 +14,10 @@ using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.API.Routes;
 using takecontrol.Domain.Models.Clubs;
 using Microsoft.EntityFrameworkCore;
+using takecontrol.Domain.Messages.Identity;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace takecontrol.API.IntegrationTests.Controllers;
 
@@ -27,12 +31,14 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
     private static string clubMainEndpoint = "api/v1/club/";
 
+    private static string loginEndpoint = "api/v1/auth/Login";
+
     private static string playerRegisterEndpoint = playerMainEndpoint + PlayerRouteName.Register;
-    
+
     private static string getAllPlayersEndpoint = playerMainEndpoint + PlayerRouteName.AllByClubId;
-    
+
     private static string clubRegisterEndpoint = clubMainEndpoint + ClubRouteName.Register;
-    
+
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
@@ -60,7 +66,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -83,7 +89,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 NumberOfYearsPlayed = (int)level * (int)level,
             };
 
-            var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+            var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
             names.Add(request.Name);
         }
 
@@ -116,7 +122,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -135,7 +141,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -154,7 +160,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -173,7 +179,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -192,7 +198,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -211,7 +217,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = -1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -230,7 +236,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        var response = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -240,38 +246,20 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     *   GetAllPlayersByClubId
     */
     [Fact]
-    public async Task GetAllPlayersByClubId_Should_Return200StatusCode() 
+    public async Task GetAllPlayersByClubId_Should_Return200StatusCode()
     {
-        // var players = Builder<Player>
-        //     .CreateNew()
-        //     .With(x => x.Id)
-        //     .With(x => x.Name)
-        //     .With(x => x.NumberOfYearsPlayed)
-        //     .Build();
-        Builder<PlayerDto>.CreateListOfSize(10).Build().ToList().ForEach(i => 
-            Console.WriteLine($"Id = {i.Id} UserId = {i.UserId} Name = {i.Name} NumberOfClasses = {i.NumberOfClassesInAWeek}")
-        );
-
-        
-        var clubs =  Builder<ClubDto>.CreateListOfSize(3).Build().ToList();
-        var numberOfPlayerPerClub = 2;
+        int numClubs = 3;
+        var clubs = Builder<ClubDto>.CreateListOfSize(numClubs).Build().ToList();
+        var numberOfPlayerPerClub = 1;
 
         List<Guid> clubIds = new List<Guid>();
+        var clubIndex = 1;
 
-        foreach(ClubDto club in clubs) {
-            numberOfPlayerPerClub *= 3;
+        foreach (ClubDto club in clubs)
+        {
+
+
             var players = Builder<PlayerDto>.CreateListOfSize(numberOfPlayerPerClub).Build().ToList();
-
-            // var clubRequest = new RegisterClubRequest
-            // {
-            //     City = club.Address.City,
-            //     Email = $"{club.Name}@clubemail.com",
-            //     MainAddress = club.Address.MainAddress,
-            //     Name = club.Name,
-            //     Password = $"{club.Name}123!",
-            //     Province = club.Address.Province
-            // };
-
             var clubRequest = new RegisterClubRequest
             {
                 City = "Sevilla",
@@ -283,38 +271,66 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             };
 
             var clubResponse = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(clubRegisterEndpoint, clubRequest, default);
-            
-            var clubCreated = await GetClubByCode(club.Code);
 
-            foreach(PlayerDto player in players) {
+            Assert.Equal(HttpStatusCode.Created, clubResponse.StatusCode);
+
+            var clubCreated = await GetClubByName(club.Name);
+            List<RegisterPlayerRequest> playersCreated = new List<RegisterPlayerRequest>();
+
+            foreach (PlayerDto player in players)
+            {
 
                 var playerRequest = new RegisterPlayerRequest
                 {
                     Name = player.Name,
-                    Email = $"{player.Name}@clubemail.com",
+                    Email = $"{player.Name}-{club.Name}@playeremail.com",
                     Password = $"{player.Name}123!",
                     AvgNumberOfMatchesInAWeek = player.AvgNumberOfMatchesInAWeek,
                     NumberOfClassesInAWeek = player.NumberOfClassesInAWeek,
                     NumberOfYearsPlayed = player.NumberOfYearsPlayed
                 };
 
-                var playerResponse = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, playerRequest, default);
+                var playerResponse = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, playerRequest, default);
+
+                Assert.Equal(HttpStatusCode.Created, playerResponse.StatusCode);
 
                 var playerCreated = await GetPlayerByName(player.Name);
-                
-                PlayerClub.Create(playerCreated.Id, clubCreated.Id);
-                clubIds.Add(clubCreated.Id);
+                var playerClubRel = PlayerClub.Create(playerCreated.Id, clubCreated.Id);
+                _takeControlDb.Context.PlayerClubs.Add(playerClubRel);
+
+                playersCreated.Add(playerRequest);
             }
+
+            // Saving relation between club and player
+            _takeControlDb.Context.SaveChanges();
+
+            // Get Player by current club id
+            var request = new AuthRequest
+            {
+                Email = playersCreated[0].Email,
+                Password = playersCreated[0].Password,
+            };
+
+            // Reading Login response
+            var responseLogin = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
+            var strBody = await responseLogin.Content.ReadAsStringAsync();
+            JObject jsonBody = JObject.Parse(strBody);
+
+            string token = jsonBody["token"].ToString();
+
+            // Reading Players by ClubId
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubCreated.Id}");
+            var strPlayers = await responsePlayersClub.Content.ReadAsStringAsync();
+
+            JArray jsonBodyPlayers = JArray.Parse(strPlayers);
+
+            var playersPerClubCount = jsonBodyPlayers.Count;
+            Assert.Equal(numberOfPlayerPerClub, playersPerClubCount);
+
+            numberOfPlayerPerClub *= 2;
+            clubIndex += 1;
         }
-
-        // Builder<Player>.CreateListOfSize(10).BuildHierarchy(players);
-
-        // Console.WriteLine("Player" + players.Name);
-
-        var responsePlayersClub1 = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubIds[0]}");
-        Console.WriteLine("TEST: " + responsePlayersClub1);
-        Assert.Equal(1, 1);
-
     }
 
     private async Task RegisterPlayerForTest()
@@ -329,14 +345,14 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfYearsPlayed = 1,
         };
 
-        await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(clubRegisterEndpoint, request, default);
+        await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, request, default);
     }
 
-    private async Task<Club> GetClubByCode(string code)
+    private async Task<Club> GetClubByName(string name)
     {
-        return await _takeControlDb.Context.Clubs?.FirstOrDefaultAsync(c => c.Code == code);
+        return await _takeControlDb.Context.Clubs?.FirstOrDefaultAsync(c => c.Name == name);
     }
-    
+
     private async Task<Player> GetPlayerByName(string name)
     {
         return await _takeControlDb.Context.Players?.FirstOrDefaultAsync(c => c.Name == name);
