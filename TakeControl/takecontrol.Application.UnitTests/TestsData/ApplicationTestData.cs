@@ -1,6 +1,7 @@
 ﻿using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Domain.Models.Emails;
+using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Models.Templates;
 using takecontrol.Domain.Models.Templates.Enum;
@@ -32,6 +33,11 @@ public static class ApplicationTestData
     public static Player CreateExpertPlayerForTest(Guid userId)
     {
         return Player.Create(userId, "name", 2, 3, 5);
+    }
+
+    public static PlayerClub AssignPlayerToClub( Player player, Club club) 
+    {
+        return PlayerClub.Create(player.Id, club.Id);
     }
 
     public static Email CreateEmailForTest()

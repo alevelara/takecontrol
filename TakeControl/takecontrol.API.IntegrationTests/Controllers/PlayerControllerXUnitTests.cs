@@ -312,8 +312,10 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Guid clubId = clubBelongToPlayers.First().Key;
         RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
 
-        // Reading Player by ClubId
-        var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint);
+        // Reading Player by ClubId - Reset token
+        
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "token-test");
+        var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubId}");
         Assert.Equal(HttpStatusCode.Unauthorized, responsePlayersClub.StatusCode);        
     }
 
@@ -330,7 +332,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             var clubRequest = new RegisterClubRequest
             {
                 City = "Sevilla",
-                Email = $"{club.Name}@clubemail.com",
+                Email = $"{club.Name}playertest@clubemail.com",
                 MainAddress = "Calle Test",
                 Name = club.Name,
                 Password = $"{club.Name}123!",
