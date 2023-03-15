@@ -246,25 +246,92 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     *   GetAllPlayersByClubId
     */
     [Fact]
-    public async Task GetAllPlayersByClubId_Should_Return200StatusCode()
+    public async Task GetAllPlayersByClubId_Should_ReturnCorrectNumberOfPlayers()
     {
         int numClubs = 3;
-        var clubs = Builder<ClubDto>.CreateListOfSize(numClubs).Build().ToList();
         var numberOfPlayerPerClub = 1;
 
-        List<Guid> clubIds = new List<Guid>();
+        Dictionary<Guid, List<RegisterPlayerRequest>> clubBelongToPlayers = await this.RegisterPlayerBelongToCLub(numClubs, numberOfPlayerPerClub);
+
+        // Guid clubId = clubBelongToPlayers.First().Key;
+        RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
+
+        // Get token
+        string token = await this.GetTokenLogin(player.Email, player.Password);
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Flatten
+        var allPlayersCreated = clubBelongToPlayers.Values
+                     .SelectMany(x => x)  
+                     .ToList();
+
+        // Reading Players by ClubId
+        foreach(Guid clubId in clubBelongToPlayers.Keys) 
+        {
+            var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubId}");
+            var strPlayers = await responsePlayersClub.Content.ReadAsStringAsync();
+
+            JArray jsonBodyPlayers = JArray.Parse(strPlayers);
+            var playersPerClubCount = jsonBodyPlayers.Count;
+
+            Assert.Equal(clubBelongToPlayers.FirstOrDefault(x => x.Key == clubId).Value.Count, playersPerClubCount);
+            Assert.NotEqual(allPlayersCreated.Count, playersPerClubCount);
+            Assert.Equal(HttpStatusCode.OK, responsePlayersClub.StatusCode);
+        }
+    }
+
+    [Fact]
+    public async Task GetAllPlayersByClubId_Return_BadRequest()
+    {
+        int numClubs = 1;
+        var numberOfPlayerPerClub = 1;
+
+        Dictionary<Guid, List<RegisterPlayerRequest>> clubBelongToPlayers = await this.RegisterPlayerBelongToCLub(numClubs, numberOfPlayerPerClub);
+
+        Guid clubId = clubBelongToPlayers.First().Key;
+        RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
+
+        // Get token
+        string token = await this.GetTokenLogin(player.Email, player.Password);
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Reading Player by ClubId
+        var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint);
+        Assert.Equal(HttpStatusCode.BadRequest, responsePlayersClub.StatusCode);        
+    }
+
+    [Fact]
+    public async Task GetAllPlayersByClubId_Return_Unauthorized()
+    {
+        int numClubs = 1;
+        var numberOfPlayerPerClub = 1;
+
+        Dictionary<Guid, List<RegisterPlayerRequest>> clubBelongToPlayers = await this.RegisterPlayerBelongToCLub(numClubs, numberOfPlayerPerClub);
+
+        // Guid clubId = clubBelongToPlayers.First().Key;
+        Guid clubId = clubBelongToPlayers.First().Key;
+        RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
+
+        // Reading Player by ClubId
+        var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint);
+        Assert.Equal(HttpStatusCode.Unauthorized, responsePlayersClub.StatusCode);        
+    }
+
+    private async Task<Dictionary<Guid, List<RegisterPlayerRequest>>> RegisterPlayerBelongToCLub(int numClubs, int numberOfPlayerPerClub) 
+    {
+        var clubs = Builder<ClubDto>.CreateListOfSize(numClubs).Build().ToList();
+
+        Dictionary<Guid, List<RegisterPlayerRequest>> clubIdsPlayers = new Dictionary<Guid, List<RegisterPlayerRequest>>();
         var clubIndex = 1;
 
         foreach (ClubDto club in clubs)
         {
-
-
             var players = Builder<PlayerDto>.CreateListOfSize(numberOfPlayerPerClub).Build().ToList();
             var clubRequest = new RegisterClubRequest
             {
                 City = "Sevilla",
                 Email = $"{club.Name}@clubemail.com",
-                MainAddress = "Cala",
+                MainAddress = "Calle Test",
                 Name = club.Name,
                 Password = $"{club.Name}123!",
                 Province = "club.Address.Province"
@@ -272,14 +339,11 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
             var clubResponse = await this._httpClient.PostAsJsonAsync<RegisterClubRequest>(clubRegisterEndpoint, clubRequest, default);
 
-            Assert.Equal(HttpStatusCode.Created, clubResponse.StatusCode);
-
             var clubCreated = await GetClubByName(club.Name);
             List<RegisterPlayerRequest> playersCreated = new List<RegisterPlayerRequest>();
 
             foreach (PlayerDto player in players)
             {
-
                 var playerRequest = new RegisterPlayerRequest
                 {
                     Name = player.Name,
@@ -289,10 +353,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                     NumberOfClassesInAWeek = player.NumberOfClassesInAWeek,
                     NumberOfYearsPlayed = player.NumberOfYearsPlayed
                 };
-
                 var playerResponse = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, playerRequest, default);
-
-                Assert.Equal(HttpStatusCode.Created, playerResponse.StatusCode);
 
                 var playerCreated = await GetPlayerByName(player.Name);
                 var playerClubRel = PlayerClub.Create(playerCreated.Id, clubCreated.Id);
@@ -301,36 +362,15 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 playersCreated.Add(playerRequest);
             }
 
-            // Saving relation between club and player
-            _takeControlDb.Context.SaveChanges();
-
-            // Get Player by current club id
-            var request = new AuthRequest
-            {
-                Email = playersCreated[0].Email,
-                Password = playersCreated[0].Password,
-            };
-
-            // Reading Login response
-            var responseLogin = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
-            var strBody = await responseLogin.Content.ReadAsStringAsync();
-            JObject jsonBody = JObject.Parse(strBody);
-
-            string token = jsonBody["token"].ToString();
-
-            // Reading Players by ClubId
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubCreated.Id}");
-            var strPlayers = await responsePlayersClub.Content.ReadAsStringAsync();
-
-            JArray jsonBodyPlayers = JArray.Parse(strPlayers);
-
-            var playersPerClubCount = jsonBodyPlayers.Count;
-            Assert.Equal(numberOfPlayerPerClub, playersPerClubCount);
-
+            clubIdsPlayers[clubCreated.Id] = playersCreated;
             numberOfPlayerPerClub *= 2;
             clubIndex += 1;
         }
+
+        // Saving relation between club and player
+        _takeControlDb.Context.SaveChanges();
+
+        return clubIdsPlayers;
     }
 
     private async Task RegisterPlayerForTest()
@@ -356,6 +396,25 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     private async Task<Player> GetPlayerByName(string name)
     {
         return await _takeControlDb.Context.Players?.FirstOrDefaultAsync(c => c.Name == name);
+    }
+
+    private async Task<string> GetTokenLogin(string email, string password) 
+    {
+        // Get Player by current club id
+        var request = new AuthRequest
+        {
+            Email = email,
+            Password = password,
+        };
+
+        // Reading Login response
+        var responseLogin = await this._httpClient.PostAsJsonAsync<AuthRequest>(loginEndpoint, request, CancellationToken.None);
+        var strBody = await responseLogin.Content.ReadAsStringAsync();
+        JObject jsonBody = JObject.Parse(strBody);
+
+        Console.WriteLine("JSON: " + jsonBody);
+
+        return jsonBody is not null ? jsonBody["token"].ToString() : "";
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
