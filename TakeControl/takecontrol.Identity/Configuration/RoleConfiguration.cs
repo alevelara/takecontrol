@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Identity.Constants;
+using Takecontrol.Identity.Constants;
 
-namespace takecontrol.Identity.Configuration;
+namespace Takecontrol.Identity.Configuration;
 
 public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
 {

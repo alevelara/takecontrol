@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Moq;
-using takecontrol.EmailEngine.IntegrationTests.Mocks;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.IntegrationTests.Mocks;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.EmailEngine.IntegrationTests
+namespace Takecontrol.EmailEngine.IntegrationTests
 {
     public class EmailDbContextFixture : IAsyncLifetime
     {

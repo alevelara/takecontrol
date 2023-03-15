@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.EmailEngine.UnitTests.TestsData;
+namespace Takecontrol.EmailEngine.UnitTests.TestsData;
 
 public static class EmailTestData
 {

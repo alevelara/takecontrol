@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.Emails;
+﻿using Takecontrol.Domain.Models.Emails;
 
-namespace takecontrol.Application.Contracts.Persitence.Emails
+namespace Takecontrol.Application.Contracts.Persitence.Emails
 {
     public interface IEmailWriteRepository
     {

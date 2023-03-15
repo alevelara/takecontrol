@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\takecontrol.API\takecontrol.API.csproj" />
+    <ProjectReference Include="..\takecontrol.API\Takecontrol.API.csproj" />
     <ProjectReference Include="..\takecontrol.IntegrationTest.Shared\takecontrol.IntegrationTest.Shared.csproj" />
   </ItemGroup>
 

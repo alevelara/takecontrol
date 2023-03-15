@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Application.Contracts.Persitence.Templates;
+namespace Takecontrol.Application.Contracts.Persitence.Templates;
 
 public interface ITemplateAsyncReadRepository
 {

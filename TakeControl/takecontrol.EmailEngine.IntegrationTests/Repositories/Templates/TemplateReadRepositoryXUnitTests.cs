@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Persistence.Data;
-using takecontrol.EmailEngine.Repositories.Templates;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Data;
+using Takecontrol.EmailEngine.Repositories.Templates;
 
-namespace takecontrol.EmailEngine.IntegrationTests.Repositories.Templates;
+namespace Takecontrol.EmailEngine.IntegrationTests.Repositories.Templates;
 
 [Collection(SharedTestCollection.Name)]
 [Trait("Category", "EmailIntegrationTests")]

@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Moq;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
-namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPassword;
+namespace Takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPassword;
 
 [Trait("Category", "UnitTests")]
 public class ResetPasswordCommandHandlerXUnitTests

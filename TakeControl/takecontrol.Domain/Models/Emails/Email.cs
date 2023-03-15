@@ -1,9 +1,9 @@
-﻿using takecontrol.Domain.Models.Emails.Enums;
-using takecontrol.Domain.Models.Emails.ValueObjects;
-using takecontrol.Domain.Models.Templates.Enum;
-using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Models.Emails.Enums;
+using Takecontrol.Domain.Models.Emails.ValueObjects;
+using Takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Emails;
+namespace Takecontrol.Domain.Models.Emails;
 
 public sealed class Email : BaseDomainModel
 {

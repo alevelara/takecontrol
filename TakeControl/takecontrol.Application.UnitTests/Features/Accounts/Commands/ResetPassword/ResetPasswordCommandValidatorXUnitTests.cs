@@ -1,6 +1,6 @@
-﻿using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+﻿using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
-namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPassword;
+namespace Takecontrol.Application.UnitTests.Features.Accounts.Commands.ResetPassword;
 
 [Trait("Category", "UnitTests")]
 public class ResetPasswordCommandValidatorXUnitTests : IClassFixture<ResetPasswordCommandValidatorXUnitTests>

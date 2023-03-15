@@ -1,16 +1,16 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using takecontrol.API.IntegrationTests.Primitives;
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.Domain.Messages.Clubs;
-using takecontrol.Domain.Messages.Players;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Players.Enums;
-using takecontrol.IntegrationTest.Shared.Repositories.Clubs;
-using takecontrol.IntegrationTest.Shared.Repositories.Players;
+using Takecontrol.API.IntegrationTests.Primitives;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.Domain.Messages.Clubs;
+using Takecontrol.Domain.Messages.Players;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.IntegrationTest.Shared.Repositories.Clubs;
+using Takecontrol.IntegrationTest.Shared.Repositories.Players;
 using Xunit.Priority;
 
-namespace takecontrol.API.IntegrationTests.Controllers;
+namespace Takecontrol.API.IntegrationTests.Controllers;
 
 [Trait("Category", "IntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]

@@ -1,7 +1,7 @@
 ﻿using RazorEngineCore;
-using takecontrol.Application.Contracts.Templates;
+using Takecontrol.Application.Contracts.Templates;
 
-namespace takecontrol.EmailEngine.Services
+namespace Takecontrol.EmailEngine.Services
 {
     public class TemplateLoader : ITemplateLoader
     {

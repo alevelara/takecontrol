@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.Clubs;
+﻿using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.Domain.UnitTests.Models.Clubs;
+namespace Takecontrol.Domain.UnitTests.Models.Clubs;
 
 [Trait("Category", "UnitTests")]
 public class ClubXUnitTest

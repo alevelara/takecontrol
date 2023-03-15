@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Emails.ValueObjects;
+namespace Takecontrol.Domain.Models.Emails.ValueObjects;
 
 public class EmailId : ValueObject
 {

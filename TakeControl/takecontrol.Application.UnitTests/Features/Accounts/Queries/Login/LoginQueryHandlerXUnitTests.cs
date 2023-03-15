@@ -1,8 +1,8 @@
 ﻿using Moq;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 

@@ -1,6 +1,6 @@
 ﻿using MailKit.Security;
 using MimeKit;
-using takecontrol.Domain.Models.Emails.Options;
+using Takecontrol.Domain.Models.Emails.Options;
 
 namespace Takecontrol.EmailEngine.Helpers
 {

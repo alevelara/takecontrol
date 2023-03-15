@@ -1,4 +1,4 @@
-﻿using takecontrol.Application.Features.Accounts.Queries.Login;
+﻿using Takecontrol.Application.Features.Accounts.Queries.Login;
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 

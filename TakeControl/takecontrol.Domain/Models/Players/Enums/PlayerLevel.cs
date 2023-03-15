@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models.Players.Enums;
+﻿namespace Takecontrol.Domain.Models.Players.Enums;
 
 public enum PlayerLevel
 {

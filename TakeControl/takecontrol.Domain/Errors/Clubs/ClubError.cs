@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Errors.Clubs;
+namespace Takecontrol.Domain.Errors.Clubs;
 
 public sealed class ClubError : DomainError
 {

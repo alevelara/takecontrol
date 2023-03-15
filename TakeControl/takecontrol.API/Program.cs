@@ -1,8 +1,8 @@
-using takecontrol.API.Mappings;
-using takecontrol.API.Middlewares;
-using takecontrol.Application;
-using takecontrol.EmailEngine;
-using takecontrol.Identity;
+using Takecontrol.API.Mappings;
+using Takecontrol.API.Middlewares;
+using Takecontrol.Application;
+using Takecontrol.EmailEngine;
+using Takecontrol.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 {

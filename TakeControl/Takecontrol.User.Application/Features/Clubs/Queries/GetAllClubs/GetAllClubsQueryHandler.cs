@@ -1,8 +1,8 @@
-﻿using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Domain.Models.Clubs;
+﻿using Takecontrol.Shared.Application.Abstractions.Mediatr;
+using Takecontrol.User.Application.Contracts.Persistence.Clubs;
+using Takecontrol.User.Domain.Models.Clubs;
 
-namespace takecontrol.Application.Features.Clubs.Queries.GetAllClubs;
+namespace Takecontrol.User.Application.Features.Clubs.Queries.GetAllClubs;
 
 public class GetAllClubsQueryHandler : IQueryHandler<GetAllClubsQuery, List<Club>>
 {

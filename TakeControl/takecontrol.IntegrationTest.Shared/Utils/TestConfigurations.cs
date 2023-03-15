@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace takecontrol.IntegrationTest.Shared.Utils;
+namespace Takecontrol.IntegrationTest.Shared.Utils;
 
 public static class TestConfigurations
 {

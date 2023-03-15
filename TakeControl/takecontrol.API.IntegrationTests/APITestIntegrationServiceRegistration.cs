@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.Identity;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.Identity;
 
-namespace takecontrol.API.IntegrationTests;
+namespace Takecontrol.API.IntegrationTests;
 
 public static class APITestIntegrationServiceRegistration
 {

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.Identity;
+using Takecontrol.Identity;
 
 #nullable disable
 
-namespace takecontrol.Infrastructure.Migrations
+namespace Takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
     [Migration("20230304201235_FirstMigration")]

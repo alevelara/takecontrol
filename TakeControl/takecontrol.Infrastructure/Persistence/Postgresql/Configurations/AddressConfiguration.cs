@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Addresses;
 
-namespace takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
+namespace Takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 
 public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {

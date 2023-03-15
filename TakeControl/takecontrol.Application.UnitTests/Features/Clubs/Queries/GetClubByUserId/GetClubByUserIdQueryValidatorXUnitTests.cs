@@ -1,7 +1,7 @@
-﻿using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
-using takecontrol.Application.Features.Clubs.Queries.GetClubById;
+﻿using Takecontrol.Application.Features.Clubs.Queries.GetByUserId;
+using Takecontrol.Application.Features.Clubs.Queries.GetClubById;
 
-namespace takecontrol.Application.UnitTests.Features.Clubs.Queries.GetClubByUserId;
+namespace Takecontrol.Application.UnitTests.Features.Clubs.Queries.GetClubByUserId;
 
 public class GetClubByUserIdQueryValidatorXUnitTests : IClassFixture<GetClubByUserIdQueryValidator>
 {

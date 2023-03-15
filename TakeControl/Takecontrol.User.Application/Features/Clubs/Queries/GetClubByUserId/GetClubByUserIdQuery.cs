@@ -1,10 +1,9 @@
-﻿using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Domain.Models.Clubs;
+﻿using Takecontrol.Shared.Application.Abstractions.Mediatr;
+using Takecontrol.User.Domain.Models.Clubs;
 
-namespace takecontrol.Application.Features.Clubs.Queries.GetByUserId
+namespace Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
+
+public sealed record class GetClubByUserIdQuery(Guid UserId)
+    : IQuery<Club>
 {
-    public sealed record class GetClubByUserIdQuery(Guid UserId)
-        : IQuery<Club>
-    {
-    }
 }

@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using takecontrol.Application.Exceptions;
-using takecontrol.Domain.Primitives;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Application.Behaviors;
+namespace Takecontrol.Application.Behaviors;
 
 public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

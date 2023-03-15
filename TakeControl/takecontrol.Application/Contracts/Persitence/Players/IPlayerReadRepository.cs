@@ -1,6 +1,6 @@
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.Contracts.Persitence.Players;
+namespace Takecontrol.Application.Contracts.Persitence.Players;
 
 public interface IPlayerReadRepository
 {

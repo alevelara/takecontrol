@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace takecontrol.EmailEngine.Migrations
+namespace Takecontrol.EmailEngine.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration

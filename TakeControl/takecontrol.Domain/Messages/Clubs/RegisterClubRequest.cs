@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Messages.Clubs;
+﻿namespace Takecontrol.Domain.Messages.Clubs;
 
 public class RegisterClubRequest
 {

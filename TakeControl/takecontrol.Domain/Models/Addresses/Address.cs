@@ -1,8 +1,8 @@
-﻿using takecontrol.Domain.Models.Addresses.ValueObjects;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Models.Addresses.ValueObjects;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Addresses;
+namespace Takecontrol.Domain.Models.Addresses;
 
 public class Address : BaseDomainModel
 {

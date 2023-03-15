@@ -1,11 +1,11 @@
-﻿using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Application.Tests.TestsData;
+namespace Takecontrol.Application.Tests.TestsData;
 
 public static class ApplicationTestData
 {

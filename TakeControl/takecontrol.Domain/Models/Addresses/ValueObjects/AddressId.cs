@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Addresses.ValueObjects;
+namespace Takecontrol.Domain.Models.Addresses.ValueObjects;
 
 public class AddresId : ValueObject
 {

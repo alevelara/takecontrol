@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace takecontrol.Identity.Configuration;
+namespace Takecontrol.Identity.Configuration;
 
 public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<Guid>>
 {

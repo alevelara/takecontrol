@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.EmailEngine.IntegrationTests.Mocks;
+namespace Takecontrol.EmailEngine.IntegrationTests.Mocks;
 
 public class MockDbContext
 {

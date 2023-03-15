@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Identity;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives.Clubs;
+namespace Takecontrol.Infrastructure.Repositories.Primitives.Clubs;
 
 public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
 {

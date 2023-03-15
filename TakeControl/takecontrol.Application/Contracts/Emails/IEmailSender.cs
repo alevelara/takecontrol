@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Templates;
+﻿using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Templates;
 
-namespace takecontrol.Application.Contracts.Emails;
+namespace Takecontrol.Application.Contracts.Emails;
 
 public interface IEmailSender
 {

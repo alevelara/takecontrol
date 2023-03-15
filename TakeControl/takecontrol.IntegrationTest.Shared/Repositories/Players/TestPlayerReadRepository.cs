@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.IntegrationTest.Shared.Repositories.Players;
+namespace Takecontrol.IntegrationTest.Shared.Repositories.Players;
 
 public class TestPlayerReadRepository
 {

@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Utils;
+﻿namespace Takecontrol.Domain.Utils;
 
 public static class RandomGenerator
 {

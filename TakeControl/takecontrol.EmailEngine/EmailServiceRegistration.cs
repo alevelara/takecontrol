@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.Application.Contracts.Emails;
-using takecontrol.Application.Contracts.Persitence.Emails;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Contracts.Persitence.Templates;
-using takecontrol.Application.Contracts.Templates;
-using takecontrol.Domain.Models.Emails.Options;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Repositories.Emails;
-using takecontrol.EmailEngine.Repositories.Primitives;
-using takecontrol.EmailEngine.Repositories.Templates;
-using takecontrol.EmailEngine.Services;
-using takecontrol.Infrastructure.Repositories.Primitives;
+using Takecontrol.Application.Contracts.Emails;
+using Takecontrol.Application.Contracts.Persitence.Emails;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Contracts.Persitence.Templates;
+using Takecontrol.Application.Contracts.Templates;
+using Takecontrol.Domain.Models.Emails.Options;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Repositories.Emails;
+using Takecontrol.EmailEngine.Repositories.Primitives;
+using Takecontrol.EmailEngine.Repositories.Templates;
+using Takecontrol.EmailEngine.Services;
+using Takecontrol.Infrastructure.Repositories.Primitives;
 
-namespace takecontrol.EmailEngine;
+namespace Takecontrol.EmailEngine;
 
 public static class EmailServiceRegistration
 {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Identity.Models;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Identity.Models;
 
-namespace takecontrol.Identity.Configuration;
+namespace Takecontrol.Identity.Configuration;
 
 public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {

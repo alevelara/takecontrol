@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
-using takecontrol.API.Errors;
-using takecontrol.Application.Exceptions;
+using Takecontrol.API.Errors;
+using Takecontrol.Application.Exceptions;
 
-namespace takecontrol.API.Middlewares;
+namespace Takecontrol.API.Middlewares;
 
 public class ExceptionHandlingMiddleware : IMiddleware
 {

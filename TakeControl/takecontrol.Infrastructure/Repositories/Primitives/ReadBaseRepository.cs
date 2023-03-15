@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Domain.Primitives;
-using takecontrol.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Domain.Primitives;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives;
+namespace Takecontrol.Infrastructure.Repositories.Primitives;
 
 public class ReadBaseRepository<T> : IAsyncReadRepository<T>
     where T : BaseDomainModel

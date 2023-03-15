@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Abstractions.Mediatr;
 
-namespace takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+namespace Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
 public sealed record class ResetPasswordCommand(
     string Email,

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
 #nullable disable
 
-namespace takecontrol.EmailEngine.Migrations
+namespace Takecontrol.EmailEngine.Migrations
 {
     [DbContext(typeof(EmailDbContext))]
     partial class EmailDbContextModelSnapshot : ModelSnapshot

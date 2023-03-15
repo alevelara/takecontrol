@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Messages.Identity;
+﻿namespace Takecontrol.Domain.Messages.Identity;
 
 public class AuthRequest
 {

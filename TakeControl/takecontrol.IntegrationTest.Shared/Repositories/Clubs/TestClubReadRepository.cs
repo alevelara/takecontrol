@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.Domain.Models.Clubs;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.IntegrationTest.Shared.Repositories.Clubs;
+namespace Takecontrol.IntegrationTest.Shared.Repositories.Clubs;
 
 public class TestClubReadRepository
 {

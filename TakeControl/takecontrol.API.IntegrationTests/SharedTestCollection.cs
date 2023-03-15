@@ -1,7 +1,7 @@
-﻿using takecontrol.API.IntegrationTests.Primitives;
+﻿using Takecontrol.API.IntegrationTests.Primitives;
 using Xunit;
 
-namespace takecontrol.API.IntegrationTests;
+namespace Takecontrol.API.IntegrationTests;
 
 [CollectionDefinition(SharedTestCollection.Name)]
 public class SharedTestCollection : ICollectionFixture<ApiWebApplicationFactory<Program>>

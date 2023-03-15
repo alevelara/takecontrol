@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
-using takecontrol.EmailEngine.Persistence.Data;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.EmailEngine.Persistence.Data;
 
-namespace takecontrol.EmailEngine.Persistence.Configurations;
+namespace Takecontrol.EmailEngine.Persistence.Configurations;
 
 public class TemplateConfiguration : IEntityTypeConfiguration<Template>
 {

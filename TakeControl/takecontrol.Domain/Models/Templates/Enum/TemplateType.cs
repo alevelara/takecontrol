@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models.Templates.Enum;
+﻿namespace Takecontrol.Domain.Models.Templates.Enum;
 
 public enum TemplateType
 {

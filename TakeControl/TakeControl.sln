@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Domain", "takec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Application", "takecontrol.Application\takecontrol.Application.csproj", "{51C387A6-C879-45C2-A7F9-BDEFB45584CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.API", "takecontrol.API\takecontrol.API.csproj", "{A64F1525-8EF2-45B9-B93C-FDB5597ACD81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.API", "takecontrol.API\Takecontrol.API.csproj", "{A64F1525-8EF2-45B9-B93C-FDB5597ACD81}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "takecontrol.Infrastructure", "takecontrol.Infrastructure\takecontrol.Infrastructure.csproj", "{18AC54E3-0F6A-421F-BE2D-0AF7D23DED8B}"
 EndProject
@@ -80,6 +80,26 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Emails.Application", "Takecontrol.Email.Application\Takecontrol.Emails.Application.csproj", "{C2377FF3-E8F2-4327-BB18-8CA1C3477725}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Emails.Infrastructure", "Takecontrol.Email.Infrastructure\Takecontrol.Emails.Infrastructure.csproj", "{E2281426-CA25-4F51-BD72-E0A9EECAC5ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6BD5F750-1CEC-46A8-B709-30A655836CDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Shared.Tests", "Takecontrol.Shared.Tests\Takecontrol.Shared.Tests.csproj", "{0182B7AD-1CF4-4859-A960-5BCDD78FC088}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{012ECB83-4A27-4606-95D7-E8DFC7947B3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AB25C4E8-A74E-45B0-817C-242DC1213E5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{15717DC7-4A1A-4148-B395-75D1023ADBFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5F7CF46B-6D06-4459-AB5F-EF294690218F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.API.Tests", "Takecontrol.API.Tests\Takecontrol.API.Tests.csproj", "{D8FED414-82F3-4E6D-B642-69027DF80C76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Credential.Application.Tests", "Takecontrol.Credential.Application.Tests\Takecontrol.Credential.Application.Tests.csproj", "{1A0D5D63-4DA1-4123-AECE-B044EED23728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Credential.Domain.Tests", "Takecontrol.Credential.Domain.Tests\Takecontrol.Credential.Domain.Tests.csproj", "{BA1645CE-7534-4E61-A531-4E6FCF5523C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Credential.Infrastructure.Tests", "Takecontrol.Credential.Infrastructure.Tests\Takecontrol.Credential.Infrastructure.Tests.csproj", "{E9397A9D-5416-4C44-8DA4-9EB55956553E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +203,26 @@ Global
 		{E2281426-CA25-4F51-BD72-E0A9EECAC5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2281426-CA25-4F51-BD72-E0A9EECAC5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2281426-CA25-4F51-BD72-E0A9EECAC5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0182B7AD-1CF4-4859-A960-5BCDD78FC088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0182B7AD-1CF4-4859-A960-5BCDD78FC088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0182B7AD-1CF4-4859-A960-5BCDD78FC088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0182B7AD-1CF4-4859-A960-5BCDD78FC088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8FED414-82F3-4E6D-B642-69027DF80C76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8FED414-82F3-4E6D-B642-69027DF80C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8FED414-82F3-4E6D-B642-69027DF80C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8FED414-82F3-4E6D-B642-69027DF80C76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0D5D63-4DA1-4123-AECE-B044EED23728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0D5D63-4DA1-4123-AECE-B044EED23728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0D5D63-4DA1-4123-AECE-B044EED23728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0D5D63-4DA1-4123-AECE-B044EED23728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1645CE-7534-4E61-A531-4E6FCF5523C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1645CE-7534-4E61-A531-4E6FCF5523C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1645CE-7534-4E61-A531-4E6FCF5523C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1645CE-7534-4E61-A531-4E6FCF5523C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9397A9D-5416-4C44-8DA4-9EB55956553E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9397A9D-5416-4C44-8DA4-9EB55956553E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9397A9D-5416-4C44-8DA4-9EB55956553E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9397A9D-5416-4C44-8DA4-9EB55956553E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,6 +264,16 @@ Global
 		{61430579-56B7-48D3-8A49-76C5D0CF825D} = {8DAE82DE-A4B9-4B99-BDCA-C75245C3362C}
 		{C2377FF3-E8F2-4327-BB18-8CA1C3477725} = {8DAE82DE-A4B9-4B99-BDCA-C75245C3362C}
 		{E2281426-CA25-4F51-BD72-E0A9EECAC5ED} = {8DAE82DE-A4B9-4B99-BDCA-C75245C3362C}
+		{6BD5F750-1CEC-46A8-B709-30A655836CDD} = {3B79D760-BE5F-4ACA-A289-49CAF709AC37}
+		{0182B7AD-1CF4-4859-A960-5BCDD78FC088} = {6BD5F750-1CEC-46A8-B709-30A655836CDD}
+		{012ECB83-4A27-4606-95D7-E8DFC7947B3C} = {64911A8D-4888-4824-98FE-32E491B12FDB}
+		{AB25C4E8-A74E-45B0-817C-242DC1213E5B} = {8DAE82DE-A4B9-4B99-BDCA-C75245C3362C}
+		{15717DC7-4A1A-4148-B395-75D1023ADBFA} = {3B2141C4-7F28-49AD-BE1B-7F31659D678F}
+		{5F7CF46B-6D06-4459-AB5F-EF294690218F} = {49F108B4-BCA8-4392-8DD7-5F9E3B83DE17}
+		{D8FED414-82F3-4E6D-B642-69027DF80C76} = {5F7CF46B-6D06-4459-AB5F-EF294690218F}
+		{1A0D5D63-4DA1-4123-AECE-B044EED23728} = {012ECB83-4A27-4606-95D7-E8DFC7947B3C}
+		{BA1645CE-7534-4E61-A531-4E6FCF5523C7} = {012ECB83-4A27-4606-95D7-E8DFC7947B3C}
+		{E9397A9D-5416-4C44-8DA4-9EB55956553E} = {012ECB83-4A27-4606-95D7-E8DFC7947B3C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97C30148-4293-4FAD-837B-5A66762FD1E3}

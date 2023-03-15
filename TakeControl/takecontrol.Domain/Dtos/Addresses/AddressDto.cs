@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Dtos.Addresses;
+﻿namespace Takecontrol.Domain.Dtos.Addresses;
 
 public sealed class AddressDto
 {

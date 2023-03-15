@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models.Emails.Enums
+﻿namespace Takecontrol.Domain.Models.Emails.Enums
 {
     public enum EmailStatus
     {

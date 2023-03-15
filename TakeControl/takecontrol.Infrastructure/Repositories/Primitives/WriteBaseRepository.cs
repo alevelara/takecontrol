@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Domain.Primitives;
-using takecontrol.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Domain.Primitives;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives;
+namespace Takecontrol.Infrastructure.Repositories.Primitives;
 
 public class WriteBaseRepository<T> : IAsyncWriteRepository<T>
     where T : BaseDomainModel

@@ -1,10 +1,10 @@
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Players.Enums;
-using takecontrol.Infrastructure.IntegrationTests.Mocks;
-using takecontrol.Infrastructure.Repositories.Primitives.Players;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.Infrastructure.IntegrationTests.Mocks;
+using Takecontrol.Infrastructure.Repositories.Primitives.Players;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
+namespace Takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
 
 [Trait("Category", "IntegrationTests")]
 [Collection(SharedTestCollection.Name)]

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.Players;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Identity;
+using Takecontrol.Application.Contracts.Persitence.Players;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives.Players;
+namespace Takecontrol.Infrastructure.Repositories.Primitives.Players;
 
 public class PlayerReadRepository : ReadBaseRepository<Player>, IPlayerReadRepository
 {

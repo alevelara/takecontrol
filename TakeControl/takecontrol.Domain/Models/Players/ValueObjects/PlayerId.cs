@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Clubs.ValueObjects;
+namespace Takecontrol.Domain.Models.Clubs.ValueObjects;
 
 public class PlayerId : ValueObject
 {

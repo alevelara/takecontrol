@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Players.Enums;
 
-namespace takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
+namespace Takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 
 public class PlayerConfiguration : IEntityTypeConfiguration<Player>
 {

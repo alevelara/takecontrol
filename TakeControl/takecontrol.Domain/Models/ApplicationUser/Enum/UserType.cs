@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models.ApplicationUser.Enum;
+﻿namespace Takecontrol.Domain.Models.ApplicationUser.Enum;
 
 public enum UserType
 {

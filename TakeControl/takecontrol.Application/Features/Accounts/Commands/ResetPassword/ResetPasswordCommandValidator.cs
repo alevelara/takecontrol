@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using takecontrol.Domain.Utils;
+using Takecontrol.Domain.Utils;
 
-namespace takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+namespace Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
 
 public class ResetPasswordCommandValidator : AbstractValidator<ResetPasswordCommand>
 {

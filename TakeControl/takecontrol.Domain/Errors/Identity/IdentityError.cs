@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Errors.Identity;
+namespace Takecontrol.Domain.Errors.Identity;
 
 public sealed class IdentityError : DomainError
 {

@@ -1,9 +1,9 @@
 using AutoFixture;
 using Castle.DynamicProxy.Generators;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Identity;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Mocks;
+namespace Takecontrol.Infrastructure.IntegrationTests.Mocks;
 
 public static class MockPlayerRepository
 {

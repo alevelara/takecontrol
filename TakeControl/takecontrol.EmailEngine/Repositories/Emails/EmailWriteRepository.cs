@@ -1,9 +1,9 @@
-﻿using takecontrol.Application.Contracts.Persitence.Emails;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Repositories.Primitives;
+﻿using Takecontrol.Application.Contracts.Persitence.Emails;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Repositories.Primitives;
 
-namespace takecontrol.EmailEngine.Repositories.Emails;
+namespace Takecontrol.EmailEngine.Repositories.Emails;
 
 public class EmailWriteRepository : WriteBaseRepository<Email>, IEmailWriteRepository
 {

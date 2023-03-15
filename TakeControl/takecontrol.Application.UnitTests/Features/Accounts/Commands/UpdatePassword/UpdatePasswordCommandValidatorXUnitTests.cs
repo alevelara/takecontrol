@@ -1,6 +1,6 @@
-﻿using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+﻿using Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 
-namespace takecontrol.Application.UnitTests.Features.Accounts.Commands.UpdatePassword;
+namespace Takecontrol.Application.UnitTests.Features.Accounts.Commands.UpdatePassword;
 
 [Trait("Category", "UnitTests")]
 public class UpdatePasswordCommandValidatorXUnitTests : IClassFixture<UpdatePasswordCommandValidatorXUnitTests>

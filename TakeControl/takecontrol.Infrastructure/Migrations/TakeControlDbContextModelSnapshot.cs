@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.Identity;
+using Takecontrol.Identity;
 
 #nullable disable
 
-namespace takecontrol.Infrastructure.Migrations
+namespace Takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
     partial class TakeControlDbContextModelSnapshot : ModelSnapshot

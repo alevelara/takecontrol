@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Application.Services.Emails;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Infrastructure.IntegrationTests.Mocks;
-using takecontrol.Infrastructure.Repositories.Primitives;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.Application.Services.Emails;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Infrastructure.IntegrationTests.Mocks;
+using Takecontrol.Infrastructure.Repositories.Primitives;
 using Xunit.Priority;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.Infrastructure.IntegrationTests.Features.Clubs.Commands.RegisterClub;
 
 [Trait("Category", "InfrastructureIntegrationTests")]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]

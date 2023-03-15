@@ -1,8 +1,8 @@
-﻿using takecontrol.Domain.Models.Templates.Enum;
-using takecontrol.Domain.Models.Templates.ValueObjects;
-using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.Domain.Models.Templates.ValueObjects;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Templates
+namespace Takecontrol.Domain.Models.Templates
 {
     public class Template : BaseDomainModel
     {

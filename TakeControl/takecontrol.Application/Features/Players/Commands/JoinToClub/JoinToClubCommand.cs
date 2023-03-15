@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Abstractions.Mediatr;
 
-namespace takecontrol.Application.Features.Players.Commands.JoinToClub;
+namespace Takecontrol.Application.Features.Players.Commands.JoinToClub;
 
 public sealed record class JoinToClubCommand(Guid PlayerId, Guid ClubId, string Code) : ICommand<Unit>
 {

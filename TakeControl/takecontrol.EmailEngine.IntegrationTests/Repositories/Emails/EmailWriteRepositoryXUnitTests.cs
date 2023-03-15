@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.EmailEngine.IntegrationTests;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Repositories.Emails;
-using takecontrol.EmailEngine.UnitTests.TestsData;
+using Takecontrol.EmailEngine.IntegrationTests;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Repositories.Emails;
+using Takecontrol.EmailEngine.UnitTests.TestsData;
 
-namespace takecontrol.EmailEngine.UnitTests.Repositories.Emails;
+namespace Takecontrol.EmailEngine.UnitTests.Repositories.Emails;
 
 [Collection(SharedTestCollection.Name)]
 [Trait("Category", "EmailIntegrationTests")]

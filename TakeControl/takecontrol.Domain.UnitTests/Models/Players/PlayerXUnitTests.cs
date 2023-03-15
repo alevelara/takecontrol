@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Players.Enums;
 
-namespace takecontrol.Domain.UnitTests.Models.Players;
+namespace Takecontrol.Domain.UnitTests.Models.Players;
 
 [Trait("Category", "UnitTests")]
 public class PlayerXUnitTests

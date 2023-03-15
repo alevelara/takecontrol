@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.Templates;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.Application.Contracts.Persitence.Templates;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.EmailEngine.Repositories.Templates;
+namespace Takecontrol.EmailEngine.Repositories.Templates;
 
 public class TemplateReadRepository : ITemplateAsyncReadRepository
 {

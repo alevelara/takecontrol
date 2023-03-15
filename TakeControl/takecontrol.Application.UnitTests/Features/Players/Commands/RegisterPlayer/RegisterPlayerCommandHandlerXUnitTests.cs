@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
-using takecontrol.Application.Services.Emails;
-using takecontrol.Application.Tests.TestsData;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.Application.Services.Emails;
+using Takecontrol.Application.Tests.TestsData;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer;
+namespace Takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer;
 
 [Trait("Category", "UnitTests")]
 public class RegisterPlayerCommandHandlerXUnitTests

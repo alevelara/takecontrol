@@ -2,7 +2,7 @@
 using Mapster;
 using MapsterMapper;
 
-namespace takecontrol.API.Mappings;
+namespace Takecontrol.API.Mappings;
 
 public static class MappingServiceRegistration
 {

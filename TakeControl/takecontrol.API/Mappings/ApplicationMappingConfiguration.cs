@@ -1,21 +1,21 @@
 ﻿using Mapster;
-using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
-using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
-using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Application.Features.Players.Commands.JoinToClub;
-using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
-using takecontrol.Domain.Dtos.Addresses;
-using takecontrol.Domain.Dtos.Clubs;
-using takecontrol.Domain.Dtos.Players;
-using takecontrol.Domain.Messages.Clubs;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Messages.Players;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+using Takecontrol.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.Application.Features.Players.Commands.JoinToClub;
+using Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.Domain.Dtos.Addresses;
+using Takecontrol.Domain.Dtos.Clubs;
+using Takecontrol.Domain.Dtos.Players;
+using Takecontrol.Domain.Messages.Clubs;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Messages.Players;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.API.Mappings
+namespace Takecontrol.API.Mappings
 {
     public class ApplicationMappingConfiguration : IRegister
     {

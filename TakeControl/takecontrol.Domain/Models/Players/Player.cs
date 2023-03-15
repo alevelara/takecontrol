@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using takecontrol.Domain.Models.Clubs.ValueObjects;
-using takecontrol.Domain.Models.PlayerClubs;
-using takecontrol.Domain.Primitives;
+using Takecontrol.Domain.Models.Clubs.ValueObjects;
+using Takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Players;
+namespace Takecontrol.Domain.Models.Players;
 
 public class Player : BaseDomainModel
 {

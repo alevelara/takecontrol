@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace takecontrol.API.Errors;
+namespace Takecontrol.API.Errors;
 
 public class CodeErrorResponse
 {

@@ -1,8 +1,7 @@
-﻿namespace takecontrol.API.Routes
+﻿namespace Takecontrol.API.Routes;
+
+public static class PlayerRouteName
 {
-    public static class PlayerRouteName
-    {
-        public const string Register = "Register";
-        public const string Join = "Join";
-    }
+    public const string Register = "Register";
+    public const string Join = "Join";
 }

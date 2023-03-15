@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Abstractions.Mediatr;
 
-namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+namespace Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommand : ICommand<Unit>
 {

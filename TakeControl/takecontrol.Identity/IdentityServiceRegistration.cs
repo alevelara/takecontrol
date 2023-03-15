@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Options;
-using takecontrol.Identity.Models;
-using takecontrol.Identity.Services;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Domain.Models.ApplicationUser.Options;
+using Takecontrol.Identity.Models;
+using Takecontrol.Identity.Services;
 
-namespace takecontrol.Identity;
+namespace Takecontrol.Identity;
 
 public static class IdentityServiceRegistration
 {
