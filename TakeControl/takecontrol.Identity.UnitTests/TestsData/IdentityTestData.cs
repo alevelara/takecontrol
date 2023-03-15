@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Identity.Models;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Identity.Models;
 
-namespace takecontrol.Identity.Tests.TestsData;
+namespace Takecontrol.Identity.Tests.TestsData;
 
 public static class IdentityTestData
 {

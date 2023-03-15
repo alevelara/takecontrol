@@ -3,15 +3,15 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using takecontrol.API.Routes;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Application.Features.Clubs.Queries.GetAllClubs;
-using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
-using takecontrol.Domain.Dtos.Clubs;
-using takecontrol.Domain.Messages.Clubs;
-using takecontrol.Identity.Constants;
+using Takecontrol.API.Routes;
+using Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.Application.Features.Clubs.Queries.GetAllClubs;
+using Takecontrol.Application.Features.Clubs.Queries.GetByUserId;
+using Takecontrol.Domain.Dtos.Clubs;
+using Takecontrol.Domain.Messages.Clubs;
+using Takecontrol.Identity.Constants;
 
-namespace takecontrol.API.Controllers;
+namespace Takecontrol.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace takecontrol.IntegrationTest.Shared.Utils;
+namespace Takecontrol.IntegrationTest.Shared.Utils;
 
 public static class TestConfigurations
 {
-    private static string apiName = "takecontrol.API";
+    private static string apiName = "Takecontrol.API";
 
     public static IConfiguration GetAppTestingConfiguration()
     {

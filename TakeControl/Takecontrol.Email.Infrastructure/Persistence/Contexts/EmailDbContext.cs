@@ -46,7 +46,7 @@ public class EmailDbContext : DbContext
 
     public class EmailDBContextFactory : IDesignTimeDbContextFactory<EmailDbContext>
     {
-        public static string API_NAME = "takecontrol.API";
+        public static string API_NAME = "Takecontrol.API";
 
         public EmailDbContext CreateDbContext(string[] args)
         {

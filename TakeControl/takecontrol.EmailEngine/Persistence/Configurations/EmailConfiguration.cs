@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Emails.Enums;
-using takecontrol.Domain.Models.Players.Enums;
-using takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Emails.Enums;
+using Takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.EmailEngine.Persistence.Configurations;
+namespace Takecontrol.EmailEngine.Persistence.Configurations;
 
 public class EmailConfiguration : IEntityTypeConfiguration<Email>
 {

@@ -1,7 +1,7 @@
-using takecontrol.Domain.Dtos.Addresses;
-using takecontrol.Domain.Models.Players.Enums;
+using Takecontrol.Domain.Dtos.Addresses;
+using Takecontrol.Domain.Models.Players.Enums;
 
-namespace takecontrol.Domain.Dtos.Players;
+namespace Takecontrol.Domain.Dtos.Players;
 
 public sealed class PlayerDto
 {

@@ -1,7 +1,7 @@
 using FluentValidation;
-using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+using Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
-namespace takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+namespace Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
 public class GetPlayerByIdQueryValidator : AbstractValidator<GetPlayerByIdQuery>
 {

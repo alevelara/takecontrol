@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
+namespace Takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 
 public class ClubConfiguration : IEntityTypeConfiguration<Club>
 {

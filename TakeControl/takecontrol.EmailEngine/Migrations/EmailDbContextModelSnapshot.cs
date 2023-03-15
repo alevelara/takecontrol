@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
 #nullable disable
 
-namespace takecontrol.EmailEngine.Migrations
+namespace Takecontrol.EmailEngine.Migrations
 {
     [DbContext(typeof(EmailDbContext))]
     partial class EmailDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace takecontrol.EmailEngine.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Emails.Email", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Emails.Email", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace takecontrol.EmailEngine.Migrations
                     b.ToTable("emails", (string)null);
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Templates.Template", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Templates.Template", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

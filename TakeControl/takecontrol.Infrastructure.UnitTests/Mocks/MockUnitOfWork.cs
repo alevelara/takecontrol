@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using takecontrol.Identity;
-using takecontrol.Infrastructure.Repositories.Primitives;
+using Takecontrol.Identity;
+using Takecontrol.Infrastructure.Repositories.Primitives;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Mocks
+namespace Takecontrol.Infrastructure.IntegrationTests.Mocks
 {
     public static class MockUnitOfWork
     {
-        private static string apiName = "takecontrol.API";
+        private static string apiName = "Takecontrol.API";
 
         public static Mock<UnitOfWork> GetUnitOfWork()
         {

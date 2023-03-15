@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.Identity;
+using Takecontrol.Identity;
 
 #nullable disable
 
-namespace takecontrol.Identity.Migrations
+namespace Takecontrol.Identity.Migrations
 {
     [DbContext(typeof(TakeControlIdentityDbContext))]
     [Migration("20230316183254_migrations_1")]
@@ -197,7 +197,7 @@ namespace takecontrol.Identity.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("takecontrol.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Takecontrol.Identity.Models.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -354,7 +354,7 @@ namespace takecontrol.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
+                    b.HasOne("Takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,7 +363,7 @@ namespace takecontrol.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
+                    b.HasOne("Takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -378,7 +378,7 @@ namespace takecontrol.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
+                    b.HasOne("Takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -387,7 +387,7 @@ namespace takecontrol.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("takecontrol.Identity.Models.ApplicationUser", null)
+                    b.HasOne("Takecontrol.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

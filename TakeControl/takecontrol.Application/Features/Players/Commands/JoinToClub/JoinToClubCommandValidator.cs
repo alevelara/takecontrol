@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using takecontrol.Domain.Utils;
+using Takecontrol.Domain.Utils;
 
-namespace takecontrol.Application.Features.Players.Commands.JoinToClub;
+namespace Takecontrol.Application.Features.Players.Commands.JoinToClub;
 
 public class JoinToClubCommandValidator : AbstractValidator<JoinToClubCommand>
 {

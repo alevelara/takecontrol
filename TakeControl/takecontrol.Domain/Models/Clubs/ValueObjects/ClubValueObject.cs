@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Primitives;
-using takecontrol.Domain.Utils;
+﻿using Takecontrol.Domain.Primitives;
+using Takecontrol.Domain.Utils;
 
-namespace takecontrol.Domain.Models.Clubs.ValueObjects;
+namespace Takecontrol.Domain.Models.Clubs.ValueObjects;
 
 public class ClubValueObject : ValueObject
 {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using takecontrol.Domain.Utils;
+using Takecontrol.Domain.Utils;
 
-namespace takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+namespace Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 
 public class UpdatePasswordCommandValidator : AbstractValidator<UpdatePasswordCommand>
 {

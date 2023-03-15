@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using takecontrol.Identity.Configuration;
-using takecontrol.Identity.Models;
+using Takecontrol.Identity.Configuration;
+using Takecontrol.Identity.Models;
 
-namespace takecontrol.Identity;
+namespace Takecontrol.Identity;
 
 public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
@@ -24,7 +24,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
 
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
     {
-        public static string APINAME = "takecontrol.API";
+        public static string APINAME = "Takecontrol.API";
 
         public TakeControlIdentityDbContext CreateDbContext(string[] args)
         {

@@ -2,10 +2,10 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.Application.Behaviors;
-using takecontrol.Application.Services.Emails;
+using Takecontrol.Application.Behaviors;
+using Takecontrol.Application.Services.Emails;
 
-namespace takecontrol.Application;
+namespace Takecontrol.Application;
 
 public static class ApplicationServiceRegistration
 {

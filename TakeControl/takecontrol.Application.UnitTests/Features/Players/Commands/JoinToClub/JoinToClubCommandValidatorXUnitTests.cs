@@ -1,7 +1,7 @@
-﻿using takecontrol.Application.Features.Players.Commands.JoinToClub;
-using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+﻿using Takecontrol.Application.Features.Players.Commands.JoinToClub;
+using Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Commands.JoinToClub;
+namespace Takecontrol.Application.UnitTests.Features.Players.Commands.JoinToClub;
 
 [Trait("Category", "UnitTests")]
 public class JoinToClubCommandValidatorXUnitTests : IClassFixture<JoinToClubCommandValidator>

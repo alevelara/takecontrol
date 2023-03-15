@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Services.Emails;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Services.Emails;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+namespace Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommandHandler : ICommandHandler<RegisterPlayerCommand, Unit>
 {
@@ -52,7 +52,7 @@ public class RegisterPlayerCommandHandler : ICommandHandler<RegisterPlayerComman
 
     private async Task SendWelcomeEmail(string toEmail, CancellationToken cancellationToken)
     {
-        var email = Email.Create(toEmail, "Welcome to takecontrol", TemplateType.WELCOME);
+        var email = Email.Create(toEmail, "Welcome to Takecontrol", TemplateType.WELCOME);
         await _emailSender.SendEmailAsync(email, cancellationToken);
     }
 }

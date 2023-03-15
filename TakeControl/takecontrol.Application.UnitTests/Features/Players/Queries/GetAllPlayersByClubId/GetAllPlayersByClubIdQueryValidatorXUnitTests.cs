@@ -1,6 +1,6 @@
-using takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
+using Takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetAllPlayersByClubId;
+namespace Takecontrol.Application.UnitTests.Features.Players.Queries.GetAllPlayersByClubId;
 
 public class GetAllPlayersByClubIdQueryValidatorXUnitTests : IClassFixture<GetAllPlayersByClubIdQueryValidator>
 {

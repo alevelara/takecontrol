@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using takecontrol.Application.Constants;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
-using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
-using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Options;
-using takecontrol.Identity.Constants;
-using takecontrol.Identity.Models;
-using IdentityError = takecontrol.Domain.Errors.Identity.IdentityError;
+using Takecontrol.Application.Constants;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+using Takecontrol.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.ApplicationUser.Options;
+using Takecontrol.Identity.Constants;
+using Takecontrol.Identity.Models;
+using IdentityError = Takecontrol.Domain.Errors.Identity.IdentityError;
 
-namespace takecontrol.Identity.Services;
+namespace Takecontrol.Identity.Services;
 
 public class AuthService : IAuthService
 {

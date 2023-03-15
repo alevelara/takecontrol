@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Abstractions.Mediatr;
 
-namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 
 public class RegisterClubCommand : ICommand<Unit>
 {

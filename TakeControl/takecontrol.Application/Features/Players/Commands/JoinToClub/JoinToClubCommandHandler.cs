@@ -1,13 +1,13 @@
 ﻿using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Exceptions;
-using takecontrol.Domain.Errors.Clubs;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Domain.Errors.Clubs;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.PlayerClubs;
 
-namespace takecontrol.Application.Features.Players.Commands.JoinToClub;
+namespace Takecontrol.Application.Features.Players.Commands.JoinToClub;
 
 public sealed class JoinToClubCommandHandler : ICommandHandler<JoinToClubCommand, Unit>
 {

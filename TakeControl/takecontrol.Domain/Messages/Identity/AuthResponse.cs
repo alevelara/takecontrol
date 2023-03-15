@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.ApplicationUser.Enum;
+﻿using Takecontrol.Domain.Models.ApplicationUser.Enum;
 
-namespace takecontrol.Domain.Messages.Identity;
+namespace Takecontrol.Domain.Messages.Identity;
 
 public class AuthResponse
 {

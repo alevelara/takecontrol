@@ -1,6 +1,6 @@
-﻿using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+﻿using Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 
-namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
 [Trait("Category", "UnitTests")]
 public class RegisterClubCommandValidatorXUnitTests

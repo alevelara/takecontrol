@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
+namespace Takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 
 public class GetAllPlayersByClubIdQueryValidator : AbstractValidator<GetAllPlayersByClubIdQuery>
 {

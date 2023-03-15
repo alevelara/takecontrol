@@ -1,8 +1,8 @@
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.PlayerClubs;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Persitence.PlayerClubs;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
+namespace Takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 
 public sealed class GetAllPlayersByClubIdQueryHandler : IQueryHandler<GetAllPlayersByClubIdQuery, List<Player>>
 {

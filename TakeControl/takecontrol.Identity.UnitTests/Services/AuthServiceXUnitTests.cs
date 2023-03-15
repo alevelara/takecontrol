@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Accounts.Commands.ResetPassword;
-using takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
-using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Domain.Models.ApplicationUser.Options;
-using takecontrol.Identity.Models;
-using takecontrol.Identity.Services;
-using takecontrol.Identity.Tests.TestsData;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+using Takecontrol.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Domain.Models.ApplicationUser.Options;
+using Takecontrol.Identity.Models;
+using Takecontrol.Identity.Services;
+using Takecontrol.Identity.Tests.TestsData;
 
-namespace takecontrol.Identity.Tests.Services
+namespace Takecontrol.Identity.Tests.Services
 {
     [Trait("Category", "UnitTests")]
     public class AuthServiceXUnitTests

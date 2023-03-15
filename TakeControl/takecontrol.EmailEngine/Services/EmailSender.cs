@@ -3,14 +3,14 @@ using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using takecontrol.Application.Contracts.Emails;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Emails.Options;
-using takecontrol.Domain.Models.Emails.ValueObjects;
-using takecontrol.Domain.Models.Templates;
+using Takecontrol.Application.Contracts.Emails;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Emails.Options;
+using Takecontrol.Domain.Models.Emails.ValueObjects;
+using Takecontrol.Domain.Models.Templates;
 using Takecontrol.EmailEngine.Helpers;
 
-namespace takecontrol.EmailEngine.Services;
+namespace Takecontrol.EmailEngine.Services;
 
 public sealed class EmailSender : IEmailSender
 {

@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Contracts.Persitence.PlayerClubs;
-using takecontrol.Application.Contracts.Persitence.Players;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Infrastructure.Repositories.Primitives;
-using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
-using takecontrol.Infrastructure.Repositories.Primitives.PlayerClubs;
-using takecontrol.Infrastructure.Repositories.Primitives.Players;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Application.Contracts.Persitence.PlayerClubs;
+using Takecontrol.Application.Contracts.Persitence.Players;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Infrastructure.Repositories.Primitives;
+using Takecontrol.Infrastructure.Repositories.Primitives.Clubs;
+using Takecontrol.Infrastructure.Repositories.Primitives.PlayerClubs;
+using Takecontrol.Infrastructure.Repositories.Primitives.Players;
 
-namespace takecontrol.Identity;
+namespace Takecontrol.Identity;
 
 public static class InfrastructureServiceRegistration
 {

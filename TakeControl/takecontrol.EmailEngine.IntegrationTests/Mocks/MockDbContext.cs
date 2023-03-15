@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Contexts;
 
-namespace takecontrol.EmailEngine.IntegrationTests.Mocks;
+namespace Takecontrol.EmailEngine.IntegrationTests.Mocks;
 
 public class MockDbContext
 {
-    private static string apiName = "takecontrol.API";
+    private static string apiName = "Takecontrol.API";
 
     public static EmailDbContext GetEmailDbContext()
     {

@@ -1,17 +1,17 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Services.Emails;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Templates.Enum;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Services.Emails;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
 
 public sealed class RegisterClubCommandHandler : ICommandHandler<RegisterClubCommand, Unit>
 {

@@ -51,4 +51,9 @@ public static class ValitatorsUtil
 
         return result;
     }
+
+    public static bool HasTheCorrectSize(string code, int digits)
+    {
+        return code.Length == digits;
+    }
 }

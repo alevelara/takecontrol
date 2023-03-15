@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using ValidationException = takecontrol.Application.Exceptions.ValidationException;
+using ValidationException = Takecontrol.Application.Exceptions.ValidationException;
 
-namespace takecontrol.Application.Behaviors;
+namespace Takecontrol.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class, IRequest<TResponse>

@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.PlayerClubs;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Primitives;
-using takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Primitives;
+using Takecontrol.Infrastructure.Persistence.Postgresql.Configurations;
 
-namespace takecontrol.Identity;
+namespace Takecontrol.Identity;
 
 public class TakeControlDbContext : DbContext
 {
@@ -55,7 +55,7 @@ public class TakeControlDbContext : DbContext
 
 public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
-    public static string APINAME = "takecontrol.API";
+    public static string APINAME = "Takecontrol.API";
 
     public TakeControlDbContext CreateDbContext(string[] args)
     {

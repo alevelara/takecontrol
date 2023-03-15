@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Dtos.Addresses;
+﻿using Takecontrol.Domain.Dtos.Addresses;
 
-namespace takecontrol.Domain.Dtos.Clubs;
+namespace Takecontrol.Domain.Dtos.Clubs;
 
 public sealed class RestrictedClubDto
 {

@@ -1,6 +1,6 @@
-﻿using takecontrol.API.IntegrationTests.Shared.MockContexts;
+﻿using Takecontrol.API.IntegrationTests.Shared.MockContexts;
 
-namespace takecontrol.Infrastructure.IntegrationTests;
+namespace Takecontrol.Infrastructure.IntegrationTests;
 
 [CollectionDefinition(SharedTestCollection.Name)]
 public class SharedTestCollection : ICollectionFixture<TakeControlDb>

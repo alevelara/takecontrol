@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Application.Exceptions;
+namespace Takecontrol.Application.Exceptions;
 
 public class UnauthorizedException : BaseException
 {

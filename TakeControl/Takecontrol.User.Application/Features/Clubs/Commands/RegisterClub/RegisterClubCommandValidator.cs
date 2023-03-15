@@ -1,10 +1,7 @@
-﻿using System.Text.RegularExpressions;
-using FluentValidation;
-using takecontrol.Domain.Utils;
-using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using FluentValidation;
+using Takecontrol.Shared.Domain.Utils;
 
-namespace takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 
 public class RegisterClubCommandValidator : AbstractValidator<RegisterClubCommand>
 {

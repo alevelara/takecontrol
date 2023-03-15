@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using takecontrol.Domain.Utils;
+using Takecontrol.Shared.Domain.Utils;
 
-namespace takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+namespace Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 
 public class RegisterPlayerCommandValidator : AbstractValidator<RegisterPlayerCommand>
 {

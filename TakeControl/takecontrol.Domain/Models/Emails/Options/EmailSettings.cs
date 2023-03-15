@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Domain.Models.Emails.Options;
+﻿namespace Takecontrol.Domain.Models.Emails.Options;
 
 public class EmailSettings
 {

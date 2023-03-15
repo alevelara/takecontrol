@@ -1,4 +1,4 @@
-﻿namespace takecontrol.EmailEngine.IntegrationTests;
+﻿namespace Takecontrol.EmailEngine.IntegrationTests;
 
 [CollectionDefinition(SharedTestCollection.Name)]
 public class SharedTestCollection : ICollectionFixture<EmailDbContextFixture>

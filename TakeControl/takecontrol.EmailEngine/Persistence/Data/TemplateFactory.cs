@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.EmailEngine.Persistence.Data;
+namespace Takecontrol.EmailEngine.Persistence.Data;
 
 public static class TemplateFactory
 {

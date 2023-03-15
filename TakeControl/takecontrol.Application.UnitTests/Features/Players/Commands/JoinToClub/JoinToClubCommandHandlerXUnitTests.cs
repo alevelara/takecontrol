@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using Moq;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Players.Commands.JoinToClub;
-using takecontrol.Application.Tests.TestsData;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Application.Features.Players.Commands.JoinToClub;
+using Takecontrol.Application.Tests.TestsData;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.PlayerClubs;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Commands.JoinToClub;
+namespace Takecontrol.Application.UnitTests.Features.Players.Commands.JoinToClub;
 
 public class JoinToClubCommandHandlerXUnitTests
 {

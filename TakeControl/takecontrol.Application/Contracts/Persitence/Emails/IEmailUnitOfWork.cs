@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Application.Contracts.Persitence.Emails;
+﻿namespace Takecontrol.Application.Contracts.Persitence.Emails;
 
 public interface IEmailUnitOfWork : IDisposable
 {

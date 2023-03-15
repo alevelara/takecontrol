@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "takecontrol.Infrastructure.IntegrationTests": {
+    "Takecontrol.Infrastructure.IntegrationTests": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

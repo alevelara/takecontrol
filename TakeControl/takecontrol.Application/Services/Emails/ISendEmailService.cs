@@ -1,7 +1,7 @@
-﻿using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Application.Services.Emails;
+namespace Takecontrol.Application.Services.Emails;
 
 public interface ISendEmailService
 {

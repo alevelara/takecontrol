@@ -1,6 +1,6 @@
-using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+using Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetPlayerByUserId;
+namespace Takecontrol.Application.UnitTests.Features.Players.Queries.GetPlayerByUserId;
 
 public class GetPlayerByIdQueryValidatorXUnitTests : IClassFixture<GetPlayerByIdQueryValidator>
 {

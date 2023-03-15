@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.PlayerClubs;
+﻿using Takecontrol.Domain.Models.PlayerClubs;
 
-namespace takecontrol.Domain.UnitTests.Models.PlayerClubs;
+namespace Takecontrol.Domain.UnitTests.Models.PlayerClubs;
 
 public class PlayerClubXUnitTests
 {

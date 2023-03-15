@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Abstractions.Mediatr;
 
-namespace takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+namespace Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 
 public sealed record class UpdatePasswordCommand(
     string Email,

@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.Clubs;
+﻿using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.Application.Contracts.Persitence.Clubs;
+namespace Takecontrol.Application.Contracts.Persitence.Clubs;
 
 public interface IClubReadRepository
 {

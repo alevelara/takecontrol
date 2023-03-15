@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Identity.Constants;
+﻿namespace Takecontrol.Identity.Constants;
 
 public static class Role
 {

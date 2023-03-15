@@ -1,7 +1,7 @@
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Shared.Application.Abstractions.Mediatr;
+using Takecontrol.User.Domain.Models.Players;
 
-namespace takecontrol.Application.Features.Players.Queries.GetPlayerByUserId
+namespace Takecontrol.User.Application.Features.Players.Queries.GetPlayer
 {
     public sealed record class GetPlayerByIdQuery(Guid Id)
         : IQuery<Player>

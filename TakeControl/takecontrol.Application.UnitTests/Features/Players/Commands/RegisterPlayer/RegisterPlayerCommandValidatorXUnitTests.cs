@@ -1,6 +1,6 @@
-﻿using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
+﻿using Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 
-namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer;
+namespace Takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer;
 
 [Trait("Category", "UnitTests")]
 public class RegisterPlayerCommandValidatorXUnitTests

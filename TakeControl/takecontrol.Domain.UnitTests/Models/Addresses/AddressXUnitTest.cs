@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Models.Addresses;
+﻿using Takecontrol.Domain.Models.Addresses;
 
-namespace takecontrol.Domain.UnitTests.Models.Addresses;
+namespace Takecontrol.Domain.UnitTests.Models.Addresses;
 
 [Trait("Category", "UnitTests")]
 public class AddressXUnitTest

@@ -1,9 +1,9 @@
 ﻿using Moq;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Features.Clubs.Queries.GetAllClubs;
-using takecontrol.Domain.Models.Clubs;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Application.Features.Clubs.Queries.GetAllClubs;
+using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.Application.UnitTests.Features.Clubs.Queries.GetAllClubs;
+namespace Takecontrol.Application.UnitTests.Features.Clubs.Queries.GetAllClubs;
 
 public class GetAllClubsQueryHandlerXunitTests
 {

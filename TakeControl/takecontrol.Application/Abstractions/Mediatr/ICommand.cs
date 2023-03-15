@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace takecontrol.Application.Abstractions.Mediatr;
+namespace Takecontrol.Application.Abstractions.Mediatr;
 
 public interface ICommand<out TResponse> : IRequest<TResponse>
 {

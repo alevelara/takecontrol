@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace takecontrol.Application.Features.Accounts.Queries.Login;
+namespace Takecontrol.Application.Features.Accounts.Queries.Login;
 
 public class LoginQueryValidator : AbstractValidator<LoginQuery>
 {

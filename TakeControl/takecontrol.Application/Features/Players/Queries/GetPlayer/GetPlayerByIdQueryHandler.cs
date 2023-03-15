@@ -1,10 +1,10 @@
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.Players;
-using takecontrol.Application.Exceptions;
-using takecontrol.Domain.Errors.Players;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Persitence.Players;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Domain.Errors.Players;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+namespace Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
 
 public sealed class GetPlayerByIdQueryHandler : IQueryHandler<GetPlayerByIdQuery, Player>
 {

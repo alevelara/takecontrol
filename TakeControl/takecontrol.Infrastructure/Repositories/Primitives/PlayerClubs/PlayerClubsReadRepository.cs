@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using takecontrol.Application.Contracts.Persitence.PlayerClubs;
-using takecontrol.Domain.Models.PlayerClubs;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Identity;
+using Takecontrol.Application.Contracts.Persitence.PlayerClubs;
+using Takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives.PlayerClubs;
+namespace Takecontrol.Infrastructure.Repositories.Primitives.PlayerClubs;
 
 public class PlayerClubsReadRepository : ReadBaseRepository<Player>, IPlayerClubsReadRepository
 {

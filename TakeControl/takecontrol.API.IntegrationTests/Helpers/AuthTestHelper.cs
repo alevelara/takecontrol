@@ -2,9 +2,9 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using takecontrol.Application.Constants;
+using Takecontrol.Application.Constants;
 
-namespace takecontrol.API.IntegrationTests.Helpers;
+namespace Takecontrol.API.IntegrationTests.Helpers;
 
 public static class AuthTestHelper
 {

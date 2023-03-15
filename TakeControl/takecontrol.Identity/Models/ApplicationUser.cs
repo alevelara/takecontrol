@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
 
-namespace takecontrol.Identity.Models;
+namespace Takecontrol.Identity.Models;
 
 public sealed class ApplicationUser : IdentityUser<Guid>
 {

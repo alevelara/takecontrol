@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.IntegrationTest.Shared.Utils;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.IntegrationTest.Shared.Utils;
 
-namespace takecontrol.API.IntegrationTests.Primitives;
+namespace Takecontrol.API.IntegrationTests.Primitives;
 
 public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime
     where TProgram : class

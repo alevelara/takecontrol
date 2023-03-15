@@ -2,4 +2,4 @@
 
 namespace Takecontrol.Shared.Application.Events.Credentials;
 
-public sealed record class RegisterPlayerMessageNotification(string Name, string Email, string Password) : IEventNotification;
+public sealed record class RegisterPlayerMessageNotification(string Name, string Email, string Password) : ICommand<Guid>;

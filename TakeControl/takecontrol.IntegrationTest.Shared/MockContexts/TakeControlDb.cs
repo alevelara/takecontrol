@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.Identity;
-using takecontrol.IntegrationTest.Shared.Utils;
-using takecontrol.IntegrationTests.Shared.Contracts;
+using Takecontrol.Identity;
+using Takecontrol.IntegrationTest.Shared.Utils;
+using Takecontrol.IntegrationTests.Shared.Contracts;
 
-namespace takecontrol.API.IntegrationTests.Shared.MockContexts;
+namespace Takecontrol.API.IntegrationTests.Shared.MockContexts;
 
 public class TakeControlDb : IDbConfiguration
 {

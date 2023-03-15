@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Application.Contracts.Templates;
+﻿namespace Takecontrol.Application.Contracts.Templates;
 
 public interface ITemplateLoader
 {

@@ -1,13 +1,13 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using takecontrol.API.IntegrationTests.Primitives;
-using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.API.Routes;
-using takecontrol.Domain.Messages.Clubs;
-using takecontrol.IntegrationTest.Shared.Repositories.Clubs;
+using Takecontrol.API.IntegrationTests.Primitives;
+using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.API.Routes;
+using Takecontrol.Domain.Messages.Clubs;
+using Takecontrol.IntegrationTest.Shared.Repositories.Clubs;
 using Xunit.Priority;
 
-namespace takecontrol.API.IntegrationTests.Controllers;
+namespace Takecontrol.API.IntegrationTests.Controllers;
 
 [Collection(SharedTestCollection.Name)]
 [Trait("Category", "IntegrationTests")]

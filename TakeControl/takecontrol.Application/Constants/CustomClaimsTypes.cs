@@ -1,4 +1,4 @@
-﻿namespace takecontrol.Application.Constants;
+﻿namespace Takecontrol.Application.Constants;
 
 public static class CustomClaimsTypes
 {

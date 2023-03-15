@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-using takecontrol.Application.Contracts.Persitence;
-using takecontrol.Application.Contracts.Persitence.Emails;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Domain.Primitives;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Repositories.Emails;
-using takecontrol.EmailEngine.Repositories.Primitives;
+using Takecontrol.Application.Contracts.Persitence;
+using Takecontrol.Application.Contracts.Persitence.Emails;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Domain.Primitives;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Repositories.Emails;
+using Takecontrol.EmailEngine.Repositories.Primitives;
 
-namespace takecontrol.Infrastructure.Repositories.Primitives;
+namespace Takecontrol.Infrastructure.Repositories.Primitives;
 
 public class EmailUnitOfWork : IEmailUnitOfWork
 {

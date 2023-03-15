@@ -1,11 +1,11 @@
-﻿using takecontrol.Application.Contracts.Emails;
-using takecontrol.Application.Contracts.Persitence.Emails;
-using takecontrol.Application.Contracts.Persitence.Templates;
-using takecontrol.Application.Contracts.Templates;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Emails.Enums;
+﻿using Takecontrol.Application.Contracts.Emails;
+using Takecontrol.Application.Contracts.Persitence.Emails;
+using Takecontrol.Application.Contracts.Persitence.Templates;
+using Takecontrol.Application.Contracts.Templates;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Emails.Enums;
 
-namespace takecontrol.Application.Services.Emails
+namespace Takecontrol.Application.Services.Emails
 {
     public class SendEmailService : ISendEmailService
     {

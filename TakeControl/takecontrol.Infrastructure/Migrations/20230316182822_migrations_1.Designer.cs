@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using takecontrol.Identity;
+using Takecontrol.Identity;
 
 #nullable disable
 
-namespace takecontrol.Infrastructure.Migrations
+namespace Takecontrol.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
     [Migration("20230316182822_migrations_1")]
@@ -25,7 +25,7 @@ namespace takecontrol.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Addresses.Address", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Addresses.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace takecontrol.Infrastructure.Migrations
                     b.ToTable("addresses", (string)null);
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Clubs.Club", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace takecontrol.Infrastructure.Migrations
                     b.ToTable("clubs", (string)null);
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.PlayerClubs.PlayerClub", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.PlayerClubs.PlayerClub", b =>
                 {
                     b.Property<Guid>("ClubId")
                         .HasColumnType("uuid");
@@ -142,7 +142,7 @@ namespace takecontrol.Infrastructure.Migrations
                     b.ToTable("PlayerClubs");
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Players.Player", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Players.Player", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,26 +186,26 @@ namespace takecontrol.Infrastructure.Migrations
                     b.ToTable("players", (string)null);
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Clubs.Club", b =>
                 {
-                    b.HasOne("takecontrol.Domain.Models.Addresses.Address", "Address")
+                    b.HasOne("Takecontrol.Domain.Models.Addresses.Address", "Address")
                         .WithOne("Club")
-                        .HasForeignKey("takecontrol.Domain.Models.Clubs.Club", "AddresId")
+                        .HasForeignKey("Takecontrol.Domain.Models.Clubs.Club", "AddresId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.PlayerClubs.PlayerClub", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.PlayerClubs.PlayerClub", b =>
                 {
-                    b.HasOne("takecontrol.Domain.Models.Clubs.Club", "Club")
+                    b.HasOne("Takecontrol.Domain.Models.Clubs.Club", "Club")
                         .WithMany("PlayerClubs")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("takecontrol.Domain.Models.Players.Player", "Player")
+                    b.HasOne("Takecontrol.Domain.Models.Players.Player", "Player")
                         .WithMany("PlayerClubs")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -216,18 +216,18 @@ namespace takecontrol.Infrastructure.Migrations
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Addresses.Address", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Addresses.Address", b =>
                 {
                     b.Navigation("Club")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Clubs.Club", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Clubs.Club", b =>
                 {
                     b.Navigation("PlayerClubs");
                 });
 
-            modelBuilder.Entity("takecontrol.Domain.Models.Players.Player", b =>
+            modelBuilder.Entity("Takecontrol.Domain.Models.Players.Player", b =>
                 {
                     b.Navigation("PlayerClubs");
                 });

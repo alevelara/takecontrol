@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
-using takecontrol.Application.Contracts.Identity;
-using takecontrol.Application.Contracts.Persitence.Primitives;
-using takecontrol.Application.Features.Clubs.Commands.RegisterClub;
-using takecontrol.Application.Services.Emails;
-using takecontrol.Application.Tests.TestsData;
-using takecontrol.Domain.Messages.Identity;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.Emails;
+using Takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Contracts.Persitence.Primitives;
+using Takecontrol.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.Application.Services.Emails;
+using Takecontrol.Application.Tests.TestsData;
+using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.Emails;
 
-namespace takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
+namespace Takecontrol.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
 [Trait("Category", "UnitTests")]
 public class RegisterClubCommandHandlerXUnitTests

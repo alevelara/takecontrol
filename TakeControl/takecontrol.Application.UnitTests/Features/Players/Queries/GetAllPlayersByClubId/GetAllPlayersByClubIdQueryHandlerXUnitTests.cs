@@ -1,12 +1,12 @@
 using Moq;
-using takecontrol.Application.Contracts.Persitence.PlayerClubs;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
-using takecontrol.Application.Tests.TestsData;
-using takecontrol.Domain.Models.PlayerClubs;
-using takecontrol.Domain.Models.Players;
+using Takecontrol.Application.Contracts.Persitence.PlayerClubs;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
+using Takecontrol.Application.Tests.TestsData;
+using Takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Domain.Models.Players;
 
-namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetAllPlayersByClubId;
+namespace Takecontrol.Application.UnitTests.Features.Players.Queries.GetAllPlayersByClubId;
 
 public class GetAllPlayersByClubIdHandlerXUnitTests
 {

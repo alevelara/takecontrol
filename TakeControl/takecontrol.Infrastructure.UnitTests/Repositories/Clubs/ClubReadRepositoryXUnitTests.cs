@@ -1,9 +1,9 @@
-﻿using takecontrol.API.IntegrationTests.Shared.MockContexts;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Infrastructure.IntegrationTests.Mocks;
-using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
+﻿using Takecontrol.API.IntegrationTests.Shared.MockContexts;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Infrastructure.IntegrationTests.Mocks;
+using Takecontrol.Infrastructure.Repositories.Primitives.Clubs;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Clubs;
+namespace Takecontrol.Infrastructure.IntegrationTests.Repositories.Clubs;
 
 [Trait("Category", "IntegrationTests")]
 [Collection(SharedTestCollection.Name)]

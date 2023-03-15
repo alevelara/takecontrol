@@ -26,7 +26,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
 
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
     {
-        public static string API_NAME = "takecontrol.API";
+        public static string API_NAME = "Takecontrol.API";
 
         public TakeControlIdentityDbContext CreateDbContext(string[] args)
         {

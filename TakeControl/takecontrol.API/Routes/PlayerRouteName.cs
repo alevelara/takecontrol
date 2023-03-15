@@ -1,4 +1,4 @@
-namespace takecontrol.API.Routes
+namespace Takecontrol.API.Routes
 {
     public static class PlayerRouteName
     {

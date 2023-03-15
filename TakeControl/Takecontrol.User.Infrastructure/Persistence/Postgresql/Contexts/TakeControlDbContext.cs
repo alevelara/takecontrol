@@ -55,7 +55,7 @@ public class TakeControlDbContext : DbContext
 
 public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
-    public static string APINAME = "takecontrol.API";
+    public static string APINAME = "Takecontrol.API";
 
     public TakeControlDbContext CreateDbContext(string[] args)
     {

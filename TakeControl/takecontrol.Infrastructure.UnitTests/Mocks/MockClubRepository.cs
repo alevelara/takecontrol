@@ -1,14 +1,14 @@
 using AutoFixture;
 using Castle.DynamicProxy.Generators;
-using takecontrol.Domain.Models.Addresses;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Identity;
+using Takecontrol.Domain.Models.Addresses;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Identity;
 
-namespace takecontrol.Infrastructure.IntegrationTests.Mocks;
+namespace Takecontrol.Infrastructure.IntegrationTests.Mocks;
 
 public static class MockClubRepository
 {
-    public static async Task AddClubs(TakeControlDbContext takecontrolDbContextFake)
+    public static async Task AddClubs(TakeControlDbContext TakecontrolDbContextFake)
     {
         var fixture = new Fixture();
         fixture.Behaviors.Add(new OmitOnRecursionBehavior());
@@ -20,11 +20,11 @@ public static class MockClubRepository
             .Create()
             );
 
-        takecontrolDbContextFake.Clubs!.AddRange(clubs);
-        await takecontrolDbContextFake.SaveChangesAsync();
+        TakecontrolDbContextFake.Clubs!.AddRange(clubs);
+        await TakecontrolDbContextFake.SaveChangesAsync();
     }
 
-    public static async Task AddClubsWithAddress(TakeControlDbContext takecontrolDbContextFake)
+    public static async Task AddClubsWithAddress(TakeControlDbContext TakecontrolDbContextFake)
     {
         var clubs = new List<Club>();
         var addresses = new List<Address>();
@@ -36,31 +36,31 @@ public static class MockClubRepository
             clubs.Add(Club.Create(address.Id, Guid.NewGuid(), "name"));
         }
 
-        takecontrolDbContextFake.Addresses!.AddRange(addresses);
-        takecontrolDbContextFake.Clubs!.AddRange(clubs);
-        await takecontrolDbContextFake.SaveChangesAsync();
+        TakecontrolDbContextFake.Addresses!.AddRange(addresses);
+        TakecontrolDbContextFake.Clubs!.AddRange(clubs);
+        await TakecontrolDbContextFake.SaveChangesAsync();
     }
 
-    public static async Task<Guid> AddClubWithUserId(TakeControlDbContext takecontrolDbContextFake, Guid userId)
+    public static async Task<Guid> AddClubWithUserId(TakeControlDbContext TakecontrolDbContextFake, Guid userId)
     {
         var address = Address.Create("city", "province", "mainaddress");
         var club = Club.Create(address.Id, userId, "name");
 
-        takecontrolDbContextFake.Addresses!.Add(address);
-        takecontrolDbContextFake.Clubs!.Add(club);
-        await takecontrolDbContextFake.SaveChangesAsync();
+        TakecontrolDbContextFake.Addresses!.Add(address);
+        TakecontrolDbContextFake.Clubs!.Add(club);
+        await TakecontrolDbContextFake.SaveChangesAsync();
 
         return club.Id;
     }
 
-    public static async Task<Club> AddClub(TakeControlDbContext takecontrolDbContextFake)
+    public static async Task<Club> AddClub(TakeControlDbContext TakecontrolDbContextFake)
     {
         var address = Address.Create("city", "province", "mainaddress");
         var club = Club.Create(address.Id, Guid.NewGuid(), "name");
 
-        takecontrolDbContextFake.Addresses!.Add(address);
-        takecontrolDbContextFake.Clubs!.Add(club);
-        await takecontrolDbContextFake.SaveChangesAsync();
+        TakecontrolDbContextFake.Addresses!.Add(address);
+        TakecontrolDbContextFake.Clubs!.Add(club);
+        await TakecontrolDbContextFake.SaveChangesAsync();
         return club;
     }
 }

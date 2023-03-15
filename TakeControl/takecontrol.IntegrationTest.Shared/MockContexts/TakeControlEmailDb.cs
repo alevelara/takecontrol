@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using takecontrol.EmailEngine.Persistence.Contexts;
-using takecontrol.EmailEngine.Persistence.Data;
-using takecontrol.IntegrationTest.Shared.Utils;
-using takecontrol.IntegrationTests.Shared.Contracts;
-using static takecontrol.EmailEngine.Persistence.Contexts.EmailDbContext;
+using Takecontrol.EmailEngine.Persistence.Contexts;
+using Takecontrol.EmailEngine.Persistence.Data;
+using Takecontrol.IntegrationTest.Shared.Utils;
+using Takecontrol.IntegrationTests.Shared.Contracts;
+using static Takecontrol.EmailEngine.Persistence.Contexts.EmailDbContext;
 
-namespace takecontrol.API.IntegrationTests.Shared.MockContexts;
+namespace Takecontrol.API.IntegrationTests.Shared.MockContexts;
 
 public class TakeControlEmailDb : IDbConfiguration
 {

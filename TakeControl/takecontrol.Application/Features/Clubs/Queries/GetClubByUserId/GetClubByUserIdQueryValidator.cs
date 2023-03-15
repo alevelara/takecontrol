@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
+using Takecontrol.Application.Features.Clubs.Queries.GetByUserId;
 
-namespace takecontrol.Application.Features.Clubs.Queries.GetClubById;
+namespace Takecontrol.Application.Features.Clubs.Queries.GetClubById;
 
 public class GetClubByUserIdQueryValidator : AbstractValidator<GetClubByUserIdQuery>
 {

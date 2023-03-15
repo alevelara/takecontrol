@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using takecontrol.Domain.Primitives;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.Templates.ValueObjects
+namespace Takecontrol.Domain.Models.Templates.ValueObjects
 {
     public class TemplateId : ValueObject
     {

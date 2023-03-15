@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using takecontrol.Domain.Models.Emails;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Primitives;
-using takecontrol.EmailEngine.Persistence.Configurations;
+using Takecontrol.Domain.Models.Emails;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Primitives;
+using Takecontrol.EmailEngine.Persistence.Configurations;
 
-namespace takecontrol.EmailEngine.Persistence.Contexts;
+namespace Takecontrol.EmailEngine.Persistence.Contexts;
 
 public class EmailDbContext : DbContext
 {
@@ -46,7 +46,7 @@ public class EmailDbContext : DbContext
 
     public class EmailDBContextFactory : IDesignTimeDbContextFactory<EmailDbContext>
     {
-        private static string apiName = "takecontrol.API";
+        private static string apiName = "Takecontrol.API";
 
         public EmailDbContext CreateDbContext(string[] args)
         {

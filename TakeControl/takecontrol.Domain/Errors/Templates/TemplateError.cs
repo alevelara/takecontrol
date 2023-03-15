@@ -1,6 +1,6 @@
-﻿using takecontrol.Domain.Primitives;
+﻿using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Errors.Templates;
+namespace Takecontrol.Domain.Errors.Templates;
 
 public sealed class TemplateError : DomainError
 {

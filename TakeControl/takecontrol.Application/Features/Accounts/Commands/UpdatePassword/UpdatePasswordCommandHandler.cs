@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Identity;
+using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Identity;
 
-namespace takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
+namespace Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
 
 public sealed class UpdatePasswordCommandHandler : ICommandHandler<UpdatePasswordCommand, Unit>
 {

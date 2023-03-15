@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using takecontrol.Domain.Models.Clubs;
-using takecontrol.Domain.Models.PlayerClubs.ValueObjects;
-using takecontrol.Domain.Models.Players;
-using takecontrol.Domain.Primitives;
+using Takecontrol.Domain.Models.Clubs;
+using Takecontrol.Domain.Models.PlayerClubs.ValueObjects;
+using Takecontrol.Domain.Models.Players;
+using Takecontrol.Domain.Primitives;
 
-namespace takecontrol.Domain.Models.PlayerClubs;
+namespace Takecontrol.Domain.Models.PlayerClubs;
 
 public class PlayerClub : BaseDomainModel
 {

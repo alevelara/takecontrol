@@ -1,11 +1,11 @@
-﻿using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.Clubs;
-using takecontrol.Application.Exceptions;
-using takecontrol.Application.Features.Clubs.Queries.GetByUserId;
-using takecontrol.Domain.Errors.Clubs;
-using takecontrol.Domain.Models.Clubs;
+﻿using Takecontrol.Application.Abstractions.Mediatr;
+using Takecontrol.Application.Contracts.Persitence.Clubs;
+using Takecontrol.Application.Exceptions;
+using Takecontrol.Application.Features.Clubs.Queries.GetByUserId;
+using Takecontrol.Domain.Errors.Clubs;
+using Takecontrol.Domain.Models.Clubs;
 
-namespace takecontrol.Application.Features.Clubs.Queries.GetClubById;
+namespace Takecontrol.Application.Features.Clubs.Queries.GetClubById;
 
 public sealed class GetClubByUserIdQueryHandler : IQueryHandler<GetClubByUserIdQuery, Club>
 {

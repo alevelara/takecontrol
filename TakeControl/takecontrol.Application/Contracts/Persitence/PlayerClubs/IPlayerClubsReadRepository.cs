@@ -1,6 +1,6 @@
-using takecontrol.Domain.Models.PlayerClubs;
+using Takecontrol.Domain.Models.PlayerClubs;
 
-namespace takecontrol.Application.Contracts.Persitence.PlayerClubs;
+namespace Takecontrol.Application.Contracts.Persitence.PlayerClubs;
 
 public interface IPlayerClubsReadRepository
 {

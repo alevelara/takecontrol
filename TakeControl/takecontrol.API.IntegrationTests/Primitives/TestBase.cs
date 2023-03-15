@@ -4,12 +4,12 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using takecontrol.API.IntegrationTests.Helpers;
-using takecontrol.Application.Features.Accounts.Queries.Login;
-using takecontrol.Domain.Models.ApplicationUser.Enum;
-using takecontrol.Identity.Models;
+using Takecontrol.API.IntegrationTests.Helpers;
+using Takecontrol.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Identity.Models;
 
-namespace takecontrol.API.IntegrationTests.Primitives;
+namespace Takecontrol.API.IntegrationTests.Primitives;
 
 public class TestBase
 {

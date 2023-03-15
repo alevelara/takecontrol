@@ -1,8 +1,8 @@
-﻿using takecontrol.Domain.Models.Emails.Enums;
-using takecontrol.Domain.Models.Templates;
-using takecontrol.Domain.Models.Templates.Enum;
+﻿using Takecontrol.Domain.Models.Emails.Enums;
+using Takecontrol.Domain.Models.Templates;
+using Takecontrol.Domain.Models.Templates.Enum;
 
-namespace takecontrol.Domain.UnitTests.Models.Templates;
+namespace Takecontrol.Domain.UnitTests.Models.Templates;
 
 [Trait("Category", "UnitTests")]
 public class TemplateXUnitTests
