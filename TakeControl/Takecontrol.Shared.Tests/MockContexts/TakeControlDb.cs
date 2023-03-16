@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Takecontrol.Shared.Tests.Contracts;
+using Takecontrol.Shared.Tests.Utils;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 
 namespace Takecontrol.Shared.Tests.MockContexts;

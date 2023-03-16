@@ -2,6 +2,7 @@
 using Takecontrol.Emails.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Persistence.Data;
 using Takecontrol.Shared.Tests.Contracts;
+using Takecontrol.Shared.Tests.Utils;
 using static Takecontrol.Emails.Infrastructure.Contexts.EmailDbContext;
 
 namespace Takecontrol.Shared.Tests.MockContexts;
