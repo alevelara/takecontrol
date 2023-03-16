@@ -1,4 +1,4 @@
-using takecontrol.API.IntegrationTests.Primitives;
+using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Domain.Models.Players.Enums;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
@@ -7,6 +7,7 @@ using takecontrol.Infrastructure.Repositories.Primitives.Players;
 namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
 
 [Trait("Category", "IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 {
     private readonly TakeControlDb _dbContext;
@@ -18,7 +19,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 
     [Fact]
     public async Task GetPlayerById_Should_ReturnNull_WhenIdDoesntExist()
-    {
+    { 
         //Arrange
         var userId = Guid.NewGuid();
         var readRepository = new PlayerReadRepository(_dbContext.Context);
@@ -61,7 +62,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Begginer);
+        Assert.Equal((int)PlayerLevel.Begginer, result.PlayerLevel);
     }
 
     [Fact]
@@ -79,7 +80,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Mid);
+        Assert.Equal((int)PlayerLevel.Mid, result.PlayerLevel);
     }
 
     [Fact]
@@ -97,7 +98,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Player>(result);
-        Assert.Equal(result.PlayerLevel, (int)PlayerLevel.Expert);
+        Assert.Equal((int)PlayerLevel.Expert, result.PlayerLevel);
     }
 
     [Fact]

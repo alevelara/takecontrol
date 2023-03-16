@@ -6,7 +6,6 @@ namespace takecontrol.Identity.Tests.TestsData;
 
 public static class IdentityTestData
 {
-
     public static ApplicationUser CreateApplicationUserForTest()
     {
         return new ApplicationUser

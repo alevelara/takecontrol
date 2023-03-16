@@ -27,12 +27,10 @@ public class GetClubByUserIdQueryHandlerXUnitTests
         Club club = null;
 
         //Act
-
         _mockReadRepository.Setup(c => c.GetClubByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(club);
 
         //Assert
-
         await Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(query, default));
     }
 

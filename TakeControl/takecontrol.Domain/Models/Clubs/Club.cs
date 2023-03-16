@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs.ValueObjects;
 using takecontrol.Domain.Models.PlayerClubs;

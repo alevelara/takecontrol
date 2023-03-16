@@ -1,4 +1,4 @@
-﻿using takecontrol.API.IntegrationTests.Primitives;
+﻿using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Infrastructure.IntegrationTests.Mocks;
 using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
@@ -6,6 +6,7 @@ using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
 namespace takecontrol.Infrastructure.IntegrationTests.Repositories.Clubs;
 
 [Trait("Category", "IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
 public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 {
     private readonly TakeControlDb _dbContext;
@@ -74,6 +75,39 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(result);
         Assert.IsType<Club>(result);
+    }
+
+    [Fact]
+    public async Task GetClubByCodeAndClubId_Should_ReturnAClub_WhenCodeIsOk()
+    {
+        //Arrange
+        var club = await MockClubRepository.AddClub(_dbContext.Context);
+
+        var readRepository = new ClubReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetClubByCodeAndClubId(club.Id, club.Code);
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.IsType<Club>(result);
+        Assert.Equal(club.Code, result.Code);
+    }
+
+    [Fact]
+    public async Task GetClubByCodeAndClubId_Should_ReturnAClub_WhenCodeIsIncorrect()
+    {
+        //Arrange
+        var wrongCode = "123456";
+        var club = await MockClubRepository.AddClub(_dbContext.Context);
+
+        var readRepository = new ClubReadRepository(_dbContext.Context);
+
+        //Act
+        var result = await readRepository.GetClubByCodeAndClubId(club.Id, wrongCode);
+
+        //Assert
+        Assert.Null(result);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

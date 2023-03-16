@@ -16,7 +16,6 @@ namespace takecontrol.Infrastructure.IntegrationTests.Features.Clubs.Commands.Re
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {
-
     private readonly Mock<UnitOfWork> _uow;
     private readonly Mock<IAuthService> _authService;
     private readonly Mock<ILogger<RegisterClubCommandHandler>> _logger;
@@ -43,8 +42,6 @@ public class RegisterClubCommandHandlerXUnitTests
         _emailSender.Setup(e => e.SendEmailAsync(It.IsAny<Email>(), default(CancellationToken)));
 
         var result = await handler.Handle(command, default);
-
-        Assert.NotNull(result);
         Assert.IsType<Unit>(result);
     }
 }

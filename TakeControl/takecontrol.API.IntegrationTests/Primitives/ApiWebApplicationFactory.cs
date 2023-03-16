@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using takecontrol.API.IntegrationTests.Shared.MockContexts;
 using takecontrol.IntegrationTest.Shared.Utils;
-using Xunit;
 
 namespace takecontrol.API.IntegrationTests.Primitives;
 
-public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime
+public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime
     where TProgram : class
 {
     public HttpClient HttpClient { get; private set; } = default!;
@@ -16,7 +16,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public TakeControlIdentityDb TakeControlIdentityDb { get; private set; } = default!;
 
-    public TakeControlEmailDb TakeControlEmailDb = default!;
+    public TakeControlEmailDb TakeControlEmailDb { get; private set; } = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -33,9 +33,10 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
         TakeControlIdentityDb = new TakeControlIdentityDb();
         TakeControlEmailDb = new TakeControlEmailDb();
         HttpClient = CreateClient();
-        TakecontrolDb.EnsureDatabase();
-        TakeControlIdentityDb.EnsureDatabase();
-        TakeControlEmailDb.EnsureDatabase();
+
+        await TakecontrolDb.EnsureDatabase();
+        await TakeControlIdentityDb.EnsureDatabase();
+        await TakeControlEmailDb.EnsureDatabase();
     }
 
     public new Task DisposeAsync() => Task.CompletedTask;

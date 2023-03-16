@@ -1,7 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using takecontrol.Application.Constants;
 
 namespace takecontrol.API.IntegrationTests.Helpers;
@@ -10,7 +10,6 @@ public static class AuthTestHelper
 {
     public static string GenerateToken(string userName, string email, string id, string role)
     {
-
         var roleClaims = new List<Claim>()
         {
             new Claim(ClaimTypes.Role, role)

@@ -1,4 +1,4 @@
-﻿using takecontrol.Domain.Models.Addresses;
+using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
 using takecontrol.Domain.Models.Emails;
 using takecontrol.Domain.Models.PlayerClubs;

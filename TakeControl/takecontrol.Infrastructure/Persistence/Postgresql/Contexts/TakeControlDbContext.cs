@@ -12,7 +12,6 @@ namespace takecontrol.Identity;
 
 public class TakeControlDbContext : DbContext
 {
-
     public TakeControlDbContext(DbContextOptions<TakeControlDbContext> options) : base(options)
     {
     }
@@ -56,7 +55,7 @@ public class TakeControlDbContext : DbContext
 
 public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeControlDbContext>
 {
-    public static string API_NAME = "takecontrol.API";
+    public static string APINAME = "takecontrol.API";
 
     public TakeControlDbContext CreateDbContext(string[] args)
     {
@@ -81,7 +80,7 @@ public class TakeControlDBContextFactory : IDesignTimeDbContextFactory<TakeContr
                   Environment.GetEnvironmentVariable(
                       "ASPNETCORE_ENVIRONMENT");
 
-        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, API_NAME);
+        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, APINAME);
 
         var builder = new ConfigurationBuilder()
                 .SetBasePath(path)

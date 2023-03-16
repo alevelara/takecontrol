@@ -5,7 +5,7 @@ namespace takecontrol.Application.Tests.Features.Players.Commands.RegisterPlayer
 [Trait("Category", "UnitTests")]
 public class RegisterPlayerCommandValidatorXUnitTests
 {
-    private RegisterPlayerCommandValidator validator;
+    private readonly RegisterPlayerCommandValidator validator;
 
     public RegisterPlayerCommandValidatorXUnitTests()
     {
@@ -22,7 +22,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 2);
+        Assert.Equal(2, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -36,7 +36,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -50,7 +50,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 2);
+        Assert.Equal(2, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -64,7 +64,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -78,7 +78,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 2);
+        Assert.Equal(2, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -92,7 +92,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 2);
+        Assert.Equal(2, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -106,7 +106,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 6);
+        Assert.Equal(6, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -120,7 +120,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 6);
+        Assert.Equal(6, result.Errors.Count);
         Assert.False(result.IsValid);
     }
 
@@ -134,7 +134,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -144,15 +144,13 @@ public class RegisterPlayerCommandValidatorXUnitTests
         //Arrange
         var request = new RegisterPlayerCommand("name", "email@test.com", "!8Char", 1, 1, 1);
 
-
         //Act
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
-
 
     [Fact]
     public void Validator_Should_ReturnValidationException_WhenPaswordLengthHasNotAnyLowercase()
@@ -160,12 +158,11 @@ public class RegisterPlayerCommandValidatorXUnitTests
         //Arrange
         var request = new RegisterPlayerCommand("name", "email@test.com", "MAYUS123!", 1, 1, 1);
 
-
         //Act
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -175,12 +172,11 @@ public class RegisterPlayerCommandValidatorXUnitTests
         //Arrange
         var request = new RegisterPlayerCommand("name", "email@test.com", "lower123!", 1, 1, 1);
 
-
         //Act
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -194,7 +190,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -208,7 +204,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -222,7 +218,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -236,7 +232,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -250,7 +246,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         var result = validator.Validate(request);
 
         //Assert
-        Assert.Equal(result.Errors.Count, 1);
+        Assert.Single(result.Errors);
         Assert.False(result.IsValid);
     }
 
@@ -263,8 +259,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
         //Act
         var result = validator.Validate(request);
 
-        //Assert        
+        //Assert
         Assert.True(result.IsValid);
     }
-
 }

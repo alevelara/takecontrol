@@ -9,5 +9,4 @@ public sealed class TemplateError : DomainError
     }
 
     public static TemplateError TemplateNotFound = new TemplateError(1601, "Template doesnt exist.");
-
 }

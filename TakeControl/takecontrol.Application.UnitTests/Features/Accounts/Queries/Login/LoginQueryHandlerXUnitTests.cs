@@ -22,6 +22,7 @@ public class LoginQueryHandlerXUnitTests
         //Arrange
         LoginQuery query = new("", "password");
         LoginQueryHandler handler = new(_authService.Object);
+
         //Act
         var result = handler.Handle(query, CancellationToken.None);
 
@@ -35,6 +36,7 @@ public class LoginQueryHandlerXUnitTests
         //Arrange
         LoginQuery query = new("user@test.com", "");
         LoginQueryHandler handler = new(_authService.Object);
+
         //Act
         var result = handler.Handle(query, CancellationToken.None);
 
@@ -46,11 +48,10 @@ public class LoginQueryHandlerXUnitTests
     public async Task Handle_Should_ReturnValidResult_WhenUserExistsAsync()
     {
         //Arrange
-
         LoginQuery query = new("user@test.com", "password");
         LoginQueryHandler handler = new(_authService.Object);
 
-        var authResponse = _authService.Setup(c => c.Login(It.IsAny<LoginQuery>())).ReturnsAsync(
+        _authService.Setup(c => c.Login(It.IsAny<LoginQuery>())).ReturnsAsync(
             new AuthResponse()
             {
                 Email = "password",
@@ -65,6 +66,6 @@ public class LoginQueryHandlerXUnitTests
 
         //Assert
         Assert.NotNull(result.Result);
-        Assert.True(result.Result is AuthResponse);
+        Assert.IsType<AuthResponse>(result.Result);
     }
 }
