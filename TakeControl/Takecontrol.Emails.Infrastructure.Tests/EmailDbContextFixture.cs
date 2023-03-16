@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Takecontrol.Emails.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Tests.Mocks;
+using Xunit;
 
 namespace Takecontrol.Emails.Infrastructure.Tests
 {
