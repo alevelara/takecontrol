@@ -370,7 +370,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                     NumberOfYearsPlayed = player.NumberOfYearsPlayed
                 };
                 var playerResponse = await this._httpClient.PostAsJsonAsync<RegisterPlayerRequest>(playerRegisterEndpoint, playerRequest, default);
-
+                Assert.Equal(HttpStatusCode.OK, playerResponse.StatusCode);
                 var playerCreated = await GetPlayerByName(player.Name);
                 var playerClubRel = PlayerClub.Create(playerCreated.Id, clubCreated.Id);
                 _takeControlDb.Context.PlayerClubs.Add(playerClubRel);
@@ -523,7 +523,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     public async Task DisposeAsync()
     {
         await _takeControlIdentityDb.ResetState();
-        await _takeControlDb.ResetState();
+        // await _takeControlDb.ResetState();
         await _takeControlEmailDb.ResetState();
     }
 }

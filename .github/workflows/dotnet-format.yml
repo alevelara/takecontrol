@@ -24,4 +24,3 @@ jobs:
 
       - name: Run dotnet format
         run: dotnet-format -v diag -f ./TakeControl --check
-        # run: dotnet format './TakeControl/TakeControl.sln' --folder --check --verbosity diagnostic

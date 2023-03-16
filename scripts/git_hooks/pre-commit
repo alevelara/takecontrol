@@ -1,4 +1,4 @@
-#!/bin/sh;
+#!/bin/sh
 echo "running precommit hook"
 LC_ALL=C
 # Select files to format
