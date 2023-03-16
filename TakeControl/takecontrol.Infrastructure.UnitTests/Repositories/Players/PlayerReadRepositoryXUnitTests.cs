@@ -19,7 +19,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 
     [Fact]
     public async Task GetPlayerById_Should_ReturnNull_WhenIdDoesntExist()
-    { 
+    {
         //Arrange
         var userId = Guid.NewGuid();
         var readRepository = new PlayerReadRepository(_dbContext.Context);
