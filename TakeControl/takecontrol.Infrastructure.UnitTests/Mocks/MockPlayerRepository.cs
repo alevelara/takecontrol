@@ -53,7 +53,7 @@ public static class MockPlayerRepository
         takecontrolDbContextFake.Players!.Add(player);
         await takecontrolDbContextFake.SaveChangesAsync();
     }
-    
+
     public static async Task AssignPlayerToClub(TakeControlDbContext takecontrolDbContextFake, Guid clubId, Guid playerId)
     {
         var playerGuid = takecontrolDbContextFake.Players.Where(x => x.UserId == playerId).First();

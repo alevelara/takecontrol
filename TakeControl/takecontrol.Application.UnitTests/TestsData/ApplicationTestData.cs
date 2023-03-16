@@ -35,7 +35,7 @@ public static class ApplicationTestData
         return Player.Create(userId, "name 3", 2, 3, 5);
     }
 
-    public static PlayerClub AssignPlayerToClub( Player player, Club club) 
+    public static PlayerClub AssignPlayerToClub(Player player, Club club)
     {
         return PlayerClub.Create(player.Id, club.Id);
     }

@@ -262,11 +262,11 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         // Flatten
         var allPlayersCreated = clubBelongToPlayers.Values
-                     .SelectMany(x => x)  
+                     .SelectMany(x => x)
                      .ToList();
 
         // Reading Players by ClubId
-        foreach(Guid clubId in clubBelongToPlayers.Keys) 
+        foreach (Guid clubId in clubBelongToPlayers.Keys)
         {
             var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubId}");
             var strPlayers = await responsePlayersClub.Content.ReadAsStringAsync();
@@ -297,7 +297,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         // Reading Player by ClubId
         var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint);
-        Assert.Equal(HttpStatusCode.BadRequest, responsePlayersClub.StatusCode);        
+        Assert.Equal(HttpStatusCode.BadRequest, responsePlayersClub.StatusCode);
     }
 
     [Fact]
@@ -313,13 +313,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
 
         // Reading Player by ClubId - Reset token
-        
+
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "token-test");
         var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubId}");
-        Assert.Equal(HttpStatusCode.Unauthorized, responsePlayersClub.StatusCode);        
+        Assert.Equal(HttpStatusCode.Unauthorized, responsePlayersClub.StatusCode);
     }
 
-    private async Task<Dictionary<Guid, List<RegisterPlayerRequest>>> RegisterPlayerBelongToCLub(int numClubs, int numberOfPlayerPerClub) 
+    private async Task<Dictionary<Guid, List<RegisterPlayerRequest>>> RegisterPlayerBelongToCLub(int numClubs, int numberOfPlayerPerClub)
     {
         var clubs = Builder<ClubDto>.CreateListOfSize(numClubs).Build().ToList();
 
@@ -400,7 +400,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         return await _takeControlDb.Context.Players?.FirstOrDefaultAsync(c => c.Name == name);
     }
 
-    private async Task<string> GetTokenLogin(string email, string password) 
+    private async Task<string> GetTokenLogin(string email, string password)
     {
         // Get Player by current club id
         var request = new AuthRequest

@@ -109,12 +109,12 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         var playerId1 = Guid.NewGuid();
         var playerId2 = Guid.NewGuid();
         var playerId3 = Guid.NewGuid();
-        
+
         // Create players
         await MockPlayerRepository.AddPlayerExpert(_dbContext.Context, playerId1);
         await MockPlayerRepository.AddPlayerMid(_dbContext.Context, playerId2);
         await MockPlayerRepository.AddPlayerBeginner(_dbContext.Context, playerId3);
-        
+
         // Create clubs
         var guidClubA = await MockClubRepository.AddClubWithUserId(_dbContext.Context, clubIdA);
         var guidClubB = await MockClubRepository.AddClubWithUserId(_dbContext.Context, clubIdB);
@@ -138,7 +138,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         Assert.NotNull(resultPlayersClubB);
         Assert.IsType<List<Player>>(resultPlayersClubB);
         Assert.Equal(resultPlayersClubB.Count, 1);
-        
+
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

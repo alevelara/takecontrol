@@ -45,7 +45,7 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var player1ClubA = ApplicationTestData.CreateBegginerPlayerForTest(userIdPlayer1);
         var player2ClubA = ApplicationTestData.CreateExpertPlayerForTest(userIdPlayer2);
         var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
-        
+
 
         // Create a Club
         var addressA = ApplicationTestData.CreateAddresForTest();
@@ -57,20 +57,20 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var player1AssignedClubA = ApplicationTestData.AssignPlayerToClub(player1ClubA, clubA);
         var player2AssignedClubA = ApplicationTestData.AssignPlayerToClub(player2ClubA, clubA);
         var player3AssignedClubB = ApplicationTestData.AssignPlayerToClub(player3ClubB, clubB);
-        
+
         //Acts
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubA.Id))
             .ReturnsAsync(new List<Player>() { player1ClubA, player2ClubA });
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubB.Id))
             .ReturnsAsync(new List<Player>() { player3ClubB });
 
-         // Queries
+        // Queries
         var queryClubA = new GetAllPlayersByClubIdQuery(clubA.Id);
         var queryClubB = new GetAllPlayersByClubIdQuery(clubB.Id);
 
         var resultClubA = await handler.Handle(queryClubA, default);
         var resultClubB = await handler.Handle(queryClubB, default);
-        
+
         Assert.NotNull(resultClubA);
         Assert.Equal(2, resultClubA.Count);
         Assert.NotNull(resultClubB);
