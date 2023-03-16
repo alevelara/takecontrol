@@ -22,17 +22,17 @@ public static class ApplicationTestData
 
     public static Player CreateBegginerPlayerForTest(Guid userId)
     {
-        return Player.Create(userId, "name", 1, 1, 1);
+        return Player.Create(userId, "name 1", 1, 1, 1);
     }
 
     public static Player CreateMidPlayerForTest(Guid userId)
     {
-        return Player.Create(userId, "name", 1, 3, 2);
+        return Player.Create(userId, "name 2", 1, 3, 2);
     }
 
     public static Player CreateExpertPlayerForTest(Guid userId)
     {
-        return Player.Create(userId, "name", 2, 3, 5);
+        return Player.Create(userId, "name 3", 2, 3, 5);
     }
 
     public static PlayerClub AssignPlayerToClub( Player player, Club club) 

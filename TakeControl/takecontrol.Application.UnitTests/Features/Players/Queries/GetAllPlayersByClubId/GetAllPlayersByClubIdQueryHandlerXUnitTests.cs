@@ -35,48 +35,45 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
     public async Task Handle_Should_PlayersThatBelongToAClub()
     {
         //Arrange
-        var userIdClub = Guid.NewGuid();
-        var userId1ClubA = Guid.NewGuid();
-        var userId2ClubA = Guid.NewGuid();
-        var userIdClubB = Guid.NewGuid();
-
-        // var queryBegginer = new GetPlayerByIdQuery(userIdBegginer);
-        // var queryMid = new GetPlayerByIdQuery(userIdMid);
-        // var queryExpert = new GetPlayerByIdQuery(userIdExpert);
+        var userClubA = Guid.NewGuid();
+        var userClubB = Guid.NewGuid();
+        var userIdPlayer1 = Guid.NewGuid();
+        var userIdPlayer2 = Guid.NewGuid();
+        var userIdPlayer3 = Guid.NewGuid();
 
         var handler = new GetAllPlayersByClubIdQueryHandler(_mockReadRepository.Object);
-        var player1ClubA = ApplicationTestData.CreateBegginerPlayerForTest(userId1ClubA);
-        var player2ClubA = ApplicationTestData.CreateBegginerPlayerForTest(userId2ClubA);
-        var playerClubB = ApplicationTestData.CreateMidPlayerForTest(userIdClubB);
+        var player1ClubA = ApplicationTestData.CreateBegginerPlayerForTest(userIdPlayer1);
+        var player2ClubA = ApplicationTestData.CreateExpertPlayerForTest(userIdPlayer2);
+        var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
         
 
         // Create a Club
         var addressA = ApplicationTestData.CreateAddresForTest();
         var addressB = ApplicationTestData.CreateAddresForTest();
-        var clubA = ApplicationTestData.CreateClubForTest(userIdClub, addressA);
-        var clubB = ApplicationTestData.CreateClubForTest(userIdClub, addressB);
+        var clubA = ApplicationTestData.CreateClubForTest(userClubA, addressA);
+        var clubB = ApplicationTestData.CreateClubForTest(userClubB, addressB);
 
         // Add Users to Club
+        var player1AssignedClubA = ApplicationTestData.AssignPlayerToClub(player1ClubA, clubA);
+        var player2AssignedClubA = ApplicationTestData.AssignPlayerToClub(player2ClubA, clubA);
+        var player3AssignedClubB = ApplicationTestData.AssignPlayerToClub(player3ClubB, clubB);
         
-
         //Acts
-        _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(It.IsAny<Guid>()))
-            .ReturnsAsync(playerBeginner);
-        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
-            .ReturnsAsync(playerMid);
-        _mockReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
-            .ReturnsAsync(playerExpert);
+        _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubA.Id))
+            .ReturnsAsync(new List<Player>() { player1ClubA, player2ClubA });
+        _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubB.Id))
+            .ReturnsAsync(new List<Player>() { player3ClubB });
 
-        var resultBeginner = await handler.Handle(queryBegginer, default);
-        var resultMid = await handler.Handle(queryMid, default);
-        var resultExpert = await handler.Handle(queryExpert, default);
+         // Queries
+        var queryClubA = new GetAllPlayersByClubIdQuery(clubA.Id);
+        var queryClubB = new GetAllPlayersByClubIdQuery(clubB.Id);
 
-        //Asserts
-        Assert.NotNull(resultBeginner);
-        Assert.Equal(userIdBegginer, resultBeginner.UserId);
-        Assert.NotNull(resultMid);
-        Assert.Equal(userIdMid, resultMid.UserId);
-        Assert.NotNull(resultExpert);
-        Assert.Equal(userIdExpert, resultExpert.UserId);
+        var resultClubA = await handler.Handle(queryClubA, default);
+        var resultClubB = await handler.Handle(queryClubB, default);
+        
+        Assert.NotNull(resultClubA);
+        Assert.Equal(2, resultClubA.Count);
+        Assert.NotNull(resultClubB);
+        Assert.Equal(1, resultClubB.Count);
     }
 }
