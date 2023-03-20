@@ -16,7 +16,7 @@ public sealed class GetAllPlayersByClubIdQueryHandler : IQueryHandler<GetAllPlay
     public async Task<List<Player>> Handle(GetAllPlayersByClubIdQuery request, CancellationToken cancellationToken)
     {
         var playersByClub = await _playerClubsReadRepository.GetAllPlayersByClubId(request.Id);
-        
+
         return playersByClub!.Select(c => c.Player).ToList();
     }
 }
