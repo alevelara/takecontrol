@@ -1,15 +1,16 @@
 using Moq;
-using takecontrol.Application.Contracts.Persitence.Players;
+using takecontrol.Application.Contracts.Persitence.PlayerClubs;
 using takecontrol.Application.Exceptions;
 using takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 using takecontrol.Application.Tests.TestsData;
+using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.Application.UnitTests.Features.Players.Queries.GetAllPlayersByClubId;
 
 public class GetAllPlayersByClubIdHandlerXUnitTests
 {
-    private readonly Mock<IPlayerReadRepository> _mockReadRepository;
+    private readonly Mock<IPlayerClubsReadRepository> _mockReadRepository;
 
     public GetAllPlayersByClubIdHandlerXUnitTests()
     {
@@ -60,9 +61,9 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
 
         //Acts
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubA.Id))
-            .ReturnsAsync(new List<Player>() { player1ClubA, player2ClubA });
+            .ReturnsAsync(new List<PlayerClub>() { player1AssignedClubA, player2AssignedClubA });
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(clubB.Id))
-            .ReturnsAsync(new List<Player>() { player3ClubB });
+            .ReturnsAsync(new List<PlayerClub>() { player3AssignedClubB });
 
         // Queries
         var queryClubA = new GetAllPlayersByClubIdQuery(clubA.Id);

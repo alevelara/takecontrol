@@ -1,20 +1,22 @@
 using takecontrol.Application.Abstractions.Mediatr;
-using takecontrol.Application.Contracts.Persitence.Players;
+using takecontrol.Application.Contracts.Persitence.PlayerClubs;
 using takecontrol.Domain.Models.Players;
 
 namespace takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 
 public sealed class GetAllPlayersByClubIdQueryHandler : IQueryHandler<GetAllPlayersByClubIdQuery, List<Player>>
 {
-    private readonly IPlayerReadRepository _playerReadRepository;
+    private readonly IPlayerClubsReadRepository _playerClubsReadRepository;
 
-    public GetAllPlayersByClubIdQueryHandler(IPlayerReadRepository playerReadRepository)
+    public GetAllPlayersByClubIdQueryHandler(IPlayerClubsReadRepository playerClubsReadRepository)
     {
-        _playerReadRepository = playerReadRepository;
+        _playerClubsReadRepository = playerClubsReadRepository;
     }
 
-    public Task<List<Player>> Handle(GetAllPlayersByClubIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<Player>> Handle(GetAllPlayersByClubIdQuery request, CancellationToken cancellationToken)
     {
-        return _playerReadRepository.GetAllPlayersByClubId(request.Id);
+        var playersByClub = await _playerClubsReadRepository.GetAllPlayersByClubId(request.Id);
+        
+        return playersByClub!.Select(c => c.Player).ToList();
     }
 }

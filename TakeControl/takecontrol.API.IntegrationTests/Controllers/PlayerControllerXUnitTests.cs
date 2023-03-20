@@ -321,13 +321,10 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var numberOfPlayerPerClub = 1;
 
         Dictionary<Guid, List<RegisterPlayerRequest>> clubBelongToPlayers = await this.RegisterPlayerBelongToCLub(numClubs, numberOfPlayerPerClub);
-
-        // Guid clubId = clubBelongToPlayers.First().Key;
         Guid clubId = clubBelongToPlayers.First().Key;
         RegisterPlayerRequest player = clubBelongToPlayers.First().Value.First();
 
         // Reading Player by ClubId - Reset token
-
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "token-test");
         var responsePlayersClub = await _httpClient.GetAsync(getAllPlayersEndpoint + $"?clubId={clubId}");
         Assert.Equal(HttpStatusCode.Unauthorized, responsePlayersClub.StatusCode);
@@ -523,7 +520,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     public async Task DisposeAsync()
     {
         await _takeControlIdentityDb.ResetState();
-        // await _takeControlDb.ResetState();
+        await _takeControlDb.ResetState();
         await _takeControlEmailDb.ResetState();
     }
 }

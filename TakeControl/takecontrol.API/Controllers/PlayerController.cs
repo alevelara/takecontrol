@@ -54,7 +54,7 @@ public class PlayerController : ControllerBase
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    [Authorize(Roles = Role.Player)]
+    [Authorize(Roles = Role.Club)]
     [HttpGet(PlayerRouteName.AllByClubId)]
     public async Task<ActionResult<List<PlayerDto>>> GetPlayersByClubId([FromQuery] Guid clubId)
     {
