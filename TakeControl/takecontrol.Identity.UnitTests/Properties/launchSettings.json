@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Takecontrol.Identity.UnitTests": {
+    "takecontrol.Identity.UnitTests": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
