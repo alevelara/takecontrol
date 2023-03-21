@@ -2,10 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using takecontrol.Application.Contracts.Persitence.Clubs;
+using takecontrol.Application.Contracts.Persitence.PlayerClubs;
 using takecontrol.Application.Contracts.Persitence.Players;
 using takecontrol.Application.Contracts.Persitence.Primitives;
 using takecontrol.Infrastructure.Repositories.Primitives;
 using takecontrol.Infrastructure.Repositories.Primitives.Clubs;
+using takecontrol.Infrastructure.Repositories.Primitives.PlayerClubs;
 using takecontrol.Infrastructure.Repositories.Primitives.Players;
 
 namespace takecontrol.Identity;
@@ -21,6 +23,7 @@ public static class InfrastructureServiceRegistration
         service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadBaseRepository<>));
         service.AddScoped<IClubReadRepository, ClubReadRepository>();
         service.AddScoped<IPlayerReadRepository, PlayerReadRepository>();
+        service.AddScoped<IPlayerClubsReadRepository, PlayerClubsReadRepository>();
         service.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return service;

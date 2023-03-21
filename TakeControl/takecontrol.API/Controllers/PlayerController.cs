@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +7,7 @@ using takecontrol.API.Routes;
 using takecontrol.Application.Features.Players.Commands.JoinToClub;
 using takecontrol.Application.Features.Players.Commands.RegisterPlayer;
 using takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
+using takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
 using takecontrol.Domain.Dtos.Players;
 using takecontrol.Domain.Messages.Players;
 using takecontrol.Identity.Constants;
@@ -51,5 +52,14 @@ public class PlayerController : ControllerBase
         await _mediator.Send(command);
 
         return StatusCode((int)HttpStatusCode.Created);
+    }
+
+    [Authorize(Roles = Role.Club)]
+    [HttpGet(PlayerRouteName.AllByClubId)]
+    public async Task<ActionResult<List<PlayerDto>>> GetPlayersByClubId([FromQuery] Guid clubId)
+    {
+        var players = await _mediator.Send(new GetAllPlayersByClubIdQuery(clubId));
+        return Ok(_mapper.From(players)
+            .AdaptToType<List<PlayerDto>>());
     }
 }

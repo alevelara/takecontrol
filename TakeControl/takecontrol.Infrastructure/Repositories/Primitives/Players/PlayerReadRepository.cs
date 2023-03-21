@@ -19,4 +19,11 @@ public class PlayerReadRepository : ReadBaseRepository<Player>, IPlayerReadRepos
         return await _dbContext.Players!
             .FirstOrDefaultAsync(c => c.UserId == userId);
     }
+
+    public Task<List<Player>> GetAllPlayersByClubId(Guid ClubId)
+    {
+        var players = _dbContext.Players.Where(b => b.PlayerClubs.Any(c => c.ClubId == ClubId));
+
+        return players.ToListAsync();
+    }
 }

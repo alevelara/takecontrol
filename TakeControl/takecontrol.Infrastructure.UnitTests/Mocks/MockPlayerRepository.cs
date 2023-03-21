@@ -1,5 +1,6 @@
 using AutoFixture;
 using Castle.DynamicProxy.Generators;
+using takecontrol.Domain.Models.PlayerClubs;
 using takecontrol.Domain.Models.Players;
 using takecontrol.Identity;
 
@@ -50,6 +51,17 @@ public static class MockPlayerRepository
         var player = Player.Create(userId, "name expert", 2, 3, 9);
 
         takecontrolDbContextFake.Players!.Add(player);
+        await takecontrolDbContextFake.SaveChangesAsync();
+    }
+
+    public static async Task AssignPlayerToClub(TakeControlDbContext takecontrolDbContextFake, Guid clubId, Guid playerId)
+    {
+        var playerGuid = takecontrolDbContextFake.Players.Where(x => x.UserId == playerId).First();
+        var clubGuid = takecontrolDbContextFake.Clubs.Where(x => x.UserId == clubId).First();
+
+        var playerClub = PlayerClub.Create(playerGuid.Id, clubGuid.Id);
+
+        takecontrolDbContextFake.PlayerClubs!.Add(playerClub);
         await takecontrolDbContextFake.SaveChangesAsync();
     }
 }

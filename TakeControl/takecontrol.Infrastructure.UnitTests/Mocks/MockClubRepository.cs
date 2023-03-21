@@ -1,4 +1,4 @@
-﻿using AutoFixture;
+using AutoFixture;
 using Castle.DynamicProxy.Generators;
 using takecontrol.Domain.Models.Addresses;
 using takecontrol.Domain.Models.Clubs;
@@ -41,7 +41,7 @@ public static class MockClubRepository
         await takecontrolDbContextFake.SaveChangesAsync();
     }
 
-    public static async Task AddClubWithUserId(TakeControlDbContext takecontrolDbContextFake, Guid userId)
+    public static async Task<Guid> AddClubWithUserId(TakeControlDbContext takecontrolDbContextFake, Guid userId)
     {
         var address = Address.Create("city", "province", "mainaddress");
         var club = Club.Create(address.Id, userId, "name");
@@ -49,6 +49,8 @@ public static class MockClubRepository
         takecontrolDbContextFake.Addresses!.Add(address);
         takecontrolDbContextFake.Clubs!.Add(club);
         await takecontrolDbContextFake.SaveChangesAsync();
+
+        return club.Id;
     }
 
     public static async Task<Club> AddClub(TakeControlDbContext takecontrolDbContextFake)

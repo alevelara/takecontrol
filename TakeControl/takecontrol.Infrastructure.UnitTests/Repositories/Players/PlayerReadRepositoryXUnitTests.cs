@@ -19,7 +19,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 
     [Fact]
     public async Task GetPlayerById_Should_ReturnNull_WhenIdDoesntExist()
-    { 
+    {
         //Arrange
         var userId = Guid.NewGuid();
         var readRepository = new PlayerReadRepository(_dbContext.Context);
@@ -101,10 +101,51 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         Assert.Equal((int)PlayerLevel.Expert, result.PlayerLevel);
     }
 
+    [Fact]
+    public async Task GetAllPlayersByClubId_Should_ReturnAListOfPlayers()
+    {
+        //Arrange
+        var clubIdA = Guid.NewGuid();
+        var clubIdB = Guid.NewGuid();
+        var playerId1 = Guid.NewGuid();
+        var playerId2 = Guid.NewGuid();
+        var playerId3 = Guid.NewGuid();
+
+        // Create players
+        await MockPlayerRepository.AddPlayerExpert(_dbContext.Context, playerId1);
+        await MockPlayerRepository.AddPlayerMid(_dbContext.Context, playerId2);
+        await MockPlayerRepository.AddPlayerBeginner(_dbContext.Context, playerId3);
+
+        // Create clubs
+        var guidClubA = await MockClubRepository.AddClubWithUserId(_dbContext.Context, clubIdA);
+        var guidClubB = await MockClubRepository.AddClubWithUserId(_dbContext.Context, clubIdB);
+
+        // Assign players to club
+        await MockPlayerRepository.AssignPlayerToClub(_dbContext.Context, clubIdA, playerId1);
+        await MockPlayerRepository.AssignPlayerToClub(_dbContext.Context, clubIdA, playerId2);
+        await MockPlayerRepository.AssignPlayerToClub(_dbContext.Context, clubIdB, playerId3);
+
+        var readRepository = new PlayerReadRepository(_dbContext.Context);
+
+        //Act
+        var resultPlayersClubA = await readRepository.GetAllPlayersByClubId(guidClubA);
+        var resultPlayersClubB = await readRepository.GetAllPlayersByClubId(guidClubB);
+
+        //Assert
+        Assert.NotNull(resultPlayersClubA);
+        Assert.IsType<List<Player>>(resultPlayersClubA);
+        Assert.Equal(resultPlayersClubA.Count, 2);
+
+        Assert.NotNull(resultPlayersClubB);
+        Assert.IsType<List<Player>>(resultPlayersClubB);
+        Assert.Equal(resultPlayersClubB.Count, 1);
+
+    }
+
     public Task InitializeAsync() => Task.CompletedTask;
 
     public async Task DisposeAsync()
     {
-        await _dbContext.ResetState();
+        // await _dbContext.ResetState();
     }
 }
