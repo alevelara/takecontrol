@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Takecontrol.Shared.Application.Behaviors;
 
-namespace Takecontrol.Emails.Application
+namespace Takecontrol.Shared.Application
 {
     public static class ServiceRegistration
     {

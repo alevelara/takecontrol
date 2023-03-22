@@ -2,6 +2,7 @@
 using Takecontrol.Credential.Infrastructure;
 using Takecontrol.Emails.Application;
 using Takecontrol.Emails.Infrastructure;
+using Takecontrol.Shared.Application;
 using Takecontrol.User.Application;
 using Takecontrol.User.Infrastructure;
 
