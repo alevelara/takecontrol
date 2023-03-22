@@ -26,10 +26,12 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         Player player = null;
 
         //Act
-        _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(It.IsAny<Guid>()));
+        _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(It.IsAny<Guid>()))
+            .ReturnsAsync(new List<PlayerClub>());
+        var result = await handler.Handle(query, default);
 
         //Assert
-        await Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(query, default));
+        Assert.Empty(result);
     }
 
     [Fact]
