@@ -1,12 +1,12 @@
-using System.Net;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Takecontrol.API.Routes;
-using Takecontrol.Application.Features.Accounts.Commands.ResetPassword;
-using Takecontrol.Application.Features.Accounts.Commands.UpdatePassword;
-using Takecontrol.Application.Features.Accounts.Queries.Login;
-using Takecontrol.Domain.Messages.Identity;
+using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;
+using Takecontrol.Credential.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Credential.Domain.Messages.Identity;
 
 namespace Takecontrol.API.Controllers;
 

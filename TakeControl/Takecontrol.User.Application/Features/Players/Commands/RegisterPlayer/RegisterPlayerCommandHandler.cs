@@ -47,6 +47,6 @@ public class RegisterPlayerCommandHandler : ICommandHandler<RegisterPlayerComman
     private async Task SendWelcomeEmail(string toEmail, CancellationToken cancellationToken)
     {
         var message = new SendWelcomeEmailMessageNotification(toEmail);
-        await _mediator.Publish(message);
+        await _mediator.Send(message, cancellationToken);
     }
 }

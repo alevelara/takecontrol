@@ -1,8 +1,6 @@
+using Takecontrol.API;
 using Takecontrol.API.Mappings;
 using Takecontrol.API.Middlewares;
-using Takecontrol.Application;
-using Takecontrol.EmailEngine;
-using Takecontrol.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -13,11 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddTransient<ExceptionHandlingMiddleware>();
-    builder.Services.ConfigureIdentityServices(builder.Configuration);
-    builder.Services.RegisterEmailServices(builder.Configuration);
-    builder.Services.AddApplicationServices();
-    builder.Services.AddMappings();
     builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+    builder.Services.ConfigureApplicationServices();
+    builder.Services.AddMappings();
     builder.Services.AddCors(opt =>
     {
         opt.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()

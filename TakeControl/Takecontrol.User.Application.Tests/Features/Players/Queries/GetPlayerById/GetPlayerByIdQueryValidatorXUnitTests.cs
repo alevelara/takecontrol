@@ -1,7 +1,7 @@
 using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
 using Xunit;
 
-namespace Takecontrol.User.Application.Tests.Features.Players.Queries;
+namespace Takecontrol.User.Application.Tests.Features.Players.Queries.GetPlayerById;
 
 public class GetPlayerByIdQueryValidatorXUnitTests : IClassFixture<GetPlayerByIdQueryValidator>
 {

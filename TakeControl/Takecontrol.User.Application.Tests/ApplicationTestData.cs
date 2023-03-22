@@ -1,5 +1,6 @@
 ﻿using Takecontrol.User.Domain.Models.Addresses;
 using Takecontrol.User.Domain.Models.Clubs;
+using Takecontrol.User.Domain.Models.PlayerClubs;
 using Takecontrol.User.Domain.Models.Players;
 
 namespace Takecontrol.User.Application.Tests;
@@ -29,5 +30,10 @@ public static class ApplicationTestData
     public static Player CreateExpertPlayerForTest(Guid userId)
     {
         return Player.Create(userId, "name", 2, 3, 5);
+    }
+
+    public static PlayerClub AssignPlayerToClub(Player player, Club club)
+    {
+        return PlayerClub.Create(player.Id, club.Id);
     }
 }

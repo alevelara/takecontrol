@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Takecontrol.Shared.Application\Takecontrol.Shared.Application.csproj" />
     <ProjectReference Include="..\Takecontrol.User.Domain\Takecontrol.User.Domain.csproj" />
   </ItemGroup>

@@ -39,7 +39,8 @@ public class RegisterPlayerCommandHandlerXUnitTests
         //Act
         await handler.Handle(command, default);
         _mediator.Setup(x => x.Send(It.IsAny<RegisterPlayerMessageNotification>(), default)).ReturnsAsync(userId);
-        _mediator.Setup(x => x.Publish(It.IsAny<SendWelcomeEmailMessageNotification>(), default)); playerRepo.Setup(c => c.AddAsync(It.IsAny<Player>())).ReturnsAsync(player);
+        _mediator.Setup(x => x.Send(It.IsAny<SendWelcomeEmailMessageNotification>(), default));
+        playerRepo.Setup(c => c.AddAsync(It.IsAny<Player>())).ReturnsAsync(player);
         _uoW.Setup(u => u.CompleteAsync()).ReturnsAsync(1);
 
         //Asserts

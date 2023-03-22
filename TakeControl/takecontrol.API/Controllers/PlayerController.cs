@@ -1,16 +1,16 @@
-using System.Net;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Takecontrol.API.Routes;
-using Takecontrol.Application.Features.Players.Commands.JoinToClub;
-using Takecontrol.Application.Features.Players.Commands.RegisterPlayer;
-using Takecontrol.Application.Features.Players.Queries.GetPlayerByUserId;
-using Takecontrol.Application.Features.Players.Queries.GetAllPlayersByClubId;
-using Takecontrol.Domain.Dtos.Players;
-using Takecontrol.Domain.Messages.Players;
-using Takecontrol.Identity.Constants;
+using Takecontrol.Credential.Infrastructure.Constants;
+using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
+using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.User.Application.Features.Players.Queries.GetAllPlayersByClubId;
+using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
+using Takecontrol.User.Domain.Dtos.Players;
+using Takecontrol.User.Domain.Messages.Players;
 
 namespace Takecontrol.API.Controllers;
 

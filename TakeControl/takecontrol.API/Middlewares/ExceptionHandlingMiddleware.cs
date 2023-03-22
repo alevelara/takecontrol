@@ -1,7 +1,7 @@
-﻿using System.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.Net;
 using Takecontrol.API.Errors;
-using Takecontrol.Application.Exceptions;
+using Takecontrol.Shared.Application.Exceptions;
 
 namespace Takecontrol.API.Middlewares;
 

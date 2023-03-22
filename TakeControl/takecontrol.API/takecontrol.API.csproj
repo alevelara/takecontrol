@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Takecontrol.EmailEngine\Takecontrol.EmailEngine.csproj" />
-    <ProjectReference Include="..\Takecontrol.Identity\Takecontrol.Identity.csproj" />
-    <ProjectReference Include="..\Takecontrol.Infrastructure\Takecontrol.Infrastructure.csproj" />
+    <ProjectReference Include="..\Takecontrol.Credential.Infrastructure\Takecontrol.Credential.Infrastructure.csproj" />
+    <ProjectReference Include="..\Takecontrol.Email.Infrastructure\Takecontrol.Emails.Infrastructure.csproj" />
+    <ProjectReference Include="..\Takecontrol.User.Infrastructure\Takecontrol.User.Infrastructure.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

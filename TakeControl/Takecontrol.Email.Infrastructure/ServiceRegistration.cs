@@ -15,9 +15,9 @@ using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 
 namespace Takecontrol.Emails.Infrastructure;
 
-public static class EmailServiceRegistration
+public static class ServiceRegistration
 {
-    public static IServiceCollection RegisterEmailServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureEmailInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<EmailDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("ConnectionString")));

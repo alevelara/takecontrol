@@ -6,4 +6,4 @@ public sealed record class RegisterPlayerRequest(
     string Password,
     int NumberOfClassesInAWeek,
     int AvgNumberOfMatchesInAWeek,
-    int NumberOgYearsPlayed);
+    int NumberOfYearsPlayed);

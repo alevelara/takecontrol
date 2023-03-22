@@ -13,9 +13,9 @@ using Takecontrol.Credential.Infrastructure.Services;
 
 namespace Takecontrol.Credential.Infrastructure;
 
-public static class IdentityServiceRegistration
+public static class ServiceRegistration
 {
-    public static IServiceCollection ConfigureIdentityServices(this IServiceCollection service, IConfiguration configuration)
+    public static IServiceCollection ConfigureCredentialInfrastructureServices(this IServiceCollection service, IConfiguration configuration)
     {
         service.AddDbContext<TakeControlIdentityDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString")));

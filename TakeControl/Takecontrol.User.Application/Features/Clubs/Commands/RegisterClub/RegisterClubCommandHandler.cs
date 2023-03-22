@@ -53,6 +53,6 @@ public sealed class RegisterClubCommandHandler :
     private async Task SendWelcomeEmail(string toEmail, CancellationToken cancellationToken)
     {
         var eventNotification = new SendWelcomeEmailMessageNotification(toEmail);
-        await _mediator.Publish(eventNotification);
+        await _mediator.Send(eventNotification, cancellationToken);
     }
 }

@@ -5,7 +5,7 @@ using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
 using Takecontrol.User.Domain.Models.Players;
 using Xunit;
 
-namespace Takecontrol.User.Application.Tests.Features.Players.Queries;
+namespace Takecontrol.User.Application.Tests.Features.Players.Queries.GetPlayerById;
 
 [Trait("Category", "UnitTests")]
 public class GetPlayerByIdQueryHandlerXUnitTests

@@ -43,7 +43,7 @@ public class RegisterClubCommandHandlerXUnitTests
         //Act
         await handler.Handle(command, default);
         _mediator.Setup(x => x.Send(It.IsAny<RegisterClubMessageNotification>(), default)).ReturnsAsync(userId);
-        _mediator.Setup(x => x.Publish(It.IsAny<SendWelcomeEmailMessageNotification>(), default));
+        _mediator.Setup(x => x.Send(It.IsAny<SendWelcomeEmailMessageNotification>(), default));
         addressRepo.Setup(a => a.AddAsync(It.IsAny<Address>())).ReturnsAsync(address);
         clubRepo.Setup(c => c.AddAsync(It.IsAny<Club>())).ReturnsAsync(club);
         _uoW.Setup(u => u.CompleteAsync()).ReturnsAsync(1);

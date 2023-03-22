@@ -1,10 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using System.Net.Mail;
+using System.Xml.Linq;
 using Takecontrol.API.Routes;
 using Takecontrol.API.Tests.Primitives;
-using Takecontrol.Domain.Messages.Clubs;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
+using Takecontrol.User.Domain.Messages.Clubs;
 using Xunit;
 using Xunit.Priority;
 
@@ -43,15 +45,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Priority(19)]
     public async Task RegisterClub_Should_Return201StatusCode_WhenRegisterRequestIsValid()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "CityTest",
-            Email = "email@test.com",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest",
+            Password: "Password123!",
+            Province: "provinceTest");
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -65,15 +65,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         await RegisterClubForTest();
 
-        var request = new RegisterClubRequest
-        {
-            City = "CityTest",
-            Email = "email@test.com",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest2",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest2",
+            Password: "Password123!",
+            Province: "provinceTest");
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -84,15 +82,14 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenEmailIsIncorrect()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "CityTest",
-            Email = "email",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest",
+            Password: "Password123!",
+            Province: "provinceTest"
+            );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -103,15 +100,14 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenPasswordIsIncorrect()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "CityTest",
-            Email = "email",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "pass",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+           City: "CityTest",
+           Email: "email@test.com",
+           MainAddress: "mainAddressTest",
+           Name: "nameTest",
+           Password: "pass",
+           Province: "provinceTest"
+           );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -122,15 +118,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenCityIsEmpty()
     {
-        var request = new RegisterClubRequest
-        {
-            City = string.Empty,
-            Email = "email",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: string.Empty,
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest",
+            Password: "Password123!",
+            Province: "provinceTest");
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -141,15 +135,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenProvinceIsEmpty()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "city",
-            Email = "email",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = string.Empty,
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest",
+            Password: "Password123!",
+            Province: string.Empty);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -160,15 +152,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenMainAddressIsEmpty()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "city",
-            Email = "email",
-            MainAddress = string.Empty,
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+             City: "CityTest",
+             Email: "email@test.com",
+             MainAddress: string.Empty,
+             Name: "nameTest",
+             Password: "Password123!",
+             Province: "provinceTest");
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -179,15 +169,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterClub_Should_ReturnConflict_WhenNameIsEmpty()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "city",
-            Email = "email",
-            MainAddress = "mainAddressTest",
-            Name = string.Empty,
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: string.Empty,
+            Password: "Password123!",
+            Province: "provinceTest");
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -266,15 +254,13 @@ public class ClubControllerXUnitTests : IAsyncLifetime
 
     private async Task RegisterClubForTest()
     {
-        var request = new RegisterClubRequest
-        {
-            City = "CityTest",
-            Email = "email@test.com",
-            MainAddress = "mainAddressTest",
-            Name = "nameTest",
-            Password = "Password123!",
-            Province = "provinceTest",
-        };
+        var request = new RegisterClubRequest(
+            City: "CityTest",
+            Email: "email@test.com",
+            MainAddress: "mainAddressTest",
+            Name: "nameTest",
+            Password: "Password123!",
+            Province: "provinceTest");
 
         await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
     }

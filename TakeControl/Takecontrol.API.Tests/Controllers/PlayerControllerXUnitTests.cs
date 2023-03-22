@@ -1,14 +1,14 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using System.Net.Mail;
+using System.Xml.Linq;
 using Takecontrol.API.Tests.Primitives;
-using Takecontrol.Domain.Messages.Clubs;
-using Takecontrol.Domain.Messages.Players;
-using Takecontrol.Domain.Models.Players;
-using Takecontrol.Domain.Models.Players.Enums;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.Shared.Tests.Repositories.Players;
-using Takecontrol.User.Domain.Models.Players;
+using Takecontrol.User.Domain.Messages.Clubs;
+using Takecontrol.User.Domain.Messages.Players;
+using Takecontrol.User.Domain.Models.Players.Enums;
 using Xunit;
 using Xunit.Priority;
 using Player = Takecontrol.User.Domain.Models.Players.Player;
@@ -48,15 +48,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Priority(29)]
     public async Task RegisterPlayer_Should_Return201StatusCode_WhenRegisterRequestIsValid()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email2@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -71,15 +69,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
         foreach (PlayerLevel level in Enum.GetValues(typeof(PlayerLevel)))
         {
-            var request = new RegisterPlayerRequest
-            {
-                Email = $"email2{(int)level}@test.com",
-                Name = $"nameTest2-{(int)level}",
-                Password = "Password123!",
-                AvgNumberOfMatchesInAWeek = 2,
-                NumberOfClassesInAWeek = 1,
-                NumberOfYearsPlayed = (int)level * (int)level,
-            };
+            var request = new RegisterPlayerRequest(
+                Email: $"email2{(int)level}@test.com",
+                Name: $"nameTest2-{(int)level}",
+                Password: "Password123!",
+                AvgNumberOfMatchesInAWeek: 2,
+                NumberOfClassesInAWeek: 1,
+                NumberOfYearsPlayed: (int)level * (int)level);
 
             var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
             names.Add(request.Name);
@@ -104,15 +100,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         await RegisterPlayerForTest();
 
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -123,15 +117,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenEmailIsIncorrect()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -142,15 +134,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenPasswordIsIncorrect()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "password!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+             Email: "email2@test.com",
+             Name: "nameTest",
+             Password: "Password!",
+             AvgNumberOfMatchesInAWeek: 1,
+             NumberOfClassesInAWeek: 1,
+             NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -161,15 +151,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenAvgNumberOfMatchesInAWeekIsNegative()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = -1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: -1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -180,15 +168,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenNumberOfClassesInAWeekIsNegative()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = -1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: -1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -199,15 +185,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenNumberOfYearsPlayedIsNegative()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = -1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: -1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -218,15 +202,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     [Fact]
     public async Task RegisterPlayer_Should_ReturnConflict_WhenNameIsEmpty()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: string.Empty,
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
 
@@ -299,30 +281,26 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     #region Private methods
     private async Task RegisterPlayerForTest()
     {
-        var request = new RegisterPlayerRequest
-        {
-            Email = "email@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            AvgNumberOfMatchesInAWeek = 1,
-            NumberOfClassesInAWeek = 1,
-            NumberOfYearsPlayed = 1,
-        };
+        var request = new RegisterPlayerRequest(
+            Email: "email2@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            AvgNumberOfMatchesInAWeek: 1,
+            NumberOfClassesInAWeek: 1,
+            NumberOfYearsPlayed: 1);
 
         await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
     }
 
     private async Task RegisterClubForTest()
     {
-        var request = new RegisterClubRequest
-        {
-            Email = "club@test.com",
-            Name = "nameTest",
-            Password = "Password123!",
-            City = "City",
-            MainAddress = "mainAddress",
-            Province = "province"
-        };
+        var request = new RegisterClubRequest(
+            Email: "club@test.com",
+            Name: "nameTest",
+            Password: "Password123!",
+            City: "City",
+            MainAddress: "mainAddress",
+            Province: "province");
 
         await _httpClient.PostAsJsonAsync(RegisterClubEndpoint, request, default);
     }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Takecontrol.EmailEngine.Persistence.Contexts;
-using Takecontrol.Identity;
+using Takecontrol.Credential.Infrastructure.Contexts;
+using Takecontrol.Emails.Infrastructure.Contexts;
+using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 
 namespace Takecontrol.API.Tests;
 
