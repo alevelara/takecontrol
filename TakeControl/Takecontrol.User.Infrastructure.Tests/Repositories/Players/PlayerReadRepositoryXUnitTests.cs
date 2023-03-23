@@ -1,4 +1,5 @@
 using Takecontrol.Shared.Tests.MockContexts;
+using Takecontrol.User.Domain.Models.PlayerClubs;
 using Takecontrol.User.Domain.Models.Players;
 using Takecontrol.User.Domain.Models.Players.Enums;
 using Takecontrol.User.Infrastructure.Repositories.Primitives.PlayerClubs;
@@ -11,11 +12,11 @@ namespace Takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
 
 [Trait("Category", "IntegrationTests")]
 [Collection(SharedTestCollection.Name)]
-public class ClubReadRepositoryXUnitTests : IAsyncLifetime
+public class PlayerReadRepositoryXUnitTests : IAsyncLifetime
 {
     private readonly TakeControlDb _dbContext;
 
-    public ClubReadRepositoryXUnitTests()
+    public PlayerReadRepositoryXUnitTests()
     {
         _dbContext = new TakeControlDb();
     }
@@ -136,11 +137,11 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 
         //Assert
         Assert.NotNull(resultPlayersClubA);
-        Assert.IsType<List<Player>>(resultPlayersClubA);
+        Assert.IsType<List<PlayerClub>>(resultPlayersClubA);
         Assert.Equal(resultPlayersClubA.Count, 2);
 
         Assert.NotNull(resultPlayersClubB);
-        Assert.IsType<List<Player>>(resultPlayersClubB);
+        Assert.IsType<List<PlayerClub>>(resultPlayersClubB);
         Assert.Equal(resultPlayersClubB.Count, 1);
 
     }

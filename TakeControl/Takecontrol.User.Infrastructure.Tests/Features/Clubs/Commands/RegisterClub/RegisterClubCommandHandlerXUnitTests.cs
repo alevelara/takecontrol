@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.User.Infrastructure.Repositories.Primitives;
+using Takecontrol.User.Infrastructure.Tests.Mocks;
 using Xunit;
 using Xunit.Priority;
 
@@ -14,13 +15,13 @@ namespace Takecontrol.User.Infrastructure.Tests.Features.Clubs.Commands.Register
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {
-    private readonly Mock<IUnitOfWork> _uoW;
+    private readonly Mock<UnitOfWork> _uoW;
     private readonly Mock<IMediator> _mediator;
     private readonly Mock<ILogger<RegisterClubCommandHandler>> _logger;
 
     public RegisterClubCommandHandlerXUnitTests()
     {
-        _uoW = new();
+        _uoW = MockUnitOfWork.GetUnitOfWork();
         _mediator = new();
         _logger = new();
     }

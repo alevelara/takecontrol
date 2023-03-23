@@ -8,10 +8,10 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
 # Set environment variables
 ENV DockerHOME=/usr/src/takecontrol
-ENV DockerAPIPath=/takecontrol.API
-ENV DockerAPIProj=takecontrol.API.csproj
+ENV DockerAPIPath=/Takecontrol.API
+ENV DockerAPIProj=Takecontrol.API.csproj
 ENV DockerAPP=/app
-ENV DockerAPPDLL=takecontrol.API.dll
+ENV DockerAPPDLL=Takecontrol.API.dll
 
 # Set work directory
 WORKDIR $DockerHOME
@@ -29,7 +29,7 @@ RUN dotnet publish $DockerAPIProj -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "takecontrol.API.dll"]
+ENTRYPOINT ["dotnet", "Takecontrol.API.dll"]
 
 EXPOSE 80
 EXPOSE 443

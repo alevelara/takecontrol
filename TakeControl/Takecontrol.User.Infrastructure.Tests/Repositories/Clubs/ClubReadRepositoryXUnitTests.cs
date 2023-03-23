@@ -1,7 +1,6 @@
 ﻿using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Infrastructure.Repositories.Primitives.Clubs;
-using Takecontrol.User.Infrastructure.Tests;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
 using Xunit;
 

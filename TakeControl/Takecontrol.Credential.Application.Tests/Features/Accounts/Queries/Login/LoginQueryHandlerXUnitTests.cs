@@ -53,7 +53,7 @@ public class LoginQueryHandlerXUnitTests
         LoginQueryHandler handler = new(_authService.Object);
 
         _authService.Setup(c => c.Login(It.IsAny<LoginQuery>())).ReturnsAsync(
-            new AuthResponse(Guid.NewGuid(), "userName","password", "tokem", UserType.Administrator));
+            new AuthResponse(Guid.NewGuid(), "userName", "password", "tokem", UserType.Administrator));
 
         //Act
         var result = handler.Handle(query, default);

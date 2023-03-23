@@ -6,7 +6,7 @@ namespace Takecontrol.Emails.Infrastructure.Tests.Mocks;
 
 public class MockDbContext
 {
-    private static string apiName = "takecontrol.API";
+    private static string apiName = "Takecontrol.API";
 
     public static EmailDbContext GetEmailDbContext()
     {
