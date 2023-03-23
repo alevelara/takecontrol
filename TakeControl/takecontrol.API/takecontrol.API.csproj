@@ -23,7 +23,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Takecontrol.API.IntegrationTests" />
+		<InternalsVisibleTo Include="Takecontrol.API.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>
