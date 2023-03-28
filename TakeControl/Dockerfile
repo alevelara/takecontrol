@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
 # Set environment variables
-ENV DockerHOME=/usr/src/takecontrol
+ENV DockerHOME=/usr/src/takecontrol/Takecontrol
 ENV DockerAPIPath=/Takecontrol.API
 ENV DockerAPIProj=Takecontrol.API.csproj
 ENV DockerAPP=/app
