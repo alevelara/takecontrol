@@ -43,13 +43,13 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var userIdPlayer1 = Guid.NewGuid();
         var userIdPlayer2 = Guid.NewGuid();
         var userIdPlayer3 = Guid.NewGuid();
-
         var handler = new GetAllPlayersByClubIdQueryHandler(_mockReadRepository.Object);
         var player1ClubA = ApplicationTestData.CreateBegginerPlayerForTest(userIdPlayer1);
         var player2ClubA = ApplicationTestData.CreateExpertPlayerForTest(userIdPlayer2);
         var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
 
         // Create a Club
+
         var addressA = ApplicationTestData.CreateAddresForTest();
         var addressB = ApplicationTestData.CreateAddresForTest();
         var clubA = ApplicationTestData.CreateClubForTest(userClubA, addressA);
