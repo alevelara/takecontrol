@@ -37,7 +37,7 @@ public class AuthService : IAuthService
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
-        ValidateUser(user, request.Email);
+        ValidateUser(user);
 
         var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
@@ -160,7 +160,7 @@ public class AuthService : IAuthService
         return jwtSecurityToken;
     }
 
-    private void ValidateUser(ApplicationUser user )
+    private void ValidateUser(ApplicationUser user)
     {
         if (user == null)
             throw new ConflictException(CredentialError.UserDoesntExist);

@@ -1,7 +1,6 @@
-﻿namespace Takecontrol.Credential.Domain.Tests
-{
-    public class Class1
-    {
+﻿namespace Takecontrol.Credential.Domain.Tests;
 
-    }
+public class Class1
+{
+
 }
