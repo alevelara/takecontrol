@@ -29,7 +29,8 @@ RUN dotnet publish $DockerAPIProj -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Takecontrol.API.dll"]
+# ENTRYPOINT ["dotnet", "takecontrol.API.dll"]
+ENTRYPOINT ["dotnet", "${DockerAPPDLL}"]
 
 EXPOSE 80
 EXPOSE 443
