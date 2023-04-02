@@ -10,5 +10,4 @@ public class DomainError
         Message = message;
         CodeId = codeId;
     }
-
 }

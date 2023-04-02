@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Takecontrol.Credential.Application.Contracts.Identity;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;
@@ -107,6 +107,7 @@ public class AuthService : IAuthService
             _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {CredentialError.UserDoesntExist.Message}");
             throw new NotFoundException(CredentialError.UserDoesntExist);
         }
+
         string resetToken = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
 
         if (string.IsNullOrEmpty(resetToken))
@@ -159,7 +160,7 @@ public class AuthService : IAuthService
         return jwtSecurityToken;
     }
 
-    private void ValidateUser(ApplicationUser user, string userEmail)
+    private void ValidateUser(ApplicationUser user )
     {
         if (user == null)
             throw new ConflictException(CredentialError.UserDoesntExist);

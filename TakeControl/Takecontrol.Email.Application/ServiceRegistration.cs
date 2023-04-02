@@ -1,6 +1,6 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Takecontrol.Emails.Application.Services.Emails;
 
 namespace Takecontrol.Emails.Application

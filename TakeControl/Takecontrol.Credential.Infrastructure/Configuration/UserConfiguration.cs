@@ -56,8 +56,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 EmailConfirmed = true,
                 UserType = UserType.Club,
                 SecurityStamp = Guid.NewGuid().ToString()
-            }
-            ,
+            },
             new ApplicationUser
             {
                 Id = PlayerUserId2,

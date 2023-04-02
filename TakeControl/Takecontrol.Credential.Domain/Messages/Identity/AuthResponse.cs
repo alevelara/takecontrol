@@ -2,4 +2,4 @@
 
 namespace Takecontrol.Credential.Domain.Messages.Identity;
 
-public sealed record class AuthResponse (Guid Id, string UserName, string Email, string Token, UserType UserType);
+public sealed record class AuthResponse(Guid Id, string UserName, string Email, string Token, UserType UserType);

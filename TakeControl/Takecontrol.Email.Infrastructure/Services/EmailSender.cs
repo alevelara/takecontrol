@@ -32,7 +32,6 @@ public sealed class EmailSender : IEmailSender
             await SendMimeMessageAsync(mailGenerator.Mail, ct);
 
             return true;
-
         }
         catch (Exception e)
         {

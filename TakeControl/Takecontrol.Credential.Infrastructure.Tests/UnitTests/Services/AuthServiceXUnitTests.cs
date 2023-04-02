@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using System.Security.Claims;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;
 using Takecontrol.Credential.Application.Features.Accounts.Queries.Login;

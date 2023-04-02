@@ -49,7 +49,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var player2ClubA = ApplicationTestData.CreateExpertPlayerForTest(userIdPlayer2);
         var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
 
-
         // Create a Club
         var addressA = ApplicationTestData.CreateAddresForTest();
         var addressB = ApplicationTestData.CreateAddresForTest();
@@ -77,6 +76,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         Assert.NotNull(resultClubA);
         Assert.Equal(2, resultClubA.Count);
         Assert.NotNull(resultClubB);
-        Assert.Equal(1, resultClubB.Count);
+        Assert.Single(resultClubB);
     }
 }

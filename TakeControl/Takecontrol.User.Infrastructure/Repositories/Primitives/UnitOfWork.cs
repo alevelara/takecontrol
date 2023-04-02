@@ -5,7 +5,7 @@ using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 
 namespace Takecontrol.User.Infrastructure.Repositories.Primitives;
 
-public class UnitOfWork : IUnitOfWork, IDisposable
+public class UnitOfWork : IUnitOfWork
 {
     private readonly TakeControlDbContext _context;
     private Hashtable _repostories;

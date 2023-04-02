@@ -1,8 +1,8 @@
-﻿using MapsterMapper;
+﻿using System.Net;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Infrastructure.Constants;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;

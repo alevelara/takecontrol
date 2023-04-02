@@ -46,7 +46,7 @@ public class EmailDbContext : DbContext
 
     public class EmailDBContextFactory : IDesignTimeDbContextFactory<EmailDbContext>
     {
-        public static string API_NAME = "Takecontrol.API";
+        public static string APINAME = "Takecontrol.API";
 
         public EmailDbContext CreateDbContext(string[] args)
         {
@@ -71,7 +71,7 @@ public class EmailDbContext : DbContext
                       Environment.GetEnvironmentVariable(
                           "ASPNETCORE_ENVIRONMENT");
 
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, API_NAME);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, APINAME);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)
@@ -83,5 +83,3 @@ public class EmailDbContext : DbContext
         }
     }
 }
-
-

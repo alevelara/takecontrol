@@ -10,10 +10,8 @@ namespace Takecontrol.Credential.Infrastructure.Contexts;
 
 public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
-
     public TakeControlIdentityDbContext(DbContextOptions<TakeControlIdentityDbContext> options) : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -26,7 +24,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
 
     public class IdentityDBContextFactory : IDesignTimeDbContextFactory<TakeControlIdentityDbContext>
     {
-        public static string API_NAME = "Takecontrol.API";
+        public static string APINAME = "Takecontrol.API";
 
         public TakeControlIdentityDbContext CreateDbContext(string[] args)
         {
@@ -45,13 +43,13 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
             return new TakeControlIdentityDbContext(optionsBuilder.Options);
         }
 
-        IConfiguration GetAppConfiguration()
+        private IConfiguration GetAppConfiguration()
         {
             var environmentName =
                       Environment.GetEnvironmentVariable(
                           "ASPNETCORE_ENVIRONMENT");
 
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, API_NAME);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, APINAME);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)

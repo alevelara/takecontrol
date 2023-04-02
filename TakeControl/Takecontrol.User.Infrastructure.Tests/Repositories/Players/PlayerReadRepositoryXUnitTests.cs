@@ -138,12 +138,11 @@ public class PlayerReadRepositoryXUnitTests : IAsyncLifetime
         //Assert
         Assert.NotNull(resultPlayersClubA);
         Assert.IsType<List<PlayerClub>>(resultPlayersClubA);
-        Assert.Equal(resultPlayersClubA.Count, 2);
+        Assert.Equal(2, resultPlayersClubA.Count);
 
         Assert.NotNull(resultPlayersClubB);
         Assert.IsType<List<PlayerClub>>(resultPlayersClubB);
-        Assert.Equal(resultPlayersClubB.Count, 1);
-
+        Assert.Equal(1, resultPlayersClubB.Count);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

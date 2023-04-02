@@ -1,7 +1,7 @@
+using System.Net;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;

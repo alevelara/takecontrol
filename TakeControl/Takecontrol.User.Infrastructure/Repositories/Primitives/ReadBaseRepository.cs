@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Domain.Primitives;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;

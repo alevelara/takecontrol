@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Takecontrol.Credential.Application.Contracts.Identity;
 using Takecontrol.Credential.Domain.Models.ApplicationUser.Options;
 using Takecontrol.Credential.Infrastructure.Contexts;

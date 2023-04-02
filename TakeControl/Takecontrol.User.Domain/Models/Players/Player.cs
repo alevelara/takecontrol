@@ -56,7 +56,7 @@ public class Player : BaseDomainModel
         const double minimunMidLevel = 1.5;
         const double minimumExpertLevel = 3;
 
-        var levelPlayer = numberOfClassesInAWeek * 0.4 + avgNumberOfMatchesInAWeek * 0.2 + numberOfYearsPlayed * 0.4;
+        var levelPlayer = (numberOfClassesInAWeek * 0.4) + (avgNumberOfMatchesInAWeek * 0.2) + (numberOfYearsPlayed * 0.4);
 
         if (levelPlayer is > minimumBegginerLevel and < minimunMidLevel)
         {

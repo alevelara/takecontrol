@@ -30,7 +30,7 @@ public class GetAllPlayersByClubIdQueryValidatorXUnitTests : IClassFixture<GetAl
 
     [Theory]
     [InlineData(null, false)]
-    public void Validator_Should_ReturnInvalidValue_WhenGuidIsNull(Guid guid, bool isValid)
+    public void Validator_Should_ReturnInvalidValue_WhenGuidIsNull(Guid? guid, bool isValid)
     {
         //Arrange
         var query = new GetAllPlayersByClubIdQuery(guid);
@@ -41,5 +41,4 @@ public class GetAllPlayersByClubIdQueryValidatorXUnitTests : IClassFixture<GetAl
         //Assert
         Assert.Equal(isValid, result.IsValid);
     }
-
 }

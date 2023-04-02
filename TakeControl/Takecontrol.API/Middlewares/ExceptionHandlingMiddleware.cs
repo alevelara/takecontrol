@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Net;
+﻿using System.Net;
+using Newtonsoft.Json;
 using Takecontrol.API.Errors;
 using Takecontrol.Shared.Application.Exceptions;
 

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Linq.Expressions;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq.Expressions;
-using System.Net.Http.Headers;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.Credential.Domain.Models.ApplicationUser.Enum;
 using Takecontrol.Credential.Infrastructure.Models;

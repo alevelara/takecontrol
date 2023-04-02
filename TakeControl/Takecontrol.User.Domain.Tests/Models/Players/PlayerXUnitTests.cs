@@ -21,7 +21,6 @@ public class PlayerXUnitTests
         Assert.Equal(player.UserId, userId);
     }
 
-
     [Fact]
     public void Create_Should_ReturnNewMidPlayer_WhenAllFieldsArePopulated()
     {
