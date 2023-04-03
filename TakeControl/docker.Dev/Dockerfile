@@ -6,7 +6,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
 # Set environment variables
-ENV DockerAPIPath=/takecontrol.API
+ENV DockerAPIPath=/Takecontrol.API
 ENV DockerAPP=/app
 ENV ASPNETCORE_URLS=http://*:5000
 ENV ASPNETCORE_ENVIRONMENT=Development
