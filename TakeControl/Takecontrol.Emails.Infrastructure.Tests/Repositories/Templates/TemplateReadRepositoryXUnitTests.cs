@@ -52,10 +52,7 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
         await _dbContext.SeedData();
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public async Task InitializeAsync() => await _dbContext.ResetState();
 
-    public async Task DisposeAsync()
-    {
-        await _dbContext.ResetState();
-    }
+    public async Task DisposeAsync() => await _dbContext.ResetState();
 }
