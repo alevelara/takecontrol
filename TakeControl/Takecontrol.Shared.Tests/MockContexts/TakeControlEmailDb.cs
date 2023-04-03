@@ -20,7 +20,6 @@ public class TakeControlEmailDb : IDbConfiguration
     public async Task EnsureDatabase()
     {
         Context.Database.Migrate();
-        await SeedData();
     }
 
     public async Task ResetState()

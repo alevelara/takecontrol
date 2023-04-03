@@ -35,5 +35,5 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
         await _dbContext.ResetState();
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public Task InitializeAsync() => _dbContext.EnsureDatabase();
 }
