@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Takecontrol.Emails.Domain.Models.Templates;
-using Takecontrol.Emails.Domain.Models.Templates.Enum;
-using Takecontrol.Emails.Infrastructure.Contexts;
-using Takecontrol.Emails.Infrastructure.Persistence.Data;
+﻿using Takecontrol.Emails.Domain.Models.Templates.Enum;
 using Takecontrol.Emails.Infrastructure.Repositories.Templates;
+using Takecontrol.Shared.Tests.MockContexts;
 using Xunit;
 
 namespace Takecontrol.Emails.Infrastructure.Tests.Repositories.Templates;
@@ -12,13 +9,11 @@ namespace Takecontrol.Emails.Infrastructure.Tests.Repositories.Templates;
 [Trait("Category", "EmailIntegrationTests")]
 public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 {
-    private readonly EmailDbContextFixture _fixture;
-    private readonly EmailDbContext _dbContext;
+    private readonly TakeControlEmailDb _dbContext;
 
-    public TemplateReadRepositoryXUnitTests(EmailDbContextFixture fixture)
+    public TemplateReadRepositoryXUnitTests()
     {
-        _fixture = fixture;
-        _dbContext = _fixture.EmailDbContext;
+        _dbContext = new TakeControlEmailDb();
     }
 
     [Fact]
@@ -27,7 +22,7 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
         //Arrange
         await SeedData();
 
-        var templateRepository = new TemplateReadRepository(_dbContext);
+        var templateRepository = new TemplateReadRepository(_dbContext.Context);
         var welcomeTemplate = TemplateType.WELCOME;
 
         //Act
@@ -42,7 +37,7 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     public async Task GetTemplateByTemplateType_Should_ReturnNullValue_WhenTemplateDoesntExist()
     {
         //Arrange
-        var templateRepository = new TemplateReadRepository(_dbContext);
+        var templateRepository = new TemplateReadRepository(_dbContext.Context);
         var welcomeTemplate = TemplateType.WELCOME;
 
         //Act
@@ -54,18 +49,13 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 
     private async Task SeedData()
     {
-        await _dbContext.Set<Template>().AddAsync(TemplateFactory.WelcomeTemplate);
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SeedData();
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
 
     public async Task DisposeAsync()
     {
-        if (await _dbContext.Database.CanConnectAsync())
-        {
-            await _dbContext.Emails.ExecuteDeleteAsync();
-            await _dbContext.Templates.ExecuteDeleteAsync();
-        }
+        await _dbContext.ResetState();
     }
 }

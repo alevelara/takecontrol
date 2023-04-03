@@ -1,9 +1,10 @@
-﻿using Xunit;
+﻿using Takecontrol.Shared.Tests.MockContexts;
+using Xunit;
 
 namespace Takecontrol.Emails.Infrastructure.Tests;
 
 [CollectionDefinition(Name)]
-public class SharedTestCollection : ICollectionFixture<EmailDbContextFixture>
+public class SharedTestCollection : ICollectionFixture<TakeControlEmailDb>
 {
     public const string Name = "EmailIntegrationTests";
 }

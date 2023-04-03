@@ -2,6 +2,7 @@
 using Takecontrol.Emails.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Repositories.Emails;
 using Takecontrol.Emails.Infrastructure.Tests.TestsData;
+using Takecontrol.Shared.Tests.MockContexts;
 using Xunit;
 
 namespace Takecontrol.Emails.Infrastructure.Tests.Repositories.Emails;
@@ -10,19 +11,17 @@ namespace Takecontrol.Emails.Infrastructure.Tests.Repositories.Emails;
 [Trait("Category", "EmailIntegrationTests")]
 public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
 {
-    private readonly EmailDbContextFixture _fixture;
-    private readonly EmailDbContext _dbContext;
+    private readonly TakeControlEmailDb _dbContext;
 
-    public EmailWriteRepositoryXUnitTests(EmailDbContextFixture fixture)
+    public EmailWriteRepositoryXUnitTests()
     {
-        _fixture = fixture;
-        _dbContext = fixture.EmailDbContext;
+        _dbContext = new TakeControlEmailDb();
     }
 
     [Fact]
     public async Task AddEmail_Should_ReturnEmail_WhenEntityIsInsertedInDB()
     {
-        var repository = new EmailWriteRepository(_dbContext);
+        var repository = new EmailWriteRepository(_dbContext.Context);
         var email = EmailTestData.CreateEmailForTest();
 
         var result = await repository.AddEmail(email);
@@ -33,10 +32,7 @@ public class EmailWriteRepositoryXUnitTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        if (await _dbContext.Database.CanConnectAsync())
-        {
-            await _dbContext.Emails.ExecuteDeleteAsync();
-        }
+        await _dbContext.ResetState();
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
