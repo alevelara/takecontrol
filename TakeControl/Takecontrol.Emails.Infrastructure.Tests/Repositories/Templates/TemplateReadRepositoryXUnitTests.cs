@@ -39,6 +39,8 @@ public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
     [Fact]
     public async Task GetTemplateByTemplateType_Should_ReturnNullValue_WhenTemplateDoesntExist()
     {
+        await _dbContext.ResetState();
+
         //Arrange
         var templateRepository = new TemplateReadRepository(_dbContext.Context);
         var welcomeTemplate = TemplateType.WELCOME;
