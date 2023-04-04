@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/TakeControl/takecontrol.API/takecontrol.API.csproj",
+                "${workspaceFolder}/TakeControl/Takecontrol.API/Takecontrol.API.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/TakeControl/takecontrol.API/takecontrol.API.csproj",
+                "${workspaceFolder}/TakeControl/Takecontrol.API/Takecontrol.API.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/TakeControl/takecontrol.API/takecontrol.API.csproj"
+                "${workspaceFolder}/TakeControl/Takecontrol.API/Takecontrol.API.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
