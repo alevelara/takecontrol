@@ -142,7 +142,7 @@ public class PlayerReadRepositoryXUnitTests : IAsyncLifetime
 
         Assert.NotNull(resultPlayersClubB);
         Assert.IsType<List<PlayerClub>>(resultPlayersClubB);
-        Assert.Equal(1, resultPlayersClubB.Count);
+        Assert.Single(resultPlayersClubB);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

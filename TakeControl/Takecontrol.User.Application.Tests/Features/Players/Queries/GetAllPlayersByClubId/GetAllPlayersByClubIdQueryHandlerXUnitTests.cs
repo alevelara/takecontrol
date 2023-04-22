@@ -49,7 +49,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
 
         // Create a Club
-
         var addressA = ApplicationTestData.CreateAddresForTest();
         var addressB = ApplicationTestData.CreateAddresForTest();
         var clubA = ApplicationTestData.CreateClubForTest(userClubA, addressA);
