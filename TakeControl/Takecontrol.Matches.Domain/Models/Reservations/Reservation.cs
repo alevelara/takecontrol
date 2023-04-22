@@ -23,6 +23,6 @@ public class Reservation : BaseDomainModel
         EndDate = endDate;
     }
 
-    public static Reservation Create(Guid userId, Guid courtId, DateTime startDate, DateTime endDate) 
+    public static Reservation Create(Guid userId, Guid courtId, DateTime startDate, DateTime endDate)
         => new Reservation(userId, courtId, startDate, endDate);
 }
