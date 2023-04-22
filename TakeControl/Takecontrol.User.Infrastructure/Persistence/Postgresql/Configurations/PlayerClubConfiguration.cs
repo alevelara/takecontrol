@@ -8,6 +8,8 @@ public class PlayerClubConfiguration : IEntityTypeConfiguration<PlayerClub>
 {
     public void Configure(EntityTypeBuilder<PlayerClub> builder)
     {
+        builder.ToTable("players_clubs");
+
         builder.HasKey(pc => new { pc.ClubId, pc.PlayerId });
 
         builder.HasOne(bc => bc.Club)

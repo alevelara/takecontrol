@@ -1,12 +1,10 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Net.Mail;
-using System.Xml.Linq;
 using Takecontrol.API.Routes;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
-using Takecontrol.User.Domain.Messages.Clubs;
+using Takecontrol.User.Domain.Messages.Clubs.Requests;
 using Xunit;
 using Xunit.Priority;
 

@@ -8,8 +8,8 @@ using Takecontrol.Credential.Infrastructure.Constants;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetAllClubs;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
-using Takecontrol.User.Domain.Dtos.Clubs;
-using Takecontrol.User.Domain.Messages.Clubs;
+using Takecontrol.User.Domain.Messages.Clubs.Dtos;
+using Takecontrol.User.Domain.Messages.Clubs.Requests;
 
 namespace Takecontrol.API.Controllers;
 
