@@ -23,7 +23,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         //Arrange
         var query = new GetAllPlayersByClubIdQuery(Guid.NewGuid());
         var handler = new GetAllPlayersByClubIdQueryHandler(_mockReadRepository.Object);
-        Player player = null;
 
         //Act
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(It.IsAny<Guid>()))

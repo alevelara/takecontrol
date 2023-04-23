@@ -76,6 +76,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 NumberOfYearsPlayed: (int)level * (int)level);
 
             var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+            Assert.True(response.IsSuccessStatusCode);
+
             names.Add(request.Name);
         }
 

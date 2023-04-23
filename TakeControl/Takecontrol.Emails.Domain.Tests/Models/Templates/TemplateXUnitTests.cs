@@ -23,7 +23,6 @@ public class TemplateXUnitTests
     [Fact]
     public void Create_Should_ReturnNewTemplate_WhenPayloadIsNull()
     {
-        var payload = "payloadTest";
         var language = "Language";
         var template = Template.Create(TemplateType.WELCOME, null, language);
 

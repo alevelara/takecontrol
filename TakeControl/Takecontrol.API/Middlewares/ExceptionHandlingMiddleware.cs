@@ -7,13 +7,11 @@ namespace Takecontrol.API.Middlewares;
 
 public class ExceptionHandlingMiddleware : IMiddleware
 {
-    private readonly IHostEnvironment _environment;
     private static int notFoundException = 1404;
     private static int badRequestException = 1400;
 
-    public ExceptionHandlingMiddleware(IHostEnvironment environment)
+    public ExceptionHandlingMiddleware()
     {
-        _environment = environment;
     }
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)

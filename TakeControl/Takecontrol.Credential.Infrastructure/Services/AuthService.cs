@@ -72,7 +72,7 @@ public class AuthService : IAuthService
         var registerResult = await _userManager.CreateAsync(user, request.Password);
         if (!registerResult.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorDuringUserRegistration.Message}: {registerResult.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorDuringUserRegistration.Message}: {registerResult.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorDuringUserRegistration);
         }
 
@@ -91,7 +91,7 @@ public class AuthService : IAuthService
         var result = await _userManager.ChangePasswordAsync(existingUser, request.CurrentPassword, request.NewPassword);
         if (!result.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorChangingPassword);
         }
 
@@ -119,7 +119,7 @@ public class AuthService : IAuthService
         var result = await _userManager.ResetPasswordAsync(existingUser, resetToken, request.NewPassword);
         if (!result.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorChangingPassword);
         }
 
