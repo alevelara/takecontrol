@@ -41,17 +41,17 @@ public class ExceptionHandlingMiddleware : IMiddleware
                     var validationException = ex as ValidationException;
                     statusCode = (int)HttpStatusCode.BadRequest;
                     var validationJson = JsonConvert.SerializeObject(validationException?.Errors);
-                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, validationException.Error.CodeId, validationException?.Error.Message, validationJson));
+                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, validationException!.Error.CodeId, validationException?.Error.Message, validationJson));
                     break;
                 case UnauthorizedException:
                     var unauthorizedException = ex as UnauthorizedException;
                     statusCode = (int)HttpStatusCode.Unauthorized;
-                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, unauthorizedException.Error.CodeId, unauthorizedException?.Error.Message, null));
+                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, unauthorizedException!.Error.CodeId, unauthorizedException?.Error.Message, null));
                     break;
                 case ConflictException:
                     var conflictException = ex as ConflictException;
                     statusCode = (int)HttpStatusCode.Conflict;
-                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, conflictException.Error.CodeId, conflictException?.Error.Message, null));
+                    resultMessage = JsonConvert.SerializeObject(new CodeErrorException(statusCode, conflictException!.Error.CodeId, conflictException?.Error.Message, null));
                     break;
             }
 

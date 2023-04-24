@@ -26,7 +26,7 @@ namespace Takecontrol.User.Infrastructure.Tests.Mocks
 
         private static IConfiguration GetAppConfiguration()
         {
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, apiName);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.Parent!.FullName, apiName);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)

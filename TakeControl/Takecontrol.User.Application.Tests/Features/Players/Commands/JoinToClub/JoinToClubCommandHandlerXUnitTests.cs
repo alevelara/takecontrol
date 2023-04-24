@@ -52,10 +52,8 @@ public class JoinToClubCommandHandlerXUnitTests
         var code = "12345";
         var command = new JoinToClubCommand(Guid.NewGuid(), Guid.NewGuid(), code);
         var handler = new JoinToClubCommandHandler(_clubReadRepository.Object, _unitOfWork.Object);
-        Club club = null;
 
-        _clubReadRepository.Setup(c => c.GetClubByCodeAndClubId(It.IsAny<Guid>(), It.IsAny<string>()))
-            .ReturnsAsync(club);
+        _clubReadRepository.Setup(c => c.GetClubByCodeAndClubId(It.IsAny<Guid>(), It.IsAny<string>()));
 
         //Assert
         await Assert.ThrowsAsync<ConflictException>(() => handler.Handle(command, default));

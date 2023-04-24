@@ -90,7 +90,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             var level = int.Parse(name.Split('-')[1]);
 
             var player = players!.FirstOrDefault(c => c.Name == name);
-            Assert.Equal(player.PlayerLevel, level);
+            Assert.Equal(player!.PlayerLevel, level);
         }
     }
 
@@ -229,7 +229,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await _clubReadRepository.GetClubByName("nameTest");
         var player = await _playerReadRepository.GetPlayerByName("nameTest");
 
-        var request = new JoinToClubRequest(player.Id, club.Id, club.Code);
+        var request = new JoinToClubRequest(player!.Id, club!.Id, club.Code);
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
         //Act
@@ -266,7 +266,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await _clubReadRepository.GetClubByName("nameTest");
         var player = await _playerReadRepository.GetPlayerByName("nameTest");
         var incorrectCode = "12345";
-        var request = new JoinToClubRequest(player.Id, club.Id, incorrectCode);
+        var request = new JoinToClubRequest(player!.Id, club!.Id, incorrectCode);
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
         //Act

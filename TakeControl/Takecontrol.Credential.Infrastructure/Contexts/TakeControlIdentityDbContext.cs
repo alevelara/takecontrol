@@ -49,7 +49,7 @@ public class TakeControlIdentityDbContext : IdentityDbContext<ApplicationUser, I
                       Environment.GetEnvironmentVariable(
                           "ASPNETCORE_ENVIRONMENT");
 
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, APINAME);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, APINAME);
 
             var builder = new ConfigurationBuilder()
                     .SetBasePath(path)

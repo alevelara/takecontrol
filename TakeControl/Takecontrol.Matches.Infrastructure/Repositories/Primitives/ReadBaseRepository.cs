@@ -26,7 +26,7 @@ public class ReadBaseRepository<T> : IAsyncReadRepository<T>
         return await _context.Set<T>().Where(predicate).ToListAsync();
     }
 
-    public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<Expression<Func<T, object>>> includes = null, string includeString = null, bool disableTracking = true)
+    public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, List<Expression<Func<T, object>>>? includes = null, string? includeString = null, bool disableTracking = true)
     {
         IQueryable<T> query = _context.Set<T>();
         if (disableTracking) query = query.AsNoTracking();

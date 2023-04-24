@@ -39,13 +39,13 @@ public class AuthService : IAuthService
 
         ValidateUser(user);
 
-        var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+        var signInResult = await _signInManager.PasswordSignInAsync(user!.UserName!, request.Password, false, lockoutOnFailure: false);
 
         if (!signInResult.Succeeded)
             throw new UnauthorizedException(CredentialError.InvalidCredentials);
 
         var token = await GenerateToken(user);
-        var authResponse = new AuthResponse(user.Id, user.UserName, user.Email, new JwtSecurityTokenHandler().WriteToken(token), user.UserType);
+        var authResponse = new AuthResponse(user.Id, user.UserName!, user.Email!, new JwtSecurityTokenHandler().WriteToken(token), user.UserType);
 
         return authResponse;
     }
@@ -140,8 +140,8 @@ public class AuthService : IAuthService
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email!),
             new Claim(CustomClaimsTypes.Uid, user.Id.ToString())
         }
         .Union(userClaims)
@@ -160,7 +160,7 @@ public class AuthService : IAuthService
         return jwtSecurityToken;
     }
 
-    private void ValidateUser(ApplicationUser user)
+    private void ValidateUser(ApplicationUser? user)
     {
         if (user == null)
             throw new ConflictException(CredentialError.UserDoesntExist);
