@@ -15,6 +15,7 @@ public static class ServiceRegistration
         services.ConfigureUserInfrastructureServSices(configuration);
         services.ConfigureEmailInfrastructureServices(configuration);
         services.ConfigureCredentialInfrastructureServices(configuration);
+        services.ConfigureMatchInfrastructureServSices(configuration);
         return services;
     }
 

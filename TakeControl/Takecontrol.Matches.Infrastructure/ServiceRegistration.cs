@@ -9,7 +9,7 @@ namespace Takecontrol.User.Infrastructure;
 
 public static class ServiceRegistration
 {
-    public static IServiceCollection ConfigureUserInfrastructureServSices(this IServiceCollection service, IConfiguration configuration)
+    public static IServiceCollection ConfigureMatchInfrastructureServSices(this IServiceCollection service, IConfiguration configuration)
     {
         service.AddDbContext<MatchesDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("MatchesConnectionString")));
