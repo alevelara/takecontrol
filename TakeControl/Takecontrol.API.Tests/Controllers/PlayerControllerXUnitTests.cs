@@ -1,13 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Net.Mail;
-using System.Xml.Linq;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.Shared.Tests.Repositories.Players;
-using Takecontrol.User.Domain.Messages.Clubs;
-using Takecontrol.User.Domain.Messages.Players;
+using Takecontrol.User.Domain.Messages.Clubs.Requests;
+using Takecontrol.User.Domain.Messages.Players.Requests;
 using Takecontrol.User.Domain.Models.Players.Enums;
 using Xunit;
 using Xunit.Priority;
@@ -78,6 +76,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 NumberOfYearsPlayed: (int)level * (int)level);
 
             var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+            Assert.True(response.IsSuccessStatusCode);
+
             names.Add(request.Name);
         }
 
@@ -90,7 +90,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             var level = int.Parse(name.Split('-')[1]);
 
             var player = players!.FirstOrDefault(c => c.Name == name);
-            Assert.Equal(player.PlayerLevel, level);
+            Assert.Equal(player!.PlayerLevel, level);
         }
     }
 
@@ -229,7 +229,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await _clubReadRepository.GetClubByName("nameTest");
         var player = await _playerReadRepository.GetPlayerByName("nameTest");
 
-        var request = new JoinToClubRequest(player.Id, club.Id, club.Code);
+        var request = new JoinToClubRequest(player!.Id, club!.Id, club.Code);
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
         //Act
@@ -266,7 +266,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await _clubReadRepository.GetClubByName("nameTest");
         var player = await _playerReadRepository.GetPlayerByName("nameTest");
         var incorrectCode = "12345";
-        var request = new JoinToClubRequest(player.Id, club.Id, incorrectCode);
+        var request = new JoinToClubRequest(player!.Id, club!.Id, incorrectCode);
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
         //Act

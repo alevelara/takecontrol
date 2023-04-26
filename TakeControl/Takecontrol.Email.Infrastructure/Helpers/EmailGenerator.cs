@@ -11,7 +11,7 @@ public class EmailGenerator
         Mail = new MimeMessage();
     }
 
-    public void AddSender(string displayName, string from, string emailTo)
+    public void AddSender(string? displayName, string? from, string? emailTo)
     {
         Mail.From.Add(new MailboxAddress(displayName, from));
         Mail.Sender = new MailboxAddress(displayName, from);

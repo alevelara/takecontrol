@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
     <PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
@@ -17,6 +17,10 @@
     <ProjectReference Include="..\Takecontrol.Credential.Infrastructure\Takecontrol.Credential.Infrastructure.csproj" />
     <ProjectReference Include="..\Takecontrol.Email.Infrastructure\Takecontrol.Emails.Infrastructure.csproj" />
     <ProjectReference Include="..\Takecontrol.User.Infrastructure\Takecontrol.User.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="8.56.0.67649" />
   </ItemGroup>
 
 </Project>

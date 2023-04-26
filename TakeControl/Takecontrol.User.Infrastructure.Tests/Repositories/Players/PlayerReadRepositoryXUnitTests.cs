@@ -2,8 +2,8 @@ using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Models.PlayerClubs;
 using Takecontrol.User.Domain.Models.Players;
 using Takecontrol.User.Domain.Models.Players.Enums;
-using Takecontrol.User.Infrastructure.Repositories.Primitives.PlayerClubs;
-using Takecontrol.User.Infrastructure.Repositories.Primitives.Players;
+using Takecontrol.User.Infrastructure.Repositories.PlayerClubs;
+using Takecontrol.User.Infrastructure.Repositories.Players;
 using Takecontrol.User.Infrastructure.Tests;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
 using Xunit;
@@ -142,7 +142,7 @@ public class PlayerReadRepositoryXUnitTests : IAsyncLifetime
 
         Assert.NotNull(resultPlayersClubB);
         Assert.IsType<List<PlayerClub>>(resultPlayersClubB);
-        Assert.Equal(1, resultPlayersClubB.Count);
+        Assert.Single(resultPlayersClubB);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

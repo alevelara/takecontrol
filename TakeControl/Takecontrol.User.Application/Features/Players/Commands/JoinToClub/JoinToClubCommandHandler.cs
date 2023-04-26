@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Takecontrol.Shared.Application.Abstractions.Mediatr;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Application.Exceptions;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
+using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Errors.Clubs;
 using Takecontrol.User.Domain.Models.PlayerClubs;
 

@@ -8,7 +8,7 @@ public static class TestConfigurations
 
     public static IConfiguration GetAppTestingConfiguration()
     {
-        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, apiName);
+        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.Parent!.FullName, apiName);
 
         var builder = new ConfigurationBuilder()
                 .SetBasePath(path)
@@ -20,6 +20,6 @@ public static class TestConfigurations
 
     public static string GetConnectionString(string connectionString)
     {
-        return GetAppTestingConfiguration().GetConnectionString(connectionString);
+        return GetAppTestingConfiguration().GetConnectionString(connectionString)!;
     }
 }

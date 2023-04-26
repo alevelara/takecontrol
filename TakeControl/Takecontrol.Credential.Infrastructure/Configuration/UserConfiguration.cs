@@ -26,7 +26,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 UserName = "alevelara",
                 Name = "Alejandro",
                 NormalizedUserName = "alevelara".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                PasswordHash = hasher.HashPassword(null!, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Administrator,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -39,7 +39,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Name = "Alberto",
                 UserName = "antgonmar",
                 NormalizedUserName = "antogonmar".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                PasswordHash = hasher.HashPassword(null!, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Player,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -52,7 +52,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Name = "PadelClubTest",
                 UserName = "antgonmar2",
                 NormalizedUserName = "antogonmar2".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                PasswordHash = hasher.HashPassword(null!, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Club,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -65,7 +65,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
                 Name = "player 2",
                 UserName = "player2",
                 NormalizedUserName = "player2".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                PasswordHash = hasher.HashPassword(null!, "Password123!"),
                 EmailConfirmed = true,
                 UserType = UserType.Player,
                 SecurityStamp = Guid.NewGuid().ToString()

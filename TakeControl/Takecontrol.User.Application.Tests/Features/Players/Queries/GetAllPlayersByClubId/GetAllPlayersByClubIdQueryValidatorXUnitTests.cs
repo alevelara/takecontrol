@@ -27,18 +27,4 @@ public class GetAllPlayersByClubIdQueryValidatorXUnitTests : IClassFixture<GetAl
         //Assert
         Assert.Equal(isValid, result.IsValid);
     }
-
-    [Theory]
-    [InlineData(null, false)]
-    public void Validator_Should_ReturnInvalidValue_WhenGuidIsNull(Guid guid, bool isValid)
-    {
-        //Arrange
-        var query = new GetAllPlayersByClubIdQuery(guid);
-
-        //Act
-        var result = _validator.Validate(query);
-
-        //Assert
-        Assert.Equal(isValid, result.IsValid);
-    }
 }

@@ -73,6 +73,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.User.Domain.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.User.Infrastructure.Tests", "Takecontrol.User.Infrastructure.Tests\Takecontrol.User.Infrastructure.Tests.csproj", "{9C6B5DD9-BACD-4EE9-A396-D3307993194C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Match", "Match", "{6D3EC314-7948-44ED-B476-73A1FE1FD97B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C6DB101-247D-4875-AEEF-58AB802FB31B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Application", "Takecontrol.Matches.Application\Takecontrol.Matches.Application.csproj", "{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Domain", "Takecontrol.Matches.Domain\Takecontrol.Matches.Domain.csproj", "{39D5DBAE-0578-445F-9682-22FF0AEB0624}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Infrastructure", "Takecontrol.Matches.Infrastructure\Takecontrol.Matches.Infrastructure.csproj", "{475D7DF5-C8FA-493C-A318-E2F797AFE33B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +177,18 @@ Global
 		{9C6B5DD9-BACD-4EE9-A396-D3307993194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C6B5DD9-BACD-4EE9-A396-D3307993194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C6B5DD9-BACD-4EE9-A396-D3307993194C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D5DBAE-0578-445F-9682-22FF0AEB0624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D5DBAE-0578-445F-9682-22FF0AEB0624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D5DBAE-0578-445F-9682-22FF0AEB0624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D5DBAE-0578-445F-9682-22FF0AEB0624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +227,11 @@ Global
 		{79863E29-B55C-4FFB-A553-1CC316651269} = {15717DC7-4A1A-4148-B395-75D1023ADBFA}
 		{BA17CA3D-648F-46C4-BE18-4F760F4D36B5} = {15717DC7-4A1A-4148-B395-75D1023ADBFA}
 		{9C6B5DD9-BACD-4EE9-A396-D3307993194C} = {15717DC7-4A1A-4148-B395-75D1023ADBFA}
+		{6D3EC314-7948-44ED-B476-73A1FE1FD97B} = {DA66AFC3-ECBA-4B58-A8E3-E5D53A963603}
+		{3C6DB101-247D-4875-AEEF-58AB802FB31B} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
+		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
+		{39D5DBAE-0578-445F-9682-22FF0AEB0624} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
+		{475D7DF5-C8FA-493C-A318-E2F797AFE33B} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97C30148-4293-4FAD-837B-5A66762FD1E3}

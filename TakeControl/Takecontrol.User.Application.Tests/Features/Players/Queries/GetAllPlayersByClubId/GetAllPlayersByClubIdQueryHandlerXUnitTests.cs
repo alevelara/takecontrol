@@ -23,7 +23,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         //Arrange
         var query = new GetAllPlayersByClubIdQuery(Guid.NewGuid());
         var handler = new GetAllPlayersByClubIdQueryHandler(_mockReadRepository.Object);
-        Player player = null;
 
         //Act
         _mockReadRepository.Setup(c => c.GetAllPlayersByClubId(It.IsAny<Guid>()))
@@ -49,7 +48,6 @@ public class GetAllPlayersByClubIdHandlerXUnitTests
         var player3ClubB = ApplicationTestData.CreateMidPlayerForTest(userIdPlayer3);
 
         // Create a Club
-
         var addressA = ApplicationTestData.CreateAddresForTest();
         var addressB = ApplicationTestData.CreateAddresForTest();
         var clubA = ApplicationTestData.CreateClubForTest(userClubA, addressA);

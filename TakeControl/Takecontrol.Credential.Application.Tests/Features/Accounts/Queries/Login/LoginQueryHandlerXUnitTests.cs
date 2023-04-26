@@ -25,10 +25,10 @@ public class LoginQueryHandlerXUnitTests
         LoginQueryHandler handler = new(_authService.Object);
 
         //Act
-        var result = handler.Handle(query, CancellationToken.None);
+        var result = await handler.Handle(query, CancellationToken.None);
 
         //Assert
-        Assert.Null(result.Result);
+        Assert.Null(result);
     }
 
     [Fact]
@@ -39,10 +39,10 @@ public class LoginQueryHandlerXUnitTests
         LoginQueryHandler handler = new(_authService.Object);
 
         //Act
-        var result = handler.Handle(query, CancellationToken.None);
+        var result = await handler.Handle(query, CancellationToken.None);
 
         //Assert
-        Assert.Null(result.Result);
+        Assert.Null(result);
     }
 
     [Fact]
@@ -56,10 +56,10 @@ public class LoginQueryHandlerXUnitTests
             new AuthResponse(Guid.NewGuid(), "userName", "password", "tokem", UserType.Administrator));
 
         //Act
-        var result = handler.Handle(query, default);
+        var result = await handler.Handle(query, default);
 
         //Assert
-        Assert.NotNull(result.Result);
-        Assert.IsType<AuthResponse>(result.Result);
+        Assert.NotNull(result);
+        Assert.IsType<AuthResponse>(result);
     }
 }

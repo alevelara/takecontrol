@@ -1,8 +1,8 @@
 ﻿using System.Collections;
+using Takecontrol.Emails.Application.Contracts.Persistence.Primitives;
 using Takecontrol.Emails.Application.Contracts.Persitence.Emails;
 using Takecontrol.Emails.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Repositories.Emails;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Domain.Primitives;
 
 namespace Takecontrol.Emails.Infrastructure.Repositories.Primitives;

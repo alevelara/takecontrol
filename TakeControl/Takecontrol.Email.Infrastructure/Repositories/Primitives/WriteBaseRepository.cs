@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Takecontrol.Emails.Application.Contracts.Persistence.Primitives;
 using Takecontrol.Emails.Infrastructure.Contexts;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Domain.Primitives;
 
 namespace Takecontrol.Emails.Infrastructure.Repositories.Primitives;

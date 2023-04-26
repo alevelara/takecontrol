@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Takecontrol.User.Infrastructure\Takecontrol.User.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="8.56.0.67649" />
+  </ItemGroup>
+
 </Project>

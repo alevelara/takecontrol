@@ -17,7 +17,7 @@ namespace Takecontrol.User.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -136,7 +136,7 @@ namespace Takecontrol.User.Infrastructure.Migrations
 
                     b.HasIndex("PlayerId");
 
-                    b.ToTable("PlayerClubs");
+                    b.ToTable("players_clubs", (string)null);
                 });
 
             modelBuilder.Entity("Takecontrol.User.Domain.Models.Players.Player", b =>

@@ -39,13 +39,13 @@ public class AuthService : IAuthService
 
         ValidateUser(user);
 
-        var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+        var signInResult = await _signInManager.PasswordSignInAsync(user!.UserName!, request.Password, false, lockoutOnFailure: false);
 
         if (!signInResult.Succeeded)
             throw new UnauthorizedException(CredentialError.InvalidCredentials);
 
         var token = await GenerateToken(user);
-        var authResponse = new AuthResponse(user.Id, user.UserName, user.Email, new JwtSecurityTokenHandler().WriteToken(token), user.UserType);
+        var authResponse = new AuthResponse(user.Id, user.UserName!, user.Email!, new JwtSecurityTokenHandler().WriteToken(token), user.UserType);
 
         return authResponse;
     }
@@ -72,7 +72,7 @@ public class AuthService : IAuthService
         var registerResult = await _userManager.CreateAsync(user, request.Password);
         if (!registerResult.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorDuringUserRegistration.Message}: {registerResult.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorDuringUserRegistration.Message}: {registerResult.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorDuringUserRegistration);
         }
 
@@ -91,7 +91,7 @@ public class AuthService : IAuthService
         var result = await _userManager.ChangePasswordAsync(existingUser, request.CurrentPassword, request.NewPassword);
         if (!result.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorChangingPassword);
         }
 
@@ -119,7 +119,7 @@ public class AuthService : IAuthService
         var result = await _userManager.ResetPasswordAsync(existingUser, resetToken, request.NewPassword);
         if (!result.Succeeded)
         {
-            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors.FirstOrDefault().Description}");
+            _logger.LogError($"{CredentialError.ErrorChangingPassword.Message}: {result.Errors?.FirstOrDefault()?.Description}");
             throw new ConflictException(CredentialError.ErrorChangingPassword);
         }
 
@@ -140,8 +140,8 @@ public class AuthService : IAuthService
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email!),
             new Claim(CustomClaimsTypes.Uid, user.Id.ToString())
         }
         .Union(userClaims)
@@ -160,7 +160,7 @@ public class AuthService : IAuthService
         return jwtSecurityToken;
     }
 
-    private void ValidateUser(ApplicationUser user)
+    private void ValidateUser(ApplicationUser? user)
     {
         if (user == null)
             throw new ConflictException(CredentialError.UserDoesntExist);

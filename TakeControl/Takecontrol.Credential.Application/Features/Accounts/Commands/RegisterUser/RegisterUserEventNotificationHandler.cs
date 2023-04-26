@@ -12,12 +12,10 @@ internal sealed class RegisterUserEventNotificationHandler :
     ICommandHandler<RegisterPlayerMessageNotification, Guid>
 {
     private readonly IAuthService _authService;
-    private readonly IMediator _mediator;
 
-    public RegisterUserEventNotificationHandler(IAuthService authService, IMediator mediator)
+    public RegisterUserEventNotificationHandler(IAuthService authService)
     {
         _authService = authService;
-        _mediator = mediator;
     }
 
     public async Task<Guid> Handle(RegisterClubMessageNotification request, CancellationToken cancellationToken)

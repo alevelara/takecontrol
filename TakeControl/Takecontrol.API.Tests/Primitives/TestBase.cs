@@ -54,7 +54,7 @@ public class TestBase
         var client = await CreateTestForLoginUser(userName, email, password, roles);
         var user = await FindAsync<ApplicationUser>(c => c.UserName == userName);
 
-        var accessToken = await GetAccessToken(userName, email, user.Id.ToString(), roles[0]);
+        var accessToken = GetAccessToken(userName, email, user.Id.ToString(), roles[0]);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         return client;
@@ -106,7 +106,7 @@ public class TestBase
     /// Shortcut para buscar entities según un criterio.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    protected async Task<TEntity> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate)
+    protected async Task<TEntity?> FindAsync<TEntity>(Expression<Func<TEntity, bool>> predicate)
         where TEntity : class
     {
         var context = _apiWebApplicationFactory.TakeControlIdentityDb.Context;
@@ -117,7 +117,7 @@ public class TestBase
     /// <summary>
     /// Shortcut para autenticar un usuario para pruebas.
     /// </summary>
-    private async Task<string> GetAccessToken(string userName, string email, string id, string role)
+    private string GetAccessToken(string userName, string email, string id, string role)
     {
         return AuthTestHelper.GenerateToken(userName, email, id, role);
     }
