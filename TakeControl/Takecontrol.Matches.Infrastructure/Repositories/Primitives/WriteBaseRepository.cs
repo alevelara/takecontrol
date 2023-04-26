@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Takecontrol.Matches.Application.Primitives;
+using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Shared.Domain.Primitives;
 
@@ -19,6 +19,11 @@ public class WriteBaseRepository<T> : IAsyncWriteRepository<T>
     {
         await _context.Set<T>().AddAsync(entity);
         return entity;
+    }
+
+    public async Task AddRangeAsync(List<T> entities)
+    {
+       await _context.Set<T>().AddRangeAsync(entities);
     }
 
     public void DeleteAsync(T entity)

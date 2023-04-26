@@ -23,21 +23,25 @@ public class Club : BaseDomainModel
     [Required]
     public string Code { get; private set; }
 
+    [Required]
+    public int NumberOfCourts { get; private set; }
+
     public virtual Address Address { get; set; }
     public virtual ICollection<PlayerClub> PlayerClubs { get; set; }
 
-    private Club(Guid id, Guid addresId, Guid userId, string name, string code)
+    private Club(Guid id, Guid addresId, Guid userId, string name, string code, int numberOfCourts)
     {
         Id = id;
         AddresId = addresId;
         UserId = userId;
         Name = name;
         Code = code;
+        NumberOfCourts = numberOfCourts;
     }
 
-    public static Club Create(Guid addresId, Guid userId, string name)
+    public static Club Create(Guid addresId, Guid userId, string name, int numberOfCourts)
     {
         ClubValueObject clubValueObject = new();
-        return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code);
+        return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code, numberOfCourts);
     }
 }

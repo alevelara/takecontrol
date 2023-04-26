@@ -23,7 +23,7 @@ public class GetAllClubsQueryHandlerXunitTests
         var handler = new GetAllClubsQueryHandler(_clubReadRepository.Object);
 
         _clubReadRepository.Setup(c => c.GetAllClubsAsync())
-            .ReturnsAsync(new List<Club>() { Club.Create(Guid.NewGuid(), Guid.NewGuid(), "name") });
+            .ReturnsAsync(new List<Club>() { Club.Create(Guid.NewGuid(), Guid.NewGuid(), "name", 1) });
 
         //Act
         var result = await handler.Handle(query, default);

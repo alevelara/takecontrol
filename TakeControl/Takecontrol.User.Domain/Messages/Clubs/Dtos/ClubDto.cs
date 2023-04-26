@@ -7,5 +7,6 @@ public sealed record class ClubDto(
     Guid UserId,
     string Name,
     string Code,
+    int NumberOfCourts,
     AddressDto Address
     );

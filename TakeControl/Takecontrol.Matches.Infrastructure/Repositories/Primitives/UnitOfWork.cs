@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Takecontrol.Matches.Application.Primitives;
+using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Shared.Domain.Primitives;
 

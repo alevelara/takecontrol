@@ -35,5 +35,8 @@ public class ClubConfiguration : IEntityTypeConfiguration<Club>
             .HasForeignKey<Club>(c => c.AddresId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Property(c => c.NumberOfCourts)
+            .IsRequired();
     }
 }

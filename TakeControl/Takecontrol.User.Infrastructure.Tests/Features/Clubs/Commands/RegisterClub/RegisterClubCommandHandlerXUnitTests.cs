@@ -31,7 +31,7 @@ public class RegisterClubCommandHandlerXUnitTests
     public async Task RegisterClub_Should_ReturnUnitValue_WhenRequestIsOK()
     {
         var userId = Guid.NewGuid();
-        var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password");
+        var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password", 1);
         var handler = new RegisterClubCommandHandler(_uoW.Object, _mediator.Object, _logger.Object);
 
         _mediator.Setup(x => x.Send(It.IsAny<RegisterClubMessageNotification>(), default)).ReturnsAsync(userId);

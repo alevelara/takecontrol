@@ -32,7 +32,7 @@ public static class MockClubRepository
         {
             var address = Address.Create("city", "province", "mainaddress");
             addresses.Add(address);
-            clubs.Add(Club.Create(address.Id, Guid.NewGuid(), "name"));
+            clubs.Add(Club.Create(address.Id, Guid.NewGuid(), "name", 1));
         }
 
         TakecontrolDbContextFake.Addresses!.AddRange(addresses);
@@ -43,7 +43,7 @@ public static class MockClubRepository
     public static async Task<Guid> AddClubWithUserId(TakeControlDbContext TakecontrolDbContextFake, Guid userId)
     {
         var address = Address.Create("city", "province", "mainaddress");
-        var club = Club.Create(address.Id, userId, "name");
+        var club = Club.Create(address.Id, userId, "name", 1);
 
         TakecontrolDbContextFake.Addresses!.Add(address);
         TakecontrolDbContextFake.Clubs!.Add(club);
@@ -55,7 +55,7 @@ public static class MockClubRepository
     public static async Task<Club> AddClub(TakeControlDbContext TakecontrolDbContextFake)
     {
         var address = Address.Create("city", "province", "mainaddress");
-        var club = Club.Create(address.Id, Guid.NewGuid(), "name");
+        var club = Club.Create(address.Id, Guid.NewGuid(), "name", 1);
 
         TakecontrolDbContextFake.Addresses!.Add(address);
         TakecontrolDbContextFake.Clubs!.Add(club);

@@ -49,7 +49,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest",
             Password: "Password123!",
-            Province: "provinceTest");
+            Province: "provinceTest",
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -69,7 +70,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest2",
             Password: "Password123!",
-            Province: "provinceTest");
+            Province: "provinceTest",
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -86,7 +88,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest",
             Password: "Password123!",
-            Province: "provinceTest"
+            Province: "provinceTest",
+            NumberOfCourts: 1
             );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
@@ -104,7 +107,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
            MainAddress: "mainAddressTest",
            Name: "nameTest",
            Password: "pass",
-           Province: "provinceTest"
+           Province: "provinceTest",
+            NumberOfCourts: 1
            );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
@@ -122,7 +126,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest",
             Password: "Password123!",
-            Province: "provinceTest");
+            Province: "provinceTest",
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -139,7 +144,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest",
             Password: "Password123!",
-            Province: string.Empty);
+            Province: string.Empty,
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -156,7 +162,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
              MainAddress: string.Empty,
              Name: "nameTest",
              Password: "Password123!",
-             Province: "provinceTest");
+             Province: "provinceTest",
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -173,7 +180,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: string.Empty,
             Password: "Password123!",
-            Province: "provinceTest");
+            Province: "provinceTest",
+            NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -258,7 +266,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             MainAddress: "mainAddressTest",
             Name: "nameTest",
             Password: "Password123!",
-            Province: "provinceTest");
+            Province: "provinceTest",
+            NumberOfCourts: 1);
 
         await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
     }
