@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
 using Takecontrol.User.Application.Contracts.Persistence.PlayerClubs;
 using Takecontrol.User.Application.Contracts.Persistence.Players;
+using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.User.Infrastructure.Repositories.Clubs;
 using Takecontrol.User.Infrastructure.Repositories.PlayerClubs;

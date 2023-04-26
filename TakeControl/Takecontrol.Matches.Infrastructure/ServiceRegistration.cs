@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Takecontrol.Matches.Application.Primitives;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Matches.Infrastructure.Repositories.Primitives;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 
 namespace Takecontrol.User.Infrastructure;
 

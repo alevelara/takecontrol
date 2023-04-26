@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Takecontrol.Emails.Application.Contracts.Emails;
+using Takecontrol.Emails.Application.Contracts.Persistence.Primitives;
 using Takecontrol.Emails.Application.Contracts.Persitence.Emails;
 using Takecontrol.Emails.Application.Contracts.Persitence.Templates;
 using Takecontrol.Emails.Application.Contracts.Templates;
@@ -11,7 +12,6 @@ using Takecontrol.Emails.Infrastructure.Repositories.Emails;
 using Takecontrol.Emails.Infrastructure.Repositories.Primitives;
 using Takecontrol.Emails.Infrastructure.Repositories.Services;
 using Takecontrol.Emails.Infrastructure.Repositories.Templates;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 
 namespace Takecontrol.Emails.Infrastructure;
 

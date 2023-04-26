@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using Moq;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Application.Exceptions;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
-using Takecontrol.User.Domain.Models.Clubs;
+using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Models.PlayerClubs;
 using Xunit;
 

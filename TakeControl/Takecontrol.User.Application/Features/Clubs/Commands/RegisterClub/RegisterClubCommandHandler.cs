@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Takecontrol.Shared.Application.Abstractions.Mediatr;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Models.Addresses;
 using Takecontrol.User.Domain.Models.Clubs;
 

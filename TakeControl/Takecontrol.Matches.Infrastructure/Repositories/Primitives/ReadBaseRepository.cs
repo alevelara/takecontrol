@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Takecontrol.Matches.Application.Primitives;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Domain.Primitives;
 
 namespace Takecontrol.Matches.Infrastructure.Repositories.Primitives;
