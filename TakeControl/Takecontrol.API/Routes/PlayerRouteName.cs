@@ -7,5 +7,7 @@ namespace Takecontrol.API.Routes
         public const string Join = "Join";
 
         public const string AllByClubId = "AllByClubId";
+
+        public const string RemovePlayerByCludId = "RemovePlayerByCludId";
     }
 }

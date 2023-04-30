@@ -7,6 +7,7 @@ using Takecontrol.API.Routes;
 using Takecontrol.Credential.Infrastructure.Constants;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.User.Application.Features.Players.Commands.RemovePlayeFromClub;
 using Takecontrol.User.Application.Features.Players.Queries.GetAllPlayersByClubId;
 using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
 using Takecontrol.User.Domain.Messages.Players.Dtos;
@@ -62,4 +63,13 @@ public class PlayerController : ControllerBase
         return Ok(_mapper.From(players)
             .AdaptToType<List<PlayerDto>>());
     }
+
+    [Authorize(Roles = Role.Club)]
+    [HttpGet(PlayerRouteName.RemovePlayerByCludId)]
+    public async Task<ActionResult> RemovePlayerFromCludId([FromQuery] Guid playerId, [FromQuery] Guid clubId)
+    {
+        await _mediator.Send(new RemovePlayeFromClubCommand(playerId, clubId));
+        return Ok();
+    }
+
 }
