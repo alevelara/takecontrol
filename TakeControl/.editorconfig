@@ -116,7 +116,7 @@ dotnet_diagnostic.S125.severity = None
 # 'System.Exception' should not be thrown by user code
 dotnet_diagnostic.S112.severity = None
 
-# CA1040: Evitar interfaces vacías
+# CA1040: Evitar interfaces vacï¿½as
 dotnet_diagnostic.CA1040.severity = warning
 
 # CA1827: No usar Count() ni LongCount() si se puede usar Any()
@@ -154,7 +154,7 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
 dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 
-# Especificaciones de símbolos
+# Especificaciones de sï¿½mbolos
 
 dotnet_naming_symbols.interface.applicable_kinds = interface
 dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
@@ -250,7 +250,7 @@ dotnet_naming_rule.miembros_que_no_son_un_campo_should_be_pascal_case.severity =
 dotnet_naming_rule.miembros_que_no_son_un_campo_should_be_pascal_case.symbols = miembros_que_no_son_un_campo
 dotnet_naming_rule.miembros_que_no_son_un_campo_should_be_pascal_case.style = pascal_case
 
-# Especificaciones de símbolos
+# Especificaciones de sï¿½mbolos
 
 dotnet_naming_symbols.interface.applicable_kinds = interface
 dotnet_naming_symbols.interface.applicable_accessibilities = public, friend, private, protected, protected_friend, private_protected
@@ -284,7 +284,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case
 [*.{cs,vb}]
 dotnet_style_allow_multiple_blank_lines_experimental = true:silent
 dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
-end_of_line = crlf
+end_of_line = lf
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
 indent_size = 4
