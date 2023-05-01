@@ -108,7 +108,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
            Name: "nameTest",
            Password: "pass",
            Province: "provinceTest",
-            NumberOfCourts: 1
+           NumberOfCourts: 1
            );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
@@ -163,7 +163,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
              Name: "nameTest",
              Password: "Password123!",
              Province: "provinceTest",
-            NumberOfCourts: 1);
+             NumberOfCourts: 1);
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 

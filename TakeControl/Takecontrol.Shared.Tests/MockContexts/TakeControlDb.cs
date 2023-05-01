@@ -25,10 +25,9 @@ public class TakeControlDb : IDbConfiguration
     {
         if (await Context.Database.CanConnectAsync())
         {
-            await Context.Clubs.ExecuteDeleteAsync();
-            await Context.Addresses.ExecuteDeleteAsync();
-            await Context.Players.ExecuteDeleteAsync();
-            await Context.PlayerClubs.ExecuteDeleteAsync();
+            Context.Clubs.ExecuteDelete();
+            Context.Addresses.ExecuteDelete();
+            Context.Players.ExecuteDelete();
         }
     }
 

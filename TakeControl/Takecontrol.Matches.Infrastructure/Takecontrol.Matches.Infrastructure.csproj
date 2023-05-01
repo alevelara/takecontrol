@@ -34,8 +34,4 @@
     <PackageReference Update="SonarAnalyzer.CSharp" Version="8.56.0.67649" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Courts\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Microsoft.EntityFrameworkCore;
 using Takecontrol.Shared.Domain.Primitives;
 using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;

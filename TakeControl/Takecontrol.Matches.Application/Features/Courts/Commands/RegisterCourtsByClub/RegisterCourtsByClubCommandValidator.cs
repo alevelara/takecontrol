@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using Takecontrol.Shared.Application.Messages.Matches;
 
-namespace Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourtsByClub
+namespace Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourtsByClub;
+
+public class RegisterCourtsByClubCommandValidator : AbstractValidator<RegisterCourtsByClubCommand>
 {
-    internal class RegisterCourtsByClubCommandValidator
+    public RegisterCourtsByClubCommandValidator()
     {
+        RuleFor(c => c.ClubId)
+            .Must(c => !c.Equals(Guid.Empty))
+            .WithMessage("You should select a club");
     }
 }

@@ -231,6 +231,7 @@ dotnet_diagnostic.S927.severity = suggestion
 dotnet_diagnostic.S3400.severity = suggestion
 dotnet_diagnostic.S3878.severity = suggestion
 dotnet_diagnostic.S1118.severity = suggestion
+dotnet_diagnostic.S3903.severity = suggestion
 
 [*.vb]
 #### Estilos de nomenclatura ####

@@ -23,7 +23,7 @@ public class WriteBaseRepository<T> : IAsyncWriteRepository<T>
 
     public async Task AddRangeAsync(List<T> entities)
     {
-       await _context.Set<T>().AddRangeAsync(entities);
+        await _context.Set<T>().AddRangeAsync(entities);
     }
 
     public void DeleteAsync(T entity)

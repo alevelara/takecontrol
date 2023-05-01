@@ -77,11 +77,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Match", "Match", "{6D3EC314
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C6DB101-247D-4875-AEEF-58AB802FB31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Application", "Takecontrol.Matches.Application\Takecontrol.Matches.Application.csproj", "{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Application", "Takecontrol.Matches.Application\Takecontrol.Matches.Application.csproj", "{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Domain", "Takecontrol.Matches.Domain\Takecontrol.Matches.Domain.csproj", "{39D5DBAE-0578-445F-9682-22FF0AEB0624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Domain", "Takecontrol.Matches.Domain\Takecontrol.Matches.Domain.csproj", "{39D5DBAE-0578-445F-9682-22FF0AEB0624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Infrastructure", "Takecontrol.Matches.Infrastructure\Takecontrol.Matches.Infrastructure.csproj", "{475D7DF5-C8FA-493C-A318-E2F797AFE33B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Infrastructure", "Takecontrol.Matches.Infrastructure\Takecontrol.Matches.Infrastructure.csproj", "{475D7DF5-C8FA-493C-A318-E2F797AFE33B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Domain.Tests", "Takecontrol.Matches.Domain.Tests\Takecontrol.Matches.Domain.Tests.csproj", "{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Application.Tests", "Takecontrol.Matches.Application.Tests\Takecontrol.Matches.Application.Tests.csproj", "{5D5766C1-E846-4875-BD00-D7BFFA801503}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Infrastructure.Tests", "Takecontrol.Matches.Infrastructure.Tests\Takecontrol.Matches.Infrastructure.Tests.csproj", "{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +195,18 @@ Global
 		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{475D7DF5-C8FA-493C-A318-E2F797AFE33B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D5766C1-E846-4875-BD00-D7BFFA801503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D5766C1-E846-4875-BD00-D7BFFA801503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D5766C1-E846-4875-BD00-D7BFFA801503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5766C1-E846-4875-BD00-D7BFFA801503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -232,6 +250,9 @@ Global
 		{0E1BEF9C-2DA1-4E61-8609-D6BDB938185E} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
 		{39D5DBAE-0578-445F-9682-22FF0AEB0624} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
 		{475D7DF5-C8FA-493C-A318-E2F797AFE33B} = {6D3EC314-7948-44ED-B476-73A1FE1FD97B}
+		{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB} = {3C6DB101-247D-4875-AEEF-58AB802FB31B}
+		{5D5766C1-E846-4875-BD00-D7BFFA801503} = {3C6DB101-247D-4875-AEEF-58AB802FB31B}
+		{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE} = {3C6DB101-247D-4875-AEEF-58AB802FB31B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97C30148-4293-4FAD-837B-5A66762FD1E3}

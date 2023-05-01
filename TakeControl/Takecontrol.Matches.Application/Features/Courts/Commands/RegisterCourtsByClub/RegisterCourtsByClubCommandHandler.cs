@@ -9,12 +9,10 @@ namespace Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourt
 public class RegisterCourtsByClubCommandHandler : ICommandHandler<RegisterCourtsByClubCommand, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IAsyncWriteRepository<Court> _courtWriteRepository;
 
-    public RegisterCourtsByClubCommandHandler(IUnitOfWork unitOfWork, IAsyncWriteRepository<Court> courtWriteRepository)
+    public RegisterCourtsByClubCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _courtWriteRepository = courtWriteRepository;
     }
 
     public async Task<Unit> Handle(RegisterCourtsByClubCommand request, CancellationToken cancellationToken)
@@ -26,7 +24,7 @@ public class RegisterCourtsByClubCommandHandler : ICommandHandler<RegisterCourts
             courts.Add(Court.Create(request.ClubId, $"Pista {i}"));
         }
 
-        await _courtWriteRepository.AddRangeAsync(courts);
+        await _unitOfWork.Repository<Court>().AddRangeAsync(courts);
         await _unitOfWork.CompleteAsync();
 
         return Unit.Value;
