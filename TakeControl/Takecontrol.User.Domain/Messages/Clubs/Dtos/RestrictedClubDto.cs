@@ -6,5 +6,6 @@ public sealed record class RestrictedClubDto(
     Guid Id,
     Guid UserId,
     string Name,
+    int NumberOfCourts,
     AddressDto Address
     );

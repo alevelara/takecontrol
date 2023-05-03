@@ -6,5 +6,6 @@ public sealed record class RegisterClubRequest(
     string Province,
     string MainAddress,
     string Email,
-    string Password
+    string Password,
+    int NumberOfCourts
     );

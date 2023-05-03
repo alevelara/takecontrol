@@ -25,6 +25,7 @@ public static class ServiceRegistration
         services.ConfigureEmailApplicationServices();
         services.ConfigureCredentialApplicationServices();
         services.ConfigureSharedApplicationServices();
+        services.ConfigureMatchApplicationServices();
         return services;
     }
 }

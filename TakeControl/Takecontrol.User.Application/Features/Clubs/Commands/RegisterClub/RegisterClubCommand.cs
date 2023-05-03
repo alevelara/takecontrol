@@ -9,5 +9,6 @@ public sealed record class RegisterClubCommand(
     string Province,
     string MainAddress,
     string Email,
-    string Password
+    string Password,
+    int NumberOfCourts
     ) : ICommand<Unit>;

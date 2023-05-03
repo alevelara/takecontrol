@@ -53,5 +53,9 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
             .WithMessage("Password must have any digit from 0 to 9")
             .Must(x => ValitatorsUtil.HasAnySymbol(x))
             .WithMessage("Password must have any symbol");
+
+        RuleFor(c => c.NumberOfCourts)
+            .GreaterThan(0)
+            .WithMessage("Club must have at least one court.");
     }
 }

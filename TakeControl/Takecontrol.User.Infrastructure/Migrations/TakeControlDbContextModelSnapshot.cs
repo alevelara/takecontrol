@@ -96,6 +96,9 @@ namespace Takecontrol.User.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<int>("NumberOfCourts")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 

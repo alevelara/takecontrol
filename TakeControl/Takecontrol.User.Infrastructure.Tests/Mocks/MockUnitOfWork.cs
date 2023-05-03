@@ -41,6 +41,7 @@ namespace Takecontrol.User.Infrastructure.Tests.Mocks
             takeControlContextFake.Clubs.ExecuteDelete();
             takeControlContextFake.Addresses.ExecuteDelete();
             takeControlContextFake.Players.ExecuteDelete();
+            takeControlContextFake.PlayerClubs.ExecuteDelete();
         }
     }
 }

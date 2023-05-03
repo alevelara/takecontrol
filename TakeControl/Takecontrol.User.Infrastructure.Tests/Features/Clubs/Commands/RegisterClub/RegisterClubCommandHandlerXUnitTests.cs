@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.Shared.Application.Messages.Matches;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Infrastructure.Repositories.Primitives;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
@@ -11,7 +12,7 @@ using Xunit.Priority;
 
 namespace Takecontrol.User.Infrastructure.Tests.Features.Clubs.Commands.RegisterClub;
 
-[Trait("Category", "InfrastructureIntegrationTests")]
+[Trait("Category", SharedTestCollection.Name)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {
@@ -31,11 +32,12 @@ public class RegisterClubCommandHandlerXUnitTests
     public async Task RegisterClub_Should_ReturnUnitValue_WhenRequestIsOK()
     {
         var userId = Guid.NewGuid();
-        var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password");
+        var command = new RegisterClubCommand("name", "city", "province", "mainAddress", "email", "password", 1);
         var handler = new RegisterClubCommandHandler(_uoW.Object, _mediator.Object, _logger.Object);
 
         _mediator.Setup(x => x.Send(It.IsAny<RegisterClubMessageNotification>(), default)).ReturnsAsync(userId);
         _mediator.Setup(x => x.Send(It.IsAny<SendWelcomeEmailMessageNotification>(), default));
+        _mediator.Setup(x => x.Send(It.IsAny<RegisterCourtsByClubCommand>(), default));
 
         var result = await handler.Handle(command, default);
         Assert.IsType<Unit>(result);

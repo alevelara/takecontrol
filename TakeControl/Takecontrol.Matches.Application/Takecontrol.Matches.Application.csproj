@@ -8,10 +8,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Takecontrol.Matches.Domain\Takecontrol.Matches.Domain.csproj" />
+    <ProjectReference Include="..\Takecontrol.Shared.Application\Takecontrol.Shared.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="SonarAnalyzer.CSharp" Version="8.56.0.67649" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Contracts\Persistence\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
   </ItemGroup>
 
 </Project>

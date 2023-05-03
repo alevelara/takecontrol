@@ -300,7 +300,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             Password: "Password123!",
             City: "City",
             MainAddress: "mainAddress",
-            Province: "province");
+            Province: "province",
+            NumberOfCourts: 1);
 
         await _httpClient.PostAsJsonAsync(RegisterClubEndpoint, request, default);
     }

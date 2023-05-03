@@ -12,7 +12,7 @@ using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 namespace Takecontrol.Matches.Infrastructure.Migrations
 {
     [DbContext(typeof(MatchesDbContext))]
-    [Migration("20230422160407_FirstMigration")]
+    [Migration("20230501200234_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
