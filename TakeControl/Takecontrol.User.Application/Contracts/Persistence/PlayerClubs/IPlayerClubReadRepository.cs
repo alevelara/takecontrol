@@ -6,5 +6,5 @@ public interface IPlayerClubReadRepository
 {
     Task<List<PlayerClub>> GetAllPlayersByClubId(Guid ClubId);
 
-    Task<Boolean> RemovePlayerByClubIdAndPlayerId(Guid playerId, Guid clubId);
+    // Task<Boolean> RemovePlayerByClubIdAndPlayerId(Guid playerId, Guid clubId);
 }

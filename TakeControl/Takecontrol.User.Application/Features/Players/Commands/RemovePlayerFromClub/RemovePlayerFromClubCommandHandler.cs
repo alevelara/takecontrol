@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Takecontrol.Shared.Application.Abstractions.Mediatr;
-using Takecontrol.Shared.Application.Contracts.Persitence.Primitives;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Models.Players;
 
 namespace Takecontrol.User.Application.Features.Players.Commands.RemovePlayeFromClub;
@@ -23,7 +23,7 @@ public class RemovePlayerFromClubCommandHandler : ICommandHandler<RemovePlayerFr
 
     public async Task<Unit> Handle(RemovePlayerFromClubCommand request, CancellationToken cancellationToken)
     {
-        var userId = await RegisterPlayer(request.Name, request.Email, request.Password);
+        var isRemovedPlayer = await RemovePlayerByClubIdAndPlayerId(request.PlayerId, request.ClubId);
 
         var player = Player.Create(userId, request.Name, request.NumberOfClassesInAWeek, request.AvgNumberOfMatchesInAWeek, request.NumberOfYearsPlayed);
         var playerWriteRepository = _unitOfWork.Repository<Player>();
@@ -38,7 +38,7 @@ public class RemovePlayerFromClubCommandHandler : ICommandHandler<RemovePlayerFr
         return Unit.Value;
     }
 
-    private async Task<Guid> RegisterPlayer(string name, string email, string password)
+    private async Task<bool> RemovePlayerByClubIdAndPlayerId(Guid playerId, Guid clubId)
     {
         var registerRequest = new RegisterPlayerMessageNotification(name, email, password);
         return await _mediator.Send(registerRequest);

@@ -33,4 +33,23 @@ public class PlayerClub : BaseDomainModel
     {
         return new PlayerClub(playerId, clubId);
     }
+
+    public static Boolean RemovePlayerByClubIdAndPlayerId(Guid playerId, Guid clubId)
+    {
+        PlayerClub playerClub = new PlayerClub(playerId, clubId);
+
+        
+
+        // var playerClub = PlayerClubs
+        //     .Where(b => b.ClubId == clubId && b.PlayerId == playerId)
+        //     .FirstOrDefaultAsync();
+
+        // if (playerClub == null) {
+        //     return false;
+        // }else {
+        //     _dbContext.PlayerClubs.Remove(playerClub);
+        //     await _dbContext.SaveChangesAsync();
+        //     return true;
+        // }
+    }
 }
