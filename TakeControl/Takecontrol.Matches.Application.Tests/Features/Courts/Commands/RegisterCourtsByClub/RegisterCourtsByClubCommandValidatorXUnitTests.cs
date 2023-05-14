@@ -19,7 +19,7 @@ public class RegisterCourtsByClubCommandValidatorXUnitTests : IClassFixture<Regi
     {
         //Arrange
         var userId = new Guid(guid);
-        var query = new RegisterCourtsByClubCommand(userId, 3);
+        var query = new RegisterCourtsByClubCommand(userId, 3, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = _validator.Validate(query);

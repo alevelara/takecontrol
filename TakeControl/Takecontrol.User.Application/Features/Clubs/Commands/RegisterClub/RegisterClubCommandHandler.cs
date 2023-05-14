@@ -32,11 +32,11 @@ public sealed class RegisterClubCommandHandler :
         var addressWriteRepository = _unitOfWork.Repository<Address>();
         await addressWriteRepository.AddAsync(address);
 
-        var club = Club.Create(address.Id, userId, request.Name, request.NumberOfCourts);
+        var club = Club.Create(address.Id, userId, request.Name, request.NumberOfCourts, request.OpenDate, request.ClosureDate);
         var clubWriteRepository = _unitOfWork.Repository<Club>();
         await clubWriteRepository.AddAsync(club);
 
-        await RegisterCourtsForAClub(club.Id, request.NumberOfCourts);
+        await RegisterCourtsAndReservationsForAClub(club.Id, request.NumberOfCourts, request.OpenDate, request.ClosureDate);
 
         await _unitOfWork.CompleteAsync();
 
@@ -59,9 +59,9 @@ public sealed class RegisterClubCommandHandler :
         await _mediator.Send(eventNotification, cancellationToken);
     }
 
-    private async Task<Unit> RegisterCourtsForAClub(Guid clubId, int numberOfCourts)
+    private async Task<Unit> RegisterCourtsAndReservationsForAClub(Guid clubId, int numberOfCourts, TimeOnly openDate, TimeOnly closureDate)
     {
-        var command = new RegisterCourtsByClubCommand(clubId, numberOfCourts);
+        var command = new RegisterCourtsByClubCommand(clubId, numberOfCourts, openDate, closureDate);
         return await _mediator.Send(command);
     }
 }

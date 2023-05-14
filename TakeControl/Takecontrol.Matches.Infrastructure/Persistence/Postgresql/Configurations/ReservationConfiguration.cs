@@ -12,9 +12,6 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.UserId)
-            .IsRequired();
-
         builder.Property(c => c.CourtId)
             .IsRequired();
 

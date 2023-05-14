@@ -14,7 +14,7 @@ public static class ApplicationTestData
 
     public static Club CreateClubForTest(Guid userId, Address address)
     {
-        return Club.Create(address.Id, userId, "nameTest", 1);
+        return Club.Create(address.Id, userId, "nameTest", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
     }
 
     public static Player CreateBegginerPlayerForTest(Guid userId)

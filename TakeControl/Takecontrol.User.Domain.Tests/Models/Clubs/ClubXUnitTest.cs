@@ -13,7 +13,7 @@ public class ClubXUnitTest
         var userId = Guid.NewGuid();
         var name = "name";
 
-        var club = Club.Create(addressId, userId, name, 1);
+        var club = Club.Create(addressId, userId, name, 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         Assert.NotNull(club);
         Assert.NotEmpty(club.Code);
@@ -29,7 +29,7 @@ public class ClubXUnitTest
         var userId = Guid.Empty;
         var name = "name";
 
-        var club = Club.Create(addressId, userId, name, 1);
+        var club = Club.Create(addressId, userId, name, 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         Assert.NotNull(club);
         Assert.NotEmpty(club.Code);
@@ -45,7 +45,7 @@ public class ClubXUnitTest
         var userId = Guid.NewGuid();
         var name = "name";
 
-        var club = Club.Create(addressId, userId, name, 1);
+        var club = Club.Create(addressId, userId, name, 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         Assert.NotNull(club);
         Assert.NotEmpty(club.Code);
@@ -60,7 +60,7 @@ public class ClubXUnitTest
         var addressId = Guid.NewGuid();
         var userId = Guid.NewGuid();
 
-        var club = Club.Create(addressId, userId, null, 1);
+        var club = Club.Create(addressId, userId, null, 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         Assert.NotNull(club);
         Assert.NotEmpty(club.Code);

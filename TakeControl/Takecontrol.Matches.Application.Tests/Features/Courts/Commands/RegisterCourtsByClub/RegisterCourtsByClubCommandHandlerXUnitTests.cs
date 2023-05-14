@@ -20,7 +20,7 @@ public class RegisterCourtsByClubCommandHandlerXUnitTests
     public async Task Handle_Should_CreateSameNumberOfCourts_WhenIsHigherThanZero()
     {
         var numberOfCourts = 3;
-        var command = new RegisterCourtsByClubCommand(Guid.NewGuid(), numberOfCourts);
+        var command = new RegisterCourtsByClubCommand(Guid.NewGuid(), numberOfCourts, new TimeOnly(10, 0), new TimeOnly(12, 0));
         var handler = new RegisterCourtsByClubCommandHandler(_uoW.Object);
         var courtsRepo = new Mock<IAsyncWriteRepository<Court>>();
         _uoW.Setup(c => c.Repository<Court>()).Returns(courtsRepo.Object);

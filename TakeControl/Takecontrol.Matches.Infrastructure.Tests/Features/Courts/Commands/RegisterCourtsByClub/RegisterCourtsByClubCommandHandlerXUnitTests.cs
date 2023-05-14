@@ -23,7 +23,7 @@ public class RegisterCourtsByClubCommandHandlerXUnitTests
     public async Task Handle_Should_CreateSameNumberOfCourts_WhenIsPopulated(int numberOfCourts)
     {
         var clubId = Guid.NewGuid();
-        var command = new RegisterCourtsByClubCommand(clubId, numberOfCourts);
+        var command = new RegisterCourtsByClubCommand(clubId, numberOfCourts, new TimeOnly(10, 0), new TimeOnly(12, 0));
         var handler = new RegisterCourtsByClubCommandHandler(_uoW.GetUnitOfWork().Object);
         var context = _uoW.GetContext();
 

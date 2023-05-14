@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Domain.Models.Courts;
+using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Application.Abstractions.Mediatr;
 using Takecontrol.Shared.Application.Messages.Matches;
 
@@ -18,10 +19,13 @@ public class RegisterCourtsByClubCommandHandler : ICommandHandler<RegisterCourts
     public async Task<Unit> Handle(RegisterCourtsByClubCommand request, CancellationToken cancellationToken)
     {
         var courts = new List<Court>();
+        //var reservations = new List<Reservation>();
 
         for (int i = 1; i <= request.NumberOfCourts; i++)
         {
-            courts.Add(Court.Create(request.ClubId, $"Pista {i}"));
+            var court = Court.Create(request.ClubId, $"Pista {i}");
+
+            courts.Add(court);
         }
 
         await _unitOfWork.Repository<Court>().AddRangeAsync(courts);

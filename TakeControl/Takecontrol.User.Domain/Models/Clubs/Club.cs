@@ -26,10 +26,16 @@ public class Club : BaseDomainModel
     [Required]
     public int NumberOfCourts { get; private set; }
 
+    [Required]
+    public TimeOnly OpenDate { get; private set; }
+
+    [Required]
+    public TimeOnly ClosureDate { get; private set; }
+
     public virtual Address Address { get; set; }
     public virtual ICollection<PlayerClub> PlayerClubs { get; set; }
 
-    private Club(Guid id, Guid addresId, Guid userId, string name, string code, int numberOfCourts)
+    private Club(Guid id, Guid addresId, Guid userId, string name, string code, int numberOfCourts, TimeOnly openDate, TimeOnly closureDate)
     {
         Id = id;
         AddresId = addresId;
@@ -37,11 +43,13 @@ public class Club : BaseDomainModel
         Name = name;
         Code = code;
         NumberOfCourts = numberOfCourts;
+        OpenDate = openDate;
+        ClosureDate = closureDate;
     }
 
-    public static Club Create(Guid addresId, Guid userId, string name, int numberOfCourts)
+    public static Club Create(Guid addresId, Guid userId, string name, int numberOfCourts, TimeOnly openDate, TimeOnly closureDate)
     {
         ClubValueObject clubValueObject = new();
-        return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code, numberOfCourts);
+        return new Club(clubValueObject.Value, addresId, userId, name, clubValueObject.Code, numberOfCourts, openDate, closureDate);
     }
 }

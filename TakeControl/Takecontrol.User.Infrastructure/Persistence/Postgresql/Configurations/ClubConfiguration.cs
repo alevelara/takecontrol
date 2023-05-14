@@ -17,6 +17,12 @@ public class ClubConfiguration : IEntityTypeConfiguration<Club>
         builder.Property(c => c.AddresId)
             .IsRequired();
 
+        builder.Property(c => c.OpenDate)
+            .IsRequired();
+
+        builder.Property(c => c.ClosureDate)
+            .IsRequired();
+
         builder.Property(c => c.Name)
             .HasMaxLength(100)
             .IsUnicode(false)
