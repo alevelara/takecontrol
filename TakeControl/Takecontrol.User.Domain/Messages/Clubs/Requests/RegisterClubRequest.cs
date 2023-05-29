@@ -7,5 +7,7 @@ public sealed record class RegisterClubRequest(
     string MainAddress,
     string Email,
     string Password,
-    int NumberOfCourts
+    int NumberOfCourts,
+    TimeOnly OpenDate,
+    TimeOnly ClosureDate
     );

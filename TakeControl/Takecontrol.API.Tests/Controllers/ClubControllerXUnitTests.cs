@@ -50,7 +50,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest",
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -71,7 +73,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest2",
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -89,7 +93,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest",
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00")
             );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
@@ -108,7 +114,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
            Name: "nameTest",
            Password: "pass",
            Province: "provinceTest",
-           NumberOfCourts: 1
+           NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00")
            );
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
@@ -127,7 +135,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest",
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -145,7 +155,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest",
             Password: "Password123!",
             Province: string.Empty,
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -163,7 +175,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
              Name: "nameTest",
              Password: "Password123!",
              Province: "provinceTest",
-             NumberOfCourts: 1);
+             NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -181,7 +195,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: string.Empty,
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 
@@ -267,7 +283,9 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             Name: "nameTest",
             Password: "Password123!",
             Province: "provinceTest",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
     }

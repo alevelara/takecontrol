@@ -9,17 +9,18 @@ public class ReservationXUnitTests
     {
         // Arrange
         var courtId = Guid.NewGuid();
-        var startDate = DateTime.Now;
-        var endDate = startDate.AddHours(1);
+        var startTime = TimeOnly.Parse("10:00");
+        var endTime = startTime.AddHours(1);
+        var reservationDate = DateOnly.FromDateTime(DateTime.Now);
 
         // Act
-        var reservation = Reservation.Create(courtId, startDate, endDate);
+        var reservation = Reservation.Create(courtId, startTime, endTime, reservationDate);
 
         // Assert
         Assert.NotNull(reservation);
         Assert.IsType<Reservation>(reservation);
         Assert.Equal(courtId, reservation.CourtId);
-        Assert.Equal(startDate, reservation.StartDate);
-        Assert.Equal(endDate, reservation.EndDate);
+        Assert.Equal(startTime, reservation.StartDate);
+        Assert.Equal(endTime, reservation.EndDate);
     }
 }
