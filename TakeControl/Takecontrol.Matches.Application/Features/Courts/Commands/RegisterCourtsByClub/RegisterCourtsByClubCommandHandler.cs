@@ -10,7 +10,6 @@ namespace Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourt
 public class RegisterCourtsByClubCommandHandler : ICommandHandler<RegisterCourtsByClubCommand, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
-    
 
     public RegisterCourtsByClubCommandHandler(IUnitOfWork unitOfWork)
     {
@@ -36,6 +35,4 @@ public class RegisterCourtsByClubCommandHandler : ICommandHandler<RegisterCourts
 
         return Unit.Value;
     }
-
-    
 }
