@@ -19,6 +19,8 @@ public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram
 
     public TakeControlEmailDb TakeControlEmailDb { get; private set; } = default!;
 
+    public TakeControlMatchesDb TakeControlMatchesDb { get; private set; } = default!;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
@@ -33,11 +35,13 @@ public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram
         TakecontrolDb = new TakeControlDb();
         TakeControlIdentityDb = new TakeControlIdentityDb();
         TakeControlEmailDb = new TakeControlEmailDb();
+        TakeControlMatchesDb = new TakeControlMatchesDb();
         HttpClient = CreateClient();
 
-        await TakecontrolDb.EnsureDatabase();
-        await TakeControlIdentityDb.EnsureDatabase();
-        await TakeControlEmailDb.EnsureDatabase();
+        TakecontrolDb.EnsureDatabase();
+        TakeControlIdentityDb.EnsureDatabase();
+        TakeControlEmailDb.EnsureDatabase();
+        TakeControlMatchesDb.EnsureDatabase();
     }
 
     public new Task DisposeAsync() => Task.CompletedTask;
