@@ -1,3 +1,4 @@
+using DateOnlyTimeOnly.AspNet.Converters;
 using Takecontrol.API;
 using Takecontrol.API.Mappings;
 using Takecontrol.API.Middlewares;
@@ -7,7 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Logging.ClearProviders();
     builder.Logging.AddConsole();
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+        });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddTransient<ExceptionHandlingMiddleware>();

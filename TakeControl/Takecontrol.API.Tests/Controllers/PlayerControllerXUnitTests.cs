@@ -301,7 +301,9 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             City: "City",
             MainAddress: "mainAddress",
             Province: "province",
-            NumberOfCourts: 1);
+            NumberOfCourts: 1,
+            OpenDate: TimeOnly.Parse("10:00"),
+            ClosureDate: TimeOnly.Parse("12:00"));
 
         await _httpClient.PostAsJsonAsync(RegisterClubEndpoint, request, default);
     }

@@ -16,10 +16,9 @@ public class TakeControlIdentityDb : IDbConfiguration
         Context = factory.CreateDbContext(TestConfigurations.GetConnectionString("IdentityConnectionString"));
     }
 
-    public Task EnsureDatabase()
+    public void EnsureDatabase()
     {
         Context.Database.Migrate();
-        return Task.CompletedTask;
     }
 
     public async Task ResetState()

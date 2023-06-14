@@ -17,7 +17,7 @@ public class TakeControlEmailDb : IDbConfiguration
         Context = factory.CreateDbContext(TestConfigurations.GetConnectionString("EmailConnectionString"));
     }
 
-    public async Task EnsureDatabase()
+    public void EnsureDatabase()
     {
         Context.Database.Migrate();
     }

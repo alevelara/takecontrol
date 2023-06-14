@@ -57,5 +57,17 @@ public class RegisterClubCommandValidator : AbstractValidator<RegisterClubComman
         RuleFor(c => c.NumberOfCourts)
             .GreaterThan(0)
             .WithMessage("Club must have at least one court.");
+
+        RuleFor(c => c.ClosureDate)
+            .GreaterThan(c => c.OpenDate.AddHours(1).AddMinutes(30))
+            .WithMessage("End Date can not be smaller than init date plus 1 hour and 30 mins");
+
+        RuleFor(c => c.OpenDate)
+           .GreaterThan(TimeOnly.MinValue)
+           .WithMessage("Open date can not be null");
+
+        RuleFor(c => c.ClosureDate)
+          .GreaterThan(TimeOnly.MinValue)
+          .WithMessage("Closure date can not be null");
     }
 }

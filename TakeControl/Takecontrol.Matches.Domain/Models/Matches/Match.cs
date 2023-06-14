@@ -13,18 +13,22 @@ public class Match : BaseDomainModel
     [Required]
     public Guid ReservationId { get; private set; }
 
+    [Required]
+    public Guid UserId { get; private set; }
+
     public bool IsClosed { get; private set; } = false;
 
     public virtual Reservation Reservation { get; private set; }
 
-    private Match(Guid reservationId)
+    private Match(Guid reservationId, Guid userId)
     {
         Id = new MatchId().Value;
         ReservationId = reservationId;
+        UserId = userId;
     }
 
-    public static Match Create(Guid reservationId)
+    public static Match Create(Guid reservationId, Guid userId)
     {
-        return new Match(reservationId);
+        return new Match(reservationId, userId);
     }
 }

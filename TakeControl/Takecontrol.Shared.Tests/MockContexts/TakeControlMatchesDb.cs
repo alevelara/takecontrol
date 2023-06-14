@@ -15,10 +15,9 @@ public class TakeControlMatchesDb : IDbConfiguration
         Context = factory.CreateDbContext(TestConfigurations.GetConnectionString("MatchesConnectionString"));
     }
 
-    public Task EnsureDatabase()
+    public void EnsureDatabase()
     {
         Context.Database.Migrate();
-        return Task.CompletedTask;
     }
 
     public async Task ResetState()

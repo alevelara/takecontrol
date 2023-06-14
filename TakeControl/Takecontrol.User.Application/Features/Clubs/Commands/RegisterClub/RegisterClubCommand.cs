@@ -10,5 +10,7 @@ public sealed record class RegisterClubCommand(
     string MainAddress,
     string Email,
     string Password,
-    int NumberOfCourts
+    int NumberOfCourts,
+    TimeOnly OpenDate,
+    TimeOnly ClosureDate
     ) : ICommand<Unit>;

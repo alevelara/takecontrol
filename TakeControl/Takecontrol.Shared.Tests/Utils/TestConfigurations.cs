@@ -5,6 +5,7 @@ namespace Takecontrol.Shared.Tests.Utils;
 public static class TestConfigurations
 {
     private static string apiName = "Takecontrol.API";
+    private static string configName = $"appsettings.Testing.json";
 
     public static IConfiguration GetAppTestingConfiguration()
     {
@@ -12,7 +13,7 @@ public static class TestConfigurations
 
         var builder = new ConfigurationBuilder()
                 .SetBasePath(path)
-                .AddJsonFile($"appsettings.Testing.json", true)
+                .AddJsonFile(configName, true)
                 .AddEnvironmentVariables();
 
         return builder.Build();

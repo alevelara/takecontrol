@@ -15,6 +15,9 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
         builder.Property(c => c.ReservationId)
             .IsRequired();
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
         builder.Property(c => c.IsClosed)
             .IsRequired();
     }

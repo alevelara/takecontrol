@@ -12,9 +12,6 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.UserId)
-            .IsRequired();
-
         builder.Property(c => c.CourtId)
             .IsRequired();
 
@@ -22,6 +19,9 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .IsRequired();
 
         builder.Property(c => c.EndDate)
+            .IsRequired();
+
+        builder.Property(c => c.ReservationDate)
             .IsRequired();
     }
 }
