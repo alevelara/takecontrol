@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Takecontrol.Matches.Domain.Models.Matches.ValueObjects;
+using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Domain.Primitives;
 
@@ -19,6 +20,8 @@ public class Match : BaseDomainModel
     public bool IsClosed { get; private set; } = false;
 
     public virtual Reservation Reservation { get; private set; }
+
+    public virtual ICollection<MatchPlayer> MatchPlayers { get; set; }
 
     private Match(Guid reservationId, Guid userId)
     {

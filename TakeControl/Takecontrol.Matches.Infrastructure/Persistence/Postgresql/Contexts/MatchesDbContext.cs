@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.Matches;
+using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Configurations;
 using Takecontrol.Shared.Domain.Primitives;
@@ -40,11 +41,14 @@ public class MatchesDbContext : DbContext
         modelBuilder.ApplyConfiguration(new MatchConfiguration());
         modelBuilder.ApplyConfiguration(new CourtConfiguration());
         modelBuilder.ApplyConfiguration(new ReservationConfiguration());
+        modelBuilder.ApplyConfiguration(new MatchPlayerConfiguration());
+
     }
 
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<Match> Matches { get; set; }
     public DbSet<Court> Courts { get; set; }
+    public DbSet<MatchPlayer> MatchPlayers { get; set; }
 }
 
 public class MatchesDbContextFactory : IDesignTimeDbContextFactory<MatchesDbContext>
