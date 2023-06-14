@@ -8,6 +8,8 @@ namespace Takecontrol.Matches.Domain.Models.MatchPlayers;
 
 public class MatchPlayer : BaseDomainModel
 {
+    public Guid Id { get; private set; }
+
     [Required]
     public Guid PlayerId { get; private set; }
 
@@ -17,11 +19,12 @@ public class MatchPlayer : BaseDomainModel
 
     public virtual Match Match { get; private set; }
 
-    private MatchPlayer(Guid playerId)
+    private MatchPlayer(Guid matchId, Guid playerId)
     {
-        MatchId = new MatchPlayerId().Value;
+        Id = new MatchPlayerId().Value;
+        MatchId = matchId;
         PlayerId = playerId;
     }
 
-    public static MatchPlayer Create(Guid playerId) => new MatchPlayer(playerId);
+    public static MatchPlayer Create(Guid matchId, Guid playerId) => new MatchPlayer(matchId, playerId);
 }
