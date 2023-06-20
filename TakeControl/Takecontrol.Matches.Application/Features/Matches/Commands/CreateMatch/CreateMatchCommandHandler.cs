@@ -19,7 +19,7 @@ public class CreateMatchCommandHandler : ICommandHandler<CreateMatchCommand, Uni
     {
         var match = Match.Create(request.ReservationId, request.PlayerId);
         var matchPlayer = MatchPlayer.Create(match.Id, request.PlayerId);
-        
+
         await _unitOfWork.Repository<Match>().AddAsync(match);
         await _unitOfWork.Repository<MatchPlayer>().AddAsync(matchPlayer);
         await _unitOfWork.CompleteAsync();

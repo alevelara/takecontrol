@@ -3,6 +3,8 @@ using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPasswor
 using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;
 using Takecontrol.Credential.Application.Features.Accounts.Queries.Login;
 using Takecontrol.Credential.Domain.Messages.Identity;
+using Takecontrol.Matches.Application.Features.Matches.Commands.CreateMatch;
+using Takecontrol.Matches.Domain.Messages.Matches.Requests;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
@@ -24,6 +26,7 @@ namespace Takecontrol.API.Mappings
             this.AddNewConfigForClubs(config);
             this.AddNewConfigForAuthentication(config);
             this.AddNewConfigForPlayers(config);
+            this.AddNewConfigForMatches(config);
         }
 
         private void AddNewConfigForAuthentication(TypeAdapterConfig config)
@@ -49,6 +52,11 @@ namespace Takecontrol.API.Mappings
             config.NewConfig<Player, PlayerDto>()
                 .Map(dest => dest.PlayerLevel, src => src.PlayerLevel);
             config.NewConfig<JoinToClubRequest, JoinToClubCommand>();
+        }
+
+        private void AddNewConfigForMatches(TypeAdapterConfig config)
+        {
+            config.NewConfig<CreateMatchRequest, CreateMatchCommand>();
         }
     }
 }
