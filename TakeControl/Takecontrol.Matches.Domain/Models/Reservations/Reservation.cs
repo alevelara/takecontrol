@@ -11,6 +11,7 @@ public class Reservation : BaseDomainModel
     public DateOnly ReservationDate { get; set; }
     public TimeOnly StartDate { get; private set; }
     public TimeOnly EndDate { get; private set; }
+    public bool IsAvailable { get; private set; }
 
     public virtual Court Court { get; private set; }
 
@@ -21,6 +22,7 @@ public class Reservation : BaseDomainModel
         StartDate = startDate;
         EndDate = endDate;
         ReservationDate = reservationDate;
+        IsAvailable = true;
     }
 
     public static Reservation Create(Guid courtId, TimeOnly startDate, TimeOnly endDate, DateOnly reservationDate)
