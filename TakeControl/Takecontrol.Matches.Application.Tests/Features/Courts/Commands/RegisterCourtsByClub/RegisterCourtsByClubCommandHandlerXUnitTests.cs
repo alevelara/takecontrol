@@ -8,12 +8,11 @@ using Takecontrol.Shared.Application.Messages.Matches;
 
 namespace Takecontrol.Matches.Application.Tests.Features.Courts.Commands.RegisterCourtsByClub;
 
-public class RegisterCourtsByClubCommandHandlerXUnitTests : IClassFixture<RegisterCourtsByClubCommandHandler>
+public class RegisterCourtsByClubCommandHandlerXUnitTests
 {
     private readonly Mock<IUnitOfWork> _uoW;
     private readonly Mock<IAsyncWriteRepository<Court>> _courtRepository;
     private readonly Mock<IAsyncWriteRepository<Reservation>> _reservationRepository;
-
 
     public RegisterCourtsByClubCommandHandlerXUnitTests()
     {

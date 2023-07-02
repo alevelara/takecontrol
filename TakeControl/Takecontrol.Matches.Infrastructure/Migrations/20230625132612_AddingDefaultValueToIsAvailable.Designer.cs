@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
@@ -11,9 +12,11 @@ using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 namespace Takecontrol.Matches.Infrastructure.Migrations
 {
     [DbContext(typeof(MatchesDbContext))]
-    partial class MatchesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230625132612_AddingDefaultValueToIsAvailable")]
+    partial class AddingDefaultValueToIsAvailable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,7 +140,9 @@ namespace Takecontrol.Matches.Infrastructure.Migrations
                         .HasColumnType("time without time zone");
 
                     b.Property<bool>("IsAvailable")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("text");

@@ -23,5 +23,8 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 
         builder.Property(c => c.ReservationDate)
             .IsRequired();
+
+        builder.Property(c => c.IsAvailable)
+            .IsRequired();
     }
 }

@@ -1,8 +1,10 @@
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Takecontrol.API.Routes;
+using Takecontrol.Credential.Infrastructure.Constants;
 using Takecontrol.Matches.Application.Features.Matches.Commands.CreateMatch;
 using Takecontrol.Matches.Domain.Messages.Matches.Requests;
 
@@ -21,6 +23,7 @@ public class MatchController : ControllerBase
         _mapper = mapper;
     }
 
+    [Authorize(Roles = Role.Users)]
     [HttpPost(nameof(MatchRouteName.Create))]
     public async Task<ActionResult> CreateMatch([FromBody] CreateMatchRequest request)
     {

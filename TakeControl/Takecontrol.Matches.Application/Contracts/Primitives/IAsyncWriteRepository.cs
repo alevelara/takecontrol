@@ -9,7 +9,7 @@ public interface IAsyncWriteRepository<T>
 
     Task AddRangeAsync(List<T> entities);
 
-    T UpdateAsync(T entity);
+    T Update(T entity);
 
-    void DeleteAsync(T entity);
+    void Delete(T entity);
 }
