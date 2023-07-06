@@ -19,7 +19,7 @@ public static class MockClubRepository
             .Create()
             );
 
-        TakecontrolDbContextFake.Clubs!.AddRange(clubs);
+        await TakecontrolDbContextFake.Clubs!.AddRangeAsync(clubs);
         await TakecontrolDbContextFake.SaveChangesAsync();
     }
 
@@ -35,8 +35,8 @@ public static class MockClubRepository
             clubs.Add(Club.Create(address.Id, Guid.NewGuid(), "name", 1, new TimeOnly(10, 0), new TimeOnly(12, 0)));
         }
 
-        TakecontrolDbContextFake.Addresses!.AddRange(addresses);
-        TakecontrolDbContextFake.Clubs!.AddRange(clubs);
+        await TakecontrolDbContextFake.Addresses!.AddRangeAsync(addresses);
+        await TakecontrolDbContextFake.Clubs!.AddRangeAsync(clubs);
         await TakecontrolDbContextFake.SaveChangesAsync();
     }
 
@@ -45,8 +45,8 @@ public static class MockClubRepository
         var address = Address.Create("city", "province", "mainaddress");
         var club = Club.Create(address.Id, userId, "name", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
-        TakecontrolDbContextFake.Addresses!.Add(address);
-        TakecontrolDbContextFake.Clubs!.Add(club);
+        await TakecontrolDbContextFake.Addresses!.AddAsync(address);
+        await TakecontrolDbContextFake.Clubs!.AddAsync(club);
         await TakecontrolDbContextFake.SaveChangesAsync();
 
         return club.Id;
@@ -57,8 +57,8 @@ public static class MockClubRepository
         var address = Address.Create("city", "province", "mainaddress");
         var club = Club.Create(address.Id, Guid.NewGuid(), "name", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
-        TakecontrolDbContextFake.Addresses!.Add(address);
-        TakecontrolDbContextFake.Clubs!.Add(club);
+        await TakecontrolDbContextFake.Addresses!.AddAsync(address);
+        await TakecontrolDbContextFake.Clubs!.AddAsync(club);
         await TakecontrolDbContextFake.SaveChangesAsync();
         return club;
     }

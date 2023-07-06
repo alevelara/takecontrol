@@ -2,14 +2,15 @@
 using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
+using Takecontrol.Matches.Infrastructure.Repositories.Primitives;
 
 namespace Takecontrol.Matches.Infrastructure.Repositories.Reservations;
 
-public sealed class ReservationReadRepository : IReservationReadRepository
+public sealed class ReservationReadRepository : ReadBaseRepository<Reservation>, IReservationReadRepository
 {
     private readonly MatchesDbContext _context;
 
-    public ReservationReadRepository(MatchesDbContext context)
+    public ReservationReadRepository(MatchesDbContext context) : base(context)
     {
         _context = context;
     }
@@ -19,11 +20,5 @@ public sealed class ReservationReadRepository : IReservationReadRepository
         return await _context
             .Set<Reservation>().
             FirstOrDefaultAsync(r => r.Id == reservationId);
-    }
-
-    public async Task<bool> IsReservationAvailable(Guid reservationId)
-    {
-        var reservation = await _context.Set<Reservation>().FindAsync(reservationId);
-        return reservation!.IsAvailable;
     }
 }

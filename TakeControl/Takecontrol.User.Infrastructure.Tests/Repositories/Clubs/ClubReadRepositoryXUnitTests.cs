@@ -32,6 +32,8 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
     }
 
     [Fact]
+
+
     public async Task GetAllClubsAsync_Should_Return_PopulatedList_WhenClubsExistsInDb()
     {
         //Assert
