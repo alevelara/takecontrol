@@ -8,10 +8,10 @@ public static class MockReservationRepository
 {
     public static async Task AddReservations(MatchesDbContext context)
     {
-       var reservations = ReservationGenerator.CreateReservations(isAvailable: true);
+        var reservations = ReservationGenerator.CreateReservations(isAvailable: true);
 
-       await context.Reservations!.AddRangeAsync(reservations);
-       await context.SaveChangesAsync();
+        await context.Reservations!.AddRangeAsync(reservations);
+        await context.SaveChangesAsync();
     }
 
     public static async Task AddUnavaibleReservations(MatchesDbContext context)

@@ -4,7 +4,9 @@ using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Matches.Infrastructure.Tests.Repositories.Reservations;
 
-public class ReservationReadRepositoryTests
+[Trait("Category", "IntegrationTests")]
+[Collection(SharedTestCollection.Name)]
+public class ReservationReadRepositoryTests : IAsyncLifetime
 {
     private readonly TakeControlMatchesDb _dbContext;
 
@@ -50,4 +52,8 @@ public class ReservationReadRepositoryTests
         Assert.Equal(reservation.Id, result.Id);
         Assert.False(reservation.IsAvailable);
     }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+
+    public Task DisposeAsync() => _dbContext.ResetState();
 }

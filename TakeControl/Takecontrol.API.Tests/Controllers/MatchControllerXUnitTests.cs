@@ -23,7 +23,6 @@ public class MatchControllerXUnitTests : IAsyncLifetime
     private readonly TakeControlMatchesDb _takeControlMatchDb;
     private readonly TestBase _testBase;
 
-
     public MatchControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
     {
         _takeControlMatchDb = factory.TakeControlMatchesDb;
@@ -92,12 +91,6 @@ public class MatchControllerXUnitTests : IAsyncLifetime
         await _takeControlMatchDb.Context.Set<Court>().AddAsync(court);
         await _takeControlMatchDb.Context.SaveChangesAsync();
         return court;
-
-    }
-
-    private async Task<HttpClient> AddJWTTokenToHeaderForClubs()
-    {
-        return await _testBase.RegisterSecuredUserAsClubAsync();
     }
 
     private async Task<HttpClient> AddJWTTokenToHeaderForPlayers()
@@ -113,5 +106,4 @@ public class MatchControllerXUnitTests : IAsyncLifetime
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
-
 }

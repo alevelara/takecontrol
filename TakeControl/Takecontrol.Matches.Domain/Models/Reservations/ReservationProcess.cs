@@ -2,8 +2,8 @@
 
 public static class ReservationProcess
 {
-    private const int MATCH_DURATION = 90;
-    private const int DAYS_IN_A_WEEK = 7;
+    private const int MATCHDURATION = 90;
+    private const int DAYSINAWEEK = 7;
 
     public static List<Reservation> GenerateReservationsByHoursInAWeek(Guid courtId, TimeOnly openTime, TimeOnly closureTime)
     {
@@ -11,7 +11,7 @@ public static class ReservationProcess
         DateOnly date = DateOnly.FromDateTime(DateTime.Now);
         var numberOfReservationsByCourt = GetNumberOfCourtsFromOpenToCloseDate(openTime, closureTime);
 
-        for (int days = 0; days <= DAYS_IN_A_WEEK; days++)
+        for (int days = 0; days <= DAYSINAWEEK; days++)
         {
             var reservationTime = openTime;
             for (int reservation = 0; reservation < numberOfReservationsByCourt; reservation++)
@@ -27,6 +27,6 @@ public static class ReservationProcess
     private static int GetNumberOfCourtsFromOpenToCloseDate(TimeOnly openTime, TimeOnly closureTime)
     {
         var minutesBetweenHours = (closureTime - openTime).TotalMinutes;
-        return (int)(minutesBetweenHours / MATCH_DURATION);
+        return (int)(minutesBetweenHours / MATCHDURATION);
     }
 }

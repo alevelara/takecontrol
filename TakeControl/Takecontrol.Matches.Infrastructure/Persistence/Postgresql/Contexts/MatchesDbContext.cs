@@ -42,7 +42,6 @@ public class MatchesDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CourtConfiguration());
         modelBuilder.ApplyConfiguration(new ReservationConfiguration());
         modelBuilder.ApplyConfiguration(new MatchPlayerConfiguration());
-
     }
 
     public DbSet<Reservation> Reservations { get; set; }
