@@ -54,6 +54,36 @@ namespace Takecontrol.Matches.Infrastructure.Migrations
                     b.ToTable("courts", (string)null);
                 });
 
+            modelBuilder.Entity("Takecontrol.Matches.Domain.Models.MatchPlayers.MatchPlayer", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MatchId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("PlayerId", "MatchId");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("matches_players", (string)null);
+                });
+
             modelBuilder.Entity("Takecontrol.Matches.Domain.Models.Matches.Match", b =>
                 {
                     b.Property<Guid>("Id")
@@ -106,6 +136,9 @@ namespace Takecontrol.Matches.Infrastructure.Migrations
                     b.Property<TimeOnly>("EndDate")
                         .HasColumnType("time without time zone");
 
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("text");
 
@@ -123,6 +156,17 @@ namespace Takecontrol.Matches.Infrastructure.Migrations
                     b.HasIndex("CourtId");
 
                     b.ToTable("reservations", (string)null);
+                });
+
+            modelBuilder.Entity("Takecontrol.Matches.Domain.Models.MatchPlayers.MatchPlayer", b =>
+                {
+                    b.HasOne("Takecontrol.Matches.Domain.Models.Matches.Match", "Match")
+                        .WithMany("MatchPlayers")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
                 });
 
             modelBuilder.Entity("Takecontrol.Matches.Domain.Models.Matches.Match", b =>
@@ -150,6 +194,11 @@ namespace Takecontrol.Matches.Infrastructure.Migrations
             modelBuilder.Entity("Takecontrol.Matches.Domain.Models.Courts.Court", b =>
                 {
                     b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("Takecontrol.Matches.Domain.Models.Matches.Match", b =>
+                {
+                    b.Navigation("MatchPlayers");
                 });
 #pragma warning restore 612, 618
         }

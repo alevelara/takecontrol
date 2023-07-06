@@ -176,8 +176,8 @@ public class ClubControllerXUnitTests : IAsyncLifetime
              Password: "Password123!",
              Province: "provinceTest",
              NumberOfCourts: 1,
-            OpenDate: TimeOnly.Parse("10:00"),
-            ClosureDate: TimeOnly.Parse("12:00"));
+             OpenDate: TimeOnly.Parse("10:00"),
+             ClosureDate: TimeOnly.Parse("12:00"));
 
         var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
 

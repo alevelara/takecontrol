@@ -26,12 +26,12 @@ public class WriteBaseRepository<T> : IAsyncWriteRepository<T>
         await _context.Set<T>().AddRangeAsync(entities);
     }
 
-    public void DeleteAsync(T entity)
+    public void Delete(T entity)
     {
         _context.Remove(entity);
     }
 
-    public T UpdateAsync(T entity)
+    public T Update(T entity)
     {
         _context.Set<T>().Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
