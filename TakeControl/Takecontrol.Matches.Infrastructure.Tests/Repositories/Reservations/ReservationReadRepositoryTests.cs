@@ -1,10 +1,11 @@
 ﻿using Takecontrol.Matches.Infrastructure.Repositories.Reservations;
 using Takecontrol.Matches.Infrastructure.Tests.Mocks;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Matches.Infrastructure.Tests.Repositories.Reservations;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.MatchIntegrationTests)]
 [Collection(SharedTestCollection.Name)]
 public class ReservationReadRepositoryTests : IAsyncLifetime
 {

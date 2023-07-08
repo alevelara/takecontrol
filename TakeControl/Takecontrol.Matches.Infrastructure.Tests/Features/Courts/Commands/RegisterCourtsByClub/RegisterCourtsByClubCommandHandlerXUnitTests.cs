@@ -2,17 +2,19 @@
 using Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourtsByClub;
 using Takecontrol.Matches.Infrastructure.Tests.Mocks;
 using Takecontrol.Shared.Application.Messages.Matches;
+using Takecontrol.Shared.Tests.Constants;
 
 namespace Takecontrol.Matches.Infrastructure.Tests.Features.Courts.Commands.RegisterCourtsByClub;
 
-[Trait("Category", SharedTestCollection.Name)]
-public class RegisterCourtsByClubCommandHandlerXUnitTests
+[Trait("Category", Category.MatchIntegrationTests)]
+[Collection(SharedTestCollection.Name)]
+public class RegisterCourtsByClubCommandHandlerXUnitTests : IAsyncLifetime
 {
     private readonly MockUnitOfWork _uoW;
 
     public RegisterCourtsByClubCommandHandlerXUnitTests()
     {
-        _uoW = new MockUnitOfWork();
+        _uoW = new();
     }
 
     [Theory]
@@ -25,13 +27,16 @@ public class RegisterCourtsByClubCommandHandlerXUnitTests
         var clubId = Guid.NewGuid();
         var command = new RegisterCourtsByClubCommand(clubId, numberOfCourts, new TimeOnly(10, 0), new TimeOnly(12, 0));
         var handler = new RegisterCourtsByClubCommandHandler(_uoW.GetUnitOfWork().Object);
-        var context = _uoW.GetContext();
 
         var result = await handler.Handle(command, default);
 
-        var courts = context.Courts.Where(c => c.ClubId == clubId).ToList();
+        var courts = _uoW.GetContext().Courts.Where(c => c.ClubId == clubId).ToList();
 
         Assert.IsType<Unit>(result);
         Assert.Equal(numberOfCourts, courts.Count);
     }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+
+    public async Task DisposeAsync() => await _uoW.ResetStateAsync();
 }
