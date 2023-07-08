@@ -1,10 +1,11 @@
-﻿using Takecontrol.User.Domain.Models.Players;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Domain.Models.Players;
 using Takecontrol.User.Domain.Models.Players.Enums;
 using Xunit;
 
 namespace Takecontrol.User.Domain.Tests.Models.Players;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class PlayerXUnitTests
 {
     [Fact]

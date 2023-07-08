@@ -54,7 +54,11 @@ public class ReservationReadRepositoryTests : IAsyncLifetime
         Assert.False(reservation.IsAvailable);
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public Task InitializeAsync()
+    {
+        _dbContext.EnsureDatabase();
+        return Task.CompletedTask;
+    }
 
     public Task DisposeAsync() => _dbContext.ResetState();
 }

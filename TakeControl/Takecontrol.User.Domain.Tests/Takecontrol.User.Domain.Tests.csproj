@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Takecontrol.Shared.Tests\Takecontrol.Shared.Tests.csproj" />
     <ProjectReference Include="..\Takecontrol.User.Domain\Takecontrol.User.Domain.csproj" />
   </ItemGroup>
 

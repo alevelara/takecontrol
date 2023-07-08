@@ -1,3 +1,4 @@
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Models.PlayerClubs;
 using Takecontrol.User.Domain.Models.Players;
@@ -10,7 +11,7 @@ using Xunit;
 
 namespace Takecontrol.Infrastructure.IntegrationTests.Repositories.Players;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.UserIntegratioTests)]
 [Collection(SharedTestCollection.Name)]
 public class PlayerReadRepositoryXUnitTests : IAsyncLifetime
 {

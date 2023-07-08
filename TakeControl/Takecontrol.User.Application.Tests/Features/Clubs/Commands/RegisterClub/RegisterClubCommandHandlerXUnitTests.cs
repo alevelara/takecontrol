@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Models.Addresses;
@@ -11,7 +12,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class RegisterClubCommandHandlerXUnitTests
 {
     private readonly Mock<IUnitOfWork> _uoW;

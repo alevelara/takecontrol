@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Takecontrol.API.Tests.Primitives;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.Shared.Tests.Repositories.Players;
@@ -13,7 +14,7 @@ using Player = Takecontrol.User.Domain.Models.Players.Player;
 
 namespace Takecontrol.API.Tests.Controllers;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.APIIntegrationTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(30)]
 [Collection(SharedTestCollection.Name)]

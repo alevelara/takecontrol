@@ -1,5 +1,6 @@
 using Moq;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Contracts.Persistence.Players;
 using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
 using Takecontrol.User.Domain.Models.Players;
@@ -7,7 +8,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Queries.GetPlayerById;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class GetPlayerByIdQueryHandlerXUnitTests
 {
     private readonly Mock<IPlayerReadRepository> _mockReadRepository;

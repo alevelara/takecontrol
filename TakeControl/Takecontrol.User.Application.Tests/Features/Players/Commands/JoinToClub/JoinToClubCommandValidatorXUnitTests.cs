@@ -1,9 +1,10 @@
-﻿using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Commands.JoinToClub;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class JoinToClubCommandValidatorXUnitTests : IClassFixture<JoinToClubCommandValidator>
 {
     private readonly JoinToClubCommandValidator _validator;

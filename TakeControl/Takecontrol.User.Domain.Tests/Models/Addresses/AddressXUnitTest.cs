@@ -1,9 +1,10 @@
-﻿using Takecontrol.User.Domain.Models.Addresses;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Domain.Models.Addresses;
 using Xunit;
 
 namespace Takecontrol.User.Domain.UnitTests.Models.Addresses;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class AddressXUnitTest
 {
     [Fact]

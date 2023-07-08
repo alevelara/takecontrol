@@ -17,7 +17,8 @@ public class TakeControlDb : IDbConfiguration
 
     public void EnsureDatabase()
     {
-        Context.Database.Migrate();
+        if (Context.Database.GetPendingMigrations().Any())
+            Context.Database.Migrate();
     }
 
     public async Task ResetState()

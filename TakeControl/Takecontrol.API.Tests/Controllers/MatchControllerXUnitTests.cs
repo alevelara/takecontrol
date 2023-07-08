@@ -7,6 +7,7 @@ using Takecontrol.Matches.Domain.Messages.Matches.Requests;
 using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Messages.Clubs.Requests;
 using Xunit;
@@ -14,7 +15,7 @@ using Xunit;
 namespace Takecontrol.API.Tests.Controllers;
 
 [Collection(SharedTestCollection.Name)]
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.APIIntegrationTests)]
 public class MatchControllerXUnitTests : IAsyncLifetime
 {
     private static string mainEndpoint = "api/v1/match/";

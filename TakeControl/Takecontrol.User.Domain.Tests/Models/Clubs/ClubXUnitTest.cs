@@ -1,9 +1,10 @@
-﻿using Takecontrol.User.Domain.Models.Clubs;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Domain.Models.Clubs;
 using Xunit;
 
 namespace Takecontrol.User.Domain.Tests.Models.Clubs;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class ClubXUnitTest
 {
     [Fact]

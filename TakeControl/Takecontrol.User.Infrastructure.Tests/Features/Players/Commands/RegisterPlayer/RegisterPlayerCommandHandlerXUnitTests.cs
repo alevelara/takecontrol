@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 using Takecontrol.User.Infrastructure.Repositories.Primitives;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
@@ -11,7 +12,7 @@ using Xunit.Priority;
 
 namespace Takecontrol.Infrastructure.IntegrationTests.Features.Players.Commands.RegisterPlayer;
 
-[Trait("Category", "InfrastructureIntegrationTests")]
+[Trait("Category", Category.UserIntegratioTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
