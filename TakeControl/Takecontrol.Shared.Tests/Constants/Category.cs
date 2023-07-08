@@ -7,5 +7,5 @@ public static class Category
     public const string EmailIntegrationTests = "EmailIntegrationTests";
     public const string CredentialIntegrationTets = "CredentialIntegrationTets";
     public const string MatchIntegrationTests = "MatchIntegrationTests";
-    public const string UserIntegratioTests = "UserIntegratioTests";
+    public const string UserIntegratioTests = "UserIntegrationTests";
 }
