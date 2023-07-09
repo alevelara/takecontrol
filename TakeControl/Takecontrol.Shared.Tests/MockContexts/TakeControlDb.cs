@@ -17,18 +17,19 @@ public class TakeControlDb : IDbConfiguration
 
     public void EnsureDatabase()
     {
-        if (Context.Database.GetPendingMigrations().Any())
-            Context.Database.Migrate();
+        Context.Database.EnsureCreated();
     }
 
-    public async Task ResetState()
+    public Task ResetState()
     {
-        if (await Context.Database.CanConnectAsync())
+        if (Context.Database.CanConnect())
         {
             Context.Clubs.ExecuteDelete();
             Context.Addresses.ExecuteDelete();
             Context.Players.ExecuteDelete();
         }
+
+        return Task.CompletedTask;
     }
 
     public Task SeedData()

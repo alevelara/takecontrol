@@ -12,7 +12,7 @@ using Xunit.Priority;
 
 namespace Takecontrol.Infrastructure.IntegrationTests.Features.Players.Commands.RegisterPlayer;
 
-[Trait("Category", Category.UserIntegratioTests)]
+[Trait("Category", Category.UserIntegrationTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
