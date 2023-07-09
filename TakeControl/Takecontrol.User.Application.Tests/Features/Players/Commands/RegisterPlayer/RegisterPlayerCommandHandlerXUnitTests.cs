@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Models.Players;
@@ -10,7 +11,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Commands.RegisterPlayer;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class RegisterPlayerCommandHandlerXUnitTests
 {
     private readonly Mock<IUnitOfWork> _uoW;

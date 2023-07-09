@@ -83,11 +83,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Infrastructure", "Takecontrol.Matches.Infrastructure\Takecontrol.Matches.Infrastructure.csproj", "{475D7DF5-C8FA-493C-A318-E2F797AFE33B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Domain.Tests", "Takecontrol.Matches.Domain.Tests\Takecontrol.Matches.Domain.Tests.csproj", "{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Domain.Tests", "Takecontrol.Matches.Domain.Tests\Takecontrol.Matches.Domain.Tests.csproj", "{5E66B0A5-AB0E-46E4-9F1C-A3ACE74D6FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Application.Tests", "Takecontrol.Matches.Application.Tests\Takecontrol.Matches.Application.Tests.csproj", "{5D5766C1-E846-4875-BD00-D7BFFA801503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Application.Tests", "Takecontrol.Matches.Application.Tests\Takecontrol.Matches.Application.Tests.csproj", "{5D5766C1-E846-4875-BD00-D7BFFA801503}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Takecontrol.Matches.Infrastructure.Tests", "Takecontrol.Matches.Infrastructure.Tests\Takecontrol.Matches.Infrastructure.Tests.csproj", "{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Takecontrol.Matches.Infrastructure.Tests", "Takecontrol.Matches.Infrastructure.Tests\Takecontrol.Matches.Infrastructure.Tests.csproj", "{C4C5BF76-E92E-4061-B61D-1DFDCED4BADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

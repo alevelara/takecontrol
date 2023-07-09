@@ -12,8 +12,8 @@ using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 namespace Takecontrol.User.Infrastructure.Migrations
 {
     [DbContext(typeof(TakeControlDbContext))]
-    [Migration("20230529183257_AddingOpeningTimes")]
-    partial class AddingOpeningTimes
+    [Migration("20230708215732_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

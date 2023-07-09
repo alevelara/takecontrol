@@ -55,4 +55,11 @@ public class MockUnitOfWork
         takeControlContextFake.Matches.ExecuteDelete();
         takeControlContextFake.Reservations.ExecuteDelete();
     }
+
+    public async Task ResetStateAsync()
+    {
+        await _context.Courts.ExecuteDeleteAsync();
+        await _context.Matches.ExecuteDeleteAsync();
+        await _context.Reservations.ExecuteDeleteAsync();
+    }
 }

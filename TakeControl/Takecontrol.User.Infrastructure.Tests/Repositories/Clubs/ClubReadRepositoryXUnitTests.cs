@@ -1,4 +1,5 @@
-﻿using Takecontrol.Shared.Tests.MockContexts;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Infrastructure.Repositories.Clubs;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
@@ -6,7 +7,7 @@ using Xunit;
 
 namespace Takecontrol.User.Infrastructure.Tests.Repositories.Clubs;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.UserIntegrationTests)]
 [Collection(SharedTestCollection.Name)]
 public class ClubReadRepositoryXUnitTests : IAsyncLifetime
 {
@@ -112,7 +113,11 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         Assert.Null(result);
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public Task InitializeAsync()
+    {
+        _dbContext.EnsureDatabase();
+        return Task.CompletedTask;
+    }
 
     public async Task DisposeAsync()
     {

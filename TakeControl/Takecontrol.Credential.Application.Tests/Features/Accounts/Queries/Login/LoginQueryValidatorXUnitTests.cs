@@ -1,9 +1,10 @@
 ﻿using Takecontrol.Credential.Application.Features.Accounts.Queries.Login;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class LoginQueryValidatorXUnitTests
 {
     private readonly LoginQueryValidator validator;

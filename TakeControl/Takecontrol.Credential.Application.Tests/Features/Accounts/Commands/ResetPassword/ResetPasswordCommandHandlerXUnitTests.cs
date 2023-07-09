@@ -2,11 +2,12 @@
 using Moq;
 using Takecontrol.Credential.Application.Contracts.Identity;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace Takecontrol.Credential.Application.Tests.Features.Accounts.Commands.ResetPassword;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class ResetPasswordCommandHandlerXUnitTests
 {
     private readonly Mock<IAuthService> _authService;

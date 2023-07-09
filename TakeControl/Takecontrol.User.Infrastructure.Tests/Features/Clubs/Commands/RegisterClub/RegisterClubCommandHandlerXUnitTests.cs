@@ -4,6 +4,7 @@ using Moq;
 using Takecontrol.Shared.Application.Events.Credentials;
 using Takecontrol.Shared.Application.Events.Emails;
 using Takecontrol.Shared.Application.Messages.Matches;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Infrastructure.Repositories.Primitives;
 using Takecontrol.User.Infrastructure.Tests.Mocks;
@@ -12,7 +13,7 @@ using Xunit.Priority;
 
 namespace Takecontrol.User.Infrastructure.Tests.Features.Clubs.Commands.RegisterClub;
 
-[Trait("Category", SharedTestCollection.Name)]
+[Trait("Category", Category.UserIntegrationTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class RegisterClubCommandHandlerXUnitTests
 {

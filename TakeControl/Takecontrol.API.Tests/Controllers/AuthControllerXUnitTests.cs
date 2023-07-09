@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using Takecontrol.API.Routes;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Credential.Domain.Messages.Identity;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Xunit;
 using Xunit.Priority;
@@ -10,7 +11,7 @@ using Xunit.Priority;
 namespace Takecontrol.API.Tests.Controllers;
 
 [Collection(SharedTestCollection.Name)]
-[Trait("Category", "IntegrationIdentityTests")]
+[Trait("Category", Category.APIIntegrationTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(10)]
 public class AuthControllerXUnitTests : IAsyncLifetime

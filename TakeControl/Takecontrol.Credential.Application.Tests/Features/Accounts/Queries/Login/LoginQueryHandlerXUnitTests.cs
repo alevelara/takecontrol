@@ -3,11 +3,12 @@ using Takecontrol.Credential.Application.Contracts.Identity;
 using Takecontrol.Credential.Application.Features.Accounts.Queries.Login;
 using Takecontrol.Credential.Domain.Messages.Identity;
 using Takecontrol.Credential.Domain.Models.ApplicationUser.Enum;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace Takecontrol.Credential.Application.Tests.Features.Accounts.Queries.Login;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class LoginQueryHandlerXUnitTests
 {
     private readonly Mock<IAuthService> _authService;

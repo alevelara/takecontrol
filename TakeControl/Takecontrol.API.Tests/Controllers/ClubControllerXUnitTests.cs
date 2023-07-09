@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using Takecontrol.API.Routes;
 using Takecontrol.API.Tests.Primitives;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.User.Domain.Messages.Clubs.Requests;
@@ -11,7 +12,7 @@ using Xunit.Priority;
 namespace Takecontrol.API.Tests.Controllers;
 
 [Collection(SharedTestCollection.Name)]
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.APIIntegrationTests)]
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 [DefaultPriority(20)]
 public class ClubControllerXUnitTests : IAsyncLifetime

@@ -1,9 +1,10 @@
 ﻿using Takecontrol.Credential.Application.Features.Accounts.Commands.UpdatePassword;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace Takecontrol.Credential.Application.Tests.Features.Accounts.Commands.UpdatePassword;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class UpdatePasswordCommandValidatorXUnitTests : IClassFixture<UpdatePasswordCommandValidatorXUnitTests>
 {
     private readonly UpdatePasswordCommandValidator _validator;

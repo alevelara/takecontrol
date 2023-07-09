@@ -1,10 +1,12 @@
 ﻿using Takecontrol.Matches.Infrastructure.Repositories.Reservations;
 using Takecontrol.Matches.Infrastructure.Tests.Mocks;
+using Takecontrol.Shared.Tests.Constants;
+
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Matches.Infrastructure.Tests.Repositories.Reservations;
 
-[Trait("Category", "IntegrationTests")]
+[Trait("Category", Category.MatchIntegrationTests)]
 [Collection(SharedTestCollection.Name)]
 public class ReservationReadRepositoryTests : IAsyncLifetime
 {
@@ -53,7 +55,11 @@ public class ReservationReadRepositoryTests : IAsyncLifetime
         Assert.False(reservation.IsAvailable);
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public Task InitializeAsync()
+    {
+        _dbContext.EnsureDatabase();
+        return Task.CompletedTask;
+    }
 
     public Task DisposeAsync() => _dbContext.ResetState();
 }

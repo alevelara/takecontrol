@@ -1,9 +1,10 @@
-﻿using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Clubs.Commands.RegisterClub;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class RegisterClubCommandValidatorXUnitTests
 {
     private readonly RegisterClubCommandValidator validator;

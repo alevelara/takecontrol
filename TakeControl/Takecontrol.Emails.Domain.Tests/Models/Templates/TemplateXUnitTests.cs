@@ -1,10 +1,11 @@
 ﻿using Takecontrol.Emails.Domain.Models.Templates;
 using Takecontrol.Emails.Domain.Models.Templates.Enum;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace Takecontrol.Emails.Domain.Tests.Models.Templates;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class TemplateXUnitTests
 {
     [Fact]

@@ -60,6 +60,8 @@ namespace Takecontrol.User.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: false),
                     Code = table.Column<string>(type: "character varying(5)", unicode: false, maxLength: 5, nullable: false),
                     NumberOfCourts = table.Column<int>(type: "integer", nullable: false),
+                    OpenDate = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    ClosureDate = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),

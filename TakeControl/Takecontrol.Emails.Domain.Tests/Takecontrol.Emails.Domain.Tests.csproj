@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Takecontrol.Email.Domain\Takecontrol.Emails.Domain.csproj" />
+    <ProjectReference Include="..\Takecontrol.Shared.Tests\Takecontrol.Shared.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

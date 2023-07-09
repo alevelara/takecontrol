@@ -15,11 +15,12 @@ using Takecontrol.Credential.Infrastructure.Models;
 using Takecontrol.Credential.Infrastructure.Services;
 using Takecontrol.Credential.Infrastructure.Tests.UnitTests.TestsData;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
 namespace Takecontrol.Credential.Infrastructure.Tests.UnitTests.Services
 {
-    [Trait("Category", "UnitTests")]
+    [Trait("Category", Category.UnitTest)]
     public class AuthServiceXUnitTests
     {
         private readonly Mock<UserManager<ApplicationUser>> _userManager;

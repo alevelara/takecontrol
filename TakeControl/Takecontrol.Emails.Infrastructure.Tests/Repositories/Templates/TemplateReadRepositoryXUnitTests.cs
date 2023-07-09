@@ -1,15 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Takecontrol.Emails.Domain.Models.Templates;
-using Takecontrol.Emails.Domain.Models.Templates.Enum;
-using Takecontrol.Emails.Infrastructure.Persistence.Data;
+﻿using Takecontrol.Emails.Domain.Models.Templates.Enum;
 using Takecontrol.Emails.Infrastructure.Repositories.Templates;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Xunit;
 
 namespace Takecontrol.Emails.Infrastructure.Tests.Repositories.Templates;
 
 [Collection(SharedTestCollection.Name)]
-[Trait("Category", "EmailIntegrationTests")]
+[Trait("Category", Category.EmailIntegrationTests)]
 public class TemplateReadRepositoryXUnitTests : IAsyncLifetime
 {
     private readonly TakeControlEmailDb _dbContext;

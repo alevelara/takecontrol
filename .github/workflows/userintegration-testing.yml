@@ -1,0 +1,30 @@
+name: User Integration testing
+on: push
+
+jobs:
+  tests:
+    name: Users Integration Testing
+    runs-on: ubuntu-latest    
+    services:
+      postgres:
+        # Docker Hub PostgreSQL image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: padel
+          POSTGRES_PASSWORD: paco1234
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+      - uses: actions/checkout@v3
+      - run: dotnet test ./TakeControl/TakeControl.sln --filter Category=UserIntegrationTests

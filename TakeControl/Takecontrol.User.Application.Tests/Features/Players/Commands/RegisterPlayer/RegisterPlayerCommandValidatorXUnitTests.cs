@@ -1,9 +1,10 @@
-﻿using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Commands.RegisterPlayer;
 
-[Trait("Category", "UnitTests")]
+[Trait("Category", Category.UnitTest)]
 public class RegisterPlayerCommandValidatorXUnitTests
 {
     private readonly RegisterPlayerCommandValidator validator;
