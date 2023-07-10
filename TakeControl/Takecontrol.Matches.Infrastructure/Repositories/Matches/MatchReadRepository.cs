@@ -2,14 +2,15 @@
 using Takecontrol.Matches.Application.Contracts.Persistence.Matches;
 using Takecontrol.Matches.Domain.Models.Matches;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
+using Takecontrol.Matches.Infrastructure.Repositories.Primitives;
 
 namespace Takecontrol.Matches.Infrastructure.Repositories.Matches;
 
-public class MatchReadRepository : IMatchReadRepository
+public class MatchReadRepository : ReadBaseRepository<Match>, IMatchReadRepository
 {
     private readonly MatchesDbContext _context;
 
-    public MatchReadRepository(MatchesDbContext context)
+    public MatchReadRepository(MatchesDbContext context) : base(context)
     {
         _context = context;
     }
