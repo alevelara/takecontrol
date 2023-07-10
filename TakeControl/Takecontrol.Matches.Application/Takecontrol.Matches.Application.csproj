@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="8.56.0.67649" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.5.0.73987" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
   </ItemGroup>
 
 </Project>
