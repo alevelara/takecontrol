@@ -50,7 +50,7 @@ public sealed class JoinToMatchCommandHandler : ICommandHandler<JoinToMatchComma
         return Unit.Value;
     }
 
-    private void ValidateMatch(Match match)
+    private static void ValidateMatch(Match match)
     {
         if (match == null)
         {

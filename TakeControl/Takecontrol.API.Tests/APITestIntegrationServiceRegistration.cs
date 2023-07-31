@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Takecontrol.Credential.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Contexts;
+using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 
 namespace Takecontrol.API.Tests;
@@ -24,6 +25,10 @@ public static class APITestIntegrationServiceRegistration
            d => d.ServiceType == typeof(DbContextOptions<EmailDbContext>));
         services.Remove(dbEmailContext!);
 
+        var dbMatchContext = services.SingleOrDefault(
+          d => d.ServiceType == typeof(DbContextOptions<MatchesDbContext>));
+        services.Remove(dbMatchContext!);
+
         services.AddDbContext<TakeControlIdentityDbContext>((container, options) =>
         {
             options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString"));
@@ -37,6 +42,11 @@ public static class APITestIntegrationServiceRegistration
         services.AddDbContext<EmailDbContext>((container, options) =>
         {
             options.UseNpgsql(configuration.GetConnectionString("EmailConnectionString"));
+        });
+
+        services.AddDbContext<MatchesDbContext>((container, options) =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("MatchesConnectionString"));
         });
 
         return services;

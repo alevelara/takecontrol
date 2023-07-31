@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Shared.Application.Constants;
 
 namespace Takecontrol.API.Tests.Helpers;
@@ -34,5 +35,10 @@ public static class AuthTestHelper
             signingCredentials: signInCredentials);
 
         return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+    }
+
+    public static async Task<HttpClient> AddJWTTokenToHeaderForPlayers(TestBase testBase)
+    {
+        return await testBase.RegisterSecuredUserAsPlayerAsync();
     }
 }
