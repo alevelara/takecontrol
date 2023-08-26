@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Takecontrol.Matches.Application\Takecontrol.Matches.Application.csproj" />
+    <ProjectReference Include="..\Takecontrol.Shared.Tests\Takecontrol.Shared.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

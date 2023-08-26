@@ -1,5 +1,6 @@
 ﻿using Moq;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
 using Takecontrol.User.Application.Tests;
@@ -8,6 +9,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Clubs.Queries.GetClubByUserId;
 
+[Trait("Category", Category.UnitTest)]
 public class GetClubByUserIdQueryHandlerXUnitTests
 {
     private readonly Mock<IClubReadRepository> _mockReadRepository;

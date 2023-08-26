@@ -1,8 +1,10 @@
-﻿using Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
+﻿using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
 using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Clubs.Queries.GetClubByUserId;
 
+[Trait("Category", Category.UnitTest)]
 public class GetClubByUserIdQueryValidatorXUnitTests : IClassFixture<GetClubByUserIdQueryValidator>
 {
     private readonly GetClubByUserIdQueryValidator _validator;

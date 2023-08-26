@@ -6,10 +6,12 @@ using Takecontrol.Matches.Application.Features.Matches.Commands.CreateMatch;
 using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Match = Takecontrol.Matches.Domain.Models.Matches.Match;
 
 namespace Takecontrol.Matches.Application.Tests.Features.Matches.Commands.CreateMatch;
 
+[Trait("Category", Category.UnitTest)]
 public class CreateMatchCommandHandlerXUnitTests
 {
     private readonly Mock<IUnitOfWork> _uoW;

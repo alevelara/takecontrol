@@ -1,4 +1,5 @@
 ﻿using Moq;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetAllClubs;
 using Takecontrol.User.Domain.Models.Clubs;
@@ -6,6 +7,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Clubs.Queries.GetAllClubs;
 
+[Trait("Category", Category.UnitTest)]
 public class GetAllClubsQueryHandlerXunitTests
 {
     private readonly Mock<IClubReadRepository> _clubReadRepository;

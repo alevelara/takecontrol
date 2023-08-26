@@ -5,9 +5,11 @@ using Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourtsByC
 using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Application.Messages.Matches;
+using Takecontrol.Shared.Tests.Constants;
 
 namespace Takecontrol.Matches.Application.Tests.Features.Courts.Commands.RegisterCourtsByClub;
 
+[Trait("Category", Category.UnitTest)]
 public class RegisterCourtsByClubCommandHandlerXUnitTests
 {
     private readonly Mock<IUnitOfWork> _uoW;

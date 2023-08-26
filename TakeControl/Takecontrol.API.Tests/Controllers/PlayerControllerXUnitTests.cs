@@ -408,7 +408,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await _matchWriteRepository.AddMatchAsync(match);
         return match;
     }
-    
+
     private async Task<Match> AddClosedMatchForTest(Guid reservationId, Guid playerId)
     {
         var match = Match.Create(reservationId, playerId);

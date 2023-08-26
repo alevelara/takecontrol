@@ -2,7 +2,7 @@
 using Takecontrol.Shared.Tests.Constants;
 using Xunit;
 
-namespace tekecontrol.Application.Tests.Features.Account.Queries.Login;
+namespace Takecontrol.Application.Tests.Features.Account.Queries.Login;
 
 [Trait("Category", Category.UnitTest)]
 public class LoginQueryValidatorXUnitTests

@@ -1,7 +1,9 @@
 ﻿using Takecontrol.Matches.Domain.Models.Courts;
+using Takecontrol.Shared.Tests.Constants;
 
 namespace Takecontrol.Matches.Domain.Tests.Models.Courts;
 
+[Trait("Category", Category.UnitTest)]
 public class CourtXUnitTests
 {
     [Fact]

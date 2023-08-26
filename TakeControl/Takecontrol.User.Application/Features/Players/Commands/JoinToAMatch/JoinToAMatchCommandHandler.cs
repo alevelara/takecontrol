@@ -3,7 +3,6 @@ using Takecontrol.Shared.Application.Abstractions.Mediatr;
 using Takecontrol.Shared.Application.Exceptions;
 using Takecontrol.Shared.Application.Messages.Matches;
 using Takecontrol.User.Application.Contracts.Persistence.Players;
-using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Errors.Players;
 
 namespace Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
