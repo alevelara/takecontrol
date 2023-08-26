@@ -194,7 +194,7 @@ namespace Takecontrol.Credential.Infrastructure.Tests.UnitTests.Services
         public async Task Register_Should_ReturnConflictException_WhenPasswordIsWrong()
         {
             //Arrange
-            var request = new RegistrationRequest("name", "existingEmail", "", UserType.Club);
+            var request = new RegistrationRequest("name", "existingEmail", string.Empty, UserType.Club);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var failedIdentityResult = IdentityTestData.CreateFailedIdentityResult();
 
@@ -211,7 +211,7 @@ namespace Takecontrol.Credential.Infrastructure.Tests.UnitTests.Services
         public async Task Register_Should_ReturnValidUserId_WhenRegisterIsSuccesful()
         {
             //Arrange
-            var request = new RegistrationRequest("name", "existingEmail", "", UserType.Club);
+            var request = new RegistrationRequest("name", "existingEmail", string.Empty, UserType.Club);
             var authService = new AuthService(_userManager.Object, _signInManager.Object, _jwtSettings, _logger.Object);
             var applicationUser = IdentityTestData.CreateApplicationUserForTest();
             var successIdentityResult = IdentityTestData.CreateSuccededIdentityResult();

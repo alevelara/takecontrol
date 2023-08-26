@@ -24,7 +24,7 @@ public static class IdentityTestData
     {
         return IdentityResult.Failed(new IdentityError
         {
-            Code = "",
+            Code = string.Empty,
             Description = "Error"
         });
     }
