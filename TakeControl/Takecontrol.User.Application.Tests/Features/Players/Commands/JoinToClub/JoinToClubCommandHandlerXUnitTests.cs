@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Moq;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Contracts.Persistence.Clubs;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Primitives;
@@ -9,6 +10,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Commands.JoinToClub;
 
+[Trait("Category", Category.UnitTest)]
 public class JoinToClubCommandHandlerXUnitTests
 {
     private readonly Mock<IClubReadRepository> _clubReadRepository;

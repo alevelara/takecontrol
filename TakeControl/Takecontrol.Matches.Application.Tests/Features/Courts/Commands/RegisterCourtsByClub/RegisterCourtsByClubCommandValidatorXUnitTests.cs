@@ -1,8 +1,10 @@
 ﻿using Takecontrol.Matches.Application.Features.Courts.Commands.RegisterCourtsByClub;
 using Takecontrol.Shared.Application.Messages.Matches;
+using Takecontrol.Shared.Tests.Constants;
 
 namespace Takecontrol.Matches.Application.Tests.Features.Courts.Commands.RegisterCourtsByClub;
 
+[Trait("Category", Category.UnitTest)]
 public class RegisterCourtsByClubCommandValidatorXUnitTests : IClassFixture<RegisterCourtsByClubCommandValidator>
 {
     private readonly RegisterCourtsByClubCommandValidator _validator;

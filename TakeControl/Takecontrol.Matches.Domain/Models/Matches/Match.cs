@@ -34,4 +34,14 @@ public class Match : BaseDomainModel
     {
         return new Match(reservationId, userId);
     }
+
+    public void Close()
+    {
+        IsClosed = true;
+    }
+
+    public void Open()
+    {
+        IsClosed = true;
+    }
 }

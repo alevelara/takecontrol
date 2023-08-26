@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Infrastructure.Constants;
+using Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 using Takecontrol.User.Application.Features.Players.Queries.GetAllPlayersByClubId;
@@ -61,5 +62,15 @@ public class PlayerController : ControllerBase
         var players = await _mediator.Send(new GetAllPlayersByClubIdQuery(clubId));
         return Ok(_mapper.From(players)
             .AdaptToType<List<PlayerDto>>());
+    }
+
+    [Authorize(Roles = Role.Player)]
+    [HttpPost(nameof(PlayerRouteName.JoinToMatch))]
+    public async Task<ActionResult> JoinToMatch(JoinToAMatchRequest request)
+    {
+        var command = _mapper.Map<JoinToAMatchCommand>(request);
+        await _mediator.Send(command);
+
+        return StatusCode((int)HttpStatusCode.Created);
     }
 }

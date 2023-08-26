@@ -6,6 +6,7 @@ using Takecontrol.Credential.Domain.Messages.Identity;
 using Takecontrol.Matches.Application.Features.Matches.Commands.CreateMatch;
 using Takecontrol.Matches.Domain.Messages.Matches.Requests;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
+using Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
 using Takecontrol.User.Domain.Messages.Addresses.Dtos;
@@ -52,6 +53,7 @@ namespace Takecontrol.API.Mappings
             config.NewConfig<Player, PlayerDto>()
                 .Map(dest => dest.PlayerLevel, src => src.PlayerLevel);
             config.NewConfig<JoinToClubRequest, JoinToClubCommand>();
+            config.NewConfig<JoinToAMatchRequest, JoinToAMatchCommand>();
         }
 
         private void AddNewConfigForMatches(TypeAdapterConfig config)

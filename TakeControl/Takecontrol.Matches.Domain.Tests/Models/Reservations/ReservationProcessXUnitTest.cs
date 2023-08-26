@@ -1,8 +1,9 @@
-﻿using Takecontrol.Matches.Domain.Models.Courts;
-using Takecontrol.Matches.Domain.Models.Reservations;
+﻿using Takecontrol.Matches.Domain.Models.Reservations;
+using Takecontrol.Shared.Tests.Constants;
 
 namespace Takecontrol.Matches.Domain.Tests.Models.Reservations;
 
+[Trait("Category", Category.UnitTest)]
 public class ReservationProcessXUnitTest : IClassFixture<ReservationProcessXUnitTest>
 {
     [Theory]
