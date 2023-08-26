@@ -32,7 +32,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenNameIsEmpty()
     {
         //Arrange
-        var request = new RegisterPlayerCommand("", "email@test.com", "Password123!", 1, 1, 1);
+        var request = new RegisterPlayerCommand(string.Empty, "email@test.com", "Password123!", 1, 1, 1);
 
         //Act
         var result = validator.Validate(request);
@@ -74,7 +74,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenEmailIsEmpty()
     {
         //Arrange
-        var request = new RegisterPlayerCommand("name", "", "Password123!", 1, 1, 1);
+        var request = new RegisterPlayerCommand("name", string.Empty, "Password123!", 1, 1, 1);
 
         //Act
         var result = validator.Validate(request);
@@ -102,7 +102,7 @@ public class RegisterPlayerCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenPaswordIsEmpty()
     {
         //Arrange
-        var request = new RegisterPlayerCommand("name", "email@test.com", "", 1, 1, 1);
+        var request = new RegisterPlayerCommand("name", "email@test.com", string.Empty, 1, 1, 1);
 
         //Act
         var result = validator.Validate(request);

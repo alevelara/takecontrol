@@ -18,7 +18,7 @@ public class LoginQueryValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenEmailIsEmptyAsync()
     {
         //Arrange
-        var request = new LoginQuery("", "password");
+        var request = new LoginQuery(string.Empty, "password");
 
         //Act
         var result = validator.Validate(request);
@@ -46,7 +46,7 @@ public class LoginQueryValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenPasswordIsEmptyAsync()
     {
         //Arrange
-        var request = new LoginQuery("user@test.com", "");
+        var request = new LoginQuery("user@test.com", string.Empty);
 
         //Act
         var result = validator.Validate(request);
@@ -60,7 +60,7 @@ public class LoginQueryValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenPasswordAndEmailAreEmptyAsync()
     {
         //Arrange
-        var request = new LoginQuery("", "");
+        var request = new LoginQuery(string.Empty, string.Empty);
 
         //Act
         var result = validator.Validate(request);
