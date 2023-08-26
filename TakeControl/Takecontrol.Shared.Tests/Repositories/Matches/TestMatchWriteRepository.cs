@@ -14,7 +14,7 @@ public class TestMatchWriteRepository
 
     public async Task AddMatchAsync(Match match)
     {
-       await _dbContext.Context.Set<Match>().AddAsync(match);
-       await _dbContext.Context.SaveChangesAsync();
+        await _dbContext.Context.Set<Match>().AddAsync(match);
+        await _dbContext.Context.SaveChangesAsync();
     }
 }
