@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Infrastructure.Constants;
+using Takecontrol.User.Application.Features.Players.Commands.CancelMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
@@ -72,5 +73,15 @@ public class PlayerController : ControllerBase
         await _mediator.Send(command);
 
         return StatusCode((int)HttpStatusCode.Created);
+    }
+
+    [Authorize(Roles = Role.Player)]
+    [HttpPut(nameof(PlayerRouteName.CancelMatch))]
+    public async Task<ActionResult> CancelMatch(CancelMatchRequest request)
+    {
+        var command = _mapper.Map<CancelMatchCommand>(request);
+        await _mediator.Send(command);
+
+        return Ok("Match was successful cancelled.");
     }
 }

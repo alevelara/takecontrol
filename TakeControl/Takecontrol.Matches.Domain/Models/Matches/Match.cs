@@ -19,6 +19,8 @@ public class Match : BaseDomainModel
 
     public bool IsClosed { get; private set; } = false;
 
+    public bool IsCancelled { get; private set; } = false;
+
     public virtual Reservation Reservation { get; private set; }
 
     public virtual ICollection<MatchPlayer> MatchPlayers { get; set; }
@@ -28,6 +30,8 @@ public class Match : BaseDomainModel
         Id = new MatchId().Value;
         ReservationId = reservationId;
         UserId = userId;
+        IsClosed = false;
+        IsCancelled = false;
     }
 
     public static Match Create(Guid reservationId, Guid userId)
@@ -42,6 +46,11 @@ public class Match : BaseDomainModel
 
     public void Open()
     {
-        IsClosed = true;
+        IsClosed = false;
+    }
+
+    public void Cancel()
+    {
+        IsCancelled = true;
     }
 }
