@@ -11,7 +11,7 @@ using Takecontrol.Shared.Application.Messages.Matches;
 
 namespace Takecontrol.Matches.Application.Features.Matches.Commands.CancelMatchByPlayer;
 
-internal sealed class CancelMatchByPlayerCommandHandler : ICommandHandler<CancelMatchByPlayerCommand, Unit>
+public sealed class CancelMatchByPlayerCommandHandler : ICommandHandler<CancelMatchByPlayerCommand, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMatchReadRepository _matchReadRepository;
@@ -34,6 +34,7 @@ internal sealed class CancelMatchByPlayerCommandHandler : ICommandHandler<Cancel
         var reservation = await _reservationReadRepository.GetReservationById(match!.ReservationId);
         ValidateReservation(reservation!);
 
+        match.Cancel();
         _unitOfWork.Repository<Match>().Update(match);
         await _unitOfWork.CompleteAsync();
 
