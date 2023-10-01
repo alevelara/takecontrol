@@ -1,20 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Json;
-using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using Takecontrol.API.Tests.Controllers.TestData;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Matches.Domain.Models.Courts;
-using Takecontrol.Matches.Domain.Models.Matches;
 using Takecontrol.Matches.Domain.Models.Reservations;
-using Takecontrol.Matches.Domain.Models.Reservations.ValueObjects;
 using Takecontrol.Shared.Tests.Constants;
-using Takecontrol.Shared.Tests.Contracts.Clubs;
-using Takecontrol.Shared.Tests.Contracts.Courts;
-using Takecontrol.Shared.Tests.Contracts.Matches;
-using Takecontrol.Shared.Tests.Contracts.Players;
-using Takecontrol.Shared.Tests.Contracts.Reservations;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Messages.Players.Requests;
 using Takecontrol.User.Domain.Models.Clubs;
@@ -39,7 +31,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     private readonly HttpClient _httpClient;
     private readonly TestBase _testBase;
 
-    public PlayerControllerXUnitTests (ApiWebApplicationFactory<Program> factory)
+    public PlayerControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
     {
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
