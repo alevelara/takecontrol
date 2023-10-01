@@ -13,5 +13,4 @@ public sealed class MatchError : DomainError
     public static MatchError MatchCompleted = new MatchError(1803, "Match is already completed");
     public static MatchError MatchCanNotBeCancelledByThisPlayer = new MatchError(1804, "Match can not be cancelled by this player");
     public static MatchError MatchCancelled = new MatchError(1805, "Match was previously cancelled");
-
 }

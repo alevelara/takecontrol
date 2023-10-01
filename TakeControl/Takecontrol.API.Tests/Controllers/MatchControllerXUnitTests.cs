@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using Takecontrol.API.Routes;
+using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Matches.Domain.Messages.Matches.Requests;
 using Takecontrol.Matches.Domain.Models.Courts;
@@ -18,9 +19,6 @@ namespace Takecontrol.API.Tests.Controllers;
 [Trait("Category", Category.APIIntegrationTests)]
 public class MatchControllerXUnitTests : IAsyncLifetime
 {
-    private static string mainEndpoint = "api/v1/match/";
-    private static string createMatchEndpoint = mainEndpoint + MatchRouteName.Create;
-
     private readonly TakeControlMatchesDb _takeControlMatchDb;
     private readonly TestBase _testBase;
 
@@ -40,7 +38,7 @@ public class MatchControllerXUnitTests : IAsyncLifetime
 
         var request = new CreateMatchRequest(Guid.NewGuid(), reservation.Id);
 
-        var response = await httpClient.PostAsJsonAsync(createMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.CreateMatch, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -55,7 +53,7 @@ public class MatchControllerXUnitTests : IAsyncLifetime
 
         var request = new CreateMatchRequest(Guid.NewGuid(), reservation.Id);
 
-        var response = await httpClient.PostAsJsonAsync(createMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.CreateMatch, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -68,7 +66,7 @@ public class MatchControllerXUnitTests : IAsyncLifetime
 
         var request = new CreateMatchRequest(Guid.NewGuid(), Guid.NewGuid());
 
-        var response = await httpClient.PostAsJsonAsync(createMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.CreateMatch, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);

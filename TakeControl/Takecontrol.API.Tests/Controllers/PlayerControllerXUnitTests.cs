@@ -1,23 +1,27 @@
-﻿using System.Net;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Net.Http.Json;
+using System.Text.RegularExpressions;
 using Takecontrol.API.Tests.Controllers.TestData;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
+using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.Matches;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Matches.Domain.Models.Reservations.ValueObjects;
 using Takecontrol.Shared.Tests.Constants;
+using Takecontrol.Shared.Tests.Contracts.Clubs;
+using Takecontrol.Shared.Tests.Contracts.Courts;
+using Takecontrol.Shared.Tests.Contracts.Matches;
+using Takecontrol.Shared.Tests.Contracts.Players;
+using Takecontrol.Shared.Tests.Contracts.Reservations;
 using Takecontrol.Shared.Tests.MockContexts;
-using Takecontrol.Shared.Tests.Repositories.Clubs;
-using Takecontrol.Shared.Tests.Repositories.Courts;
-using Takecontrol.Shared.Tests.Repositories.Matches;
-using Takecontrol.Shared.Tests.Repositories.Players;
-using Takecontrol.Shared.Tests.Repositories.Reservations;
-using Takecontrol.User.Domain.Messages.Clubs.Requests;
 using Takecontrol.User.Domain.Messages.Players.Requests;
+using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Domain.Models.Players.Enums;
 using Xunit;
 using Xunit.Priority;
+using Match = Takecontrol.Matches.Domain.Models.Matches.Match;
 using Player = Takecontrol.User.Domain.Models.Players.Player;
 
 namespace Takecontrol.API.Tests.Controllers;
@@ -28,22 +32,14 @@ namespace Takecontrol.API.Tests.Controllers;
 [Collection(SharedTestCollection.Name)]
 public class PlayerControllerXUnitTests : IAsyncLifetime
 {
-    private const string RegisterPlayerEndpoint = "api/v1/player/Register";
-    private const string JoinToClubEndpoint = "api/v1/player/Join";
-    private const string JoinToMatchEndpoint = "api/v1/player/JoinToMatch";
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly TakeControlMatchesDb _takeControlMatchesDb;
     private readonly HttpClient _httpClient;
     private readonly TestBase _testBase;
-    private readonly TestClubReadRepository _clubReadRepository;
-    private readonly TestPlayerReadRepository _playerReadRepository;
-    private readonly TestMatchWriteRepository _matchWriteRepository;
-    private readonly TestCourtReadRepository _courtReadRepository;
-    private readonly TestReservationReadRepository _reservationReadRepository;
 
-    public PlayerControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
+    public PlayerControllerXUnitTests (ApiWebApplicationFactory<Program> factory)
     {
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
@@ -51,11 +47,6 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         _takeControlEmailDb = factory.TakeControlEmailDb;
         _takeControlMatchesDb = factory.TakeControlMatchesDb;
         _testBase = new TestBase(factory);
-        _clubReadRepository = new TestClubReadRepository(_takeControlDb);
-        _playerReadRepository = new TestPlayerReadRepository(_takeControlDb);
-        _matchWriteRepository = new TestMatchWriteRepository(_takeControlMatchesDb);
-        _reservationReadRepository = new TestReservationReadRepository(_takeControlMatchesDb);
-        _courtReadRepository = new TestCourtReadRepository(_takeControlMatchesDb);
     }
 
     #region RegisterPlayer Tests
@@ -71,7 +62,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -92,7 +83,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
                 NumberOfClassesInAWeek: 1,
                 NumberOfYearsPlayed: (int)level * (int)level);
 
-            var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+            var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
             Assert.True(response.IsSuccessStatusCode);
 
             names.Add(request.Name);
@@ -125,7 +116,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -142,7 +133,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -159,7 +150,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
              NumberOfClassesInAWeek: 1,
              NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -176,7 +167,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -193,7 +184,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: -1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -210,7 +201,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: -1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -227,7 +218,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
             NumberOfClassesInAWeek: 1,
             NumberOfYearsPlayed: 1);
 
-        var response = await _httpClient.PostAsJsonAsync(RegisterPlayerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterPlayer, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -243,14 +234,14 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
         await ClubTestData.RegisterClubForTest(_httpClient);
 
-        var club = await _clubReadRepository.GetClubByName("nameTest");
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var club = await GetClubByNameAsync("nameTest");
+        var player = await GetPlayerByNameAsync("nameTest");
 
         var request = new JoinToClubRequest(player!.Id, club!.Id, club.Code);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToClubEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToClub, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -266,7 +257,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToClubEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToClub, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -280,14 +271,14 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
         await ClubTestData.RegisterClubForTest(_httpClient);
 
-        var club = await _clubReadRepository.GetClubByName("nameTest");
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var club = await GetClubByNameAsync("nameTest");
+        var player = await GetPlayerByNameAsync("nameTest");
         var incorrectCode = "12345";
         var request = new JoinToClubRequest(player!.Id, club!.Id, incorrectCode);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToClubEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToClub, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -302,17 +293,17 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         //Arrange
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
         await ClubTestData.RegisterClubForTest(_httpClient);
-        var club = await _clubReadRepository.GetClubByName("nameTest");
-        var court = await _courtReadRepository.GetCourtByClubAsync(club!.Id);
-        var reservation = await _reservationReadRepository.GetReservationByCourtAsync(court!.Id);
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await GetReservationByCourtAsync(court!.Id);
+        var player = await GetPlayerByNameAsync("nameTest");
         var match = await AddMatchForTest(reservation!.Id, player!.UserId);
 
         var request = new JoinToAMatchRequest(player!.UserId, match.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -327,7 +318,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -339,13 +330,13 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var player = await GetPlayerByNameAsync("nameTest");
 
         var request = new JoinToAMatchRequest(player!.UserId, Guid.NewGuid());
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -357,18 +348,18 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var player = await GetPlayerByNameAsync("nameTest");
         await ClubTestData.RegisterClubForTest(_httpClient);
-        var club = await _clubReadRepository.GetClubByName("nameTest");
-        var court = await _courtReadRepository.GetCourtByClubAsync(club!.Id);
-        var reservation = await _reservationReadRepository.GetReservationByCourtAsync(court!.Id);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await GetReservationByCourtAsync(court!.Id);
         var match = await AddClosedMatchForTest(reservation!.Id, player!.UserId);
 
         var request = new JoinToAMatchRequest(player!.UserId, match!.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        var response = await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
 
         //Assert
         Assert.NotNull(response);
@@ -380,23 +371,126 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
-        var player = await _playerReadRepository.GetPlayerByName("nameTest");
+        var player = await GetPlayerByNameAsync("nameTest");
         await ClubTestData.RegisterClubForTest(_httpClient);
-        var club = await _clubReadRepository.GetClubByName("nameTest");
-        var court = await _courtReadRepository.GetCourtByClubAsync(club!.Id);
-        var reservation = await _reservationReadRepository.GetReservationByCourtAsync(court!.Id);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await GetReservationByCourtAsync(court!.Id);
         var match = await AddMatchForTest(reservation!.Id, player!.UserId);
 
         var request = new JoinToAMatchRequest(player!.UserId, match!.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
-        await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
-        var response = await httpClient.PostAsJsonAsync(JoinToMatchEndpoint, request, default);
+        await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
+        var response = await httpClient.PostAsJsonAsync(Endpoints.JoinToMatch, request, default);
 
         //Assert
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+    #endregion
+
+    #region CancelMatch tests
+    [Fact]
+    public async Task Should_fail_when_user_does_not_exist()
+    {
+        //Arrange
+        var request = new CancelMatchRequest(Guid.NewGuid(), Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_match_does_not_exist()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        var request = new CancelMatchRequest(player!.UserId, Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_other_player_tries_to_cancel_the_match()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await GetReservationByCourtAsync(court!.Id);
+        var match = await AddMatchForTest(reservation!.Id, Guid.NewGuid());
+
+        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_reservation_time_is_smaller_than_one_hour()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.Now.AddMinutes(50).Hour, 0), DateOnly.FromDateTime(DateTime.Now));
+        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+
+        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_cancel_the_match_succesfully()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.Now.AddHours(3).Hour, 0), DateOnly.FromDateTime(DateTime.Now.AddDays(1)));
+        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+
+        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
     #endregion
 
@@ -405,7 +499,8 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     private async Task<Match> AddMatchForTest(Guid reservationId, Guid playerId)
     {
         var match = Match.Create(reservationId, playerId);
-        await _matchWriteRepository.AddMatchAsync(match);
+        await _takeControlMatchesDb.Context.Set<Match>().AddAsync(match);
+        await _takeControlMatchesDb.Context.SaveChangesAsync();
         return match;
     }
 
@@ -413,8 +508,38 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     {
         var match = Match.Create(reservationId, playerId);
         match.Close();
-        await _matchWriteRepository.AddMatchAsync(match);
+        await _takeControlMatchesDb.Context.Set<Match>().AddAsync(match);
+        await _takeControlMatchesDb.Context.SaveChangesAsync();
         return match;
+    }
+
+    private async Task<Reservation> AddReservationForCourt(Guid courtId, TimeOnly startTime, DateOnly reservationDate)
+    {
+        var reservation = Reservation.Create(courtId, startTime, new TimeOnly(DateTime.Now.AddHours(2).Hour, 30), reservationDate);
+        await _takeControlMatchesDb.Context.Set<Reservation>().AddAsync(reservation);
+        await _takeControlMatchesDb.Context.SaveChangesAsync();
+
+        return reservation;
+    }
+
+    private async Task<Club?> GetClubByNameAsync(string name)
+    {
+        return await _takeControlDb.Context.Set<Club>().FirstOrDefaultAsync(x => x.Name == name);
+    }
+
+    private async Task<Player?> GetPlayerByNameAsync(string name)
+    {
+        return await _takeControlDb.Context.Set<Player>().FirstOrDefaultAsync(x => x.Name == name);
+    }
+
+    private async Task<Court?> GetCourtByClubAsync(Guid clubId)
+    {
+        return await _takeControlMatchesDb.Context.Set<Court>().FirstOrDefaultAsync(x => x.ClubId == clubId);
+    }
+
+    private async Task<Reservation?> GetReservationByCourtAsync(Guid courtId)
+    {
+        return await _takeControlMatchesDb.Context.Reservations.FirstOrDefaultAsync(x => x.CourtId == courtId);
     }
 
     #endregion

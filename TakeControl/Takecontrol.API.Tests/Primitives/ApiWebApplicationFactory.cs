@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Takecontrol.Shared.Tests;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Utils;
 using Xunit;
@@ -27,6 +28,7 @@ public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram
         builder.ConfigureTestServices(services =>
         {
             services.AddIntegrationTestsServices(GetAppConfiguration());
+            services.ConfigureSharedTestInfrastructureServices();
         });
     }
 

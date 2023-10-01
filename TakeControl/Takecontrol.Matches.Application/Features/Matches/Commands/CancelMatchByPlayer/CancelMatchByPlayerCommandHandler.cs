@@ -49,6 +49,9 @@ public sealed class CancelMatchByPlayerCommandHandler : ICommandHandler<CancelMa
 
         if (match.UserId != playerId)
             throw new ConflictException(MatchError.MatchCanNotBeCancelledByThisPlayer);
+
+        if (match.IsCancelled)
+            throw new ConflictException(MatchError.MatchCancelled);
     }
 
     private void ValidateReservation(Reservation reservation)

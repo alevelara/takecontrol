@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Takecontrol.Credential.Infrastructure.Contexts;
 using Takecontrol.Emails.Infrastructure.Contexts;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
+using Takecontrol.Shared.Tests;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 
 namespace Takecontrol.API.Tests;

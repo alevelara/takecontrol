@@ -1,9 +1,10 @@
 ﻿using Takecontrol.Matches.Domain.Models.Reservations;
+using Takecontrol.Shared.Tests.Contracts.Reservations;
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Shared.Tests.Repositories.Reservations;
 
-public class TestReservationWriteRepository
+public class TestReservationWriteRepository : ITestReservationWriteRepository
 {
     private readonly TakeControlMatchesDb _dbContext;
 
@@ -12,7 +13,7 @@ public class TestReservationWriteRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddReservationhAsync(Reservation reservation)
+    public async Task AddReservationAsync(Reservation reservation)
     {
         await _dbContext.Context.Set<Reservation>().AddAsync(reservation);
         await _dbContext.Context.SaveChangesAsync();

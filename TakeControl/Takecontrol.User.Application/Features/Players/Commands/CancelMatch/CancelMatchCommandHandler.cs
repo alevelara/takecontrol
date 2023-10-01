@@ -12,9 +12,9 @@ namespace Takecontrol.User.Application.Features.Players.Commands.CancelMatch;
 public sealed class CancelMatchCommandHandler : ICommandHandler<CancelMatchCommand, Unit>
 {
     private readonly IMediator _mediator;
-    private readonly IAsyncReadRepository<Player> _playerReadRepository;
+    private readonly IPlayerReadRepository _playerReadRepository;
 
-    public CancelMatchCommandHandler(IMediator mediator, IAsyncReadRepository<Player> playerReadRepository)
+    public CancelMatchCommandHandler(IMediator mediator, IPlayerReadRepository playerReadRepository)
     {
         _mediator = mediator;
         _playerReadRepository = playerReadRepository;
@@ -22,7 +22,7 @@ public sealed class CancelMatchCommandHandler : ICommandHandler<CancelMatchComma
 
     public async Task<Unit> Handle(CancelMatchCommand request, CancellationToken cancellationToken)
     {
-        var user = await _playerReadRepository.GetByIdAsync(request.PlayerId);
+        var user = await _playerReadRepository.GetPlayerByUserId(request.PlayerId);
 
         if (user == null)
             throw new NotFoundException(PlayerError.PlayerNotFound);

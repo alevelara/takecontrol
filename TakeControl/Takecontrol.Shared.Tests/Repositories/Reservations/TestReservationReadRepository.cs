@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Takecontrol.Matches.Domain.Models.Reservations;
+using Takecontrol.Shared.Tests.Contracts.Reservations;
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Shared.Tests.Repositories.Reservations;
 
-public class TestReservationReadRepository
+public class TestReservationReadRepository : ITestReservationReadRepository
 {
     private readonly TakeControlMatchesDb _dbContext;
 
