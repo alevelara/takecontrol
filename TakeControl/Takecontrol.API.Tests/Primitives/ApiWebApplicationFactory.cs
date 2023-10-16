@@ -28,7 +28,6 @@ public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram
         builder.ConfigureTestServices(services =>
         {
             services.AddIntegrationTestsServices(GetAppConfiguration());
-            services.ConfigureSharedTestInfrastructureServices();
         });
     }
 

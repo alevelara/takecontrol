@@ -68,6 +68,25 @@ public class CancelMatchByPlayerCommandHandlerTests
     }
 
     [Fact]
+    public async Task Should_fail_when_match_was_previously_cancelled()
+    {
+        var reservationId = Guid.NewGuid();
+        var userId = Guid.NewGuid();
+        Match match = Match.Create(reservationId, userId);
+        match.Cancel();
+        Reservation reservation = Reservation.Create(Guid.NewGuid(), new TimeOnly(DateTime.Now.AddHours(2).Hour, 30), new TimeOnly(DateTime.Now.AddHours(4).Hour, 0), DateOnly.FromDateTime(DateTime.Now));
+
+        _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>())).
+            ReturnsAsync(match);
+        _reservationReadRepository.Setup(c => c.GetReservationById(It.IsAny<Guid>()))
+            .ReturnsAsync(reservation);
+
+        var command = new CancelMatchByPlayerCommand(userId, match.Id);
+        var handler = new CancelMatchByPlayerCommandHandler(_unitOfWork.Object, _matchReadRepository.Object, _reservationReadRepository.Object);
+        await Assert.ThrowsAsync<ConflictException>(() => handler.Handle(command, default!));
+    }
+
+    [Fact]
     public async Task Should_fail_when_reservation_time_is_smaller_than_one_hour()
     {
         var reservationId = Guid.NewGuid();

@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Takecontrol.Shared.Tests.Contracts.Players;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Models.Players;
 
 namespace Takecontrol.Shared.Tests.Repositories.Players;
 
-public class TestPlayerReadRepository : ITestPlayerReadRepository
+public class TestPlayerReadRepository
 {
     private readonly TakeControlDb _takeControlDb;
 

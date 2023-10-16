@@ -1,10 +1,9 @@
 ﻿using Takecontrol.Matches.Domain.Models.Reservations;
-using Takecontrol.Shared.Tests.Contracts.Reservations;
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Shared.Tests.Repositories.Reservations;
 
-public class TestReservationWriteRepository : ITestReservationWriteRepository
+public class TestReservationWriteRepository
 {
     private readonly TakeControlMatchesDb _dbContext;
 

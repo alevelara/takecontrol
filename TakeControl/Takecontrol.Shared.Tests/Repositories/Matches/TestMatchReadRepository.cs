@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Takecontrol.Matches.Domain.Models.Matches;
-using Takecontrol.Shared.Tests.Contracts;
-using Takecontrol.Shared.Tests.Contracts.Matches;
 using Takecontrol.Shared.Tests.MockContexts;
 
 namespace Takecontrol.Shared.Tests.Repositories.Matches;
 
-public class TestMatchReadRepository : ITestMatchReadRepository
+public class TestMatchReadRepository
 {
     private readonly TakeControlMatchesDb _dbContext;
 
