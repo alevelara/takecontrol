@@ -1,13 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Json;
-using Takecontrol.API.Routes;
+using Microsoft.EntityFrameworkCore;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Shared.Tests.Constants;
-using Takecontrol.Shared.Tests.Contracts.Clubs;
 using Takecontrol.Shared.Tests.MockContexts;
-using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.User.Domain.Messages.Clubs.Requests;
 using Takecontrol.User.Domain.Models.Clubs;
 using Xunit;
