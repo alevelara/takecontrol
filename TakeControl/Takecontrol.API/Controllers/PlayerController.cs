@@ -77,7 +77,7 @@ public class PlayerController : ControllerBase
 
     [Authorize(Roles = Role.Player)]
     [HttpPut(nameof(PlayerRouteName.CancelMatch))]
-    public async Task<ActionResult> CancelMatch(CancelMatchRequest request)
+    public async Task<ActionResult> CancelMatch(CancelMatchByPlayerRequest request)
     {
         var command = _mapper.Map<CancelMatchCommand>(request);
         await _mediator.Send(command);

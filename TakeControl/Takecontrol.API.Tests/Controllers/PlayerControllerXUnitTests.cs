@@ -388,7 +388,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     public async Task Should_fail_when_user_does_not_exist()
     {
         //Arrange
-        var request = new CancelMatchRequest(Guid.NewGuid(), Guid.NewGuid());
+        var request = new CancelMatchByPlayerRequest(Guid.NewGuid(), Guid.NewGuid());
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
@@ -405,7 +405,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         //Arrange
         await PlayerTestData.RegisterPlayerForTest(_httpClient);
         var player = await GetPlayerByNameAsync("nameTest");
-        var request = new CancelMatchRequest(player!.UserId, Guid.NewGuid());
+        var request = new CancelMatchByPlayerRequest(player!.UserId, Guid.NewGuid());
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
@@ -428,7 +428,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var reservation = await GetReservationByCourtAsync(court!.Id);
         var match = await AddMatchForTest(reservation!.Id, Guid.NewGuid());
 
-        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var request = new CancelMatchByPlayerRequest(player!.UserId, match.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
@@ -451,7 +451,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.Now.AddMinutes(50).Hour, 0), DateOnly.FromDateTime(DateTime.Now));
         var match = await AddMatchForTest(reservation!.Id, player!.UserId);
 
-        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var request = new CancelMatchByPlayerRequest(player!.UserId, match.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
@@ -474,7 +474,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.Now.AddHours(3).Hour, 0), DateOnly.FromDateTime(DateTime.Now.AddDays(1)));
         var match = await AddMatchForTest(reservation!.Id, player!.UserId);
 
-        var request = new CancelMatchRequest(player!.UserId, match.Id);
+        var request = new CancelMatchByPlayerRequest(player!.UserId, match.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
