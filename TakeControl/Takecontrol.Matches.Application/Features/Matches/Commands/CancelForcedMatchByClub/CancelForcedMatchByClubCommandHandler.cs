@@ -31,7 +31,7 @@ public sealed class CancelForcedMatchByClubCommandHandler : ICommandHandler<Canc
     {
         var match = await _matchReadRepository.GetByIdAsync(request.MatchId);
         ValidateMatch(match!);
-        var reservation = await _reservationReadRepository.GetReservationById(match!.ReservationId);
+        var reservation = await _reservationReadRepository.GetReservationWithCourtById(match!.ReservationId);
         ValidateReservation(reservation!);
 
         if (!reservation!.Court.ClubId.Equals(request.ClubId))

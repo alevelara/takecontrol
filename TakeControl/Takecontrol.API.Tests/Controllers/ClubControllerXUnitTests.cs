@@ -3,6 +3,9 @@ using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
+using Takecontrol.Matches.Domain.Models.Courts;
+using Takecontrol.Matches.Domain.Models.Matches;
+using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Messages.Clubs.Requests;
@@ -21,6 +24,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
+    private readonly TakeControlMatchesDb _takeControlMatchesDb;
     private readonly HttpClient _httpClient;
     private readonly TestBase _testBase;
     private const string MainEndpoint = "api/v1/club";
@@ -29,6 +33,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         _takeControlDb = factory.TakecontrolDb;
         _takeControlIdentityDb = factory.TakeControlIdentityDb;
+        _takeControlMatchesDb = factory.TakeControlMatchesDb;
         _httpClient = factory.HttpClient;
         _takeControlEmailDb = factory.TakeControlEmailDb;
         _testBase = new TestBase(factory);
@@ -250,7 +255,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.NewGuid().ToString();
-        var httpClient = await AddJWTTokenToHeaderForClubs();
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
 
         //Act
         var response = await httpClient.GetAsync(MainEndpoint + $"?userId={userId}");
@@ -264,7 +269,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var clubName = "nameTest";
-        var httpClient = await AddJWTTokenToHeaderForClubs();
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
 
         await RegisterClubForTest();
         var club = await GetClubByNameAsync(clubName);
@@ -282,7 +287,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         //Arrange
         var userId = Guid.Empty;
-        var httpClient = await AddJWTTokenToHeaderForClubs();
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
 
         //Act
         var response = await httpClient.GetAsync(MainEndpoint + $"?userId={userId}");
@@ -298,12 +303,57 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     public async Task GetAllClubs_Should_ReturnSuccesfulHttpStatus_WhenClubsAreInDatabase()
     {
         //Arrange
-        var httpClient = await AddJWTTokenToHeaderForPlayers();
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
         var response = await httpClient.GetAsync(Endpoints.AllClubs);
 
         //Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    #endregion
+
+    #region CancelForcedMatch Tests
+
+    [Fact]
+    public async Task Should_fail_when_club_does_not_exist()
+    {
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
+        var request = new CancelForcedMatchRequest(Guid.NewGuid(), Guid.NewGuid(), "description");
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelForcedMatch, request, default);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_match_does_not_exist()
+    {
+        await RegisterClubForTest();
+        var club = await GetClubByNameAsync("nameTest");
+
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
+        var request = new CancelForcedMatchRequest(club!.UserId, Guid.NewGuid(), "description");
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelForcedMatch, request, default);
+
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_cancel_match_succesfully()
+    {
+        await RegisterClubForTest();
+        var club = await GetClubByNameAsync("nameTest");
+        var reservation = await GetReservationByClubId(club!.Id);
+        var match = await AddMatchForTest(reservation!.Id, Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForClubs(_testBase);
+
+        var request = new CancelForcedMatchRequest(club!.UserId, match.Id, "description");
+        var response = await httpClient.PutAsJsonAsync(Endpoints.CancelForcedMatch, request, default);
+
+        Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
@@ -327,19 +377,27 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
     }
 
-    private async Task<HttpClient> AddJWTTokenToHeaderForClubs()
-    {
-        return await _testBase.RegisterSecuredUserAsClubAsync();
-    }
-
-    private async Task<HttpClient> AddJWTTokenToHeaderForPlayers()
-    {
-        return await _testBase.RegisterSecuredUserAsPlayerAsync();
-    }
-
     private async Task<Club?> GetClubByNameAsync(string name)
     {
         return await _takeControlDb.Context.Set<Club>().FirstOrDefaultAsync(x => x.Name == name);
+    }
+
+    private async Task<Match> AddMatchForTest(Guid reservationId, Guid playerId)
+    {
+        var match = Match.Create(reservationId, playerId);
+        await _takeControlMatchesDb.Context.Set<Match>().AddAsync(match);
+        await _takeControlMatchesDb.Context.SaveChangesAsync();
+        return match;
+    }
+
+    private async Task<Reservation?> GetReservationByClubId(Guid clubId)
+    {
+        var court = await _takeControlMatchesDb
+             .Context.Set<Court>()
+             .Include(c => c.Reservations)
+             .FirstOrDefaultAsync(C => C.ClubId == clubId);
+
+        return court!.Reservations.FirstOrDefault();
     }
 
     #endregion
@@ -350,6 +408,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     {
         await _takeControlDb.ResetState();
         await _takeControlIdentityDb.ResetState();
+        await _takeControlMatchesDb.ResetState();
         await _takeControlEmailDb.ResetState();
     }
 }

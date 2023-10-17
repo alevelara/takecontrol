@@ -543,5 +543,6 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await _takeControlIdentityDb.ResetState();
         await _takeControlDb.ResetState();
         await _takeControlEmailDb.ResetState();
+        await _takeControlMatchesDb.ResetState();
     }
 }

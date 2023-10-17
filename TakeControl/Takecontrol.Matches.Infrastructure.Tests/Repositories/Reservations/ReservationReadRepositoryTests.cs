@@ -55,6 +55,19 @@ public class ReservationReadRepositoryTests : IAsyncLifetime
         Assert.False(reservation.IsAvailable);
     }
 
+    [Fact]
+    public async Task Should_return_an_reservation_including_the_court()
+    {
+        var court = await MockCourtRepository.AddCourt(_dbContext.Context);
+        var reservation = await MockReservationRepository.AddUnavaibleReservation(_dbContext.Context, court.Id);
+        var readRepository = new ReservationReadRepository(_dbContext.Context);
+
+        var result = await readRepository.GetReservationWithCourtById(reservation.Id);
+
+        Assert.NotNull(result);
+        Assert.NotNull(reservation.Court);
+    }
+
     public Task InitializeAsync()
     {
         _dbContext.EnsureDatabase();

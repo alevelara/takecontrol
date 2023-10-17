@@ -6,7 +6,6 @@ using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Application.Features.Matches.Commands.CancelForcedMatchByClub;
 using Takecontrol.Matches.Domain.Models.Courts;
-using Takecontrol.Matches.Domain.Models.Matches;
 using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Shared.Application.Exceptions;
@@ -52,7 +51,7 @@ public class CancelForcedMatchByClubCommandHandlerTests
         Reservation reservation = null;
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(match);
-        _reservationReadRepository.Setup(r => r.GetReservationById(It.IsAny<Guid>()))
+        _reservationReadRepository.Setup(r => r.GetReservationWithCourtById(It.IsAny<Guid>()))
             .ReturnsAsync(reservation);
 
         var command = new CancelForcedMatchByClubCommand(Guid.NewGuid(), Guid.NewGuid(), "description");
@@ -66,9 +65,10 @@ public class CancelForcedMatchByClubCommandHandlerTests
     {
         var match = Match.Create(Guid.NewGuid(), Guid.NewGuid());
         Reservation reservation = Reservation.Create(Guid.NewGuid(), new TimeOnly(10, 30), new TimeOnly(12, 0), DateOnly.FromDateTime(DateTime.UtcNow));
+        reservation.SetCourt(null);
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(match);
-        _reservationReadRepository.Setup(r => r.GetReservationById(It.IsAny<Guid>()))
+        _reservationReadRepository.Setup(r => r.GetReservationWithCourtById(It.IsAny<Guid>()))
             .ReturnsAsync(reservation);
 
         var command = new CancelForcedMatchByClubCommand(Guid.NewGuid(), Guid.NewGuid(), "description");
@@ -85,7 +85,7 @@ public class CancelForcedMatchByClubCommandHandlerTests
         reservation.SetCourt(Court.Create(Guid.NewGuid(), "name"));
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(match);
-        _reservationReadRepository.Setup(r => r.GetReservationById(It.IsAny<Guid>()))
+        _reservationReadRepository.Setup(r => r.GetReservationWithCourtById(It.IsAny<Guid>()))
             .ReturnsAsync(reservation);
 
         var command = new CancelForcedMatchByClubCommand(Guid.NewGuid(), Guid.NewGuid(), "description");
@@ -103,7 +103,7 @@ public class CancelForcedMatchByClubCommandHandlerTests
         reservation.SetCourt(Court.Create(clubId, "name"));
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(match);
-        _reservationReadRepository.Setup(r => r.GetReservationById(It.IsAny<Guid>()))
+        _reservationReadRepository.Setup(r => r.GetReservationWithCourtById(It.IsAny<Guid>()))
             .ReturnsAsync(reservation);
         _matchPlayerReadRepository.Setup(c => c.GetMatchPlayersByMatchId(It.IsAny<Guid>()))
             .ReturnsAsync(new List<MatchPlayer>());
