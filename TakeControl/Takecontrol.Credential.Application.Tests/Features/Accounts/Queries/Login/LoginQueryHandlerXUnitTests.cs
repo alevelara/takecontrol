@@ -22,7 +22,7 @@ public class LoginQueryHandlerXUnitTests
     public async Task Handle_Should_ReturnNullResult_WhenEmailIsEmptyAsync()
     {
         //Arrange
-        LoginQuery query = new("", "password");
+        LoginQuery query = new(string.Empty, "password");
         LoginQueryHandler handler = new(_authService.Object);
 
         //Act
@@ -36,7 +36,7 @@ public class LoginQueryHandlerXUnitTests
     public async Task Handle_Should_ReturnNullResult_WhenPasswordIsEmptyAsync()
     {
         //Arrange
-        LoginQuery query = new("user@test.com", "");
+        LoginQuery query = new("user@test.com", string.Empty);
         LoginQueryHandler handler = new(_authService.Object);
 
         //Act

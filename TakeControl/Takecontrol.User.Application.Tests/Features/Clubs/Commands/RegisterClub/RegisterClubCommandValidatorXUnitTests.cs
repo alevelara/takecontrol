@@ -32,7 +32,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenNameIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("", "city", "province", "mainAddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand(string.Empty, "city", "province", "mainAddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);
@@ -60,7 +60,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenCityIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "", "province", "mainAddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand("name", string.Empty, "province", "mainAddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);
@@ -88,7 +88,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenProvinceIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "city", "", "mainaddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand("name", "city", string.Empty, "mainaddress", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);
@@ -116,7 +116,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenMainAddressIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "city", "province", "", "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand("name", "city", "province", string.Empty, "email@test.com", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);
@@ -144,7 +144,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenEmailIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "city", "province", "mainAddress", "", "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand("name", "city", "province", "mainAddress", string.Empty, "Password123!", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);
@@ -172,7 +172,7 @@ public class RegisterClubCommandValidatorXUnitTests
     public void Validator_Should_ReturnValidationException_WhenPaswordIsEmpty()
     {
         //Arrange
-        var request = new RegisterClubCommand("name", "city", "province", "mainAddress", "email@test.com", "", 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
+        var request = new RegisterClubCommand("name", "city", "province", "mainAddress", "email@test.com", string.Empty, 1, new TimeOnly(10, 0), new TimeOnly(12, 0));
 
         //Act
         var result = validator.Validate(request);

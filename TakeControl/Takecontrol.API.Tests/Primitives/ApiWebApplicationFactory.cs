@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using Takecontrol.Shared.Tests;
+using Takecontrol.Shared.Tests.Factories;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.Shared.Tests.Utils;
 using Xunit;
@@ -33,10 +33,10 @@ public class ApiWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram
 
     public async Task InitializeAsync()
     {
-        TakecontrolDb = new TakeControlDb();
-        TakeControlIdentityDb = new TakeControlIdentityDb();
-        TakeControlEmailDb = new TakeControlEmailDb();
-        TakeControlMatchesDb = new TakeControlMatchesDb();
+        TakecontrolDb = DbContextFactory.CreateTakeControlDbContext();
+        TakeControlIdentityDb = DbContextFactory.CreateTakeControlIdentityDbContext();
+        TakeControlEmailDb = DbContextFactory.CreateTakeControlEmailDbContext();
+        TakeControlMatchesDb = DbContextFactory.CreateTakeControlMatchDbContext();
         HttpClient = CreateClient();
 
         TakecontrolDb.EnsureDatabase();

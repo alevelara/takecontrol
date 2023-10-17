@@ -27,7 +27,7 @@ public class AddressXUnitTest
     {
         var city = "city";
         var province = "province";
-        var mainAddress = "";
+        var mainAddress = string.Empty;
 
         Address address = Address.Create(city, province, mainAddress);
 
@@ -40,7 +40,7 @@ public class AddressXUnitTest
     [Fact]
     public void Create_Should_ReturnNewAddress_WhenCityIsEmpty()
     {
-        var city = "";
+        var city = string.Empty;
         var province = "province";
         var mainAddress = "mainAddress";
 
@@ -56,7 +56,7 @@ public class AddressXUnitTest
     public void Create_Should_ReturnNewAddress_WhenProvinceIsEmpty()
     {
         var city = "city";
-        var province = "";
+        var province = string.Empty;
         var mainAddress = "mainAddress";
 
         Address address = Address.Create(city, province, mainAddress);
