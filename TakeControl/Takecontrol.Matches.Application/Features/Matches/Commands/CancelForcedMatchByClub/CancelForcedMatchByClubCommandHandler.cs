@@ -34,8 +34,7 @@ public sealed class CancelForcedMatchByClubCommandHandler : ICommandHandler<Canc
         var reservation = await _reservationReadRepository.GetReservationById(match!.ReservationId);
         ValidateReservation(reservation!);
 
-        var players = await _matchPlayerReadRepository.GetMatchPlayersByMatchId(request.MatchId);
-        if (reservation!.Court.ClubId.Equals(request.ClubId))
+        if (!reservation!.Court.ClubId.Equals(request.ClubId))
             throw new ConflictException(MatchError.MatchCanNotBeCancelledByThisClub);
 
         match.Cancel(request.Description);
@@ -43,6 +42,7 @@ public sealed class CancelForcedMatchByClubCommandHandler : ICommandHandler<Canc
         await _unitOfWork.CompleteAsync();
 
         //TODO: Notify to the related players -> Remove players.Clear()
+        var players = await _matchPlayerReadRepository.GetMatchPlayersByMatchId(request.MatchId);
         players.Clear();
         return Unit.Value;
     }

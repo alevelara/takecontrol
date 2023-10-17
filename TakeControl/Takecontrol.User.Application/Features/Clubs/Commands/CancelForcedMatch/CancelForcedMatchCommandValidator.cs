@@ -12,7 +12,9 @@ public class CancelForcedMatchCommandValidator : AbstractValidator<CancelForcedM
         RuleFor(x => x.MatchId).NotEmpty()
             .WithMessage("Match can not be empty");
 
-        RuleFor(x => x.Description).NotEmpty()
+        RuleFor(x => x.Description)
+            .NotEmpty()
+            .NotNull()
             .WithMessage("Description can not be empty");
     }
 }

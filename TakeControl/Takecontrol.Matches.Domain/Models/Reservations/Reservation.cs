@@ -9,7 +9,7 @@ public class Reservation : BaseDomainModel
 {
     public Guid Id { get; private set; }
     public Guid CourtId { get; private set; }
-    public DateOnly ReservationDate { get; set; }
+    public DateOnly ReservationDate { get; private set; }
     public TimeOnly StartDate { get; private set; }
     public TimeOnly EndDate { get; private set; }
     [DefaultValue(true)]
@@ -46,5 +46,10 @@ public class Reservation : BaseDomainModel
     public void SetIsAvailable(bool isAvailable)
     {
         IsAvailable = isAvailable;
+    }
+
+    public void SetCourt(Court court)
+    {
+        Court = court;
     }
 }

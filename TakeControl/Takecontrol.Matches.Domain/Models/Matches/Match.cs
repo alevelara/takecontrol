@@ -21,7 +21,7 @@ public class Match : BaseDomainModel
 
     public bool IsCancelled { get; private set; } = false;
 
-    public string? CancelledDescription { get; private set; };
+    public string? CancelledDescription { get; private set; }
 
     public virtual Reservation Reservation { get; private set; }
 
