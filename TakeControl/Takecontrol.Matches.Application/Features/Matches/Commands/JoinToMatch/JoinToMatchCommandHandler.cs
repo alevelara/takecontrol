@@ -61,5 +61,10 @@ public sealed class JoinToMatchCommandHandler : ICommandHandler<JoinToMatchComma
         {
             throw new ConflictException(MatchError.MatchCompleted);
         }
+
+        if (match.IsCancelled)
+        {
+            throw new ConflictException(MatchError.MatchCancelled);
+        }
     }
 }

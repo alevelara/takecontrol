@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Takecontrol.API.Routes;
+using Microsoft.EntityFrameworkCore;
+using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
-using Takecontrol.Shared.Tests.Repositories.Clubs;
 using Takecontrol.User.Domain.Messages.Clubs.Requests;
+using Takecontrol.User.Domain.Models.Clubs;
 using Xunit;
 using Xunit.Priority;
 
@@ -17,16 +18,12 @@ namespace Takecontrol.API.Tests.Controllers;
 [DefaultPriority(20)]
 public class ClubControllerXUnitTests : IAsyncLifetime
 {
-    private static string mainEndpoint = "api/v1/club/";
-    private static string registerEndpoint = mainEndpoint + ClubRouteName.Register;
-    private static string allClubsEndpoint = mainEndpoint + ClubRouteName.All;
-
     private readonly TakeControlDb _takeControlDb;
     private readonly TakeControlIdentityDb _takeControlIdentityDb;
     private readonly TakeControlEmailDb _takeControlEmailDb;
     private readonly HttpClient _httpClient;
     private readonly TestBase _testBase;
-    private readonly TestClubReadRepository _clubReadRepository;
+    private const string MainEndpoint = "api/v1/club";
 
     public ClubControllerXUnitTests(ApiWebApplicationFactory<Program> factory)
     {
@@ -35,7 +32,6 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         _httpClient = factory.HttpClient;
         _takeControlEmailDb = factory.TakeControlEmailDb;
         _testBase = new TestBase(factory);
-        _clubReadRepository = new TestClubReadRepository(_takeControlDb);
     }
 
     #region RegisterClub Tests
@@ -55,7 +51,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -78,7 +74,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -99,7 +95,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             ClosureDate: TimeOnly.Parse("12:00")
             );
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -120,7 +116,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
            ClosureDate: TimeOnly.Parse("12:00")
            );
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -140,7 +136,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -160,7 +156,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -180,7 +176,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
              OpenDate: TimeOnly.Parse("10:00"),
              ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -200,7 +196,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -220,7 +216,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.MinValue,
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -240,7 +236,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.MinValue);
 
-        var response = await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        var response = await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
 
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -257,7 +253,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         var httpClient = await AddJWTTokenToHeaderForClubs();
 
         //Act
-        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+        var response = await httpClient.GetAsync(MainEndpoint + $"?userId={userId}");
 
         //Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -271,10 +267,10 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         var httpClient = await AddJWTTokenToHeaderForClubs();
 
         await RegisterClubForTest();
-        var club = await _clubReadRepository.GetClubByName(clubName);
+        var club = await GetClubByNameAsync(clubName);
 
         //Act
-        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={club!.UserId}");
+        var response = await httpClient.GetAsync(MainEndpoint + $"?userId={club!.UserId}");
 
         //Assert
         Assert.NotNull(response);
@@ -289,7 +285,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         var httpClient = await AddJWTTokenToHeaderForClubs();
 
         //Act
-        var response = await httpClient.GetAsync(mainEndpoint + $"?userId={userId}");
+        var response = await httpClient.GetAsync(MainEndpoint + $"?userId={userId}");
 
         //Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -305,7 +301,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
         var httpClient = await AddJWTTokenToHeaderForPlayers();
 
         //Act
-        var response = await httpClient.GetAsync(allClubsEndpoint);
+        var response = await httpClient.GetAsync(Endpoints.AllClubs);
 
         //Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -328,7 +324,7 @@ public class ClubControllerXUnitTests : IAsyncLifetime
             OpenDate: TimeOnly.Parse("10:00"),
             ClosureDate: TimeOnly.Parse("12:00"));
 
-        await _httpClient.PostAsJsonAsync(registerEndpoint, request, default);
+        await _httpClient.PostAsJsonAsync(Endpoints.RegisterClub, request, default);
     }
 
     private async Task<HttpClient> AddJWTTokenToHeaderForClubs()
@@ -339,6 +335,11 @@ public class ClubControllerXUnitTests : IAsyncLifetime
     private async Task<HttpClient> AddJWTTokenToHeaderForPlayers()
     {
         return await _testBase.RegisterSecuredUserAsPlayerAsync();
+    }
+
+    private async Task<Club?> GetClubByNameAsync(string name)
+    {
+        return await _takeControlDb.Context.Set<Club>().FirstOrDefaultAsync(x => x.Name == name);
     }
 
     #endregion

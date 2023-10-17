@@ -20,5 +20,9 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
 
         builder.Property(c => c.IsClosed)
             .IsRequired();
+
+        builder.Property(c => c.IsCancelled)
+            .IsRequired()
+            .HasDefaultValue(false);
     }
 }

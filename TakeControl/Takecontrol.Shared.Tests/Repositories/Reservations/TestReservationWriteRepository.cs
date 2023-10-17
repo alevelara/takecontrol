@@ -12,7 +12,7 @@ public class TestReservationWriteRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddReservationhAsync(Reservation reservation)
+    public async Task AddReservationAsync(Reservation reservation)
     {
         await _dbContext.Context.Set<Reservation>().AddAsync(reservation);
         await _dbContext.Context.SaveChangesAsync();

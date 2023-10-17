@@ -21,6 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Repositories\Matches\TestMatchReadRepository.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="SonarAnalyzer.CSharp" Version="9.5.0.73987" />
   </ItemGroup>
 

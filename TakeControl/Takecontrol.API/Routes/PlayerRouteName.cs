@@ -9,5 +9,7 @@ namespace Takecontrol.API.Routes
         public const string AllByClubId = "AllByClubId";
 
         public const string JoinToMatch = "JoinToMatch";
+
+        public const string CancelMatch = "CancelMatch";
     }
 }
