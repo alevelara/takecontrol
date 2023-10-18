@@ -14,4 +14,5 @@ internal class Endpoints
     public const string CreateMatch = "api/v1/match/Create";
     public const string RegisterClub = "api/v1/club/Register";
     public const string AllClubs = "api/v1/club/all";
+    public const string CancelForcedMatch = "api/v1/club/CancelForcedMatch";
 }

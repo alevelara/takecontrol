@@ -21,6 +21,8 @@ public class Match : BaseDomainModel
 
     public bool IsCancelled { get; private set; } = false;
 
+    public string? CancelledDescription { get; private set; }
+
     public virtual Reservation Reservation { get; private set; }
 
     public virtual ICollection<MatchPlayer> MatchPlayers { get; set; }
@@ -32,6 +34,7 @@ public class Match : BaseDomainModel
         UserId = userId;
         IsClosed = false;
         IsCancelled = false;
+        CancelledDescription = string.Empty;
     }
 
     public static Match Create(Guid reservationId, Guid userId)
@@ -49,8 +52,9 @@ public class Match : BaseDomainModel
         IsClosed = false;
     }
 
-    public void Cancel()
+    public void Cancel(string? description = null)
     {
         IsCancelled = true;
+        CancelledDescription = description;
     }
 }

@@ -24,5 +24,8 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
         builder.Property(c => c.IsCancelled)
             .IsRequired()
             .HasDefaultValue(false);
+
+        builder.Property(c => c.CancelledDescription)
+            .HasMaxLength(100);
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Infrastructure.Constants;
+using Takecontrol.User.Application.Features.Clubs.Commands.CancelForcedMatch;
 using Takecontrol.User.Application.Features.Clubs.Commands.RegisterClub;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetAllClubs;
 using Takecontrol.User.Application.Features.Clubs.Queries.GetClubByUserId;
@@ -51,5 +52,14 @@ public class ClubController : ControllerBase
         var clubs = await _mediator.Send(new GetAllClubsQuery());
         return Ok(_mapper.From(clubs)
             .AdaptToType<List<RestrictedClubDto>>());
+    }
+
+    [Authorize(Roles = Role.Club)]
+    [HttpPut(ClubRouteName.CancelForcedMatch)]
+    public async Task<ActionResult> CancelMatch(CancelForcedMatchRequest request)
+    {
+        var command = _mapper.Map<CancelForcedMatchCommand>(request);
+        await _mediator.Send(command);
+        return Ok("Match successfuly cancelled.");
     }
 }

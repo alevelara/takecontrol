@@ -41,4 +41,9 @@ public static class AuthTestHelper
     {
         return await testBase.RegisterSecuredUserAsPlayerAsync();
     }
+
+    public static async Task<HttpClient> AddJWTTokenToHeaderForClubs(TestBase testBase)
+    {
+        return await testBase.RegisterSecuredUserAsClubAsync();
+    }
 }

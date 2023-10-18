@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Takecontrol.Matches.Application.Contracts.Persistence.Matches;
 using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Domain.Errors.Match;

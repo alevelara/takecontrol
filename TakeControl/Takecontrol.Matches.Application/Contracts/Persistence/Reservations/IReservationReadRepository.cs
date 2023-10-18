@@ -5,4 +5,5 @@ namespace Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 public interface IReservationReadRepository
 {
     Task<Reservation?> GetReservationById(Guid reservationId);
+    Task<Reservation?> GetReservationWithCourtById(Guid reservationId);
 }
