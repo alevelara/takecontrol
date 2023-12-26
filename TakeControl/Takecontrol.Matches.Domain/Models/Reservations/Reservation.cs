@@ -52,4 +52,14 @@ public class Reservation : BaseDomainModel
     {
         Court = court;
     }
+
+    public DateTime GetMatchDate()
+    {
+        return ReservationDate.ToDateTime(StartDate);
+    }
+
+    public bool IsCancellableByDate(DateTime limit)
+    {
+        return limit <= GetMatchDate();
+    }
 }

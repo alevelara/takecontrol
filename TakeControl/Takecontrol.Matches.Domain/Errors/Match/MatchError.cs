@@ -14,4 +14,6 @@ public sealed class MatchError : DomainError
     public static MatchError MatchCanNotBeCancelledByThisPlayer = new MatchError(1804, "Match can not be cancelled by this player");
     public static MatchError MatchCancelled = new MatchError(1805, "Match was previously cancelled");
     public static MatchError MatchCanNotBeCancelledByThisClub = new MatchError(1806, "Match can not be cancelled by this club");
+    public static MatchError LimitHourToCancelHasExpired = new MatchError(1807, "Player can not unsubscribe because you exceed the limit hour.");
+
 }
