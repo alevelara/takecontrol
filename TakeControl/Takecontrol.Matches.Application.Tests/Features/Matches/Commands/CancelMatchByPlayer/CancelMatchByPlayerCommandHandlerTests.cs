@@ -110,7 +110,7 @@ public class CancelMatchByPlayerCommandHandlerTests
         var reservationId = Guid.NewGuid();
         var userId = Guid.NewGuid();
         Match match = Match.Create(reservationId, userId);
-        Reservation reservation = Reservation.Create(Guid.NewGuid(), new TimeOnly(DateTime.Now.AddHours(4).Hour, 30), new TimeOnly(DateTime.Now.AddHours(6).Hour, 0), DateOnly.FromDateTime(DateTime.Now));
+        Reservation reservation = Reservation.Create(Guid.NewGuid(), new TimeOnly(DateTime.Now.AddHours(4).Hour, 30), new TimeOnly(DateTime.Now.AddHours(6).Hour, 0), DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)));
 
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>())).
             ReturnsAsync(match);

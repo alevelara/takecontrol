@@ -57,4 +57,9 @@ public class Match : BaseDomainModel
         IsCancelled = true;
         CancelledDescription = description;
     }
+
+    public void SetReservation(Reservation reservation)
+    {
+        Reservation = reservation;
+    }
 }

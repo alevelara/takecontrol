@@ -11,6 +11,7 @@ internal class Endpoints
     public const string JoinToClub = "api/v1/player/Join";
     public const string JoinToMatch = "api/v1/player/JoinToMatch";
     public const string CancelMatch = "api/v1/player/CancelMatch";
+    public const string UnsubscribeFromMatch = "api/v1/player/Unsubscribe";
     public const string CreateMatch = "api/v1/match/Create";
     public const string RegisterClub = "api/v1/club/Register";
     public const string AllClubs = "api/v1/club/all";
