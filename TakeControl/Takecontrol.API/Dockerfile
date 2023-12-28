@@ -7,11 +7,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Set environment variables
-ENV DockerHOME=/usr/src/Takecontrol
-ENV DockerAPIPath=/Takecontrol.API
-ENV DockerAPIProj=Takecontrol.API.csproj
+ENV DockerHOME=/usr/src/takecontrol
+ENV DockerAPIPath=/takecontrol.API
+ENV DockerAPIProj=takecontrol.API.csproj
 ENV DockerAPP=/app
-ENV DockerAPPDLL=Takecontrol.API.dll
+ENV DockerAPPDLL=takecontrol.API.dll
 
 # Set work directory
 WORKDIR $DockerHOME

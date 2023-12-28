@@ -5,12 +5,15 @@ using Takecontrol.API.Tests.Controllers.TestData;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Matches.Domain.Models.Courts;
+using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
+using Takecontrol.Matches.Domain.Models.Reservations.ValueObjects;
 using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Messages.Players.Requests;
 using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Domain.Models.Players.Enums;
+using Takecontrol.User.Domain.Models.Players.ValueObjects;
 using Xunit;
 using Xunit.Priority;
 using Match = Takecontrol.Matches.Domain.Models.Matches.Match;
@@ -486,6 +489,107 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     }
     #endregion
 
+    #region UnsubscribeFromMatch tests
+    [Fact]
+    public async Task Should_fail_when_player_was_not_registered_previously()
+    {
+        //Arrange
+        var request = new UnsubscribeFromMatchRequest(Guid.NewGuid(), Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnsubscribeFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_if_match_was_not_created_previously()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        var request = new UnsubscribeFromMatchRequest(player!.UserId, Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnsubscribeFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_player_tries_to_unbsubscribe_from_the_match_within_one_day()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.UtcNow.Hour), DateOnly.FromDateTime(DateTime.Now));
+        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+        var request = new UnsubscribeFromMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnsubscribeFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_player_was_not_subscribe_to_the_match_previously()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.UtcNow.AddDays(-2).Hour), DateOnly.FromDateTime(DateTime.Now.AddDays(-2)));
+        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+        var request = new UnsubscribeFromMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnsubscribeFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_be_unbsubscribed_from_the_match_and_match_must_be_available_again()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var court = await GetCourtByClubAsync(club!.Id);
+        var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.UtcNow.AddDays(-2).Hour), DateOnly.FromDateTime(DateTime.Now.AddDays(-2)));
+        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+        await AddPlayerMatchForTest(match.Id, player.Id);
+        var request = new UnsubscribeFromMatchRequest(player!.UserId, match.Id);
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnsubscribeFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+    #endregion
+
     #region Private methods
 
     private async Task<Match> AddMatchForTest(Guid reservationId, Guid playerId)
@@ -507,7 +611,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
     private async Task<Reservation> AddReservationForCourt(Guid courtId, TimeOnly startTime, DateOnly reservationDate)
     {
-        var reservation = Reservation.Create(courtId, startTime, new TimeOnly(DateTime.Now.AddHours(2).Hour, 30), reservationDate);
+        var reservation = Reservation.Create(courtId, startTime, new TimeOnly(DateTime.UtcNow.AddHours(2).Hour), reservationDate);
         await _takeControlMatchesDb.Context.Set<Reservation>().AddAsync(reservation);
         await _takeControlMatchesDb.Context.SaveChangesAsync();
 
@@ -532,6 +636,14 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
     private async Task<Reservation?> GetReservationByCourtAsync(Guid courtId)
     {
         return await _takeControlMatchesDb.Context.Reservations.FirstOrDefaultAsync(x => x.CourtId == courtId);
+    }
+
+    private async Task<MatchPlayer?> AddPlayerMatchForTest(Guid matchId, Guid playerId)
+    {
+        var matchPlayer = MatchPlayer.Create(matchId, playerId);
+        await _takeControlMatchesDb.Context.Set<MatchPlayer>().AddAsync(matchPlayer);
+        await _takeControlMatchesDb.Context.SaveChangesAsync();
+        return matchPlayer;
     }
 
     #endregion

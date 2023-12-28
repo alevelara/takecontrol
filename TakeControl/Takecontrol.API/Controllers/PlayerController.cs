@@ -9,6 +9,7 @@ using Takecontrol.User.Application.Features.Players.Commands.CancelMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.User.Application.Features.Players.Commands.UnsubscribeFromMatch;
 using Takecontrol.User.Application.Features.Players.Queries.GetAllPlayersByClubId;
 using Takecontrol.User.Application.Features.Players.Queries.GetPlayer;
 using Takecontrol.User.Domain.Messages.Players.Dtos;
@@ -83,5 +84,15 @@ public class PlayerController : ControllerBase
         await _mediator.Send(command);
 
         return Ok("Match was successful cancelled.");
+    }
+
+    [Authorize(Roles = Role.Player)]
+    [HttpPost(nameof(PlayerRouteName.Unsubscribe))]
+    public async Task<ActionResult> UnsubscribeFromMatch(UnsubscribeFromMatchRequest request)
+    {
+        var command = _mapper.Map<UnsubscribeFromMatchCommand>(request);
+        await _mediator.Send(command);
+
+        return Ok("You were unsubscribed from the match.");
     }
 }

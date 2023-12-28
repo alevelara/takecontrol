@@ -6,4 +6,5 @@ namespace Takecontrol.Matches.Application.Contracts.Persistence.Matches;
 public interface IMatchReadRepository : IAsyncReadRepository<Match>
 {
     Task<bool> IsThisReservationCompleted(Guid reservationId);
+    Task<Match?> GetMatchWithReservation(Guid matchId);
 }

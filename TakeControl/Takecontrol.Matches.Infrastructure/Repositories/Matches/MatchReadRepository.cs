@@ -19,4 +19,11 @@ public class MatchReadRepository : ReadBaseRepository<Match>, IMatchReadReposito
     {
         return await _context.Set<Match>().AnyAsync(m => m.ReservationId == reservationId);
     }
+
+    public async Task<Match?> GetMatchWithReservation(Guid matchId)
+    {
+        return await _context.Set<Match>()
+            .Include(m => m.Reservation)
+            .FirstOrDefaultAsync(c => c.Id == matchId);
+    }
 }
