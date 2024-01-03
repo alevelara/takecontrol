@@ -31,7 +31,7 @@ public class UnsubscribePlayerFromMatchCommandHandlerTests
     public async Task Should_fail_if_match_was_not_created_previously()
     {
         var request = new UnsubscribePlayerFromMatchCommand(Guid.NewGuid(), Guid.NewGuid());
-        Match match = null;
+        Match? match = null;
         var handler = new UnsubscribePlayerFromMatchCommandHandler(_unitOfWork.Object, _matchReadRepository.Object, _playerMatchReadRepository.Object);
         _matchReadRepository.Setup(m => m.GetMatchWithReservation(request.MatchId))
             .ReturnsAsync(match);

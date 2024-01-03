@@ -28,7 +28,7 @@ public class CancelMatchByPlayerCommandHandlerTests
     [Fact]
     public async Task Should_fail_when_match_does_not_exist()
     {
-        Match match = null;
+        Match? match = null;
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>())).
             ReturnsAsync(match);
 
@@ -55,7 +55,7 @@ public class CancelMatchByPlayerCommandHandlerTests
         var reservationId = Guid.NewGuid();
         var userId = Guid.NewGuid();
         Match match = Match.Create(reservationId, userId);
-        Reservation reservation = null;
+        Reservation? reservation = null;
 
         _matchReadRepository.Setup(c => c.GetByIdAsync(It.IsAny<Guid>())).
             ReturnsAsync(match);

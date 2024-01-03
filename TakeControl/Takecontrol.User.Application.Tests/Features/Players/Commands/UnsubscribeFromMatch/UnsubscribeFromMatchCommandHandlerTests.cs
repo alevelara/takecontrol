@@ -25,7 +25,7 @@ public class UnsubscribeFromMatchCommandHandlerTests
     [Fact]
     public async Task Should_fail_when_player_was_not_registered_previously()
     {
-        Player player = null;
+        Player? player = null;
         var handler = new UnsubscribeFromMatchCommandHandler(_mediator.Object, _playerReadRepository.Object);
         var request = new UnsubscribeFromMatchCommand(Guid.NewGuid(), Guid.NewGuid());
         _playerReadRepository.Setup(s => s.GetPlayerByUserId(request.UserId))
