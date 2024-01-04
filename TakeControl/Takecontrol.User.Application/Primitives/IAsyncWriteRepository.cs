@@ -7,7 +7,7 @@ public interface IAsyncWriteRepository<T>
 {
     Task<T> AddAsync(T entity);
 
-    T UpdateAsync(T entity);
+    T Update(T entity);
 
-    void DeleteAsync(T entity);
+    void Delete(T entity);
 }

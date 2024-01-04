@@ -11,6 +11,7 @@ using Takecontrol.User.Application.Features.Players.Commands.CancelMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToAMatch;
 using Takecontrol.User.Application.Features.Players.Commands.JoinToClub;
 using Takecontrol.User.Application.Features.Players.Commands.RegisterPlayer;
+using Takecontrol.User.Application.Features.Players.Commands.UnregisterFromClub;
 using Takecontrol.User.Application.Features.Players.Commands.UnsubscribeFromMatch;
 using Takecontrol.User.Domain.Messages.Addresses.Dtos;
 using Takecontrol.User.Domain.Messages.Clubs.Dtos;
@@ -60,6 +61,7 @@ namespace Takecontrol.API.Mappings
             config.NewConfig<JoinToAMatchRequest, JoinToAMatchCommand>();
             config.NewConfig<CancelMatchByPlayerRequest, CancelMatchCommand>();
             config.NewConfig<UnsubscribeFromMatchRequest, UnsubscribeFromMatchCommand>();
+            config.NewConfig<UnregisterFromClubRequest, UnregisterFromClubCommand>();
         }
 
         private void AddNewConfigForMatches(TypeAdapterConfig config)

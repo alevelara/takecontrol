@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Takecontrol.User.Application.Contracts.Persistence.PlayerClubs;
+using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Domain.Models.PlayerClubs;
 using Takecontrol.User.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.User.Infrastructure.Repositories.Primitives;
@@ -21,5 +22,13 @@ public class PlayerClubReadRepository : ReadBaseRepository<PlayerClub>, IPlayerC
             .Include(c => c.Player)
             .Where(b => b.ClubId == ClubId)
             .ToListAsync();
+    }
+
+    public async Task<PlayerClub?> GetByPlayerIdAndClubId(Guid playerId, Guid clubId)
+    {
+        return await _dbContext.PlayerClubs!
+           .Where(b => b.ClubId == clubId
+           && b.PlayerId == playerId)
+           .FirstOrDefaultAsync();
     }
 }
