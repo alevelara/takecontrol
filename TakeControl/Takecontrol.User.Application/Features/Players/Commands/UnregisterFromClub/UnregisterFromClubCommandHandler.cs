@@ -33,7 +33,7 @@ public sealed class UnregisterFromClubCommandHandler : ICommandHandler<Unregiste
             throw new NotFoundException(PlayerClubError.PlayerDoesntBelongToTheClub);
 
         _unitOfWork.Repository<PlayerClub>().Delete(playerClub);
-
+        await _unitOfWork.CompleteAsync();
         return Unit.Value;
     }
 }
