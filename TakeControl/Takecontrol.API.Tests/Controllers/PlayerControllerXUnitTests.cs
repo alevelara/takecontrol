@@ -646,7 +646,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
 
     #region Private methods
 
-        private async Task<Match> AddMatchForTest(Guid reservationId, Guid playerId)
+    private async Task<Match> AddMatchForTest(Guid reservationId, Guid playerId)
     {
         var match = Match.Create(reservationId, playerId);
         await _takeControlMatchesDb.Context.Set<Match>().AddAsync(match);
