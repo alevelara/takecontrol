@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Moq;
 using Takecontrol.Shared.Application.Exceptions;
+using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.User.Application.Contracts.Persistence.PlayerClubs;
 using Takecontrol.User.Application.Contracts.Persistence.Players;
 using Takecontrol.User.Application.Features.Players.Commands.UnregisterFromClub;
@@ -11,6 +12,7 @@ using Xunit;
 
 namespace Takecontrol.User.Application.Tests.Features.Players.Commands.UnregisterFromClub;
 
+[Trait("Category", Category.UnitTest)]
 public class UnregisterFromClubCommandHandlerTests
 {
     private readonly Mock<IUnitOfWork> _unitOfWork;
