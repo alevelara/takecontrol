@@ -13,5 +13,7 @@ namespace Takecontrol.API.Routes
         public const string CancelMatch = "CancelMatch";
 
         public const string Unsubscribe = "Unsubscribe";
+
+        public const string Unregister = "Unregister";
     }
 }

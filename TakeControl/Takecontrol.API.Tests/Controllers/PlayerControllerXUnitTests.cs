@@ -1,19 +1,17 @@
-﻿using System.Net;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Net.Http.Json;
-using Microsoft.EntityFrameworkCore;
 using Takecontrol.API.Tests.Controllers.TestData;
 using Takecontrol.API.Tests.Helpers;
 using Takecontrol.API.Tests.Primitives;
 using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.MatchPlayers;
 using Takecontrol.Matches.Domain.Models.Reservations;
-using Takecontrol.Matches.Domain.Models.Reservations.ValueObjects;
 using Takecontrol.Shared.Tests.Constants;
 using Takecontrol.Shared.Tests.MockContexts;
 using Takecontrol.User.Domain.Messages.Players.Requests;
 using Takecontrol.User.Domain.Models.Clubs;
 using Takecontrol.User.Domain.Models.Players.Enums;
-using Takecontrol.User.Domain.Models.Players.ValueObjects;
 using Xunit;
 using Xunit.Priority;
 using Match = Takecontrol.Matches.Domain.Models.Matches.Match;
@@ -588,6 +586,62 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
+    #endregion
+
+    #region UnregisgerFromClub tests
+    [Fact]
+    public async Task Should_fail_when_player_was_not_registered_yet()
+    {
+        //Arrange
+        var request = new UnregisterFromClubRequest(Guid.NewGuid(), Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnregisterFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_fail_when_player_was_not_joint_to_the_club()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        var request = new UnregisterFromClubRequest(player!.UserId, Guid.NewGuid());
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnregisterFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Should_unregister_the_player_when_player_was_previously_registered_to_the_club()
+    {
+        //Arrange
+        await PlayerTestData.RegisterPlayerForTest(_httpClient);
+        var player = await GetPlayerByNameAsync("nameTest");
+        await ClubTestData.RegisterClubForTest(_httpClient);
+        var club = await GetClubByNameAsync("nameTest");
+        var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
+        await PlayerTestData.JoinAPlayerToClub(httpClient, player!.Id, club!.Id, club!.Code);
+
+        var request = new UnregisterFromClubRequest(player!.UserId, club!.Id);
+
+        //Act
+        var response = await httpClient.PostAsJsonAsync(Endpoints.UnregisterFromMatch, request, default);
+
+        //Assert
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+    }
+
     #endregion
 
     #region Private methods
