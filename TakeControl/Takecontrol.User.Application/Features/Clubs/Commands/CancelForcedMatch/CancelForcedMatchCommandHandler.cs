@@ -20,7 +20,7 @@ public sealed class CancelForcedMatchCommandHandler : ICommandHandler<CancelForc
 
     public async Task<Unit> Handle(CancelForcedMatchCommand request, CancellationToken cancellationToken)
     {
-        var club = await _clubReadRepository.GetClubByUserId(request.ClubId);
+        var club = await _clubReadRepository.GetClubByUserId(request.UserId);
         if (club == null)
             throw new NotFoundException(ClubError.ClubNotFound);
 

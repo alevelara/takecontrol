@@ -20,13 +20,13 @@ public sealed class JoinToAMatchCommandHandler : ICommandHandler<JoinToAMatchCom
 
     public async Task<Unit> Handle(JoinToAMatchCommand request, CancellationToken cancellationToken)
     {
-        var player = await _playerReadRepository.GetPlayerByUserId(request.PlayerId);
+        var player = await _playerReadRepository.GetPlayerByUserId(request.UserId);
         if (player == null)
         {
             throw new NotFoundException(PlayerError.PlayerNotFound);
         }
 
-        var command = new JoinToMatchCommand(request.PlayerId, request.MatchId);
+        var command = new JoinToMatchCommand(player.Id, request.MatchId);
 
         return await _mediator.Send(command);
     }

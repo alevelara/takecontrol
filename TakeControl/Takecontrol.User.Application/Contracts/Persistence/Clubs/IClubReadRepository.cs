@@ -8,5 +8,5 @@ public interface IClubReadRepository
 
     Task<List<Club>> GetAllClubsAsync();
 
-    Task<Club?> GetClubByCodeAndClubId(Guid clubId, string code);
+    Task<Club?> GetClubByCodeAndUserId(Guid clubId, string code);
 }

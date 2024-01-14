@@ -7,13 +7,13 @@ public class UnregisterFromClubCommandValidator : AbstractValidator<UnregisterFr
 {
     public UnregisterFromClubCommandValidator()
     {
-        RuleFor(c => c.UserId)
+        RuleFor(c => c.UserPlayerId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)
             .WithMessage("UserId can not be empty");
 
-        RuleFor(c => c.ClubId)
+        RuleFor(c => c.UserClubId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)

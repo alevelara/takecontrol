@@ -17,7 +17,7 @@ public sealed class GetPlayerByIdQueryHandler : IQueryHandler<GetPlayerByIdQuery
 
     public async Task<Player> Handle(GetPlayerByIdQuery request, CancellationToken cancellationToken)
     {
-        var player = await _playerReadRepository.GetPlayerByUserId(request.Id);
+        var player = await _playerReadRepository.GetPlayerByUserId(request.UserId);
         if (player == null)
             throw new NotFoundException(PlayerError.PlayerNotFound);
 

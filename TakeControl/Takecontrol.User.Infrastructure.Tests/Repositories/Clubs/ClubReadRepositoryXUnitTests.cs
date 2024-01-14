@@ -89,7 +89,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         var readRepository = new ClubReadRepository(_dbContext.Context);
 
         //Act
-        var result = await readRepository.GetClubByCodeAndClubId(club.Id, club.Code);
+        var result = await readRepository.GetClubByCodeAndUserId(club.UserId, club.Code);
 
         //Assert
         Assert.NotNull(result);
@@ -107,7 +107,7 @@ public class ClubReadRepositoryXUnitTests : IAsyncLifetime
         var readRepository = new ClubReadRepository(_dbContext.Context);
 
         //Act
-        var result = await readRepository.GetClubByCodeAndClubId(club.Id, wrongCode);
+        var result = await readRepository.GetClubByCodeAndUserId(club.Id, wrongCode);
 
         //Assert
         Assert.Null(result);
