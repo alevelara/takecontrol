@@ -40,7 +40,7 @@ public class CancelMatchCommandHandlerTests
         var command = new CancelMatchCommand(Guid.NewGuid(), Guid.NewGuid());
         var handler = new CancelMatchCommandHandler(_mediator.Object, _playerReadRepository.Object);
         Player player = ApplicationTestData.CreateMidPlayerForTest(Guid.NewGuid());
-        var commandToSend = new CancelMatchByPlayerCommand(command.PlayerId, command.MatchId);
+        var commandToSend = new CancelMatchByPlayerCommand(player.Id, command.MatchId);
 
         _playerReadRepository.Setup(c => c.GetPlayerByUserId(It.IsAny<Guid>()))
             .ReturnsAsync(player);

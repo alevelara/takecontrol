@@ -10,7 +10,7 @@ public sealed class CancelMatchCommandValidator : AbstractValidator<CancelMatchC
             .Must(v => !v.Equals(Guid.Empty))
             .WithMessage("Match id can not be empty");
 
-        RuleFor(c => c.PlayerId)
+        RuleFor(c => c.UserId)
             .Must(v => !v.Equals(Guid.Empty))
             .WithMessage("Player id can not be empty");
     }

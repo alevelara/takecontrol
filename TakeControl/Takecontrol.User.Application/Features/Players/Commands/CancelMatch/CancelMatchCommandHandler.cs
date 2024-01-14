@@ -3,9 +3,7 @@ using Takecontrol.Shared.Application.Abstractions.Mediatr;
 using Takecontrol.Shared.Application.Exceptions;
 using Takecontrol.Shared.Application.Messages.Matches;
 using Takecontrol.User.Application.Contracts.Persistence.Players;
-using Takecontrol.User.Application.Primitives;
 using Takecontrol.User.Domain.Errors.Players;
-using Takecontrol.User.Domain.Models.Players;
 
 namespace Takecontrol.User.Application.Features.Players.Commands.CancelMatch;
 
@@ -22,12 +20,12 @@ public sealed class CancelMatchCommandHandler : ICommandHandler<CancelMatchComma
 
     public async Task<Unit> Handle(CancelMatchCommand request, CancellationToken cancellationToken)
     {
-        var user = await _playerReadRepository.GetPlayerByUserId(request.PlayerId);
+        var player = await _playerReadRepository.GetPlayerByUserId(request.UserId);
 
-        if (user == null)
+        if (player == null)
             throw new NotFoundException(PlayerError.PlayerNotFound);
 
-        var command = new CancelMatchByPlayerCommand(request.PlayerId, request.MatchId);
+        var command = new CancelMatchByPlayerCommand(player.Id, request.MatchId);
 
         return await _mediator.Send(command);
     }

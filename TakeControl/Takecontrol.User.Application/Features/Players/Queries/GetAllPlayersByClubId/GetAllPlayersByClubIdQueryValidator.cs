@@ -6,7 +6,7 @@ public class GetAllPlayersByClubIdQueryValidator : AbstractValidator<GetAllPlaye
 {
     public GetAllPlayersByClubIdQueryValidator()
     {
-        RuleFor(c => c.Id)
+        RuleFor(c => c.ClubId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)

@@ -6,7 +6,7 @@ public class CancelForcedMatchCommandValidator : AbstractValidator<CancelForcedM
 {
     public CancelForcedMatchCommandValidator()
     {
-        RuleFor(x => x.ClubId).NotEmpty()
+        RuleFor(x => x.UserId).NotEmpty()
             .WithMessage("Club can not be empty");
 
         RuleFor(x => x.MatchId).NotEmpty()

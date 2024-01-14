@@ -13,13 +13,13 @@ public class JoinToClubCommandValidator : AbstractValidator<JoinToClubCommand>
             .Must(x => ValitatorsUtil.HasTheCorrectSize(x, 5))
             .WithMessage("Code must have 5 digits");
 
-        RuleFor(c => c.ClubId)
+        RuleFor(c => c.UserClubId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)
             .WithMessage("ClubId can not be empty");
 
-        RuleFor(c => c.PlayerId)
+        RuleFor(c => c.UserPlayerId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)

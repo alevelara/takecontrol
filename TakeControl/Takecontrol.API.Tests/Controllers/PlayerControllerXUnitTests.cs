@@ -230,7 +230,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await GetClubByNameAsync("nameTest");
         var player = await GetPlayerByNameAsync("nameTest");
 
-        var request = new JoinToClubRequest(player!.Id, club!.Id, club.Code);
+        var request = new JoinToClubRequest(player!.UserId, club!.UserId, club.Code);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
 
         //Act
@@ -473,7 +473,7 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         var club = await GetClubByNameAsync("nameTest");
         var court = await GetCourtByClubAsync(club!.Id);
         var reservation = await AddReservationForCourt(court!.Id, new TimeOnly(DateTime.Now.AddHours(3).Hour, 0), DateOnly.FromDateTime(DateTime.Now.AddDays(1)));
-        var match = await AddMatchForTest(reservation!.Id, player!.UserId);
+        var match = await AddMatchForTest(reservation!.Id, player!.Id);
 
         var request = new CancelMatchByPlayerRequest(player!.UserId, match.Id);
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
@@ -630,9 +630,9 @@ public class PlayerControllerXUnitTests : IAsyncLifetime
         await ClubTestData.RegisterClubForTest(_httpClient);
         var club = await GetClubByNameAsync("nameTest");
         var httpClient = await AuthTestHelper.AddJWTTokenToHeaderForPlayers(_testBase);
-        await PlayerTestData.JoinAPlayerToClub(httpClient, player!.Id, club!.Id, club!.Code);
+        await PlayerTestData.JoinAPlayerToClub(httpClient, player!.UserId, club!.UserId, club!.Code);
 
-        var request = new UnregisterFromClubRequest(player!.UserId, club!.Id);
+        var request = new UnregisterFromClubRequest(player!.UserId, club!.UserId);
 
         //Act
         var response = await httpClient.PostAsJsonAsync(Endpoints.UnregisterFromMatch, request, default);

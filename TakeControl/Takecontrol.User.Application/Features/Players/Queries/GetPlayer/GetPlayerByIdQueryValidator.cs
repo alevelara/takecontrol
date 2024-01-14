@@ -6,7 +6,7 @@ public class GetPlayerByIdQueryValidator : AbstractValidator<GetPlayerByIdQuery>
 {
     public GetPlayerByIdQueryValidator()
     {
-        RuleFor(c => c.Id)
+        RuleFor(c => c.UserId)
             .NotNull()
             .NotEmpty()
             .NotEqual(Guid.Empty)

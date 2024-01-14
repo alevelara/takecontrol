@@ -23,12 +23,12 @@ public class ClubReadRepository : ReadBaseRepository<Club>, IClubReadRepository
             .ToListAsync();
     }
 
-    public async Task<Club?> GetClubByCodeAndClubId(Guid clubId, string code)
+    public async Task<Club?> GetClubByCodeAndUserId(Guid clubId, string code)
     {
         return await _dbContext.Clubs!
             .Include(c => c.Address)
             .IgnoreAutoIncludes()
-            .FirstOrDefaultAsync(c => c.Id == clubId && c.Code == code);
+            .FirstOrDefaultAsync(c => c.UserId == clubId && c.Code == code);
     }
 
     public async Task<Club?> GetClubByUserId(Guid userId)
