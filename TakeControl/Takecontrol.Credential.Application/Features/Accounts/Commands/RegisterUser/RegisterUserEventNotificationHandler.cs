@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Takecontrol.Credential.Application.Contracts.Identity;
+﻿using Takecontrol.Credential.Application.Contracts.Identity;
 using Takecontrol.Credential.Domain.Messages.Identity;
 using Takecontrol.Credential.Domain.Models.ApplicationUser.Enum;
 using Takecontrol.Shared.Application.Abstractions.Mediatr;
@@ -7,7 +6,7 @@ using Takecontrol.Shared.Application.Events.Credentials;
 
 namespace Takecontrol.Credential.Application.Features.Accounts.Commands.RegisterUser;
 
-internal sealed class RegisterUserEventNotificationHandler :
+public sealed class RegisterUserEventNotificationHandler :
     ICommandHandler<RegisterClubMessageNotification, Guid>,
     ICommandHandler<RegisterPlayerMessageNotification, Guid>
 {
