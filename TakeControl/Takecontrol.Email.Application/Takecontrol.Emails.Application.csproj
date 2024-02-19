@@ -20,4 +20,8 @@
     <PackageReference Update="SonarAnalyzer.CSharp" Version="9.16.0.82469" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Emails\Commands\SendCancelMatchToClubEmail\" />
+  </ItemGroup>
+
 </Project>

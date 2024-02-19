@@ -19,7 +19,7 @@ public sealed class SendWelcomeEmailCommandHandler : ICommandHandler<SendWelcome
     public async Task<Unit> Handle(SendWelcomeEmailMessageNotification request, CancellationToken cancellationToken)
     {
         var email = Email.Create(request.EmailTo, "Welcome to Takecontrol", TemplateType.WELCOME);
-        await _emailSender.SendEmailAsync(email, cancellationToken);
+        await _emailSender.SendEmailAsync(email, null, cancellationToken);
 
         return Unit.Value;
     }

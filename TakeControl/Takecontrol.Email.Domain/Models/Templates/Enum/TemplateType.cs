@@ -3,4 +3,6 @@
 public enum TemplateType
 {
     WELCOME,
+    CANCELLED_FOR_PLAYER,
+    CANCELLED_FOR_CLUB
 }

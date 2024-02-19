@@ -2,5 +2,5 @@
 
 public interface ITemplateLoader
 {
-    string LoadTemplate(string template);
+    Task<string> LoadTemplate(string template, object? model);
 }

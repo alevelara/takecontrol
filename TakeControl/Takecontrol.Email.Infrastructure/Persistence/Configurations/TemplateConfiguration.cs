@@ -23,6 +23,6 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
         builder.Property(x => x.Language)
             .HasMaxLength(10);
 
-        builder.HasData(new Template[] { TemplateFactory.WelcomeTemplate });
+        builder.HasData(new Template[] { TemplateFactory.WelcomeTemplate, TemplateFactory.CancelByPlayerTemplate });
     }
 }

@@ -11,10 +11,11 @@ services:
       - "5167:5167"
     depends_on:
      - "postgres"
+     - "mongodb"
     volumes:
       - ./TakeControl/:/app
     environment:
-      DB_CONNECTION_STRING: "host=postgres;port=5432;database=${DATABASE_NAME};username=${USERNAME};password=${PASSWORD}"
+      DB_CONNECTION_STRING: "host=postgres;port=5432;database=${DATABASE_NAME};username=${PG_USERNAME};password=${pG_PASSWORD}"
     networks:
      - takecontrol-dev
   frontend-app:
@@ -35,8 +36,8 @@ services:
     volumes:
      - db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: "${USERNAME}"
-      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_USER: "${PG_USERNAME}"
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: "${DATABASE_NAME}"
       PGDATA: /var/lib/postgresql/data
       POSTGRES_HOST_AUTH_METHOD: "trust"
@@ -55,6 +56,15 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     networks:
       - takecontrol-dev
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+    ports: 
+        - 27017:27017
 volumes:
  db-data:
  pgadmin-data:

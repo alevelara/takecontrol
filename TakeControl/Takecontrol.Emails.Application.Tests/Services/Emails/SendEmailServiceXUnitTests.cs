@@ -44,7 +44,7 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-        await sender.SendEmailAsync(email, default);
+        await sender.SendEmailAsync(email, null, default);
 
         //Assert
         Assert.Equal(EmailStatus.FAILED, email.Status);
@@ -61,7 +61,7 @@ public class SendEmailServiceXUnitTests
         _templateRepository.Setup(c => c.GetTemplateByTemplateType(It.IsAny<TemplateType>()))
             .ReturnsAsync(template);
 
-        _templateLoader.Setup(t => t.LoadTemplate(It.IsAny<string>())).Returns("serializedPayload");
+        _templateLoader.Setup(t => t.LoadTemplate(It.IsAny<string>(), It.IsAny<object?>())).ReturnsAsync("serializedPayload");
 
         _emailSender.Setup(s => s.SendEmailAsync(It.IsAny<Email>(), It.IsAny<string>(), default)).ReturnsAsync(false);
 
@@ -69,7 +69,7 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-        await sender.SendEmailAsync(email, default);
+        await sender.SendEmailAsync(email, null, default);
 
         //Assert
         Assert.Equal(EmailStatus.FAILED, email.Status);
@@ -86,7 +86,7 @@ public class SendEmailServiceXUnitTests
         _templateRepository.Setup(c => c.GetTemplateByTemplateType(It.IsAny<TemplateType>()))
             .ReturnsAsync(template);
 
-        _templateLoader.Setup(t => t.LoadTemplate(It.IsAny<string>())).Returns("serializedPayload");
+        _templateLoader.Setup(t => t.LoadTemplate(It.IsAny<string>(), It.IsAny<object?>())).ReturnsAsync("serializedPayload");
 
         _emailSender.Setup(s => s.SendEmailAsync(It.IsAny<Email>(), It.IsAny<string>(), default)).ReturnsAsync(true);
 
@@ -94,7 +94,7 @@ public class SendEmailServiceXUnitTests
             .ReturnsAsync(email);
 
         //Act
-        await sender.SendEmailAsync(email, default);
+        await sender.SendEmailAsync(email,null, default);
 
         //Assert
         Assert.Equal(EmailStatus.CONFIRMED, email.Status);

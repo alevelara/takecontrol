@@ -5,11 +5,11 @@ namespace Takecontrol.Emails.Infrastructure.Repositories.Services;
 
 public class TemplateLoader : ITemplateLoader
 {
-    public string LoadTemplate(string template)
+    public async Task<string> LoadTemplate(string template, object? model)
     {
         IRazorEngine razorEngine = new RazorEngine();
-        IRazorEngineCompiledTemplate modifiedMailTemplate = razorEngine.Compile(template);
+        IRazorEngineCompiledTemplate modifiedMailTemplate = await razorEngine.CompileAsync(template);
 
-        return modifiedMailTemplate.Run();
+        return await modifiedMailTemplate.RunAsync(model);
     }
 }

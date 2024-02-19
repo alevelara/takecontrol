@@ -22,14 +22,14 @@ namespace Takecontrol.Emails.Application.Services.Emails
             _unitOfWork = unitOfWork;
         }
 
-        public async Task SendEmailAsync(Email email, CancellationToken cancellationToken)
+        public async Task SendEmailAsync(Email email, object? model, CancellationToken cancellationToken)
         {
             var isSuccesfulSent = false;
             var template = await _templateRepository.GetTemplateByTemplateType(email.TemplateType);
 
             if (template != null)
             {
-                var emailPayload = _templateLoader.LoadTemplate(template.Payload);
+                var emailPayload = await _templateLoader.LoadTemplate(template.Payload, model);
                 isSuccesfulSent = await _emailSender.SendEmailAsync(email, emailPayload, cancellationToken);
             }
 
