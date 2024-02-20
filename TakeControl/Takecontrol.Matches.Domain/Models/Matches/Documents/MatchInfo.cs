@@ -1,6 +1,6 @@
 ﻿using Takecontrol.Shared.Domain.Primitives;
 
-namespace Takecontrol.Matches.Domain.Models.Matches.Aggregates;
+namespace Takecontrol.Matches.Domain.Models.Matches.Documents;
 
 public class MatchInfo : BaseDomainModel
 {

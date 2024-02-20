@@ -5,6 +5,7 @@ using Takecontrol.Matches.Application.Contracts.Persistence.Matches;
 using Takecontrol.Matches.Application.Contracts.Persistence.MatchPlayers;
 using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 using Takecontrol.Matches.Application.Contracts.Primitives;
+using Takecontrol.Matches.Domain.Models.Matches.Options;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Matches.Infrastructure.Repositories.Matches;
 using Takecontrol.Matches.Infrastructure.Repositories.MatchPlayers;
@@ -22,6 +23,7 @@ public static class ServiceRegistration
                 configuration.GetConnectionString("MatchesConnectionString"),
                 o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
+        service.Configure<MatchDatabaseSettings>(configuration.GetSection("MatchMongoDB"));
         service.AddScoped(typeof(IAsyncWriteRepository<>), typeof(WriteBaseRepository<>));
         service.AddScoped(typeof(IAsyncReadRepository<>), typeof(ReadBaseRepository<>));
         service.AddScoped<IUnitOfWork, UnitOfWork>();

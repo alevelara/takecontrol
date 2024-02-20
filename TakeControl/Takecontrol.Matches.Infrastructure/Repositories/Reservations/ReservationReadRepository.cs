@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
-using Takecontrol.Matches.Domain.Models.Courts;
 using Takecontrol.Matches.Domain.Models.Reservations;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Matches.Infrastructure.Repositories.Primitives;
