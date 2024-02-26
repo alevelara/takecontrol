@@ -2,12 +2,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Takecontrol.Matches.Application.Contracts.Persistence.Matches;
+using Takecontrol.Matches.Application.Contracts.Persistence.MatchesInfo;
 using Takecontrol.Matches.Application.Contracts.Persistence.MatchPlayers;
 using Takecontrol.Matches.Application.Contracts.Persistence.Reservations;
 using Takecontrol.Matches.Application.Contracts.Primitives;
 using Takecontrol.Matches.Domain.Models.Matches.Options;
 using Takecontrol.Matches.Infrastructure.Persistence.Postgresql.Contexts;
 using Takecontrol.Matches.Infrastructure.Repositories.Matches;
+using Takecontrol.Matches.Infrastructure.Repositories.MatchesInfo;
 using Takecontrol.Matches.Infrastructure.Repositories.MatchPlayers;
 using Takecontrol.Matches.Infrastructure.Repositories.Primitives;
 using Takecontrol.Matches.Infrastructure.Repositories.Reservations;
@@ -30,6 +32,7 @@ public static class ServiceRegistration
         service.AddScoped<IMatchReadRepository, MatchReadRepository>();
         service.AddScoped<IReservationReadRepository, ReservationReadRepository>();
         service.AddScoped<IMatchPlayerReadRepository, MatchPlayerReadRepository>();
+        service.AddScoped<IMatchInfoWriteRepository, MatchInfoWriteRepository>();
 
         return service;
     }

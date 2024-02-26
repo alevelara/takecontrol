@@ -25,4 +25,14 @@ public class MatchInfo : BaseDomainModel
     {
         return new MatchInfo(matchId, playerNames, startDate, endDate, courtName, clubName);
     }
+
+    public void AddPlayerName(string playerName)
+    {
+        PlayerNames.Add(playerName);
+    }
+
+    public void RemovePlayerName(string playerName)
+    {
+        PlayerNames.Remove(playerName);
+    }
 }

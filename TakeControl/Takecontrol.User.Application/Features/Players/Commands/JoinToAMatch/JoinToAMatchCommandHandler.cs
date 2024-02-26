@@ -27,7 +27,9 @@ public sealed class JoinToAMatchCommandHandler : ICommandHandler<JoinToAMatchCom
         }
 
         var command = new JoinToMatchCommand(player.Id, request.MatchId);
+        var playerSubscribed = new PlayerSusbscribed(player.Name, request.MatchId);
+        await _mediator.Send(playerSubscribed, cancellationToken);
 
-        return await _mediator.Send(command);
+        return await _mediator.Send(command, cancellationToken);
     }
 }

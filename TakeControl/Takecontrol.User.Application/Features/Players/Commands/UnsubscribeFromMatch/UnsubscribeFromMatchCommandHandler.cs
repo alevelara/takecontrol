@@ -27,6 +27,9 @@ public sealed class UnsubscribeFromMatchCommandHandler : ICommandHandler<Unsubsc
         }
 
         var command = new UnsubscribePlayerFromMatchCommand(player.Id, request.MatchId);
-        return await _mediator.Send(command);
+        var playerUnsubscribed = new PlayerUnsusbscribed(player.Name, request.MatchId);
+        await _mediator.Send(playerUnsubscribed, cancellationToken);
+
+        return await _mediator.Send(command, cancellationToken);
     }
 }

@@ -42,6 +42,9 @@ public class CreateMatchCommandHandler : ICommandHandler<CreateMatchCommand, Uni
 
         reservation.SetIsAvailable(false);
         _unitOfWork.Repository<Reservation>().Update(reservation);
+
+        //TODO: Create MatchInfo entity. Needed playerName and clubName.
+        //Thinking about sharing the mongo repo between different modules.
         await _unitOfWork.CompleteAsync();
 
         return Unit.Value;
