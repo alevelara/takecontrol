@@ -1,6 +1,7 @@
 using System.Net;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Takecontrol.API.Routes;
 using Takecontrol.Credential.Application.Features.Accounts.Commands.ResetPassword;
@@ -38,6 +39,7 @@ public class AuthController : ControllerBase
         return StatusCode((int)HttpStatusCode.Created);
     }
 
+    [Authorize]
     [HttpPost(nameof(AuthRouteName.UpdatePassword))]
     public async Task<ActionResult<AuthResponse>> UpdatePasword([FromBody] UpdatePasswordRequest request)
     {

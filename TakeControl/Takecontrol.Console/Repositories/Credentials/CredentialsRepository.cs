@@ -6,7 +6,7 @@ namespace Takecontrol.Console.Repositories.Credentials;
 
 public class CredentialsRepository
 {
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
 
     public CredentialsRepository(HttpClient httpClient)
     {
@@ -47,7 +47,7 @@ public class CredentialsRepository
         return await _httpClient.PostAsync(url, jsonContent);
     }
 
-    public async Task<HttpResponseMessage> UpdatePassword(string username, string newPassword)
+    public async Task<HttpResponseMessage> UpdatePassword(string username, string newPassword, string token)
     {
         var url = "/api/v1/Auth/UpdatePassword";
 
@@ -60,6 +60,7 @@ public class CredentialsRepository
         Encoding.UTF8,
         "application/json");
 
+        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
         return await _httpClient.PostAsync(url, jsonContent);
     }
 }

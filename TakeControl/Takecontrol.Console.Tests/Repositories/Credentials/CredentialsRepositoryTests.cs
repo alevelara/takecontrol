@@ -7,7 +7,7 @@ namespace Takecontrol.Console.Tests.Repositories.Credentials;
 [Trait("Category", "Integration")]
 public class CredentialsRepositoryTests
 {
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
 
     public CredentialsRepositoryTests()
     {
